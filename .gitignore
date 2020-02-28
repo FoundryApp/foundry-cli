@@ -1,0 +1,7 @@
+**/**/vendor
+**/keyfile.json
+**/terraform_*
+tmp/
+tmp_air/
+air-master/air
+deploy/deploy
