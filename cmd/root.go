@@ -32,8 +32,7 @@ func Execute() {
 	// viper.SetDefault("author", "NAME HERE <EMAIL ADDRESS>")
 	// viper.SetDefault("license", "apache")
 
-	rootCmd.AddCommand(versionCmd)
-	rootCmd.AddCommand(initCmd)
+	rootCmd.AddCommand(watchCmd)
 }
 
 func er(msg interface{}) {
