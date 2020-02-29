@@ -5,3 +5,6 @@ tmp/
 tmp_air/
 air-master/air
 deploy/deploy
+air-master/
+deploy/
+cli
