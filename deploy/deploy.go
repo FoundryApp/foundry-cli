@@ -133,6 +133,7 @@ func (ec *errCmd) run() {
 
 	}
 }
+
 func deploy(do DeployObject, fn string) error {
 	// TODO: Not portable
 	const root = "/Users/valenta.and.thomas/Developer/go-back"
