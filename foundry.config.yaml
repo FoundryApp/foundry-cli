@@ -1,0 +1,23 @@
+version: 0.1
+rootDir: "./" # A root directory for the watcher (all dirs inside are also watched)
+serviceAcc: "./serviceAcc.json"
+functions:
+  - name: "ExportedName"
+    data:
+      type: "file"
+      path: "./functions/createCustomer/envData.json"
+  - name: "ExportedName2"
+    data:
+      type: "dynamic"
+      firestore:
+        collection: "users"
+        document: "doc-id"
+  - name: "ExportedName3"
+    data:
+      type: "dynamic"
+      firestore:
+        collection: "users" # If no 'document' key is specified, take a random doc from the collection
+  - name: "ExportedName4"
+    data:
+      type: "direct" # Should be named better
+      value: "{email: 'my@email.com', userId: 'dummy-user-id', name: 'Abigail Rotterdam'}"
