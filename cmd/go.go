@@ -4,7 +4,10 @@ package cmd
 
 import (
   "log"
-  // "time"
+  "os"
+  "net/http"
+  "io/ioutil"
+  "fmt"
   "github.com/spf13/cobra"
   // "github.com/fsnotify/fsnotify"
 
@@ -36,7 +39,7 @@ func run(cmd *cobra.Command, args []string) {
       select {
       case e := <-w.Events:
         log.Println(e)
-        sendFiles()
+        upload()
       case err := <-w.Errors:
 				log.Println("error:", err)
       }
@@ -50,14 +53,31 @@ func run(cmd *cobra.Command, args []string) {
   <-done
 }
 
-func sendFiles() {
+func upload() {
   ignore := []string{"node_modules", ".git", ".foundry"}
   // Zip project
-  f, err := zip.ArchiveDir(conf.RootDir, ignore)
+  path, err := zip.ArchiveDir(conf.RootDir, ignore)
   if err != nil {
     log.Println("error", err)
   }
-  // log.Println(f.Name())
 
   // Send to cloud
+  makeUploadReq(path)
+}
+
+func makeUploadReq(fname string) {
+  log.Println("makeUploadReq", fname)
+  file, err := os.Open(fname)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	res, err := http.Post("http://127.0.0.1:8080/run", "binary/octet-stream", file)
+	if err != nil {
+		panic(err)
+  }
+	defer res.Body.Close()
+	message, _ := ioutil.ReadAll(res.Body)
+  fmt.Printf(string(message))
 }
