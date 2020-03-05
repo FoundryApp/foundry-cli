@@ -16,17 +16,20 @@ import (
 )
 
 var goCmd = &cobra.Command{
-  Use:   "go",
-  Short: "Connect Foundry to your project and GO!",
-  Long:  "",
-  Run: run,
+  Use:    "go",
+  Short:  "Connect Foundry to your project and GO!",
+  Long:   "",
+  Run:    runGo,
 }
 
 func init() {
   rootCmd.AddCommand(goCmd)
 }
 
-func run(cmd *cobra.Command, args []string) {
+func runGo(cmd *cobra.Command, args []string) {
+  // Connect to pod
+  token := getToken()
+
   w, err := rwatch.New()
   if err != nil {
     log.Fatal("Watcher error", err)
@@ -39,7 +42,7 @@ func run(cmd *cobra.Command, args []string) {
       select {
       case e := <-w.Events:
         log.Println(e)
-        upload()
+        upload(token)
       case err := <-w.Errors:
 				log.Println("error:", err)
       }
@@ -53,7 +56,11 @@ func run(cmd *cobra.Command, args []string) {
   <-done
 }
 
-func upload() {
+func getToken() string {
+  return ""
+}
+
+func upload(token string) {
   ignore := []string{"node_modules", ".git", ".foundry"}
   // Zip project
   path, err := zip.ArchiveDir(conf.RootDir, ignore)
@@ -62,10 +69,10 @@ func upload() {
   }
 
   // Send to cloud
-  makeUploadReq(path)
+  makeUploadReq(path, token)
 }
 
-func makeUploadReq(fname string) {
+func makeUploadReq(fname string, token string) {
   log.Println("makeUploadReq", fname)
   file, err := os.Open(fname)
 	if err != nil {
@@ -73,11 +80,16 @@ func makeUploadReq(fname string) {
 	}
 	defer file.Close()
 
-	res, err := http.Post("http://127.0.0.1:8080/run", "binary/octet-stream", file)
+  url := "http://127.0.0.1:8080/run/"
+  // url := fmt.Sprintf("http://127.0.0.1:8080/run/%v", token)
+  // url := fmt.Sprintf("http://ide.foundryapp.co/run/%v", token)
+
+  res, err := http.Post(url, "binary/octet-stream", file)
 	if err != nil {
-		panic(err)
+    log.Println(err)
+    panic(err)
   }
-	defer res.Body.Close()
+  defer res.Body.Close()
 	message, _ := ioutil.ReadAll(res.Body)
   fmt.Printf(string(message))
 }

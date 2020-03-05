@@ -61,7 +61,7 @@ func (w *Watcher) start() {
 				}
 			}
 
-			// os.Stat() can't be  used on deleted dir/file
+			// os.Stat() can't be used on deleted dir/file
 			// Pretend it was a directory (we don't really know)
 			// and try to remove it
 			if ev.Op == fsnotify.Remove {
