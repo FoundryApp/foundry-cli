@@ -3,15 +3,21 @@ package cmd
 // "foundry go" or "foundry connect" or "foundry " or "foundry start" or "foundry link"?
 
 import (
+  "bytes"
+  "mime/multipart"
+  "path/filepath"
+
+  "io"
   "log"
   "os"
   "net/http"
-  "io/ioutil"
+  // "io/ioutil"
   "fmt"
   "github.com/spf13/cobra"
   // "github.com/fsnotify/fsnotify"
 
   "foundry/cli/rwatch"
+  "foundry/cli/auth"
   "foundry/cli/zip"
 )
 
@@ -28,7 +34,10 @@ func init() {
 
 func runGo(cmd *cobra.Command, args []string) {
   // Connect to pod
-  token := getToken()
+  token, err := getToken()
+  if err != nil {
+    log.Fatal("getToken error", err)
+  }
 
   w, err := rwatch.New()
   if err != nil {
@@ -40,8 +49,8 @@ func runGo(cmd *cobra.Command, args []string) {
   go func() {
     for {
       select {
-      case e := <-w.Events:
-        log.Println(e)
+      case _ = <-w.Events:
+        // log.Println(e)
         upload(token)
       case err := <-w.Errors:
 				log.Println("error:", err)
@@ -56,8 +65,13 @@ func runGo(cmd *cobra.Command, args []string) {
   <-done
 }
 
-func getToken() string {
-  return ""
+func getToken() (string, error) {
+  a := auth.New()
+  a.LoadTokens()
+  if err := a.RefreshIDToken(); err != nil {
+    return "", err
+  }
+  return a.IDToken, nil
 }
 
 func upload(token string) {
@@ -69,27 +83,53 @@ func upload(token string) {
   }
 
   // Send to cloud
-  makeUploadReq(path, token)
+
+  req, err := newFileUploadReq(path, token)
+   if err != nil {
+    log.Println("error file upload req", err)
+  }
+  client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		body := &bytes.Buffer{}
+		_, err := body.ReadFrom(resp.Body)
+    if err != nil {
+			log.Fatal(err)
+		}
+    resp.Body.Close()
+		// fmt.Println(resp.StatusCode)
+		// fmt.Println(resp.Header)
+		fmt.Println(body)
+	}
 }
 
-func makeUploadReq(fname string, token string) {
-  log.Println("makeUploadReq", fname)
-  file, err := os.Open(fname)
-	if err != nil {
-		panic(err)
+func newFileUploadReq(path, token string) (*http.Request, error) {
+  file, err := os.Open(path)
+  if err != nil {
+		return nil, err
 	}
-	defer file.Close()
+  defer file.Close()
 
-  url := "http://127.0.0.1:8080/run/"
-  // url := fmt.Sprintf("http://127.0.0.1:8080/run/%v", token)
-  // url := fmt.Sprintf("http://ide.foundryapp.co/run/%v", token)
-
-  res, err := http.Post(url, "binary/octet-stream", file)
+  body := &bytes.Buffer{}
+  writer := multipart.NewWriter(body)
+  part, err := writer.CreateFormFile("file", filepath.Base(path))
 	if err != nil {
-    log.Println(err)
-    panic(err)
+		return nil, err
   }
-  defer res.Body.Close()
-	message, _ := ioutil.ReadAll(res.Body)
-  fmt.Printf(string(message))
+
+  _, err = io.Copy(part, file)
+  writer.WriteField("token", token)
+  err = writer.Close()
+  if err != nil {
+		return nil, err
+  }
+
+  url := "http://127.0.0.1:8081/run"
+  // url := "https://ide.foundryapp.co/run"
+
+  req, err := http.NewRequest("POST", url, body)
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+	return req, err
 }

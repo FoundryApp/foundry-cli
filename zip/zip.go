@@ -3,7 +3,6 @@ package zip
 import (
 	"archive/zip"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
 )
@@ -31,7 +30,7 @@ func ArchiveDir(dir string, ignore []string) (string, error) {
 		return "", err
 	}
 
-	log.Println(fs)
+	// log.Println(fs)
 
 	for _, f := range fs {
 		err = addToZip(f, zw)
@@ -89,8 +88,8 @@ func walk(start string, ignore []string) ([]string, error) {
 
 func addToZip(fname string, zw *zip.Writer) error {
 	f, err := os.Open(fname)
-	fi, err := f.Stat()
-	log.Println("add", fi.Size())
+	// fi, err := f.Stat()
+	// log.Println("add", fi.Size())
 	if err != nil {
 		return err
 	}

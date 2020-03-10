@@ -1,23 +1,36 @@
 version: 0.1
 rootDir: "./" # A root directory for the watcher (all dirs inside are also watched)
 serviceAcc: "./serviceAcc.json"
+firestore:
+  - collection: users
+    docs:
+      - '{"id":"user1", "home":"hell"}'
+      - '{"id":"user2", "home":"heaven"}'
+  - collection: users
+    get: 5
 functions:
-  - name: "ExportedName"
+  - name: helloWorld
+    trigger: http
     data:
-      type: "file"
-      path: "./functions/createCustomer/envData.json"
-  - name: "ExportedName2"
+      collection: users
+      take: id1
+  - name: helloWorld
+    trigger: http
+    data: '{"id":"user1"}'
+  - name: createWorkspace
+    trigger: onCreate
     data:
-      type: "dynamic"
-      firestore:
-        collection: "users"
-        document: "doc-id"
-  - name: "ExportedName3"
+      collection: users
+      create: '{"id":"user3", "home":"hearthstone"}'
+  - name: updateSlug
+    trigger: onUpdate
     data:
-      type: "dynamic"
-      firestore:
-        collection: "users" # If no 'document' key is specified, take a random doc from the collection
-  - name: "ExportedName4"
+      collection: workspace
+      update:
+        doc: doc-id
+        new: '{"slug": "my-new-slug"}'
+  - name: deleteAcc
+    trigger: onDelete
     data:
-      type: "direct" # Should be named better
-      value: "{email: 'my@email.com', userId: 'dummy-user-id', name: 'Abigail Rotterdam'}"
+      collection: users
+      doc: user-id
