@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"log"
+	// "log"
 
 	"bytes"
 	"context"
@@ -58,9 +58,6 @@ func (a *Auth) SignIn(ctx context.Context, email, pass string) error {
 }
 
 func (a *Auth) SaveTokens() error {
-	log.Println(a.IDToken)
-	log.Println(a.RefreshToken)
-
 	viper.Set(idTokenKey, a.IDToken)
 	viper.Set(refreshTokenKey, a.RefreshToken)
 

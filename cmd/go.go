@@ -78,6 +78,11 @@ func runGo(cmd *cobra.Command, args []string) {
   if err != nil {
     log.Println(err)
   }
+
+  // Don't wait for first save to send the code - send it as soon
+  // as user calls 'foundry go'
+  upload(c, token)
+
   <-done
 }
 
@@ -134,8 +139,6 @@ func upload(c *websocket.Conn, token string) {
 
     lastChunk := i == chunkCount - 1
 
-    log.Println("Size", bytesread)
-
     if err = sendChunk(
       c,
       bytes,
@@ -172,6 +175,6 @@ func listenWS(c *websocket.Conn) {
     if err != nil {
       log.Fatal("WS error:", err)
     }
-    log.Printf("Autorun message: %s", msg)
+    log.Printf("%s\n", msg)
   }
 }

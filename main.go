@@ -30,6 +30,8 @@ func main() {
 	viper.SetConfigType(ext)
 	viper.AddConfigPath(dirPath)
 
+	log.Println(dirPath);
+
 	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
 		os.MkdirAll(dirPath, os.ModePerm)
 
@@ -37,7 +39,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		f.Close()
+		defer f.Close()
+		f.WriteString("{}")
 	}
 
 	err = viper.ReadInConfig()
