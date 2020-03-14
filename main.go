@@ -30,8 +30,6 @@ func main() {
 	viper.SetConfigType(ext)
 	viper.AddConfigPath(dirPath)
 
-	log.Println(dirPath);
-
 	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
 		os.MkdirAll(dirPath, os.ModePerm)
 
