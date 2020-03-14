@@ -3,22 +3,26 @@ package cmd
 // "foundry go" or "foundry connect" or "foundry " or "foundry start" or "foundry link"?
 
 import (
-  "bytes"
-  "mime/multipart"
-  "path/filepath"
+  // "bytes"
+  "crypto/md5"
+  "encoding/hex"
+  // "mime/multipart"
+  // "path/filepath"
 
-  "io"
+  // "io"
   "log"
   "os"
-  "net/http"
+  // "net/http"
   // "io/ioutil"
-  "fmt"
+  // "fmt"
   "github.com/spf13/cobra"
   // "github.com/fsnotify/fsnotify"
 
   "foundry/cli/rwatch"
   "foundry/cli/auth"
   "foundry/cli/zip"
+
+  "github.com/gorilla/websocket"
 )
 
 var goCmd = &cobra.Command{
@@ -39,6 +43,16 @@ func runGo(cmd *cobra.Command, args []string) {
     log.Fatal("getToken error", err)
   }
 
+  // Connect to websocket
+  c, _, err := websocket.DefaultDialer.Dial("ws://127.0.0.1:3500/ws", nil)
+	if err != nil {
+		log.Fatal("WS dial error:", err)
+	}
+	defer c.Close()
+
+  go listenWS(c)
+
+  // Start file watcher
   w, err := rwatch.New()
   if err != nil {
     log.Fatal("Watcher error", err)
@@ -51,9 +65,11 @@ func runGo(cmd *cobra.Command, args []string) {
       select {
       case _ = <-w.Events:
         // log.Println(e)
-        upload(token)
+
+        // TODO: Send binary data with websocket
+        upload(c, token)
       case err := <-w.Errors:
-				log.Println("error:", err)
+				log.Println("watcher error:", err)
       }
     }
   }()
@@ -74,62 +90,88 @@ func getToken() (string, error) {
   return a.IDToken, nil
 }
 
-func upload(token string) {
+func upload(c *websocket.Conn, token string) {
   ignore := []string{"node_modules", ".git", ".foundry"}
-  // Zip project
+
+  // Zip the project
   path, err := zip.ArchiveDir(conf.RootDir, ignore)
   if err != nil {
-    log.Println("error", err)
+    log.Fatal(err)
   }
 
-  // Send to cloud
-
-  req, err := newFileUploadReq(path, token)
-   if err != nil {
-    log.Println("error file upload req", err)
-  }
-  client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-	} else {
-		body := &bytes.Buffer{}
-		_, err := body.ReadFrom(resp.Body)
-    if err != nil {
-			log.Fatal(err)
-		}
-    resp.Body.Close()
-		// fmt.Println(resp.StatusCode)
-		// fmt.Println(resp.Header)
-		fmt.Println(body)
-	}
-}
-
-func newFileUploadReq(path, token string) (*http.Request, error) {
+  // Read file in chunks and send each chunk
   file, err := os.Open(path)
   if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
   defer file.Close()
 
-  body := &bytes.Buffer{}
-  writer := multipart.NewWriter(body)
-  part, err := writer.CreateFormFile("file", filepath.Base(path))
-	if err != nil {
-		return nil, err
-  }
-
-  _, err = io.Copy(part, file)
-  writer.WriteField("token", token)
-  err = writer.Close()
+  // fileInfo is needed to calculate how many chunks are in the file
+  fileInfo, err := os.Stat(path)
   if err != nil {
-		return nil, err
+		log.Fatal(err)
   }
 
-  url := "http://127.0.0.1:8081/run"
-  // url := "https://ide.foundryapp.co/run"
+  bufferSize := int64(1024) // 1024B, size of a single chunk
+  buffer := make([]byte, bufferSize)
+  chunkCount := (fileInfo.Size() / bufferSize) + 1
 
-  req, err := http.NewRequest("POST", url, body)
-	req.Header.Set("Content-Type", writer.FormDataContentType())
-	return req, err
+  checksum := [md5.Size]byte{}
+  previousChecksum := [md5.Size]byte{}
+
+  for i := int64(0); i < chunkCount; i++ {
+    bytesread, err := file.Read(buffer)
+    if err != nil {
+      log.Fatal(err)
+    }
+
+    previousChecksum = checksum
+    bytes := buffer[:bytesread]
+    checksum = md5.Sum(bytes)
+
+    checkStr := hex.EncodeToString(checksum[:])
+    prevCheckStr := hex.EncodeToString(previousChecksum[:])
+
+    lastChunk := i == chunkCount - 1
+
+    log.Println("Size", bytesread)
+
+    if err = sendChunk(
+      c,
+      bytes,
+      checkStr,
+      prevCheckStr,
+      lastChunk); err != nil {
+      log.Fatal(err)
+    }
+  }
+}
+
+
+func sendChunk(c *websocket.Conn, b []byte, checksum string, prevChecksum string, last bool) error {
+  msg := struct {
+    Data              string `json:"data"`
+    PreviousChecksum  string `json:"previousChecksum"`
+    Checksum          string `json:"checksum"`
+    IsLast            bool   `json:"isLast"`
+  }{hex.EncodeToString(b),
+    prevChecksum,
+    checksum,
+    last,
+  }
+  err := c.WriteJSON(msg)
+  if err != nil {
+    return err
+  }
+  return nil
+}
+
+func listenWS(c *websocket.Conn) {
+  for {
+    _, msg, err := c.ReadMessage()
+    if err != nil {
+      log.Fatal("WS error:", err)
+    }
+    log.Printf("Autorun message: %s", msg)
+  }
 }

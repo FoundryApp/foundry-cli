@@ -78,35 +78,5 @@ func runLogin(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	// if err = runHTTPPost(a.IDToken); err != nil {
-	// 	color.Red("⨯ Error")
-	// 	log.Println("HTTP post error", err)
-	// 	return
-	// }
-
 	color.Green("✔ Signed in")
 }
-
-// func runHTTPPost(idToken string) error {
-// 	req := struct {
-// 		Token string `json:"token"`
-// 	}{idToken}
-
-// 	jReq, err := json.Marshal(req)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	url := fmt.Sprintf("http://127.0.0.1:8081/run")
-// 	res, err := http.Post(url, "application/json", bytes.NewBuffer(jReq))
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	if res.StatusCode != http.StatusOK {
-// 		body, _ := ioutil.ReadAll(res.Body)
-// 		return errors.New(string(body))
-// 	}
-
-// 	return nil
-// }
