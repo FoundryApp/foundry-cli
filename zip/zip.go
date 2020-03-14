@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 const (
@@ -116,6 +117,11 @@ func addToZip(fname string, zw *zip.Writer) error {
 	// see http://golang.org/pkg/archive/zip/#pkg-constants
 	h.Method = zip.Deflate
 
+	// Reset time values so they don't influence
+	// the checksum of the created zip file
+	h.Modified = time.Time{}
+	h.ModifiedTime = uint16(0)
+	h.ModifiedDate = uint16(0)
 
 	w, err := zw.CreateHeader(h)
 	if err != nil {

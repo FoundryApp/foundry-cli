@@ -9,7 +9,7 @@ import (
   // "mime/multipart"
   // "path/filepath"
 
-  // "io"
+  "io"
   "log"
   "os"
   // "net/http"
@@ -25,12 +25,15 @@ import (
   "github.com/gorilla/websocket"
 )
 
-var goCmd = &cobra.Command{
-  Use:    "go",
-  Short:  "Connect Foundry to your project and GO!",
-  Long:   "",
-  Run:    runGo,
-}
+var (
+  fileSavedChecksum = ""
+  goCmd = &cobra.Command{
+    Use:    "go",
+    Short:  "Connect Foundry to your project and GO!",
+    Long:   "",
+    Run:    runGo,
+  }
+)
 
 func init() {
   rootCmd.AddCommand(goCmd)
@@ -103,6 +106,17 @@ func upload(c *websocket.Conn, token string) {
   if err != nil {
     log.Fatal(err)
   }
+
+  // Check if checksum of this zipped file is different
+  // from the last checksum - if it's same we don't need
+  // to send any files -> nothing has changed.
+  fileChecksum, err := filemd5(path)
+  if err != nil {
+    log.Fatal(err)
+  }
+
+  if fileSavedChecksum == fileChecksum { return }
+  fileSavedChecksum = fileChecksum
 
   // Read file in chunks and send each chunk
   file, err := os.Open(path)
@@ -177,4 +191,21 @@ func listenWS(c *websocket.Conn) {
     }
     log.Printf("%s\n", msg)
   }
+}
+
+func filemd5(fpath string) (string, error) {
+  f, err := os.Open(fpath)
+	if err != nil {
+		return "", err
+  }
+  defer f.Close()
+
+  h := md5.New()
+	if _, err = io.Copy(h, f); err != nil {
+		return "", err
+	}
+
+	// Get the 16 bytes hash
+	hashInBytes := h.Sum(nil)[:16]
+	return hex.EncodeToString(hashInBytes), nil
 }
