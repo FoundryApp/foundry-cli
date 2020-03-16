@@ -30,6 +30,9 @@ func main() {
 	viper.SetConfigType(ext)
 	viper.AddConfigPath(dirPath)
 
+	// /Users/vasekmlejnsky/Library/Application Support/foundrycli
+	// log.Fatal(dirPath)
+
 	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
 		os.MkdirAll(dirPath, os.ModePerm)
 

@@ -3,18 +3,20 @@ package cmd
 // "foundry go" or "foundry connect" or "foundry " or "foundry start" or "foundry link"?
 
 import (
-  // "bytes"
+  "bytes"
   "crypto/md5"
   "encoding/hex"
+  "encoding/json"
   // "mime/multipart"
   // "path/filepath"
 
   "io"
   "log"
   "os"
-  // "net/http"
-  // "io/ioutil"
-  // "fmt"
+  "net/http"
+  "io/ioutil"
+  "fmt"
+  "time"
   "github.com/spf13/cobra"
   // "github.com/fsnotify/fsnotify"
 
@@ -33,6 +35,7 @@ var (
     Long:   "",
     Run:    runGo,
   }
+  start = time.Now()
 )
 
 func init() {
@@ -47,7 +50,24 @@ func runGo(cmd *cobra.Command, args []string) {
   }
 
   // Connect to websocket
-  c, _, err := websocket.DefaultDialer.Dial("ws://127.0.0.1:3500/ws", nil)
+  // TODO: Client shouldn't be using Auth ID token
+  // baseURL := "127.0.0.1:3500"
+  baseURL := "ide.foundryapp.co"
+
+  // wsScheme := "ws"
+  wsScheme := "wss"
+  wsURL := fmt.Sprintf("%s://%s/ws/%s", wsScheme, baseURL, token)
+
+  // pingScheme := "http"
+  pingScheme := "https"
+  pingURL := fmt.Sprintf("%s://%s/ping", pingScheme, baseURL)
+
+  // url := fmt.Sprintf("ws://127.0.0.1:3500/ws/%s", token)
+  // url := fmt.Sprintf("wss://ide.foundryapp.co/ws/%s", token)
+
+  // url = "ws://ide.foundryapp.co/ws/token"
+
+  c, _, err := websocket.DefaultDialer.Dial(wsURL, nil)
 	if err != nil {
 		log.Fatal("WS dial error:", err)
 	}
@@ -68,7 +88,6 @@ func runGo(cmd *cobra.Command, args []string) {
       select {
       case _ = <-w.Events:
         // log.Println(e)
-
         // TODO: Send binary data with websocket
         upload(c, token)
       case err := <-w.Errors:
@@ -81,6 +100,10 @@ func runGo(cmd *cobra.Command, args []string) {
   if err != nil {
     log.Println(err)
   }
+
+  // Start periodically pinging server so the env isn't killed
+  ticker := time.NewTicker(time.Second * 10)
+  go ping(ticker, token, pingURL)
 
   // Don't wait for first save to send the code - send it as soon
   // as user calls 'foundry go'
@@ -96,6 +119,41 @@ func getToken() (string, error) {
     return "", err
   }
   return a.IDToken, nil
+}
+
+func ping(ticker *time.Ticker, token, url string) {
+  for {
+    select {
+    case <- ticker.C:
+      // Ping the server
+      var body = struct {
+        Token string `json:"token"`
+      }{token}
+
+      jBody, err := json.Marshal(body)
+      if err != nil {
+        fmt.Println("Error marshaling ping body: ", err)
+        continue
+      }
+
+      res, err := http.Post(url, "application/json", bytes.NewBuffer(jBody))
+      if err != nil {
+        fmt.Println("Error making ping post request: ", err)
+        continue
+      }
+
+      if res.StatusCode != http.StatusOK {
+        bodyBytes, err := ioutil.ReadAll(res.Body)
+        if err != nil {
+          fmt.Println("Error reading ping response body: ", err)
+          continue
+        }
+
+        bodyString := string(bodyBytes)
+        fmt.Printf("Non-OK ping response: %s\n", bodyString)
+      }
+    }
+  }
 }
 
 func upload(c *websocket.Conn, token string) {
@@ -187,6 +245,9 @@ func listenWS(c *websocket.Conn) {
   for {
     _, msg, err := c.ReadMessage()
     if err != nil {
+      elapsed := time.Since(start)
+      log.Printf("Elapsed time %s\n", elapsed)
+
       log.Fatal("WS error:", err)
     }
     log.Printf("%s\n", msg)
