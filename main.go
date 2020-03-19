@@ -2,12 +2,9 @@ package main
 
 import (
 	"log"
-	"foundry/cli/cmd"
-	// "foundry/cli/auth"
-	// "context"
-	"os"
 
-	"github.com/spf13/viper"
+	"foundry/cli/cmd"
+	"foundry/cli/config"
 )
 
 func init() {
@@ -16,43 +13,9 @@ func init() {
 }
 
 func main() {
-	configDir, err := os.UserConfigDir()
-	if err != nil {
-		log.Fatal("Failed to get a config dir", err)
-	}
-
-	dirPath := configDir + "/foundrycli"
-	confName := "config"
-	ext := "json"
-	fullPath := dirPath + "/" + confName + "." + ext
-
-	viper.SetConfigName(confName)
-	viper.SetConfigType(ext)
-	viper.AddConfigPath(dirPath)
-
-	// /Users/vasekmlejnsky/Library/Application Support/foundrycli
-	// log.Fatal(dirPath)
-
-	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
-		os.MkdirAll(dirPath, os.ModePerm)
-
-		f, err := os.Create(fullPath)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer f.Close()
-		f.WriteString("{}")
-	}
-
-	err = viper.ReadInConfig()
-	if err != nil {
-		log.Fatal(err)
+	if err := config.Init(); err != nil {
+		log.Fatal("Couldn't init config", err)
 	}
 
 	cmd.Execute()
-
-	// a := auth.New()
-	// a.SignIn(context.TODO(), "vasek@foundryapp.co", "123456")
-
-	// log.Println(a)
 }

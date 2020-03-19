@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/viper"
+	"foundry/cli/config"
 )
 
 const (
@@ -58,10 +58,10 @@ func (a *Auth) SignIn(ctx context.Context, email, pass string) error {
 }
 
 func (a *Auth) SaveTokens() error {
-	viper.Set(idTokenKey, a.IDToken)
-	viper.Set(refreshTokenKey, a.RefreshToken)
+	config.Set(idTokenKey, a.IDToken)
+	config.Set(refreshTokenKey, a.RefreshToken)
 
-	err := viper.WriteConfig()
+	err := config.Write()
 
 	// if err := os.Setenv(idTokenKey, a.IDToken); err != nil {
 	// 	return err
@@ -73,13 +73,14 @@ func (a *Auth) SaveTokens() error {
 }
 
 func (a *Auth) LoadTokens() {
-	idtok, ok := viper.Get(idTokenKey).(string)
+	idtok, ok := config.Get(idTokenKey).(string)
+
 	if !ok {
 		// TODO: Error
 	}
 	a.IDToken = idtok
 
-	rtok, ok := viper.Get(refreshTokenKey).(string)
+	rtok, ok := config.Get(refreshTokenKey).(string)
 	if !ok {
 		// TODO: Error
 	}

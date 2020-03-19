@@ -36,6 +36,8 @@ var (
     Run:    runGo,
   }
   start = time.Now()
+
+  uploadStart time.Time
 )
 
 func init() {
@@ -157,6 +159,9 @@ func ping(ticker *time.Ticker, token, url string) {
 }
 
 func upload(c *websocket.Conn, token string) {
+  fmt.Printf("\n[timer] Starting timer\n");
+  uploadStart = time.Now()
+
   ignore := []string{"node_modules", ".git", ".foundry"}
 
   // Zip the project
@@ -211,6 +216,11 @@ func upload(c *websocket.Conn, token string) {
 
     lastChunk := i == chunkCount - 1
 
+    if (lastChunk) {
+      elapsed := time.Since(uploadStart)
+      fmt.Printf("[timer] time until last chunk - %v\n", elapsed);
+    }
+
     if err = sendChunk(
       c,
       bytes,
@@ -222,17 +232,20 @@ func upload(c *websocket.Conn, token string) {
   }
 }
 
-
 func sendChunk(c *websocket.Conn, b []byte, checksum string, prevChecksum string, last bool) error {
   msg := struct {
-    Data              string `json:"data"`
-    PreviousChecksum  string `json:"previousChecksum"`
-    Checksum          string `json:"checksum"`
-    IsLast            bool   `json:"isLast"`
+    Data              string   `json:"data"`
+    PreviousChecksum  string   `json:"previousChecksum"`
+    Checksum          string   `json:"checksum"`
+    IsLast            bool     `json:"isLast"`
+    RunAll            bool     `json:"runAll"`
+    Run               []string `json:"run"`
   }{hex.EncodeToString(b),
     prevChecksum,
     checksum,
     last,
+    true,
+    []string{},
   }
   err := c.WriteJSON(msg)
   if err != nil {
@@ -244,6 +257,10 @@ func sendChunk(c *websocket.Conn, b []byte, checksum string, prevChecksum string
 func listenWS(c *websocket.Conn) {
   for {
     _, msg, err := c.ReadMessage()
+
+    elapsed := time.Since(uploadStart)
+    fmt.Printf("\n[timer] time until response - %v\n\n", elapsed);
+
     if err != nil {
       elapsed := time.Since(start)
       log.Printf("Elapsed time %s\n", elapsed)
