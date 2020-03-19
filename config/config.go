@@ -38,7 +38,6 @@ func Init() error {
 		return err
 	}
 
-	fmt.Println("Read in config")
 	if err = viper.ReadInConfig(); err != nil {
 		return err
 	}
