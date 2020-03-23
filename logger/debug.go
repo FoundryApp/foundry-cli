@@ -2,12 +2,13 @@
 
 package logger
 
-import "log"
+import "fmt"
 
-func Debugf(fmt string, args ...interface{}) {
-	log.Printf(fmt, args...)
+func Debugf(s string, args ...interface{}) {
+	fmt.Printf("DEBUG: " + s, args...)
 }
 
 func Debugln(args ...interface{}) {
-	log.Println(args)
+	s := fmt.Sprintf("DEBUG: %s", args...)
+	fmt.Println(s)
 }

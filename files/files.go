@@ -5,9 +5,11 @@ import (
 	"encoding/hex"
 	"log"
 
-	"foundry/cli/zip"
+	"foundry/cli/logger"
+	conn "foundry/cli/connection"
+	connMsg "foundry/cli/connection/msg"
 
-	"github.com/gorilla/websocket"
+	"foundry/cli/zip"
 )
 
 var (
@@ -15,14 +17,13 @@ var (
 	lastArchiveChecksum = ""
 )
 
-func Upload(c *websocket.Conn, rootDir string) {
+func Upload(c *conn.Connection, rootDir string) {
   // Zip the project
   buf, err := zip.ArchiveDir(rootDir, ignore)
   if err != nil {
     log.Fatal(err)
   }
 
-  // Get the 16 bytes hash
   archiveChecksum := checksum(buf.Bytes())
 
   // TODO: REMOVE
@@ -51,37 +52,13 @@ func Upload(c *websocket.Conn, rootDir string) {
 
     lastChunk := i == chunkCount - 1
 
-    if err = sendChunk(
-      c,
-      bytes,
-      checkStr,
-      prevCheckStr,
-      lastChunk); err != nil {
-      log.Fatal(err)
-    }
-  }
-}
 
-func sendChunk(c *websocket.Conn, b []byte, checksum string, prevChecksum string, last bool) error {
-  msg := struct {
-    Data              string   `json:"data"`
-    PreviousChecksum  string   `json:"previousChecksum"`
-    Checksum          string   `json:"checksum"`
-    IsLast            bool     `json:"isLast"`
-    RunAll            bool     `json:"runAll"`
-    Run               []string `json:"run"`
-  }{hex.EncodeToString(b),
-    prevChecksum,
-    checksum,
-    last,
-    true,
-    []string{},
+		logger.Debugln("Chunk:", i)
+		chunk := connMsg.NewChunkMsg(bytes, checkStr, prevCheckStr, lastChunk)
+		if err = c.Send(chunk); err != nil {
+			log.Fatal(err)
+		}
   }
-  err := c.WriteJSON(msg)
-  if err != nil {
-    return err
-  }
-  return nil
 }
 
 func checksum(data []byte) string {
