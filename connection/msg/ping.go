@@ -50,7 +50,6 @@ func (pm *PingMsg) Send() error {
 	return nil
 }
 
-
 // func ping(ticker *time.Ticker, token, url string) {
 //   for {
 //     select {

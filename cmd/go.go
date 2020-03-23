@@ -3,9 +3,8 @@ package cmd
 // "foundry go" or "foundry connect" or "foundry " or "foundry start" or "foundry link"?
 
 import (
-  "log"
-  "fmt"
   "time"
+  "fmt"
 
   "foundry/cli/auth"
   conn "foundry/cli/connection"
@@ -83,14 +82,14 @@ func runGo(cmd *cobra.Command, args []string) {
         uploadStart = time.Now()
         files.Upload(c, conf.RootDir)
       case err := <-w.Errors:
-				log.Println("watcher error:", err)
+				logger.Debugln("watcher error:", err)
       }
     }
   }()
 
   err = w.AddRecursive(conf.RootDir)
   if err != nil {
-    log.Println(err)
+    logger.Debugln(err)
   }
 
   // Don't wait for first save to send the code - send it as soon
@@ -113,7 +112,7 @@ func getToken() (string, error) {
 
 func listenCallback(data []byte, err error) {
   elapsed := time.Since(uploadStart)
-  logger.Debugf("[timer] time until response - %v\n\n", elapsed);
+  logger.Debugf("<timer> time until response - %v\n", elapsed);
 
   if err != nil {
     elapsed := time.Since(start)

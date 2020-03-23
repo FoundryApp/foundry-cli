@@ -62,8 +62,6 @@ func (c *Connection) Listen(cb ListenCallback) {
 
 // Sends WS message
 func (c *Connection) Send(cm ConnectionMessage) error {
-	logger.Debugln("Sending data")
-
 	b := cm.Body()
 	err := c.wsconn.WriteJSON(b)
   if err != nil {
