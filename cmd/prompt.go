@@ -21,7 +21,7 @@ var (
 	}
 
 	cmds = []*fprompt.Cmd{
-		fpromptCmd.Watch(),
+		// fpromptCmd.Watch(),
 		fpromptCmd.Exit(),
 	}
 )

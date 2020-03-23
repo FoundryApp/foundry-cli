@@ -9,12 +9,12 @@ func Log(s string, args ...interface{}) {
 	fmt.Printf(s, args)
 }
 
-func Logln(s string, args ...interface{}) {
-	// s := fmt.Sprintf("%v", args...)
-	fmt.Println(s, args)
+func Logln(args ...interface{}) {
+	s := fmt.Sprintf("%s", args...)
+	fmt.Println(s)
 }
 
-func LogFatal(s string, args ...interface{}) {
-	Logln(s, args)
+func LogFatal( args ...interface{}) {
+	Logln(args)
 	os.Exit(1)
 }

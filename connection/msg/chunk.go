@@ -2,38 +2,27 @@ package msg
 
 import (
 	"encoding/hex"
-
-	// "foundry/cli/logger"
 )
 
-type ChunkBody struct {
-	Data              string   `json:"data"`
-	PreviousChecksum  string   `json:"previousChecksum"`
-	Checksum          string   `json:"checksum"`
-	IsLast            bool     `json:"isLast"`
-	RunAll            bool     `json:"runAll"`
-	Run               []string `json:"run"`
+type ChunkContent struct {
+	Data              string 	`json:"data"`
+	PreviousChecksum  string 	`json:"previousChecksum"`
+	Checksum          string 	`json:"checksum"`
+	IsLast            bool   	`json:"isLast"`
 }
 
 type ChunkMsg struct {
-	MsgBody	ChunkBody
+	Type		string				`json:"type"`
+	Content	ChunkContent 	`json:"content"`
 }
 
 func NewChunkMsg(b []byte, checksum, checksumPrev string, last bool) *ChunkMsg {
-	return &ChunkMsg{
-		MsgBody: ChunkBody{
-			hex.EncodeToString(b),
-			checksumPrev,
-			checksum,
-			last,
-			true,
-			[]string{},
-		},
-	}
+	c := ChunkContent{hex.EncodeToString(b), checksumPrev, checksum, last}
+	return &ChunkMsg{"chunk", c}
 }
 
 func (cm *ChunkMsg) Body() interface{} {
-	return cm.MsgBody
+	return cm
 }
 
 // msg := struct {

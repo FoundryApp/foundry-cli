@@ -61,7 +61,7 @@ func runGo(cmd *cobra.Command, args []string) {
 
   // Start an interactive prompt
   cmds := []*p.Cmd{
-    pc.Watch(),
+    pc.Watch(c),
     pc.Exit(),
   }
   prompt := p.NewPrompt(cmds)
