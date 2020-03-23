@@ -10,9 +10,7 @@ import (
   // "mime/multipart"
   // "path/filepath"
 
-  "io"
   "log"
-  "os"
   "net/http"
   "io/ioutil"
   "fmt"
@@ -28,7 +26,7 @@ import (
 )
 
 var (
-  fileSavedChecksum = ""
+  lastArchiveChecksum = ""
   goCmd = &cobra.Command{
     Use:    "go",
     Short:  "Connect Foundry to your cloud environment and GO!",
@@ -95,7 +93,8 @@ func runGo(cmd *cobra.Command, args []string) {
       case _ = <-w.Events:
         // log.Println(e)
         // TODO: Send binary data with websocket
-        upload(c, token)
+        // upload(c, token)
+        uploadBuffer(c)
       case err := <-w.Errors:
 				log.Println("watcher error:", err)
       }
@@ -113,7 +112,8 @@ func runGo(cmd *cobra.Command, args []string) {
 
   // Don't wait for first save to send the code - send it as soon
   // as user calls 'foundry go'
-  upload(c, token)
+  // upload(c, token)
+  uploadBuffer(c)
 
   <-done
 }
@@ -162,52 +162,35 @@ func ping(ticker *time.Ticker, token, url string) {
   }
 }
 
-func upload(c *websocket.Conn, token string) {
+func uploadBuffer(c *websocket.Conn) {
   logger.Debugf("\n[timer] Starting timer\n");
   uploadStart = time.Now()
 
-  ignore := []string{"node_modules", ".git", ".foundry"}
+  ignore := []string{"node_modules", ".git"}
 
   // Zip the project
-  path, err := zip.ArchiveDir(conf.RootDir, ignore)
+  buf, err := zip.ArchiveDir(conf.RootDir, ignore)
   if err != nil {
     log.Fatal(err)
   }
 
-  // Check if checksum of this zipped file is different
-  // from the last checksum - if it's same we don't need
-  // to send any files -> nothing has changed.
-  fileChecksum, err := filemd5(path)
-  if err != nil {
-    log.Fatal(err)
-  }
+
+  // Get the 16 bytes hash
+  archiveChecksum := checksum(buf.Bytes())
 
   // TODO: REMOVE
-  // if fileSavedChecksum == fileChecksum { return }
-  fileSavedChecksum = fileChecksum
+  // if lastArchiveChecksum == archiveChecksum { return }
+  lastArchiveChecksum = archiveChecksum
 
-  // Read file in chunks and send each chunk
-  file, err := os.Open(path)
-  if err != nil {
-		log.Fatal(err)
-	}
-  defer file.Close()
-
-  // fileInfo is needed to calculate how many chunks are in the file
-  fileInfo, err := os.Stat(path)
-  if err != nil {
-		log.Fatal(err)
-  }
-
-  bufferSize := int64(1024) // 1024B, size of a single chunk
+  bufferSize := 1024 // 1024B, size of a single chunk
   buffer := make([]byte, bufferSize)
-  chunkCount := (fileInfo.Size() / bufferSize) + 1
+  chunkCount := (buf.Len() / bufferSize) + 1
 
   checksum := [md5.Size]byte{}
   previousChecksum := [md5.Size]byte{}
 
-  for i := int64(0); i < chunkCount; i++ {
-    bytesread, err := file.Read(buffer)
+  for i := 0; i < chunkCount; i++ {
+    bytesread, err := buf.Read(buffer)
     if err != nil {
       log.Fatal(err)
     }
@@ -276,19 +259,7 @@ func listenWS(c *websocket.Conn) {
   }
 }
 
-func filemd5(fpath string) (string, error) {
-  f, err := os.Open(fpath)
-	if err != nil {
-		return "", err
-  }
-  defer f.Close()
-
-  h := md5.New()
-	if _, err = io.Copy(h, f); err != nil {
-		return "", err
-	}
-
-	// Get the 16 bytes hash
-	hashInBytes := h.Sum(nil)[:16]
-	return hex.EncodeToString(hashInBytes), nil
+func checksum(data []byte) string {
+  hashInBytes := md5.Sum(data)
+  return hex.EncodeToString(hashInBytes[:])
 }

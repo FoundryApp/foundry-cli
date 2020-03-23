@@ -2,33 +2,22 @@ package zip
 
 import (
 	"archive/zip"
+	"bytes"
 	"io"
 	"os"
 	"path/filepath"
 	"time"
 )
 
-const (
-	foundryDir 	= "./.foundry"
-	output 			= "source.zip"
-)
-
 // Recursively zips the directory
-func ArchiveDir(dir string, ignore []string) (string, error) {
-	zf, err := createZipFile()
-	if err != nil {
-		return "", err
-	}
-	zw := zip.NewWriter(zf)
-
-	defer func() {
-		zw.Close()
-		zf.Close()
-	}()
+func ArchiveDir(dir string, ignore []string) (*bytes.Buffer, error) {
+	buf := new(bytes.Buffer)
+	zw := zip.NewWriter(buf)
+	defer zw.Close()
 
 	fs, err := walk(dir, ignore)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	// log.Println(fs)
@@ -36,26 +25,11 @@ func ArchiveDir(dir string, ignore []string) (string, error) {
 	for _, f := range fs {
 		err = addToZip(f, zw)
 		if err != nil {
-			return "", err
+			return nil, err
 		}
 	}
 
-
-	wd, err := os.Getwd()
-	if err != nil {
-		return "", err
-	}
-	path := filepath.Join(wd, foundryDir, output)
-	return path, nil
-}
-
-func createZipFile() (*os.File, error) {
-	err := os.Mkdir(foundryDir, 0700)
-	f, err := os.Create(foundryDir + "/" + output)
-	if err != nil {
-		return nil, err
-	}
-	return f, nil
+	return buf, nil
 }
 
 func walk(start string, ignore []string) ([]string, error) {
