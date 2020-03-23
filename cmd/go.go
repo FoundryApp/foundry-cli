@@ -18,8 +18,8 @@ import (
   "fmt"
   "time"
   "github.com/spf13/cobra"
-  // "github.com/fsnotify/fsnotify"
 
+  "foundry/cli/logger"
   "foundry/cli/rwatch"
   "foundry/cli/auth"
   "foundry/cli/zip"
@@ -31,7 +31,7 @@ var (
   fileSavedChecksum = ""
   goCmd = &cobra.Command{
     Use:    "go",
-    Short:  "Connect Foundry to your project and GO!",
+    Short:  "Connect Foundry to your cloud environment and GO!",
     Long:   "",
     Run:    runGo,
   }
@@ -69,11 +69,15 @@ func runGo(cmd *cobra.Command, args []string) {
 
   // url = "ws://ide.foundryapp.co/ws/token"
 
+  logger.Debugln("=WS DIALING=")
+
   c, _, err := websocket.DefaultDialer.Dial(wsURL, nil)
 	if err != nil {
 		log.Fatal("WS dial error:", err)
-	}
-	defer c.Close()
+  }
+  defer c.Close()
+
+  logger.Debugln("=WS CONNECTED=")
 
   go listenWS(c)
 
@@ -134,32 +138,32 @@ func ping(ticker *time.Ticker, token, url string) {
 
       jBody, err := json.Marshal(body)
       if err != nil {
-        fmt.Println("Error marshaling ping body: ", err)
+        logger.Debugln("Error marshaling ping body: ", err)
         continue
       }
 
       res, err := http.Post(url, "application/json", bytes.NewBuffer(jBody))
       if err != nil {
-        fmt.Println("Error making ping post request: ", err)
+        logger.Debugln("Error making ping post request: ", err)
         continue
       }
 
       if res.StatusCode != http.StatusOK {
         bodyBytes, err := ioutil.ReadAll(res.Body)
         if err != nil {
-          fmt.Println("Error reading ping response body: ", err)
+          logger.Debugln("Error reading ping response body: ", err)
           continue
         }
 
         bodyString := string(bodyBytes)
-        fmt.Printf("Non-OK ping response: %s\n", bodyString)
+        logger.Debugln("Non-OK ping response: %s\n", bodyString)
       }
     }
   }
 }
 
 func upload(c *websocket.Conn, token string) {
-  fmt.Printf("\n[timer] Starting timer\n");
+  logger.Debugf("\n[timer] Starting timer\n");
   uploadStart = time.Now()
 
   ignore := []string{"node_modules", ".git", ".foundry"}
@@ -178,7 +182,8 @@ func upload(c *websocket.Conn, token string) {
     log.Fatal(err)
   }
 
-  if fileSavedChecksum == fileChecksum { return }
+  // TODO: REMOVE
+  // if fileSavedChecksum == fileChecksum { return }
   fileSavedChecksum = fileChecksum
 
   // Read file in chunks and send each chunk
@@ -218,7 +223,7 @@ func upload(c *websocket.Conn, token string) {
 
     if (lastChunk) {
       elapsed := time.Since(uploadStart)
-      fmt.Printf("[timer] time until last chunk - %v\n", elapsed);
+      logger.Debugf("[timer] time until last chunk - %v\n", elapsed);
     }
 
     if err = sendChunk(
@@ -259,15 +264,15 @@ func listenWS(c *websocket.Conn) {
     _, msg, err := c.ReadMessage()
 
     elapsed := time.Since(uploadStart)
-    fmt.Printf("\n[timer] time until response - %v\n\n", elapsed);
+    logger.Debugf("[timer] time until response - %v\n\n", elapsed);
 
     if err != nil {
       elapsed := time.Since(start)
-      log.Printf("Elapsed time %s\n", elapsed)
+      logger.Debugf("Elapsed time %s\n", elapsed)
 
       log.Fatal("WS error:", err)
     }
-    log.Printf("%s\n", msg)
+    fmt.Printf("%s\n", msg)
   }
 }
 

@@ -1,20 +1,17 @@
 package main
 
 import (
-	"log"
+	"os"
 
+	"foundry/cli/logger"
 	"foundry/cli/cmd"
 	"foundry/cli/config"
 )
 
-func init() {
-	// Remove timestamp prefix
-	log.SetFlags(0)
-}
-
 func main() {
 	if err := config.Init(); err != nil {
-		log.Fatal("Couldn't init config", err)
+		logger.Log("Couldn't init config", err)
+		os.Exit(1)
 	}
 
 	cmd.Execute()
