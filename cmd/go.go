@@ -4,11 +4,7 @@ package cmd
 
 import (
   "bytes"
-  "crypto/md5"
-  "encoding/hex"
   "encoding/json"
-  // "mime/multipart"
-  // "path/filepath"
 
   "log"
   "net/http"
@@ -20,7 +16,7 @@ import (
   "foundry/cli/logger"
   "foundry/cli/rwatch"
   "foundry/cli/auth"
-  "foundry/cli/zip"
+  "foundry/cli/files"
 
   "github.com/gorilla/websocket"
 )
@@ -35,7 +31,7 @@ var (
   }
   start = time.Now()
 
-  uploadStart time.Time
+  uploadStart = time.Now()
 )
 
 func init() {
@@ -77,6 +73,7 @@ func runGo(cmd *cobra.Command, args []string) {
 
   logger.Debugln("=WS CONNECTED=")
 
+
   go listenWS(c)
 
   // Start file watcher
@@ -92,7 +89,9 @@ func runGo(cmd *cobra.Command, args []string) {
       select {
       case _ = <-w.Events:
         // log.Println(e)
-        upload(c)
+        logger.Debugln("[timer] reseting starting upload time");
+        uploadStart = time.Now()
+        files.Upload(c, conf.RootDir)
       case err := <-w.Errors:
 				log.Println("watcher error:", err)
       }
@@ -110,7 +109,9 @@ func runGo(cmd *cobra.Command, args []string) {
 
   // Don't wait for first save to send the code - send it as soon
   // as user calls 'foundry go'
-  upload(c)
+  logger.Debugln("[timer] reseting starting upload time");
+  uploadStart = time.Now()
+  files.Upload(c, conf.RootDir)
 
   <-done
 }
@@ -124,6 +125,8 @@ func getToken() (string, error) {
   return a.IDToken, nil
 }
 
+// Periodically pings a server so the server
+// doesn't kill the WS connection
 func ping(ticker *time.Ticker, token, url string) {
   for {
     select {
@@ -159,85 +162,6 @@ func ping(ticker *time.Ticker, token, url string) {
   }
 }
 
-func upload(c *websocket.Conn) {
-  logger.Debugf("\n[timer] Starting timer\n");
-  uploadStart = time.Now()
-
-  ignore := []string{"node_modules", ".git"}
-
-  // Zip the project
-  buf, err := zip.ArchiveDir(conf.RootDir, ignore)
-  if err != nil {
-    log.Fatal(err)
-  }
-
-  // Get the 16 bytes hash
-  archiveChecksum := checksum(buf.Bytes())
-
-  // TODO: REMOVE
-  // if lastArchiveChecksum == archiveChecksum { return }
-  lastArchiveChecksum = archiveChecksum
-
-  bufferSize := 1024 // 1024B, size of a single chunk
-  buffer := make([]byte, bufferSize)
-  chunkCount := (buf.Len() / bufferSize) + 1
-
-  checksum := [md5.Size]byte{}
-  previousChecksum := [md5.Size]byte{}
-
-  for i := 0; i < chunkCount; i++ {
-    bytesread, err := buf.Read(buffer)
-    if err != nil {
-      log.Fatal(err)
-    }
-
-    previousChecksum = checksum
-    bytes := buffer[:bytesread]
-    checksum = md5.Sum(bytes)
-
-    checkStr := hex.EncodeToString(checksum[:])
-    prevCheckStr := hex.EncodeToString(previousChecksum[:])
-
-    lastChunk := i == chunkCount - 1
-
-    if (lastChunk) {
-      elapsed := time.Since(uploadStart)
-      logger.Debugf("[timer] time until last chunk - %v\n", elapsed);
-    }
-
-    if err = sendChunk(
-      c,
-      bytes,
-      checkStr,
-      prevCheckStr,
-      lastChunk); err != nil {
-      log.Fatal(err)
-    }
-  }
-}
-
-func sendChunk(c *websocket.Conn, b []byte, checksum string, prevChecksum string, last bool) error {
-  msg := struct {
-    Data              string   `json:"data"`
-    PreviousChecksum  string   `json:"previousChecksum"`
-    Checksum          string   `json:"checksum"`
-    IsLast            bool     `json:"isLast"`
-    RunAll            bool     `json:"runAll"`
-    Run               []string `json:"run"`
-  }{hex.EncodeToString(b),
-    prevChecksum,
-    checksum,
-    last,
-    true,
-    []string{},
-  }
-  err := c.WriteJSON(msg)
-  if err != nil {
-    return err
-  }
-  return nil
-}
-
 func listenWS(c *websocket.Conn) {
   for {
     _, msg, err := c.ReadMessage()
@@ -253,9 +177,4 @@ func listenWS(c *websocket.Conn) {
     }
     fmt.Printf("%s\n", msg)
   }
-}
-
-func checksum(data []byte) string {
-  hashInBytes := md5.Sum(data)
-  return hex.EncodeToString(hashInBytes[:])
 }
