@@ -92,9 +92,7 @@ func runGo(cmd *cobra.Command, args []string) {
       select {
       case _ = <-w.Events:
         // log.Println(e)
-        // TODO: Send binary data with websocket
-        // upload(c, token)
-        uploadBuffer(c)
+        upload(c)
       case err := <-w.Errors:
 				log.Println("watcher error:", err)
       }
@@ -112,8 +110,7 @@ func runGo(cmd *cobra.Command, args []string) {
 
   // Don't wait for first save to send the code - send it as soon
   // as user calls 'foundry go'
-  // upload(c, token)
-  uploadBuffer(c)
+  upload(c)
 
   <-done
 }
@@ -162,7 +159,7 @@ func ping(ticker *time.Ticker, token, url string) {
   }
 }
 
-func uploadBuffer(c *websocket.Conn) {
+func upload(c *websocket.Conn) {
   logger.Debugf("\n[timer] Starting timer\n");
   uploadStart = time.Now()
 
@@ -173,7 +170,6 @@ func uploadBuffer(c *websocket.Conn) {
   if err != nil {
     log.Fatal(err)
   }
-
 
   // Get the 16 bytes hash
   archiveChecksum := checksum(buf.Bytes())
