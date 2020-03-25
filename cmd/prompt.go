@@ -38,6 +38,9 @@ var (
 
 	filledLines = 0
 
+	freeLines = 0
+	overlapping = false
+
 	promptw = prompt.NewStandardOutputWriter()
 )
 
@@ -114,11 +117,17 @@ func getCommand(s string) *fprompt.Cmd {
 func printPeriodically2(ticker *time.Ticker, p *prompt.Prompt) {
 	stdoutw := prompt.NewStandardOutputWriter()
 
+	i := 0
+
 	for {
 		select {
 		case <-ticker.C:
+			i += 1
 			if saved {
 				stdoutw.UnSaveCursor()
+				if overlapping {
+					stdoutw.CursorUp(2)
+				}
 				saved = false
 			} else {
 				stdoutw.CursorGoTo(0, 0)
@@ -149,7 +158,8 @@ func printPeriodically2(ticker *time.Ticker, p *prompt.Prompt) {
 			stdoutw.Flush()
 
 			// Output the text
-			t := "=Lorem \nipsum \ndolor \nsit \namet\n. Hello \n WOrld\n, how\n"
+			t := fmt.Sprintf("=Lorem \nipsum \ndolor \nsit \namet\n. Hello \n WOrld\n, how - %v\n", i)
+			calcOverlap(t)
 			stdoutw.WriteStr(t)
 			stdoutw.Flush()
 			stdoutw.SaveCursor()
@@ -182,6 +192,18 @@ func printPeriodically2(ticker *time.Ticker, p *prompt.Prompt) {
 			promptw.WriteStr("> " + inputText)
 			promptw.Flush()
 		}
+	}
+}
+
+func calcOverlap(t string) {
+	// TODO: Handle case when len(t) > width of terminal - t gets rendered as multiple lines
+	l := strings.Split(t, "\n")
+
+	if len(l) >= freeLines {
+		freeLines = 0
+		overlapping = true
+	} else {
+		freeLines -= len(l)
 	}
 }
 
@@ -348,6 +370,7 @@ func runPrompt(cmd *cobra.Command, ars []string) {
 	row = int(size.Row)
 
 	promptRow = row
+	freeLines = promptRow - 3
 
 
 	promptw.EraseScreen()
