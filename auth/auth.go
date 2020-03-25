@@ -1,20 +1,14 @@
 package auth
 
 import (
-	// "log"
-
 	"bytes"
-	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strconv"
 	"strings"
 	"time"
-
-	"foundry/cli/config"
 )
 
 const (
@@ -48,77 +42,35 @@ func New() *Auth {
 	return &Auth{}
 }
 
-func (a *Auth) SignIn(ctx context.Context, email, pass string) error {
+func (a *Auth) SignUp(email, pass string) error {
+	reqBody := struct {
+		Email							string	`json:"email"`
+		Password					string	`json:"password"`
+		ReturnSecureToken	bool		`json:"returnSecureToken"`
+	}{email, pass, true}
+
+	baseURL := "https://identitytoolkit.googleapis.com/v1"
+	endpoint := fmt.Sprintf("accounts:signUp?key=%v", apiKey)
+	url := fmt.Sprintf("%v/%v", baseURL, endpoint)
+
+	return a.authReq(url, reqBody)
+}
+
+func (a *Auth) SignIn(email, pass string) error {
 	reqBody := struct {
 		Email 						string 	`json:"email"`
 		Password 					string 	`json:"password"`
 		ReturnSecureToken bool 		`json:"returnSecureToken"`
 	}{email, pass, true}
-	return a.doSignInReq(reqBody)
-}
 
-func (a *Auth) SaveTokens() error {
-	config.Set(idTokenKey, a.IDToken)
-	config.Set(refreshTokenKey, a.RefreshToken)
-
-	err := config.Write()
-
-	// if err := os.Setenv(idTokenKey, a.IDToken); err != nil {
-	// 	return err
-	// }
-	// if err := os.Setenv(refreshTokenKey, a.RefreshToken); err != nil {
-	// 	return err
-	// }
-	return err
-}
-
-func (a *Auth) LoadTokens() {
-	idtok, ok := config.Get(idTokenKey).(string)
-
-	if !ok {
-		// TODO: Error
-	}
-	a.IDToken = idtok
-
-	rtok, ok := config.Get(refreshTokenKey).(string)
-	if !ok {
-		// TODO: Error
-	}
-	a.RefreshToken = rtok
-}
-
-// Exchanges a refresh token for an ID token
-func (a *Auth) RefreshIDToken() error {
-	now := time.Now()
-	origin := a.originDate
-
-	if a.ExpiresIn == "" { a.ExpiresIn = "0" }
-
-	expireSeconds, err := strconv.Atoi(a.ExpiresIn)
-	if err != nil {
-		return err
-	}
-
-	end := origin.Add(time.Duration(expireSeconds))
-
-	// log.Println("now", now)
-	// log.Println("origin", origin)
-	// log.Println("expireSeconds", expireSeconds)
-	// log.Println("end", end)
-
-	if now.After(end) {
-		if err := a.doRefreshReq(); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func (a *Auth) doSignInReq(body interface{}) error {
 	baseURL := "https://identitytoolkit.googleapis.com/v1"
 	endpoint := fmt.Sprintf("accounts:signInWithPassword?key=%v", apiKey)
 	url := fmt.Sprintf("%v/%v", baseURL, endpoint)
 
+	return a.authReq(url, reqBody)
+}
+
+func (a *Auth) authReq(url string, body interface{}) error {
 	jBody, err := json.Marshal(body)
 	if err != nil {
 		return err
@@ -139,6 +91,7 @@ func (a *Auth) doSignInReq(body interface{}) error {
 	if err != nil {
 		return err
 	}
+
 	// Save the time when we originaly acquired the ID token
 	// for checking whether we need to refresh it
 	a.originDate = time.Now()
@@ -177,7 +130,9 @@ func (a *Auth) doRefreshReq() error {
 	}
 
 	// Sigh... Firebase has different keys in the response payload
-	// for token refresh flow than in the sign in response payload
+	// for token refresh flow from the response payload in a sign
+	// in flow. Also, its content-type isn't application/json but
+	// application/x-www-form-urlencoded.
 	var j struct {
 		ExpiresIn 		string `json:"expires_in"`
 		RefreshToken 	string `json:"refresh_token"`

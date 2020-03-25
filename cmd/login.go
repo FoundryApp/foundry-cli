@@ -1,14 +1,6 @@
 package cmd
 
 import (
-	// "bytes"
-	// "encoding/json"
-	// "errors"
-	// "fmt"
-	// "io/ioutil"
-	// "net/http"
-
-	"context"
 	"log"
 	"os"
 
@@ -22,7 +14,7 @@ import (
 var (
 	loginCmd = &cobra.Command{
 		Use: 		"login",
-		Short: 	"Log to your Foundry account",
+		Short: 	"Log in to your Foundry account",
 		Long:		"",
 		Run:		runLogin,
 	}
@@ -50,6 +42,7 @@ func runLogin(cmd *cobra.Command, args []string) {
 		Email string 	`survey:"email`
 		Pass	string	`survey:"pass`
 	}{}
+
 	err := survey.Ask(qs, &creds)
 	// Without this specific "if" SIGINT (Ctrl+C) would only
 	// interrupt the survey's prompt and not the whole program
@@ -60,7 +53,7 @@ func runLogin(cmd *cobra.Command, args []string) {
 	}
 
 	a := auth.New()
-	if err = a.SignIn(context.Background(), creds.Email, creds.Pass); err != nil {
+	if err = a.SignIn(creds.Email, creds.Pass); err != nil {
 		color.Red("⨯ Error")
 		log.Println("HTTP request error", err)
 		return

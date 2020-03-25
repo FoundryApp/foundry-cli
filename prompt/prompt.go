@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	goprompt "github.com/c-bata/go-prompt"
+	goprompt "github.com/mlejva/go-prompt"
 )
 
 type CmdRunFunc func(args []string) error

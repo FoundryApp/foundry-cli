@@ -18,3 +18,4 @@ func LogFatal( args ...interface{}) {
 	Logln(args)
 	os.Exit(1)
 }
+
