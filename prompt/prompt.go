@@ -28,6 +28,20 @@ type Prompt struct {
 	cmds 	[]*Cmd
 }
 
+var (
+	promptText = ""
+	promptTextCols = 0
+	errorRow = 0
+	promptRow = 0
+
+	totalRows = 0
+	freeRows = 0
+
+	overlapping = false
+
+	writer = goprompt.NewStandardOutputWriter()
+)
+
 func NewPrompt(cmds []*Cmd) *Prompt {
 	return &Prompt{cmds}
 }
@@ -66,7 +80,21 @@ func (p *Prompt) getCommand(s string) *Cmd {
 	return nil
 }
 
+func (p *Prompt) Print(t string) {
+
+}
+
 func (p *Prompt) Run() {
+	parser := goprompt.NewStandardInputParser()
+	size := parser.GetWinSize()
+
+	totalRows = int(size.Row)
+	promptRow = totalRows
+	errorRow = promptRow - 1
+	freeRows = promptRow - 3
+
+	wReset()
+
 	interup := goprompt.OptionAddKeyBind(goprompt.KeyBind{
 		Key: 	goprompt.ControlC,
 		Fn: 	func(buf *goprompt.Buffer) {
@@ -76,3 +104,12 @@ func (p *Prompt) Run() {
 	newp := goprompt.New(p.executor, p.completer, interup)
 	newp.Run()
 }
+
+
+func wReset() {
+	writer.EraseScreen()
+	writer.CursorGoTo(promptRow, 0)
+	writer.Flush()
+}
+
+// TODO: Handle resizing terminal

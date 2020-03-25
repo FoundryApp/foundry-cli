@@ -10,7 +10,7 @@ import (
 	fpromptCmd "foundry/cli/prompt/cmd"
 
 	"github.com/spf13/cobra"
-	"github.com/mlejva/go-prompt"
+	gprompt "github.com/mlejva/go-prompt"
 )
 
 var (
@@ -41,7 +41,7 @@ var (
 	freeLines = 0
 	overlapping = false
 
-	promptw = prompt.NewStandardOutputWriter()
+	promptw = gprompt.NewStandardOutputWriter()
 )
 
 
@@ -49,17 +49,17 @@ func init() {
 	rootCmd.AddCommand(promptCmd)
 }
 
-func completer(d prompt.Document) []prompt.Suggest {
+func completer(d gprompt.Document) []gprompt.Suggest {
 	col = d.CursorPositionCol()
 	inputText = d.CurrentLine()
 
-	s := []prompt.Suggest{}
+	s := []gprompt.Suggest{}
 	for _, c := range cmds {
 		s = append(s, c.ToSuggest())
 	}
 
-	return []prompt.Suggest{}
-	// return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
+	return []gprompt.Suggest{}
+	// return gprompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
 }
 
 func executor(s string) {
@@ -114,8 +114,8 @@ func getCommand(s string) *fprompt.Cmd {
 	return nil
 }
 
-func printPeriodically2(ticker *time.Ticker, p *prompt.Prompt) {
-	stdoutw := prompt.NewStandardOutputWriter()
+func printPeriodically2(ticker *time.Ticker, p *gprompt.Prompt) {
+	stdoutw := gprompt.NewStandardOutputWriter()
 
 	i := 0
 
@@ -207,8 +207,8 @@ func calcOverlap(t string) {
 	}
 }
 
-func printPeriodically(ticker *time.Ticker, p *prompt.Prompt) {
-	stdoutw := prompt.NewStandardOutputWriter()
+func printPeriodically(ticker *time.Ticker, p *gprompt.Prompt) {
+	// stdoutw := gprompt.NewStandardOutputWriter()
 
 	// stdoutw.SaveCursor()
 	// stdoutw.Flush()
@@ -221,12 +221,12 @@ func printPeriodically(ticker *time.Ticker, p *prompt.Prompt) {
 
 			// stdoutw.Flush()
 			if saved {
-				stdoutw.UnSaveCursor()
+				promptw.UnSaveCursor()
 				saved = false
 			} else {
-				stdoutw.CursorGoTo(0, 0)
+				promptw.CursorGoTo(0, 0)
 			}
-			stdoutw.Flush()
+			promptw.Flush()
 
 
 
@@ -245,26 +245,26 @@ func printPeriodically(ticker *time.Ticker, p *prompt.Prompt) {
 
 
 			if filledLines > promptRow - 3 {
-				stdoutw.SaveCursor()
-				stdoutw.Flush()
+				promptw.SaveCursor()
+				promptw.Flush()
 
 				// Go to prompt line, erase the line
 				// print output text, restore the prompt line
-				stdoutw.CursorGoTo(promptRow, 0)
-				stdoutw.Flush()
+				promptw.CursorGoTo(promptRow, 0)
+				promptw.Flush()
 				fmt.Print("\x1b[2K") // Erase current line
 
 
 				// same with error line
 				// Go to error line, erase the line
 				if len(errorText) > 0 {
-					stdoutw.CursorGoTo(promptRow - 1, 0)
-					stdoutw.Flush()
+					promptw.CursorGoTo(promptRow - 1, 0)
+					promptw.Flush()
 					fmt.Print("\x1b[2K") // Erase current line
 				}
 
-				stdoutw.UnSaveCursor()
-				stdoutw.Flush()
+				promptw.UnSaveCursor()
+				promptw.Flush()
 
 				// if filledLines > promptRow - 3 {
 				// 	fmt.Println("filledLines:", filledLines)
@@ -279,11 +279,11 @@ func printPeriodically(ticker *time.Ticker, p *prompt.Prompt) {
 				// 	stdoutw.Flush()
 				// }
 			}
-			stdoutw.WriteStr(t)
-			stdoutw.Flush()
-			stdoutw.SaveCursor()
+			promptw.WriteStr(t)
+			promptw.Flush()
+			promptw.SaveCursor()
 			saved = true
-			stdoutw.Flush()
+			promptw.Flush()
 
 
 
@@ -357,14 +357,14 @@ func printPeriodically(ticker *time.Ticker, p *prompt.Prompt) {
 }
 
 func runPrompt(cmd *cobra.Command, ars []string) {
-	interup := prompt.OptionAddKeyBind(prompt.KeyBind{
-		Key: 	prompt.ControlC,
-		Fn: 	func(buf *prompt.Buffer) {
+	interup := gprompt.OptionAddKeyBind(gprompt.KeyBind{
+		Key: 	gprompt.ControlC,
+		Fn: 	func(buf *gprompt.Buffer) {
 						os.Exit(0)
 					},
 	})
 
-	parser := prompt.NewStandardInputParser()
+	parser := gprompt.NewStandardInputParser()
 	size := parser.GetWinSize()
 	col = int(size.Col)
 	row = int(size.Row)
@@ -377,7 +377,7 @@ func runPrompt(cmd *cobra.Command, ars []string) {
 	promptw.CursorGoTo(promptRow, 0)
 	promptw.Flush()
 
-	p := prompt.New(executor, completer, interup)
+	p := gprompt.New(executor, completer, interup)
 
 
 	ticker := time.NewTicker(time.Second * 1)

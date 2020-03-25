@@ -28,6 +28,7 @@ var (
   }
   start = time.Now()
 
+  prompt *p.Prompt
   uploadStart = time.Now()
 )
 
@@ -63,7 +64,7 @@ func runGo(cmd *cobra.Command, args []string) {
     pc.Watch(c),
     pc.Exit(),
   }
-  prompt := p.NewPrompt(cmds)
+  prompt = p.NewPrompt(cmds)
   go prompt.Run()
 
   // Start the file watcher
