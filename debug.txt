@@ -1,0 +1,457 @@
+totalRows: 25
+promptRow: 25
+errorRow: 24
+freeRows: 22
+=================
+Connected to Autorun (ready)
+LEN: 1
+wsaved: false
+freeRows: 22
+overlapping: false
+[32m'undefined >Trigger - initializeNetworkFiltering: 1.693ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 21
+overlapping: false
+[32m'undefined >Trigger - initializeFunctionsConfigHelper: 40.273ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 20
+overlapping: false
+[32m'undefined >Trigger - initializeFirebaseFunctionsStubs: 1.298ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 19
+overlapping: false
+[32m'undefined >sslCreds InsecureChannelCredentialsImpl {'[39m
+LEN: 1
+wsaved: true
+freeRows: 18
+overlapping: false
+[32m'  callCredentials: EmptyCallCredentials {}'[39m
+LEN: 1
+wsaved: true
+freeRows: 17
+overlapping: false
+[32m'}'[39m
+LEN: 1
+wsaved: true
+freeRows: 16
+overlapping: false
+[32m'>>> makeProxiedFirestore - getGRPCInsecureCredential: 42.704ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 15
+overlapping: false
+[32m'>>> makeProxiedFirestore - initializeFirestoreSettings: 0.004ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 14
+overlapping: false
+[32m'undefined >>>> makeProxiedFirestore - new Proxied: 261.948ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 13
+overlapping: false
+[32m'undefined ><<< initializeFirebaseAdminStubs >>> makeProxiedFirestore: 305.130ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 12
+overlapping: false
+[32m'<<< initializeFirebaseAdminStubs >>> getDefaultConfig: 0.051ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 11
+overlapping: false
+[32m'<<< initializeFirebaseAdminStubs >>> RTDB emulator: 0.013ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 10
+overlapping: false
+[32m'undefined ><<< initializeFirebaseAdminStubs >>> adminModuleProxy: 0.004ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 9
+overlapping: false
+[32m'<<< initializeFirebaseAdminStubs >>> proxiedAdminModule: 0.047ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 8
+overlapping: false
+[32m'<<< initializeFirebaseAdminStubs >>> require.cache: 0.051ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 7
+overlapping: false
+[32m'Trigger - initializeFirebaseAdminStubs: 308.630ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 6
+overlapping: false
+[32m'undefined >Trigger - triggerModule = require(frb.cwd);: 0.546ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 5
+overlapping: false
+[32m'undefined >Trigger - require("../extractTriggers")(triggerModule, triggerDefinitions);: 0.626ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 4
+overlapping: false
+[32m'undefined >Trigger - getEmulatedTriggersFromDefinitions: 0.067ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 3
+overlapping: false
+[31mreloaded[39m
+LEN: 1
+wsaved: true
+freeRows: 2
+overlapping: false
+[37m...[39m
+LEN: 1
+wsaved: true
+freeRows: 1
+overlapping: false
+[32m'undefined >Trigger - initializeNetworkFiltering: 1.643ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeFunctionsConfigHelper: 28.847ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeFirebaseFunctionsStubs: 2.610ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >sslCreds InsecureChannelCredentialsImpl {'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'  callCredentials: EmptyCallCredentials {}'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'}'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >>>> makeProxiedFirestore - getGRPCInsecureCredential: 28.027ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'>>> makeProxiedFirestore - initializeFirestoreSettings: 0.003ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >>>> makeProxiedFirestore - new Proxied: 162.363ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined ><<< initializeFirebaseAdminStubs >>> makeProxiedFirestore: 190.855ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> getDefaultConfig: 0.047ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> RTDB emulator: 0.014ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> adminModuleProxy: 0.004ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> proxiedAdminModule: 0.044ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined ><<< initializeFirebaseAdminStubs >>> require.cache: 0.014ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeFirebaseAdminStubs: 192.233ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - triggerModule = require(frb.cwd);: 358.938ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - require("../extractTriggers")(triggerModule, triggerDefinitions);: 0.699ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - getEmulatedTriggersFromDefinitions: 0.120ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[31mexecute functioncreateWorkspace[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeNetworkFiltering: 1.633ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeFunctionsConfigHelper: 29.332ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeFirebaseFunctionsStubs: 0.895ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >sslCreds InsecureChannelCredentialsImpl {'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'  callCredentials: EmptyCallCredentials {}'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'}'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >>>> makeProxiedFirestore - getGRPCInsecureCredential: 27.732ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'>>> makeProxiedFirestore - initializeFirestoreSettings: 0.003ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >>>> makeProxiedFirestore - new Proxied: 146.668ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined ><<< initializeFirebaseAdminStubs >>> makeProxiedFirestore: 174.856ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> getDefaultConfig: 0.050ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> RTDB emulator: 0.013ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> adminModuleProxy: 0.003ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined ><<< initializeFirebaseAdminStubs >>> proxiedAdminModule: 0.040ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> require.cache: 0.013ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'Trigger - initializeFirebaseAdminStubs: 177.418ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - triggerModule = require(frb.cwd);: 204.765ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - require("../extractTriggers")(triggerModule, triggerDefinitions);: 0.371ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - getEmulatedTriggersFromDefinitions: 0.119ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+LEN: 2
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'createWorkspace >user3'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'user3'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[34m------[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+{ data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[31mexecute functionhelloWorld[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeNetworkFiltering: 1.649ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeFunctionsConfigHelper: 29.889ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - initializeFirebaseFunctionsStubs: 2.211ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >sslCreds InsecureChannelCredentialsImpl {'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'  callCredentials: EmptyCallCredentials {}'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'}'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >>>> makeProxiedFirestore - getGRPCInsecureCredential: 28.924ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'>>> makeProxiedFirestore - initializeFirestoreSettings: 0.003ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >>>> makeProxiedFirestore - new Proxied: 155.424ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined ><<< initializeFirebaseAdminStubs >>> makeProxiedFirestore: 184.797ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> getDefaultConfig: 0.050ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> RTDB emulator: 0.017ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined ><<< initializeFirebaseAdminStubs >>> adminModuleProxy: 0.004ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> proxiedAdminModule: 0.044ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'<<< initializeFirebaseAdminStubs >>> require.cache: 0.012ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'Trigger - initializeFirebaseAdminStubs: 186.154ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - triggerModule = require(frb.cwd);: 215.259ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - require("../extractTriggers")(triggerModule, triggerDefinitions);: 0.390ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'undefined >Trigger - getEmulatedTriggersFromDefinitions: 0.118ms'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+LEN: 2
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'helloWorld >MAGIC IS REAL'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[34m------[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+{ data: [32m'Response from a function'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true

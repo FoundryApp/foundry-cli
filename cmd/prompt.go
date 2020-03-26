@@ -115,7 +115,7 @@ func getCommand(s string) *fprompt.Cmd {
 }
 
 func printPeriodically2(ticker *time.Ticker, p *gprompt.Prompt) {
-	stdoutw := gprompt.NewStandardOutputWriter()
+	// stdoutw := gprompt.NewStandardOutputWriter()
 
 	i := 0
 
@@ -124,47 +124,47 @@ func printPeriodically2(ticker *time.Ticker, p *gprompt.Prompt) {
 		case <-ticker.C:
 			i += 1
 			if saved {
-				stdoutw.UnSaveCursor()
+				promptw.UnSaveCursor()
 				if overlapping {
-					stdoutw.CursorUp(2)
+					promptw.CursorUp(2)
 				}
 				saved = false
 			} else {
-				stdoutw.CursorGoTo(0, 0)
+				promptw.CursorGoTo(0, 0)
 			}
-			stdoutw.Flush()
+			promptw.Flush()
 
-			stdoutw.SaveCursor()
-			stdoutw.Flush()
+			promptw.SaveCursor()
+			promptw.Flush()
 
 			// Go to prompt line, erase the line
 			// print output text, restore the prompt line
-			stdoutw.CursorGoTo(promptRow, 0)
-			stdoutw.Flush()
-			stdoutw.EraseLine()
-			stdoutw.Flush()
+			promptw.CursorGoTo(promptRow, 0)
+			promptw.Flush()
+			promptw.EraseLine()
+			promptw.Flush()
 
 			// same with error line
 			// Go to error line, erase the line
 			if len(errorText) > 0 {
-				stdoutw.CursorGoTo(promptRow - 1, 0)
-				stdoutw.Flush()
-				stdoutw.EraseLine()
-				stdoutw.Flush()
+				promptw.CursorGoTo(promptRow - 1, 0)
+				promptw.Flush()
+				promptw.EraseLine()
+				promptw.Flush()
 			}
 
 			// Restore cursor
-			stdoutw.UnSaveCursor()
-			stdoutw.Flush()
+			promptw.UnSaveCursor()
+			promptw.Flush()
 
 			// Output the text
 			t := fmt.Sprintf("=Lorem \nipsum \ndolor \nsit \namet\n. Hello \n WOrld\n, how - %v\n", i)
 			calcOverlap(t)
-			stdoutw.WriteStr(t)
-			stdoutw.Flush()
-			stdoutw.SaveCursor()
+			promptw.WriteStr(t)
+			promptw.Flush()
+			promptw.SaveCursor()
 			saved = true
-			stdoutw.Flush()
+			promptw.Flush()
 
 			// DO THE FOLLOWING ONLY IF THE OUTPUT TEXT IS ABOUT TO HIT ERROR + PROMPT LINE
 			// vars:
@@ -177,8 +177,8 @@ func printPeriodically2(ticker *time.Ticker, p *gprompt.Prompt) {
 			// the terminal down
 
 			// Create space for prompt line + error line
-			stdoutw.WriteRawStr("\n\n")
-			stdoutw.Flush()
+			promptw.WriteRawStr("\n\n")
+			promptw.Flush()
 
 			// Restore the error line
 			promptw.CursorGoTo(promptRow - 1, 0)

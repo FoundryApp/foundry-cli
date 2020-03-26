@@ -26,13 +26,17 @@ func (c *Cmd) ToSuggest() goprompt.Suggest {
 
 type Prompt struct {
 	cmds 	[]*Cmd
+	// TODO: vars should be here? At least writer
+
+	// buff bytes.Buffer
 }
 
 var (
 	promptText = ""
-	promptTextCols = 0
-	errorRow = 0
 	promptRow = 0
+
+	errorText = ""
+	errorRow = 0
 
 	totalRows = 0
 	freeRows = 0
@@ -40,6 +44,10 @@ var (
 	overlapping = false
 
 	writer = goprompt.NewStandardOutputWriter()
+
+	wsaved = false
+
+	f *os.File
 )
 
 func NewPrompt(cmds []*Cmd) *Prompt {
@@ -47,11 +55,15 @@ func NewPrompt(cmds []*Cmd) *Prompt {
 }
 
 func (p *Prompt) completer(d goprompt.Document) []goprompt.Suggest {
+	promptText = d.CurrentLine()
+
 	s := []goprompt.Suggest{}
 	for _, c := range p.cmds {
 		s = append(s, c.ToSuggest())
 	}
-	return goprompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
+
+	return []goprompt.Suggest{}
+	//return goprompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
 }
 
 func (p *Prompt) executor(s string) {
@@ -67,7 +79,13 @@ func (p *Prompt) executor(s string) {
 			// os.Exit(1)
 		}
 	} else {
-		fmt.Printf("Unknown command '%s'. Write 'help' to list available commands.\n", fields[0])
+		p.wGoToAndEraseError()
+
+		errorText = fmt.Sprintf("Unknown command '%s'. Write 'help' to list available commands.\n", fields[0])
+		writer.WriteStr(errorText)
+		writer.Flush()
+
+		p.wGoToPrompt()
 	}
 }
 
@@ -81,10 +99,80 @@ func (p *Prompt) getCommand(s string) *Cmd {
 }
 
 func (p *Prompt) Print(t string) {
+	// TODO: Handle resizing terminal
+	// TODO: Handle text that is too long and is rendered as a multiline text
 
+	t = strings.TrimSpace(t)
+	fmt.Fprintln(f, t)
+
+
+	// s := fmt.Sprintf("split: %v", split)
+	// fmt.Fprintln(f, s)
+
+	split := strings.Split(t, "\n")
+	l := len(split)
+	s := fmt.Sprintf("LEN: %v", l)
+	fmt.Fprintln(f, s)
+
+	s = fmt.Sprintf("wsaved: %v", wsaved)
+	fmt.Fprintln(f, s)
+
+	s = fmt.Sprintf("freeRows: %v", freeRows)
+	fmt.Fprintln(f, s)
+
+	s = fmt.Sprintf("overlapping: %v", overlapping)
+	fmt.Fprintln(f, s)
+
+	if wsaved {
+		writer.UnSaveCursor()
+		writer.Flush()
+		if overlapping {
+			// writer.CursorUp(2)
+		}
+		wsaved = false
+	} else {
+		writer.CursorGoTo(0, 0)
+	}
+
+	writer.SaveCursor()
+	writer.Flush()
+
+	p.wGoToAndErasePrompt()
+	p.wGoToAndEraseError()
+
+	// Restore the cursor
+	writer.UnSaveCursor()
+	writer.Flush()
+
+	// Output the text
+	p.calcOverlapping(t)
+	writer.WriteRawStr(t+"\n")
+	writer.Flush()
+	writer.SaveCursor()
+	wsaved = true
+	writer.Flush()
+
+	// Create space for the prompt line + error line
+	writer.WriteRawStr("\n")
+	writer.Flush()
+
+	// Restore the error
+	p.wGoToError()
+	writer.WriteStr(errorText)
+	writer.Flush()
+
+	// Restore the prompt lines
+	p.wGoToPrompt()
+	writer.WriteStr("> " + promptText)
+	writer.Flush()
 }
 
+
 func (p *Prompt) Run() {
+	file, _ := os.Create("/Users/vasekmlejnsky/Developer/foundry/cli/debug.txt")
+	f = file
+	defer f.Close()
+
 	parser := goprompt.NewStandardInputParser()
 	size := parser.GetWinSize()
 
@@ -93,7 +181,18 @@ func (p *Prompt) Run() {
 	errorRow = promptRow - 1
 	freeRows = promptRow - 3
 
-	wReset()
+	s := fmt.Sprintf("totalRows: %v", totalRows)
+	fmt.Fprintln(f, s)
+	s = fmt.Sprintf("promptRow: %v", promptRow)
+	fmt.Fprintln(f, s)
+	s = fmt.Sprintf("errorRow: %v", errorRow)
+	fmt.Fprintln(f, s)
+	s = fmt.Sprintf("freeRows: %v", freeRows)
+	fmt.Fprintln(f, s)
+
+	fmt.Fprintln(f, "=================")
+
+	p.wReset()
 
 	interup := goprompt.OptionAddKeyBind(goprompt.KeyBind{
 		Key: 	goprompt.ControlC,
@@ -105,11 +204,41 @@ func (p *Prompt) Run() {
 	newp.Run()
 }
 
+func (p *Prompt) calcOverlapping(t string) {
+	l := strings.Split(t, "\n")
 
-func wReset() {
+	if len(l) >= freeRows {
+		freeRows = 0
+		overlapping = true
+	} else {
+		freeRows -= len(l)
+	}
+}
+
+func (p *Prompt) wReset() {
 	writer.EraseScreen()
 	writer.CursorGoTo(promptRow, 0)
 	writer.Flush()
 }
 
-// TODO: Handle resizing terminal
+func (p *Prompt) wGoToPrompt() {
+	writer.CursorGoTo(promptRow, 0)
+	writer.Flush()
+}
+
+func (p *Prompt) wGoToError() {
+	writer.CursorGoTo(errorRow, 0)
+	writer.Flush()
+}
+
+func (p *Prompt) wGoToAndErasePrompt() {
+	p.wGoToPrompt()
+	writer.EraseLine()
+	writer.Flush()
+}
+
+func (p *Prompt) wGoToAndEraseError() {
+	p.wGoToError()
+	writer.EraseLine()
+	writer.Flush()
+}

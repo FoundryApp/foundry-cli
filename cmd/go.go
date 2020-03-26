@@ -112,6 +112,8 @@ func getToken() (string, error) {
 }
 
 func listenCallback(data []byte, err error) {
+  time.Sleep(time.Millisecond * 10)
+
   elapsed := time.Since(uploadStart)
   logger.Debugf("<timer> time until response - %v\n", elapsed);
 
@@ -122,5 +124,10 @@ func listenCallback(data []byte, err error) {
     logger.LogFatal("WS error:", err)
   }
 
-  fmt.Printf("%s\n", data)
+  // fmt.Printf("%s\n", data)
+
+  // TODO: listenCallback is callback - it doesn't wait for prompt to print everything
+  // prompt must have a buffer and a lock that makes sure that it's printing sequentially
+  t := fmt.Sprintf("%s\n", data)
+  prompt.Print(t)
 }
