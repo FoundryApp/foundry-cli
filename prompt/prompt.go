@@ -127,7 +127,9 @@ func (p *Prompt) Print(t string) {
 		writer.UnSaveCursor()
 		writer.Flush()
 		if overlapping {
-			// writer.CursorUp(2)
+			writer.WriteRawStr("\n\n")
+			writer.CursorUp(2)
+			// os.Exit()
 		}
 		wsaved = false
 	} else {
@@ -146,14 +148,14 @@ func (p *Prompt) Print(t string) {
 
 	// Output the text
 	p.calcOverlapping(t)
-	writer.WriteRawStr(t+"\n")
+	writer.WriteRawStr(t + "\n")
 	writer.Flush()
 	writer.SaveCursor()
 	wsaved = true
 	writer.Flush()
 
 	// Create space for the prompt line + error line
-	writer.WriteRawStr("\n")
+	writer.WriteRawStr("\n\n")
 	writer.Flush()
 
 	// Restore the error
@@ -169,7 +171,7 @@ func (p *Prompt) Print(t string) {
 
 
 func (p *Prompt) Run() {
-	file, _ := os.Create("/Users/vasekmlejnsky/Developer/foundry/cli/debug.txt")
+	file, _ := os.Create("/Users/vasekmlejnsky/Developer/foundry/cli/debug2.txt")
 	f = file
 	defer f.Close()
 

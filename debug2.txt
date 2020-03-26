@@ -1,108 +1,129 @@
-<timer> reseting starting upload time
-
-
+totalRows: 22
+promptRow: 22
+errorRow: 21
+freeRows: 19
+=================
 ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
 ██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
 █████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝
 ██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝
 ██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║
 ╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
-
-
-
-<timer> time until response - 10.573784ms
-
+LEN: 6
+wsaved: false
+freeRows: 19
+overlapping: false
 [37m...[39m
-
-<timer> time until response - 83.801717ms
-
+LEN: 1
+wsaved: true
+freeRows: 13
+overlapping: false
 [34m[39m
 [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
-
-<timer> time until response - 4.512603922s
-
+LEN: 2
+wsaved: true
+freeRows: 12
+overlapping: false
 [32m'user3'[39m
-
-<timer> time until response - 4.543744797s
-
+LEN: 1
+wsaved: true
+freeRows: 10
+overlapping: false
 [32m'user3'[39m
-
-<timer> time until response - 4.554127004s
-
+LEN: 1
+wsaved: true
+freeRows: 9
+overlapping: false
 { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-<timer> time until response - 4.564974589s
-
+LEN: 1
+wsaved: true
+freeRows: 8
+overlapping: false
 [34m[39m
 [34m[4m[34mhelloWorld[39m[34m[24m[39m
-
-<timer> time until response - 4.577028346s
-
+LEN: 2
+wsaved: true
+freeRows: 7
+overlapping: false
 [32m'Now it seems fast!'[39m
-
-<timer> time until response - 4.587442308s
-
+LEN: 1
+wsaved: true
+freeRows: 5
+overlapping: false
 [32m'MAGIC IS REAL'[39m
-
-<timer> time until response - 4.598370829s
-
+LEN: 1
+wsaved: true
+freeRows: 4
+overlapping: false
 [32m'Is magic fast though?'[39m
-
-<timer> time until response - 4.609528254s
-
+LEN: 1
+wsaved: true
+freeRows: 3
+overlapping: false
 { data: [32m'Response from a function'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-<timer> time until response - 4.622219017s
-
-<timer> reseting starting upload time
+LEN: 1
+wsaved: true
+freeRows: 2
+overlapping: false
 [37m...[39m
-
-<timer> time until response - 82.648429ms
-
+LEN: 1
+wsaved: true
+freeRows: 1
+overlapping: false
 [34m[39m
 [34m[4m[34mhelloWorld[39m[34m[24m[39m
-
-<timer> time until response - 394.728855ms
-
+LEN: 2
+wsaved: true
+freeRows: 0
+overlapping: true
 [32m'Now it seems fast!'[39m
-
-<timer> time until response - 405.325697ms
-
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
 [32m'MAGIC IS REAL'[39m
-
-<timer> time until response - 416.708279ms
-
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
 [32m'Is magic fast though?'[39m
-
-<timer> time until response - 427.75578ms
-
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
 { data: [32m'Response from a function'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-<timer> time until response - 439.102761ms
-
-<timer> reseting starting upload time
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
 [37m...[39m
-
-<timer> time until response - 90.329829ms
-
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
 [34m[39m
 [34m[4m[34mhelloWorld[39m[34m[24m[39m
-
-<timer> time until response - 383.465064ms
-
+LEN: 2
+wsaved: true
+freeRows: 0
+overlapping: true
 [32m'Now it seems fast!'[39m
-
-<timer> time until response - 394.322363ms
-
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
 [32m'MAGIC IS REAL'[39m
-
-<timer> time until response - 404.809946ms
-
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
 [32m'Is magic fast though?'[39m
-
-<timer> time until response - 415.495701ms
-
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
 { data: [32m'Response from a function'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-<timer> time until response - 426.914883ms
-
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true

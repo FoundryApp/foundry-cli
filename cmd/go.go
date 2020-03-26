@@ -5,6 +5,8 @@ package cmd
 import (
   "time"
   "fmt"
+  // "log"
+  "os"
 
   "foundry/cli/auth"
   conn "foundry/cli/connection"
@@ -30,6 +32,8 @@ var (
 
   prompt *p.Prompt
   uploadStart = time.Now()
+
+  df *os.File
 )
 
 func init() {
@@ -37,6 +41,10 @@ func init() {
 }
 
 func runGo(cmd *cobra.Command, args []string) {
+  file, _ := os.Create("/Users/vasekmlejnsky/Developer/foundry/cli/debug.txt")
+  df = file
+  defer df.Close()
+
   token, err := getToken()
   if err != nil {
     logger.LogFatal("getToken error", err)
@@ -80,6 +88,7 @@ func runGo(cmd *cobra.Command, args []string) {
       case _ = <-w.Events:
         // log.Println(e)
         logger.Debugln("<timer> reseting starting upload time");
+        fmt.Fprintln(df, "<timer> reseting starting upload time")
         uploadStart = time.Now()
         files.Upload(c, conf.RootDir)
       case err := <-w.Errors:
@@ -96,6 +105,8 @@ func runGo(cmd *cobra.Command, args []string) {
   // Don't wait for first save to send the code - send it as soon
   // as user calls 'foundry go'
   logger.Debugln("<timer> reseting starting upload time");
+  fmt.Fprintln(df, "<timer> reseting starting upload time")
+
   uploadStart = time.Now()
   files.Upload(c, conf.RootDir)
 
@@ -129,5 +140,15 @@ func listenCallback(data []byte, err error) {
   // TODO: listenCallback is callback - it doesn't wait for prompt to print everything
   // prompt must have a buffer and a lock that makes sure that it's printing sequentially
   t := fmt.Sprintf("%s\n", data)
+  // // log.Println(t)
+
+  fmt.Fprintln(df, t)
+
+  tm := fmt.Sprintf("<timer> time until response - %v\n", elapsed)
+  fmt.Fprintln(df, tm)
+
+  // log.Println(string(data))
+  // logger.Fdebugln(t)
+
   prompt.Print(t)
 }
