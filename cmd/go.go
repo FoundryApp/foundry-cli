@@ -5,8 +5,9 @@ package cmd
 import (
   "time"
   "fmt"
-  // "log"
   "os"
+  "encoding/json"
+  "strings"
 
   "foundry/cli/auth"
   conn "foundry/cli/connection"
@@ -41,13 +42,10 @@ func init() {
 }
 
 func runGo(cmd *cobra.Command, args []string) {
-  file, _ := os.Create("/Users/vasekmlejnsky/Developer/foundry/cli/debug.txt")
-  df = file
-  defer df.Close()
-
   token, err := getToken()
   if err != nil {
-    logger.LogFatal("getToken error", err)
+    logger.FdebuglnFatal("getToken error", err)
+    logger.LogFatal(err)
   }
 
   done := make(chan struct{})
@@ -55,7 +53,8 @@ func runGo(cmd *cobra.Command, args []string) {
   // Create a new connection to the cloud env
   c, err := conn.New(token)
   if err != nil {
-    logger.LogFatal("Connection error", err)
+    logger.FdebuglnFatal("Connection error", err)
+    logger.LogFatal(err)
   }
   defer c.Close()
 
@@ -78,7 +77,8 @@ func runGo(cmd *cobra.Command, args []string) {
   // Start the file watcher
   w, err := rwatch.New()
   if err != nil {
-    logger.LogFatal("Watcher error", err)
+    logger.FdebuglnFatal("Watcher error", err)
+    logger.LogFatal(err)
   }
   defer w.Close()
 
@@ -87,26 +87,25 @@ func runGo(cmd *cobra.Command, args []string) {
       select {
       case _ = <-w.Events:
         // log.Println(e)
-        logger.Debugln("<timer> reseting starting upload time");
-        fmt.Fprintln(df, "<timer> reseting starting upload time")
+        logger.Fdebugln("<timer> reseting starting upload time")
         uploadStart = time.Now()
         files.Upload(c, conf.RootDir)
       case err := <-w.Errors:
-				logger.Debugln("watcher error:", err)
+        logger.FdebuglnFatal("watcher error", err)
+        logger.LogFatal(err)
       }
     }
   }()
 
   err = w.AddRecursive(conf.RootDir)
   if err != nil {
-    logger.Debugln(err)
+    logger.FdebuglnFatal("watcher AddRecursive", err)
+    logger.LogFatal(err)
   }
 
   // Don't wait for first save to send the code - send it as soon
   // as user calls 'foundry go'
-  logger.Debugln("<timer> reseting starting upload time");
-  fmt.Fprintln(df, "<timer> reseting starting upload time")
-
+  logger.Fdebugln("<timer> reseting starting upload time")
   uploadStart = time.Now()
   files.Upload(c, conf.RootDir)
 
@@ -123,32 +122,55 @@ func getToken() (string, error) {
 }
 
 func listenCallback(data []byte, err error) {
-  time.Sleep(time.Millisecond * 10)
-
   elapsed := time.Since(uploadStart)
-  logger.Debugf("<timer> time until response - %v\n", elapsed);
+  logger.Fdebugln("<timer> time until response (+ time.Sleep) -", elapsed)
+
+  time.Sleep(time.Millisecond * 10)
+  logger.Fdebugln(string(data))
+
+
 
   if err != nil {
     elapsed := time.Since(start)
-    logger.Debugf("Elapsed time %s\n", elapsed)
-
-    logger.LogFatal("WS error:", err)
+    logger.Fdebugln("<timer> Elapsed time -", elapsed)
+    logger.FdebuglnFatal("WS error", err)
+    logger.LogFatal(err)
   }
 
-  // fmt.Printf("%s\n", data)
 
-  // TODO: listenCallback is callback - it doesn't wait for prompt to print everything
-  // prompt must have a buffer and a lock that makes sure that it's printing sequentially
-  t := fmt.Sprintf("%s\n", data)
-  // // log.Println(t)
+  t := connMsg.ResponseMsgType{}
+  if err := json.Unmarshal(data, &t); err != nil {
+    elapsed := time.Since(start)
+    logger.Fdebugln("<timer> Elapsed time -", elapsed)
+    logger.FdebuglnFatal("Unmarshaling response error", err)
+    logger.LogFatal(err)
+  }
 
-  fmt.Fprintln(df, t)
+  switch t.Type {
+  case connMsg.LogResponseMsg:
+    var s struct { Content connMsg.LogContent }
 
-  tm := fmt.Sprintf("<timer> time until response - %v\n", elapsed)
-  fmt.Fprintln(df, tm)
+    if err := json.Unmarshal(data, &s); err != nil {
+      elapsed := time.Since(start)
+      logger.Fdebugln("<timer> Elapsed time -", elapsed)
+      logger.FdebuglnFatal("Unmarshaling response error", err)
+    }
 
-  // log.Println(string(data))
-  // logger.Fdebugln(t)
+    // TODO: listenCallback is a callback - it doesn't wait for prompt to print everything
+    // prompt must have a buffer and a lock that makes sure that it's printing sequentially
+    prompt.Print(s.Content.Msg)
 
-  prompt.Print(t)
+  case connMsg.WatchResponseMsg:
+    var s struct { Content connMsg.WatchContent }
+
+    if err := json.Unmarshal(data, &s); err != nil {
+      elapsed := time.Since(start)
+      logger.Fdebugln("<timer> Elapsed time -", elapsed)
+      logger.FdebuglnFatal("Unmarshaling response error", err)
+      logger.LogFatal(err)
+    }
+
+    p := fmt.Sprintf("[%s] > ", strings.Join(s.Content.Run, ", "))
+    prompt.SetPromptPrefix(p)
+  }
 }

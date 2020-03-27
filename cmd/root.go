@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 
+	"foundry/cli/logger"
+
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 )
@@ -16,6 +18,8 @@ type FoundryConf struct {
 const confFile = "./foundry.config.yaml"
 
 var (
+	debugFile = ""
+
 	conf = FoundryConf{}
 	rootCmd = &cobra.Command{
 		Use:   "foundry",
@@ -27,25 +31,33 @@ var (
 	}
 )
 
+func cobraInitCallback() {
+	logger.InitDebug(debugFile)
+}
+
 func init() {
+	cobra.OnInitialize(cobraInitCallback)
+
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
+	rootCmd.PersistentFlags().StringVar(&debugFile, "debug-file", "", "A file where the debug logs are saved (required)")
 
-	data, err := ioutil.ReadFile(confFile)
+	confData, err := ioutil.ReadFile(confFile)
 	if err != nil {
 		log.Fatal("Read file error", err)
 	}
 
-	err = yaml.Unmarshal(data, &conf)
+	err = yaml.Unmarshal(confData, &conf)
 	if err != nil {
 		log.Fatal("YAML error", err)
 	}
 }
 
 func Execute() {
-  if err := rootCmd.Execute(); err != nil {
+	logger.Close()
+	if err := rootCmd.Execute(); err != nil {
     log.Println(err)
     os.Exit(1)
-  }
+	}
 }

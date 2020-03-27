@@ -8,6 +8,7 @@ import (
 	"foundry/cli/config"
 )
 
+
 func main() {
 	if err := config.Init(); err != nil {
 		logger.Log("Couldn't init config", err)

@@ -5,6 +5,8 @@ import (
 	"os"
 	"strings"
 
+	"foundry/cli/logger"
+
 	goprompt "github.com/mlejva/go-prompt"
 )
 
@@ -32,6 +34,8 @@ type Prompt struct {
 }
 
 var (
+	promptPrefix = "> "
+
 	promptText = ""
 	promptRow = 0
 
@@ -75,8 +79,8 @@ func (p *Prompt) executor(s string) {
 		args := fields[1:]
 
 		if err := cmd.Do(args); err != nil {
-			fmt.Println(err)
-			// os.Exit(1)
+			logger.FdebuglnFatal(err)
+			logger.LogFatal(err)
 		}
 	} else {
 		p.wGoToAndEraseError()
@@ -103,25 +107,7 @@ func (p *Prompt) Print(t string) {
 	// TODO: Handle text that is too long and is rendered as a multiline text
 
 	t = strings.TrimSpace(t)
-	fmt.Fprintln(f, t)
-
-
-	// s := fmt.Sprintf("split: %v", split)
-	// fmt.Fprintln(f, s)
-
-	split := strings.Split(t, "\n")
-	l := len(split)
-	s := fmt.Sprintf("LEN: %v", l)
-	fmt.Fprintln(f, s)
-
-	s = fmt.Sprintf("wsaved: %v", wsaved)
-	fmt.Fprintln(f, s)
-
-	s = fmt.Sprintf("freeRows: %v", freeRows)
-	fmt.Fprintln(f, s)
-
-	s = fmt.Sprintf("overlapping: %v", overlapping)
-	fmt.Fprintln(f, s)
+	logger.Fdebugln("[prompt]", t)
 
 	if wsaved {
 		writer.UnSaveCursor()
@@ -129,7 +115,6 @@ func (p *Prompt) Print(t string) {
 		if overlapping {
 			writer.WriteRawStr("\n\n")
 			writer.CursorUp(2)
-			// os.Exit()
 		}
 		wsaved = false
 	} else {
@@ -165,16 +150,15 @@ func (p *Prompt) Print(t string) {
 
 	// Restore the prompt lines
 	p.wGoToPrompt()
-	writer.WriteStr("> " + promptText)
+	writer.WriteStr(promptPrefix + promptText)
 	writer.Flush()
 }
 
+func (p *Prompt) SetPromptPrefix(s string) {
+	promptPrefix = s
+}
 
 func (p *Prompt) Run() {
-	file, _ := os.Create("/Users/vasekmlejnsky/Developer/foundry/cli/debug2.txt")
-	f = file
-	defer f.Close()
-
 	parser := goprompt.NewStandardInputParser()
 	size := parser.GetWinSize()
 
@@ -183,26 +167,20 @@ func (p *Prompt) Run() {
 	errorRow = promptRow - 1
 	freeRows = promptRow - 3
 
-	s := fmt.Sprintf("totalRows: %v", totalRows)
-	fmt.Fprintln(f, s)
-	s = fmt.Sprintf("promptRow: %v", promptRow)
-	fmt.Fprintln(f, s)
-	s = fmt.Sprintf("errorRow: %v", errorRow)
-	fmt.Fprintln(f, s)
-	s = fmt.Sprintf("freeRows: %v", freeRows)
-	fmt.Fprintln(f, s)
-
-	fmt.Fprintln(f, "=================")
-
 	p.wReset()
 
-	interup := goprompt.OptionAddKeyBind(goprompt.KeyBind{
+	interupOpt := goprompt.OptionAddKeyBind(goprompt.KeyBind{
 		Key: 	goprompt.ControlC,
 		Fn: 	func(buf *goprompt.Buffer) {
 						os.Exit(0)
 					},
 	})
-	newp := goprompt.New(p.executor, p.completer, interup)
+	prefixOpt := goprompt.OptionPrefix(promptPrefix)
+	livePrefixOpt := goprompt.OptionLivePrefix(func() (prefix string, useLivePrefix bool) {
+		return promptPrefix, true
+	})
+
+	newp := goprompt.New(p.executor, p.completer, interupOpt, prefixOpt, livePrefixOpt)
 	newp.Run()
 }
 

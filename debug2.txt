@@ -1,8 +1,13 @@
-totalRows: 22
-promptRow: 22
-errorRow: 21
-freeRows: 19
+totalRows: 20
+promptRow: 20
+errorRow: 19
+freeRows: 17
 =================
+Preparing your environment...
+LEN: 1
+wsaved: false
+freeRows: 17
+overlapping: false
 ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
 ██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
 █████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝
@@ -10,88 +15,52 @@ freeRows: 19
 ██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║
 ╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
 LEN: 6
-wsaved: false
-freeRows: 19
+wsaved: true
+freeRows: 16
 overlapping: false
 [37m...[39m
 LEN: 1
 wsaved: true
-freeRows: 13
+freeRows: 10
 overlapping: false
 [34m[39m
 [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
 LEN: 2
 wsaved: true
-freeRows: 12
-overlapping: false
-[32m'user3'[39m
-LEN: 1
-wsaved: true
-freeRows: 10
-overlapping: false
-[32m'user3'[39m
-LEN: 1
-wsaved: true
 freeRows: 9
 overlapping: false
-{ data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[32m'--> CREATE WORKSPACE'[39m
 LEN: 1
-wsaved: true
-freeRows: 8
-overlapping: false
-[34m[39m
-[34m[4m[34mhelloWorld[39m[34m[24m[39m
-LEN: 2
 wsaved: true
 freeRows: 7
 overlapping: false
-[32m'Now it seems fast!'[39m
+[32m'user3'[39m
+LEN: 1
+wsaved: true
+freeRows: 6
+overlapping: false
+[32m'user3'[39m
 LEN: 1
 wsaved: true
 freeRows: 5
 overlapping: false
-[32m'MAGIC IS REAL'[39m
+{ data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
 LEN: 1
 wsaved: true
 freeRows: 4
 overlapping: false
-[32m'Is magic fast though?'[39m
-LEN: 1
+[34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+LEN: 2
 wsaved: true
 freeRows: 3
 overlapping: false
-{ data: [32m'Response from a function'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-LEN: 1
-wsaved: true
-freeRows: 2
-overlapping: false
-[37m...[39m
+[32m'[log] --> HELLO WORLD'[39m
 LEN: 1
 wsaved: true
 freeRows: 1
 overlapping: false
-[34m[39m
-[34m[4m[34mhelloWorld[39m[34m[24m[39m
-LEN: 2
-wsaved: true
-freeRows: 0
-overlapping: true
-[32m'Now it seems fast!'[39m
-LEN: 1
-wsaved: true
-freeRows: 0
-overlapping: true
-[32m'MAGIC IS REAL'[39m
-LEN: 1
-wsaved: true
-freeRows: 0
-overlapping: true
-[32m'Is magic fast though?'[39m
-LEN: 1
-wsaved: true
-freeRows: 0
-overlapping: true
-{ data: [32m'Response from a function'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+{ data: [32m'2nd run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
 LEN: 1
 wsaved: true
 freeRows: 0
@@ -102,27 +71,43 @@ wsaved: true
 freeRows: 0
 overlapping: true
 [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+LEN: 2
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'--> CREATE WORKSPACE'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'user3'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[32m'user3'[39m
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+{ data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+LEN: 1
+wsaved: true
+freeRows: 0
+overlapping: true
+[34m[39m
 [34m[4m[34mhelloWorld[39m[34m[24m[39m
 LEN: 2
 wsaved: true
 freeRows: 0
 overlapping: true
-[32m'Now it seems fast!'[39m
+[32m'[log] --> HELLO WORLD'[39m
 LEN: 1
 wsaved: true
 freeRows: 0
 overlapping: true
-[32m'MAGIC IS REAL'[39m
-LEN: 1
-wsaved: true
-freeRows: 0
-overlapping: true
-[32m'Is magic fast though?'[39m
-LEN: 1
-wsaved: true
-freeRows: 0
-overlapping: true
-{ data: [32m'Response from a function'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+{ data: [32m'2nd run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
 LEN: 1
 wsaved: true
 freeRows: 0

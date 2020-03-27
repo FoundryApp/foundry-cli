@@ -3,10 +3,10 @@ package msg
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	// "io/ioutil"
 	"net/http"
 
-	"foundry/cli/logger"
+	// l "foundry/cli/logger"
 )
 
 type PingBody struct {
@@ -17,6 +17,10 @@ type PingMsg struct {
 	URL		string
 	Body 	PingBody
 }
+
+var (
+	// logger *l.Logger
+)
 
 func NewPingMsg(url, t string) *PingMsg {
 	return &PingMsg{
@@ -37,14 +41,14 @@ func (pm *PingMsg) Send() error {
 	}
 
 	if res.StatusCode != http.StatusOK {
-		bodyBytes, err := ioutil.ReadAll(res.Body)
+		// bodyBytes, err := ioutil.ReadAll(res.Body)
 		if err != nil {
-			logger.Debugln("<Non-OK ping response> Error reading ping response body: ", err)
+			// logger.Debugln("<Non-OK ping response> Error reading ping response body: ", err)
 			return err
 		}
 
-		bodyString := string(bodyBytes)
-		logger.Debugln("Non-OK ping response: %s\n", bodyString)
+		// bodyString := string(bodyBytes)
+		// logger.Debugln("Non-OK ping response: %s\n", bodyString)
 	}
 
 	return nil

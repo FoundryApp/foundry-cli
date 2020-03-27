@@ -2,10 +2,7 @@
 
 package logger
 
-import io
-
-func Debugf(fmt string, args ...interface{}) {}
-// func Fdebugf(w io.Writer, f string, a ...interface) {}
+func InitDebug(path string) {}
+func Close() {}
 func Fdebugln(s string) {}
-func Debugln(s string, args ...interface{}) {}
-
+func FdebuglnFatal(s string) {}

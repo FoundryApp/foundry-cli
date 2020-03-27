@@ -43,7 +43,7 @@ func (w *Watcher) AddRecursive(dir string) error {
 }
 
 func (w *Watcher) Close() {
-	log.Println("Closing")
+	log.Println("Closing rwatch")
 	w.fsnotify.Close()
 	close(w.done)
 }
