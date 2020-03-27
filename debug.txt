@@ -1,41 +1,47 @@
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 416.638377ms
-[1mDEBUG[0m [foundry/cli/cmd.runGo:108] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"Preparing your environment...\n"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> Preparing your environment...
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 8.613618ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\n\n\n\n\n\n\n███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗\n██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝\n█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝\n██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝\n██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║\n╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝\n"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
+[1mDEBUG[0m [foundry/cli/connection.New:38] WS dialing
+[1mDEBUG[0m [foundry/cli/connection.New:44] WS connected
+[1mDEBUG[0m [foundry/cli/cmd.runGo:67] BEFORE PING
+[1mDEBUG[0m [foundry/cli/connection.(*Connection).Listen:55]  WS listening
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 439.461329ms
+[1mDEBUG[0m [foundry/cli/connection.(*Connection).Ping:74] Ping
+[1mDEBUG[0m [foundry/cli/cmd.runGo:109] <timer> reseting starting upload time
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"Preparing your environment...\n"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] Preparing your environment...
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 9.463163ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"\n\n\n\n\n\n\n███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗\n██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝\n█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝\n██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝\n██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║\n╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝\n"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
 ██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
 █████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝
 ██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝
 ██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║
 ╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 69.932117ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> [37m...[39m
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 379.718567ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> [34m[39m
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 91.204653ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] [37m...[39m
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 517.03149ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] [34m[39m
 [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 390.331138ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> [32m'--> CREATE WORKSPACE'[39m
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 400.914709ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> [32m'user3'[39m
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 411.258781ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> [32m'user3'[39m
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 421.62869ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 432.008121ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> [34m[39m
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 527.484206ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 538.874745ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 549.290522ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 562.323099ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 575.403399ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] [34m[39m
 [34m[4m[34mhelloWorld[39m[34m[24m[39m
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 442.298123ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> [32m'[log] --> HELLO WORLD'[39m
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 452.694546ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'2nd run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] <prompt> { data: [32m'2nd run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 586.474372ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:127] <timer> time until response (+ time.Sleep) - 597.903507ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:130] {"type":"log","content":{"msg":"{ data: \u001b[32m'2nd run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:110] [prompt] { data: [32m'2nd run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[31m[1mFATAL[0m [foundry/cli/connection.(*Connection).Ping:79] Failed to ping the server Post http://127.0.0.1:8000/ping: EOF

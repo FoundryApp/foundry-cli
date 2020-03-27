@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	// "foundry/cli/logger"
+	"foundry/cli/logger"
 	"foundry/cli/connection/msg"
 
 	"github.com/gorilla/websocket"
@@ -35,25 +35,24 @@ const (
 
 
 func New(token string) (*Connection, error) {
-	// logger.Debugln("<Connection> WS dialing")
+	logger.Fdebugln("WS dialing")
 	url := WebSocketURL(token)
 	c, _, err := websocket.DefaultDialer.Dial(url, nil)
 	if err != nil {
 		return nil, err
 	}
-	// logger.Debugln("<Connection> WS connected")
+	logger.Fdebugln("WS connected")
 
 	return &Connection{token, c}, nil
 }
 
 func (c *Connection) Close() {
-	// logger.Debugln("<Connection> WS closing")
+	logger.Fdebugln("WS closing")
 	c.wsconn.Close()
 }
 
 func (c *Connection) Listen(cb ListenCallback) {
-	// logger.Debugln("<Connection> WS listening")
-
+	logger.Fdebugln(" WS listening")
 	for {
 		_, msg, err := c.wsconn.ReadMessage()
 		cb(msg, err)
@@ -72,15 +71,16 @@ func (c *Connection) Send(cm ConnectionMessage) error {
 
 // Pings server so the WS connection stays open
 func (c *Connection) Ping(pm *msg.PingMsg, ticker *time.Ticker, stop <-chan struct{}) {
-	// logger.Debugln("<Ping> Pinging")
+	logger.Fdebugln("Ping")
 	for {
 		select {
 		case <-ticker.C:
 			if err := pm.Send(); err != nil {
-				// logger.Debugln("<Ping> Failed to ping server", err)
+				logger.FdebuglnFatal("Failed to ping the server", err)
+				logger.LogFatal(err)
 			}
 		case <-stop:
-			// logger.Debugln("<Ping> Stopping ping")
+			logger.Fdebugln("Stop pinging")
 			ticker.Stop()
 			return
 		}
