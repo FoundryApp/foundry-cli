@@ -6,6 +6,7 @@ import (
 
 	"foundry/cli/logger"
 	"foundry/cli/connection/msg"
+	"foundry/cli/connection/endpoint"
 
 	"github.com/gorilla/websocket"
 )
@@ -20,19 +21,6 @@ type Connection struct {
 type ConnectionMessage interface {
 	Body() interface{}
 }
-
-const (
-	baseURL = "127.0.0.1:8000" // autorun
-	// baseURL = "127.0.0.1:3500" // podm
-  // baseURL = "ide.foundryapp.co"
-
-  wsScheme = "ws"
-  // wsScheme = "wss"
-
-  pingScheme = "http"
-  // pingScheme = "https"
-)
-
 
 func New(token string) (*Connection, error) {
 	logger.Fdebugln("WS dialing")
@@ -88,9 +76,9 @@ func (c *Connection) Ping(pm *msg.PingMsg, ticker *time.Ticker, stop <-chan stru
 }
 
 func WebSocketURL(token string) string {
-	return fmt.Sprintf("%s://%s/ws/%s", wsScheme, baseURL, token)
+	return fmt.Sprintf("%s://%s/ws/%s", endpoint.WebSocketScheme, endpoint.BaseURL, token)
 }
 
 func PingURL() string {
-	return fmt.Sprintf("%s://%s/ping", pingScheme, baseURL)
+	return fmt.Sprintf("%s://%s/ping", endpoint.PingScheme, endpoint.BaseURL)
 }

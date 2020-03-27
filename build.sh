@@ -1,26 +1,17 @@
 #!/bin/sh
 
-debug_flag="debug"
+flags=$@
+build_name="foundry"
 
-build_flag=$1 # "debug" or empty (= release)
+echo "Building with flags: '$@'...\n"
 
-if [ "$build_flag" = "$debug_flag" ]
-then
-  echo "Debug build...\n"
-  build_name="foundry-debug"
-elif [ -z "$build_flag" ] # empty build_flag is a release version
-then
-  echo "Release build..."
-  build_name="foundry"
-else
-  echo "ERROR: Unknown build flag '$build_flag'"
-  exit 1
-fi
+for flag in `echo $flags`; do
+  build_name=$build_name-$flag
+done
 
-go build -tags "$build_flag" -o "./build/$build_name" .
+go build -tags "$flags" -o "./build/$build_name" .
 if [ $? -eq 0 ]; then
   echo "✅ SUCCESS"
 else
   echo "\n❌ FAIL"
 fi
-
