@@ -2,8 +2,10 @@ package prompt
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"strings"
+	"time"
 
 	"foundry/cli/logger"
 
@@ -46,12 +48,13 @@ var (
 	freeRows = 0
 
 	overlapping = false
+	overlappingRows = 0
 
 	writer = goprompt.NewStandardOutputWriter()
 
 	wsaved = false
 
-	f *os.File
+	waitDuration = time.Millisecond * 300
 )
 
 func NewPrompt(cmds []*Cmd) *Prompt {
@@ -103,54 +106,60 @@ func (p *Prompt) getCommand(s string) *Cmd {
 }
 
 func (p *Prompt) Print(t string) {
-	// TODO: Handle resizing terminal
-	// TODO: Handle text that is too long and is rendered as a multiline text
-
 	t = strings.TrimSpace(t)
-	logger.Fdebugln("[prompt]", t)
+	lines := strings.Split(t, "\n")
 
-	if wsaved {
+	for _, l := range lines {
+		logger.Fdebugln("[prompt] freeRows start:", freeRows)
+
+		freeRows -= 1
+
 		writer.UnSaveCursor()
 		writer.Flush()
-		if overlapping {
-			writer.WriteRawStr("\n\n")
-			writer.CursorUp(2)
+
+		writer.WriteRawStr(l+"\n")
+		writer.Flush()
+
+		writer.SaveCursor()
+		writer.Flush()
+
+		if freeRows <= 3 {
+			newRows := 3 - freeRows
+
+			writer.CursorGoTo(errorRow, 0)
+			writer.Flush()
+			writer.EraseLine()
+			writer.Flush()
+
+			writer.CursorGoTo(promptRow, 0)
+			writer.Flush()
+			writer.EraseLine()
+			writer.Flush()
+			writer.WriteRawStr(strings.Repeat("\n", newRows))
+			writer.Flush()
+
+			freeRows += newRows
+
+			writer.UnSaveCursor()
+			writer.Flush()
+
+			writer.CursorUp(newRows)
+			writer.Flush()
+			writer.SaveCursor()
+			writer.Flush()
 		}
-		wsaved = false
-	} else {
-		writer.CursorGoTo(0, 0)
+
+		logger.Fdebugln("[prompt] freeRows end:", freeRows)
 	}
 
-	writer.SaveCursor()
+	writer.CursorGoTo(errorRow, 0)
+	writer.Flush()
+	writer.WriteRawStr(errorText)
 	writer.Flush()
 
-	p.wGoToAndErasePrompt()
-	p.wGoToAndEraseError()
-
-	// Restore the cursor
-	writer.UnSaveCursor()
+	writer.CursorGoTo(promptRow, 0)
 	writer.Flush()
-
-	// Output the text
-	p.calcOverlapping(t)
-	writer.WriteRawStr(t + "\n")
-	writer.Flush()
-	writer.SaveCursor()
-	wsaved = true
-	writer.Flush()
-
-	// Create space for the prompt line + error line
-	writer.WriteRawStr("\n\n")
-	writer.Flush()
-
-	// Restore the error
-	p.wGoToError()
-	writer.WriteStr(errorText)
-	writer.Flush()
-
-	// Restore the prompt lines
-	p.wGoToPrompt()
-	writer.WriteStr(promptPrefix + promptText)
+	writer.WriteRawStr(promptPrefix + promptText)
 	writer.Flush()
 }
 
@@ -165,7 +174,13 @@ func (p *Prompt) Run() {
 	totalRows = int(size.Row)
 	promptRow = totalRows
 	errorRow = promptRow - 1
-	freeRows = promptRow - 3
+	freeRows = totalRows
+
+	// So the first unsave in print() is at 0,0
+	writer.CursorGoTo(0, 0)
+	writer.Flush()
+	writer.SaveCursor()
+	writer.Flush()
 
 	p.wReset()
 
@@ -190,8 +205,10 @@ func (p *Prompt) calcOverlapping(t string) {
 	if len(l) >= freeRows {
 		freeRows = 0
 		overlapping = true
+		overlappingRows = int(math.Abs(float64(freeRows - len(l))))
 	} else {
 		freeRows -= len(l)
+		overlappingRows = 0
 	}
 }
 
