@@ -50,13 +50,8 @@ var (
 	totalRows = 0
 	freeRows = 0
 
-	overlapping = false
-	overlappingRows = 0
-
 	parser = goprompt.NewStandardInputParser()
 	writer = goprompt.NewStandardOutputWriter()
-
-	wsaved = false
 
 	waitDuration = time.Millisecond * 300
 )
@@ -88,8 +83,6 @@ func NewPrompt(cmds []*Cmd) *Prompt {
 // }
 
 func (p *Prompt) Print(s string) {
-	logger.Fdebugln("#### START PRINT")
-
 	logger.Fdebugln("[print] totalRows:", totalRows)
 	logger.Fdebugln("[print] promptRow:", promptRow)
 	logger.Fdebugln("[print] errorRow:", errorRow)
@@ -119,15 +112,17 @@ func (p *Prompt) Print(s string) {
 			newRows := 3 - freeRows
 			logger.Fdebugln("[prompt] newRows:", newRows)
 
-			writer.CursorGoTo(errorRow, 0)
-			writer.Flush()
-			writer.EraseLine()
-			writer.Flush()
+			p.wGoToAndEraseError()
+			// writer.CursorGoTo(errorRow, 0)
+			// writer.Flush()
+			// writer.EraseLine()
+			// writer.Flush()
 
-			writer.CursorGoTo(promptRow, 0)
-			writer.Flush()
-			writer.EraseLine()
-			writer.Flush()
+			p.wGoToAndErasePrompt()
+			// writer.CursorGoTo(promptRow, 0)
+			// writer.Flush()
+			// writer.EraseLine()
+			// writer.Flush()
 			writer.WriteRawStr(strings.Repeat("\n", newRows))
 			writer.Flush()
 
@@ -145,17 +140,28 @@ func (p *Prompt) Print(s string) {
 		logger.Fdebugln("[prompt] freeRows end:", freeRows)
 	}
 
-	writer.CursorGoTo(errorRow, 0)
-	writer.Flush()
-	writer.WriteRawStr(errorText)
+	p.wGoToAndRestoreError()
+	// writer.CursorGoTo(errorRow, 0)
+	// writer.Flush()
+	// writer.WriteRawStr(errorText)
+	// writer.Flush()
+
+	p.wGoToAndRestorePrompt()
+	// writer.CursorGoTo(promptRow, 0)
+	// writer.Flush()
+	// writer.WriteRawStr(promptPrefix + promptText)
+	// writer.Flush()
+}
+
+func (p *Prompt) PrintInfo(s string) {
+	p.wGoToAndEraseError()
+
+	writer.SetColor(goprompt.Green, goprompt.DefaultColor, true)
+	writer.WriteStr(s)
+	writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, true)
 	writer.Flush()
 
-	writer.CursorGoTo(promptRow, 0)
-	writer.Flush()
-	writer.WriteRawStr(promptPrefix + promptText)
-	writer.Flush()
-
-	logger.Fdebugln("#### END PRINT")
+	p.wGoToPrompt()
 }
 
 func (p *Prompt) SetPromptPrefix(s string) {
@@ -225,8 +231,10 @@ func (p *Prompt) executor(s string) {
 	} else {
 		p.wGoToAndEraseError()
 
+		writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
 		errorText = fmt.Sprintf("Unknown command '%s'. Write 'help' to list available commands.\n", fields[0])
 		writer.WriteStr(errorText)
+		writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, true)
 		writer.Flush()
 
 		p.wGoToPrompt()
@@ -288,5 +296,21 @@ func (p *Prompt) wGoToAndErasePrompt() {
 func (p *Prompt) wGoToAndEraseError() {
 	p.wGoToError()
 	writer.EraseLine()
+	writer.Flush()
+}
+
+func (p *Prompt) wGoToAndRestorePrompt() {
+	p.wGoToPrompt()
+
+	writer.SetColor(goprompt.Blue, goprompt.DefaultColor, false)
+	writer.WriteRawStr(promptPrefix)
+	writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
+	writer.WriteRawStr(promptText)
+	writer.Flush()
+}
+
+func (p *Prompt) wGoToAndRestoreError() {
+	p.wGoToError()
+	writer.WriteRawStr(errorText)
 	writer.Flush()
 }

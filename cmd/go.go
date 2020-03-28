@@ -174,5 +174,8 @@ func listenCallback(data []byte, err error) {
 
     p := fmt.Sprintf("[%s] > ", strings.Join(s.Content.Run, ", "))
     prompt.SetPromptPrefix(p)
+
+    p = fmt.Sprintf("Watching only functions: %s", strings.Join(s.Content.Run, ", "))
+    prompt.PrintInfo(p)
   }
 }
