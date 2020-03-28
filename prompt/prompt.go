@@ -1,10 +1,13 @@
 package prompt
 
 import (
+	// "bytes"
 	"fmt"
-	"math"
+	// "io"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 
 	"foundry/cli/logger"
@@ -32,7 +35,7 @@ type Prompt struct {
 	cmds 	[]*Cmd
 	// TODO: vars should be here? At least writer
 
-	// buff bytes.Buffer
+	// buf *bytes.Buffer
 }
 
 var (
@@ -50,6 +53,7 @@ var (
 	overlapping = false
 	overlappingRows = 0
 
+	parser = goprompt.NewStandardInputParser()
 	writer = goprompt.NewStandardOutputWriter()
 
 	wsaved = false
@@ -58,7 +62,7 @@ var (
 )
 
 func NewPrompt(cmds []*Cmd) *Prompt {
-	return &Prompt{cmds}
+	return &Prompt{cmds,/* &bytes.Buffer{}*/}
 }
 
 func (p *Prompt) completer(d goprompt.Document) []goprompt.Suggest {
@@ -105,12 +109,44 @@ func (p *Prompt) getCommand(s string) *Cmd {
 	return nil
 }
 
-func (p *Prompt) Print(t string) {
-	t = strings.TrimSpace(t)
-	lines := strings.Split(t, "\n")
+// func (p *Prompt) WriteToBuffer(s string) error {
+// 	_, err := p.buf.Write([]byte(s))
+// 	return err
+// }
+
+// func (p *Prompt) watchBuffer() {
+// 	for {
+// 		// logger.Fdebugln("Watch Buffer")
+
+// 		b := make([]byte, 1024)
+// 		if n, err := p.buf.Read(b); err == nil && n > 0 {
+// 			p.Print(string(b))
+// 			// logger.Fdebugln("BUFFER:", string(b))
+// 		} else if err != nil && err != io.EOF {
+// 			logger.FdebuglnFatal(err)
+// 			logger.LogFatal(err)
+// 		}
+
+// 		// time.Sleep(time.Millisecond * 10)
+// 	}
+// }
+
+func (p *Prompt) Print(s string) {
+	logger.Fdebugln("#### START PRINT")
+
+	logger.Fdebugln("[print] totalRows:", totalRows)
+	logger.Fdebugln("[print] promptRow:", promptRow)
+	logger.Fdebugln("[print] errorRow:", errorRow)
+
+	logger.Fdebugln("[print] raw:", s)
+	trimmed := strings.TrimSpace(s)
+	logger.Fdebugln("[print] trimmed:", trimmed)
+	lines := strings.Split(trimmed, "\n")
+	logger.Fdebugln("[print] totalLines:", len(lines))
 
 	for _, l := range lines {
 		logger.Fdebugln("[prompt] freeRows start:", freeRows)
+		logger.Fdebugln("[prompt] line:", l)
 
 		freeRows -= 1
 
@@ -125,6 +161,7 @@ func (p *Prompt) Print(t string) {
 
 		if freeRows <= 3 {
 			newRows := 3 - freeRows
+			logger.Fdebugln("[prompt] newRows:", newRows)
 
 			writer.CursorGoTo(errorRow, 0)
 			writer.Flush()
@@ -161,6 +198,8 @@ func (p *Prompt) Print(t string) {
 	writer.Flush()
 	writer.WriteRawStr(promptPrefix + promptText)
 	writer.Flush()
+
+	logger.Fdebugln("#### END PRINT")
 }
 
 func (p *Prompt) SetPromptPrefix(s string) {
@@ -168,21 +207,34 @@ func (p *Prompt) SetPromptPrefix(s string) {
 }
 
 func (p *Prompt) Run() {
-	parser := goprompt.NewStandardInputParser()
 	size := parser.GetWinSize()
 
-	totalRows = int(size.Row)
-	promptRow = totalRows
-	errorRow = promptRow - 1
-	freeRows = totalRows
+	// totalRows = int(size.Row)
+	// promptRow = totalRows
+	// errorRow = promptRow - 1
+	// freeRows = totalRows
 
-	// So the first unsave in print() is at 0,0
-	writer.CursorGoTo(0, 0)
-	writer.Flush()
-	writer.SaveCursor()
-	writer.Flush()
 
-	p.wReset()
+
+	// Watch for terminal size changes
+	sigwinch := make(chan os.Signal, 1)
+	defer close(sigwinch)
+	signal.Notify(sigwinch, syscall.SIGWINCH)
+	go func() {
+		for {
+			if _, ok := <-sigwinch; !ok { return }
+			size = parser.GetWinSize()
+			logger.Fdebugln("Terminal size change:", size)
+			p.rerender(size)
+		}
+	}()
+
+	p.rerender(size)
+
+	// writer.CursorGoTo(0, 0)
+	// writer.Flush()
+	// writer.SaveCursor()
+	// writer.Flush()
 
 	interupOpt := goprompt.OptionAddKeyBind(goprompt.KeyBind{
 		Key: 	goprompt.ControlC,
@@ -196,20 +248,44 @@ func (p *Prompt) Run() {
 	})
 
 	newp := goprompt.New(p.executor, p.completer, interupOpt, prefixOpt, livePrefixOpt)
+
+	// go p.watchBuffer()
+
 	newp.Run()
 }
 
-func (p *Prompt) calcOverlapping(t string) {
-	l := strings.Split(t, "\n")
+// func (p *Prompt) calcOverlapping(t string) {
+// 	l := strings.Split(t, "\n")
 
-	if len(l) >= freeRows {
-		freeRows = 0
-		overlapping = true
-		overlappingRows = int(math.Abs(float64(freeRows - len(l))))
-	} else {
-		freeRows -= len(l)
-		overlappingRows = 0
-	}
+// 	if len(l) >= freeRows {
+// 		freeRows = 0
+// 		overlapping = true
+// 		overlappingRows = int(math.Abs(float64(freeRows - len(l))))
+// 	} else {
+// 		freeRows -= len(l)
+// 		overlappingRows = 0
+// 	}
+// }
+
+func (p *Prompt) rerender(size *goprompt.WinSize) {
+	totalRows = int(size.Row)
+	promptRow = totalRows
+	errorRow = promptRow - 1
+	freeRows = totalRows
+
+	// So the initial UnSave is at 0,0
+	writer.CursorGoTo(0, 0)
+	writer.Flush()
+	writer.SaveCursor()
+	writer.Flush()
+
+	// Clears the screen and moves cursor to promptRow
+	p.wReset()
+
+	logger.Fdebugln("totalRows:", totalRows)
+	logger.Fdebugln("promptRow:", promptRow)
+	logger.Fdebugln("errorRow:", errorRow)
+	logger.Fdebugln("freeRows:", freeRows)
 }
 
 func (p *Prompt) wReset() {

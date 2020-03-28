@@ -30,6 +30,8 @@ func InitDebug(path string) {
 		panic(err)
 	}
 	debugFile = dfile
+
+	Fdebugln("==== STARTING ====")
 }
 
 func Close() {

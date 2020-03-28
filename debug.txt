@@ -1,418 +1,1393 @@
+[1mDEBUG[0m [foundry/cli/logger.InitDebug:34] ==== STARTING ====
 [1mDEBUG[0m [foundry/cli/connection.New:26] WS dialing
 [1mDEBUG[0m [foundry/cli/connection.New:32] WS connected
 [1mDEBUG[0m [foundry/cli/connection.(*Connection).Listen:43]  WS listening
-[1mDEBUG[0m [foundry/cli/connection.(*Connection).Ping:62] Ping
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 450.614937ms
-[1mDEBUG[0m [foundry/cli/cmd.runGo:108] <timer> reseting starting upload time
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 460.810591ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"Preparing your environment..."}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 20
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 19
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 63.843519ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:285] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:286] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:287] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:288] freeRows: 53
+[1mDEBUG[0m [foundry/cli/connection.(*Connection).Ping:62] Ping
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: Preparing your environment...
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: Preparing your environment...
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: Preparing your environment...
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 461.45101ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\n███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗\n██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝\n█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝\n██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝\n██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║\n╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝\n"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: 
+███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
+██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
+█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝
+██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝
+██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║
+╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
+
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
+██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
+█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝
+██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝
+██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║
+╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 6
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 51
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 51
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: ██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 50
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 50
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: █████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 49
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 49
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: ██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 48
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 48
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: ██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 47
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 47
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: ╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 46
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.runGo:108] <timer> reseting starting upload time
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 26.049205ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 19
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 18
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 366.667933ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 46
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 45
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 313.971715ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 18
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 17
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 17
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 16
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 387.390237ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 45
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 44
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 44
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 43
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 323.863613ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 16
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 15
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 399.365453ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 43
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 42
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 324.190519ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 15
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 14
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 412.136333ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 42
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 41
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 324.686021ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 14
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 13
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 423.306644ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 13
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 12
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 435.111111ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 41
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 40
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 332.342836ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 40
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 39
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 341.117829ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 12
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 11
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 11
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 10
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 448.876445ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 39
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 38
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 38
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 37
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 349.159459ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 10
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 9
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 460.958494ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 9
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 8
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 37
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 36
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 352.282977ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 36
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 35
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 56.651185ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 44.467096ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 8
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 7
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 313.761742ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 35
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 34
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 348.870792ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 7
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 6
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 6
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 5
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 325.182004ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 34
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 33
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 33
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 32
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 357.461116ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 5
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 4
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 336.401336ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 32
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 357.676022ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 4
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 346.777146ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 357.836834ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 357.782448ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 368.118005ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 29
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 378.424344ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 29
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 28
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 382.376142ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 380.296925ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 28
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 27
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 27
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 26
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 392.634214ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 390.807936ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 26
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 25
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 392.997989ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 25
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 24
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 35.936091ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 27.740376ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 271.487312ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 24
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 23
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 281.336871ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 282.691458ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 23
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 22
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 22
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 21
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 289.258075ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 293.808508ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 21
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 20
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 290.213376ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 304.32425ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 20
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 19
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 290.563488ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 314.77238ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 325.240173ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 19
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 18
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 290.759895ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 18
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 17
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 296.675325ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 335.722482ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 17
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 16
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 16
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 15
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 317.463777ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 347.713591ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 15
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 14
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 317.76563ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 14
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 13
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 39.622287ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 25.50644ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 318.628162ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 13
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 12
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 288.332146ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 329.292029ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 12
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 11
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 11
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 10
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 294.148012ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 339.849586ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 10
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 9
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 294.457939ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 350.335533ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 9
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 8
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 294.584984ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 360.857249ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 371.677021ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 8
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 7
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 296.070028ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 7
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 6
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 303.442589ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 382.261535ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 6
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 5
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 5
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 4
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 311.490076ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 392.932425ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 4
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 0
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 311.991511ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 51.639435ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 27.547235ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 297.84788ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 263.126024ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 309.769884ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 271.22153ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 322.827259ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 271.552172ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 335.00874ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 271.752094ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 348.861543ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 359.398044ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 271.956437ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 281.480506ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 370.539189ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 287.862099ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 381.050095ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 288.077437ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 36.859071ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 23.140602ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 265.181764ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 256.458103ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 275.720844ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 261.892073ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 286.127488ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 262.323471ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 296.533784ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 262.435404ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 309.252582ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 319.873138ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 264.499376ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 275.579003ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 331.918207ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 280.157034ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 342.196793ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 280.399387ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 40.663151ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 43.313664ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 270.233449ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 329.877551ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 281.667104ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 292.041462ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 331.183554ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE 2'\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 331.637097ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 302.339775ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 332.70235ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 314.230742ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 325.179822ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 333.98727ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 342.103553ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 335.679513ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 346.94781ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 346.555571ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 347.837725ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 53
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 52
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Run.func1:227] Terminal size change: &{49 231}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:285] totalRows: 49
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:286] promptRow: 49
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:287] errorRow: 48
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:288] freeRows: 49
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Run.func1:227] Terminal size change: &{31 231}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:285] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:286] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:287] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).rerender:288] freeRows: 31
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 64.106485ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 38.57534ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 280.256482ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 421.883531ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 291.239489ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 301.809081ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 29
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 29
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 28
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 431.57009ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE 2'\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 28
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 27
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 431.898277ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 313.153715ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 27
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 26
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 432.103223ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 323.608889ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 334.050353ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 26
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 25
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 432.54002ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 25
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 24
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 445.587103ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 344.502711ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 24
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 23
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 23
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 22
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 453.06393ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 355.378257ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 22
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 21
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 453.499836ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 21
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 20
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 38.681968ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 32.802803ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 287.958772ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 20
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 19
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 272.262259ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 299.157069ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 311.380174ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 19
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 18
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 18
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 17
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 276.993805ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE 2'\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 17
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 16
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 277.9701ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 323.514163ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 16
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 15
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 278.202762ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 335.951934ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 347.416402ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 15
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 14
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 278.543637ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 14
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 13
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 282.929354ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 357.869703ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 13
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 12
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 12
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 11
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 294.911966ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 368.61245ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 11
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 10
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 295.690167ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 10
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 9
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
 [1mDEBUG[0m [foundry/cli/cmd.runGo.func1:90] <timer> reseting starting upload time
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 37.765268ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 23.799609ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 308.239772ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 9
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [37m...[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 8
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 277.816058ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 318.67794ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 329.875254ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 8
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 7
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 7
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 6
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 282.797099ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'--> CREATE WORKSPACE 2'\u001b[39m"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 6
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'--> CREATE WORKSPACE 2'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 5
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 283.103126ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 342.489698ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 5
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 4
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 283.342097ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'user3'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 352.776929ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 363.198044ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 4
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'user3'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 0
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 285.553637ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace2'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'Created a workspace2'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 290.402212ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 374.370265ms
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [34m[39m
+[34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 2
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [34m[4m[34mhelloWorld[39m[34m[24m[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 300.680243ms
 [1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"\u001b[32m'[log] --> HELLO WORLD'\u001b[39m"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 386.293964ms
-[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'6th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:113] [prompt] freeRows start: 3
-[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print3:152] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: [32m'[log] --> HELLO WORLD'[39m
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:126] <timer> time until response (+ time.Sleep) - 301.82707ms
+[1mDEBUG[0m [foundry/cli/cmd.listenCallback:129] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:135] #### START PRINT
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:137] [print] totalRows: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:138] [print] promptRow: 31
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:139] [print] errorRow: 30
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:141] [print] raw: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:143] [print] trimmed: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:145] [print] totalLines: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:148] [prompt] freeRows start: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:149] [prompt] line: { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
+[1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
