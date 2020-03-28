@@ -1391,3 +1391,4 @@
 [1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:164] [prompt] newRows: 1
 [1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:189] [prompt] freeRows end: 3
 [1mDEBUG[0m [foundry/cli/prompt.(*Prompt).Print:202] #### END PRINT
+[31m[1mFATAL[0m [foundry/cli/connection.(*Connection).Ping:67] Failed to ping the server Post http://127.0.0.1:8000/ping: EOF

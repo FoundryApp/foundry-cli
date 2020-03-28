@@ -158,12 +158,9 @@ func listenCallback(data []byte, err error) {
 
     // TODO: listenCallback is a callback - it doesn't wait for prompt to print everything
     // prompt must have a buffer and a lock that makes sure that it's printing sequentially
-    // t := fmt.Sprintf("%s\n", s.Content.Msg)
+
     prompt.Print(string(s.Content.Msg))
-    // if err := prompt.WriteToBuffer(t); err != nil {
-    //   logger.FdebuglnFatal(err)
-		// 	logger.LogFatal(err)
-    // }
+
 
   case connMsg.WatchResponseMsg:
     var s struct { Content connMsg.WatchContent }

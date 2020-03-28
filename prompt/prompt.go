@@ -65,50 +65,6 @@ func NewPrompt(cmds []*Cmd) *Prompt {
 	return &Prompt{cmds,/* &bytes.Buffer{}*/}
 }
 
-func (p *Prompt) completer(d goprompt.Document) []goprompt.Suggest {
-	promptText = d.CurrentLine()
-
-	s := []goprompt.Suggest{}
-	for _, c := range p.cmds {
-		s = append(s, c.ToSuggest())
-	}
-
-	return []goprompt.Suggest{}
-	//return goprompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
-}
-
-func (p *Prompt) executor(s string) {
-	if s == "" { return }
-
-	fields := strings.Fields(s)
-
-	if cmd := p.getCommand(fields[0]); cmd != nil {
-		args := fields[1:]
-
-		if err := cmd.Do(args); err != nil {
-			logger.FdebuglnFatal(err)
-			logger.LogFatal(err)
-		}
-	} else {
-		p.wGoToAndEraseError()
-
-		errorText = fmt.Sprintf("Unknown command '%s'. Write 'help' to list available commands.\n", fields[0])
-		writer.WriteStr(errorText)
-		writer.Flush()
-
-		p.wGoToPrompt()
-	}
-}
-
-func (p *Prompt) getCommand(s string) *Cmd {
-	for _, c := range p.cmds {
-		if c.Text == s {
-			return c
-		}
-	}
-	return nil
-}
-
 // func (p *Prompt) WriteToBuffer(s string) error {
 // 	_, err := p.buf.Write([]byte(s))
 // 	return err
@@ -209,13 +165,6 @@ func (p *Prompt) SetPromptPrefix(s string) {
 func (p *Prompt) Run() {
 	size := parser.GetWinSize()
 
-	// totalRows = int(size.Row)
-	// promptRow = totalRows
-	// errorRow = promptRow - 1
-	// freeRows = totalRows
-
-
-
 	// Watch for terminal size changes
 	sigwinch := make(chan os.Signal, 1)
 	defer close(sigwinch)
@@ -230,11 +179,6 @@ func (p *Prompt) Run() {
 	}()
 
 	p.rerender(size)
-
-	// writer.CursorGoTo(0, 0)
-	// writer.Flush()
-	// writer.SaveCursor()
-	// writer.Flush()
 
 	interupOpt := goprompt.OptionAddKeyBind(goprompt.KeyBind{
 		Key: 	goprompt.ControlC,
@@ -254,18 +198,49 @@ func (p *Prompt) Run() {
 	newp.Run()
 }
 
-// func (p *Prompt) calcOverlapping(t string) {
-// 	l := strings.Split(t, "\n")
+func (p *Prompt) completer(d goprompt.Document) []goprompt.Suggest {
+	promptText = d.CurrentLine()
 
-// 	if len(l) >= freeRows {
-// 		freeRows = 0
-// 		overlapping = true
-// 		overlappingRows = int(math.Abs(float64(freeRows - len(l))))
-// 	} else {
-// 		freeRows -= len(l)
-// 		overlappingRows = 0
-// 	}
-// }
+	s := []goprompt.Suggest{}
+	for _, c := range p.cmds {
+		s = append(s, c.ToSuggest())
+	}
+
+	return []goprompt.Suggest{}
+	//return goprompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
+}
+
+func (p *Prompt) executor(s string) {
+	if s == "" { return }
+
+	fields := strings.Fields(s)
+
+	if cmd := p.getCommand(fields[0]); cmd != nil {
+		args := fields[1:]
+
+		if err := cmd.Do(args); err != nil {
+			logger.FdebuglnFatal(err)
+			logger.LogFatal(err)
+		}
+	} else {
+		p.wGoToAndEraseError()
+
+		errorText = fmt.Sprintf("Unknown command '%s'. Write 'help' to list available commands.\n", fields[0])
+		writer.WriteStr(errorText)
+		writer.Flush()
+
+		p.wGoToPrompt()
+	}
+}
+
+func (p *Prompt) getCommand(s string) *Cmd {
+	for _, c := range p.cmds {
+		if c.Text == s {
+			return c
+		}
+	}
+	return nil
+}
 
 func (p *Prompt) rerender(size *goprompt.WinSize) {
 	totalRows = int(size.Row)
