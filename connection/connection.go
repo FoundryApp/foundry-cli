@@ -76,9 +76,9 @@ func (c *Connection) Ping(pm *msg.PingMsg, ticker *time.Ticker, stop <-chan stru
 }
 
 func WebSocketURL(token string) string {
-	return fmt.Sprintf("%s://%s/ws/%s", endpoint.WebSocketScheme, endpoint.BaseURL, token)
+	return fmt.Sprintf("%s://%s/ws/%s", endpoint.WebSocketScheme, endpoint.WebSocketURL, token)
 }
 
 func PingURL() string {
-	return fmt.Sprintf("%s://%s/ping", endpoint.PingScheme, endpoint.BaseURL)
+	return fmt.Sprintf("%s://%s/ping", endpoint.PingScheme, endpoint.PingURL)
 }

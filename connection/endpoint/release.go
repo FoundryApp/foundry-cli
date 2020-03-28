@@ -3,7 +3,8 @@
 package endpoint
 
 const (
-  BaseURL = "ide.foundryapp.co"
+  WebSocketURL = "ide.foundryapp.co"
+  PingURL = "ide.foundryapp.co"
 
   WebSocketScheme = "wss"
   PingScheme = "https"

@@ -232,9 +232,10 @@ func (p *Prompt) executor(s string) {
 		p.wGoToAndEraseError()
 
 		writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
-		errorText = fmt.Sprintf("Unknown command '%s'. Write 'help' to list available commands.\n", fields[0])
+		// errorText = fmt.Sprintf("Unknown command '%s'. Write 'help' to list available commands.\n", fields[0])
+		errorText = fmt.Sprintf("Unknown command '%s'", fields[0])
 		writer.WriteStr(errorText)
-		writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, true)
+		writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
 		writer.Flush()
 
 		p.wGoToPrompt()
@@ -311,6 +312,10 @@ func (p *Prompt) wGoToAndRestorePrompt() {
 
 func (p *Prompt) wGoToAndRestoreError() {
 	p.wGoToError()
+
+	writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
 	writer.WriteRawStr(errorText)
+	writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
+
 	writer.Flush()
 }

@@ -3,10 +3,9 @@
 package endpoint
 
 const (
-	// BaseURL = "127.0.0.1:8371" // terminal
-
-	BaseURL = "127.0.0.1:8000" // autorun
-	// baseURL = "127.0.0.1:3500" // podm
+	WebSocketURL = "127.0.0.1:8000" // autorun
+	// WebSocketURL = "127.0.0.1:3500" // podm
+	PingURL = "ide.foundryapp.co"
 
   WebSocketScheme = "ws"
   PingScheme = "http"
