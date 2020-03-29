@@ -25,7 +25,7 @@ var (
 					Validate: survey.Required,
 			},
 			{
-					Name: "pass",
+					Name: 		"pass",
 					Prompt:   &survey.Password{Message: "Password:"},
 					Validate: survey.Required,
 			},
@@ -60,12 +60,6 @@ func runSignIn(cmd *cobra.Command, args []string) {
 	if authClient.Error != nil {
 		color.Red("⨯ Error")
 		log.Println("Auth error", authClient.Error)
-		return
-	}
-
-	if err = authClient.SaveTokens(); err != nil {
-		color.Red("⨯ Error")
-		log.Println("Save tokens error", err)
 		return
 	}
 

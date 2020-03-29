@@ -1,53 +1,12 @@
 package auth
 
 import (
+	"fmt"
 	"strconv"
 	"time"
 
 	"foundry/cli/config"
 )
-
-
-func (a *Auth) ClearTokens() {
-	a.UserID = ""
-	a.Email = ""
-	a.IDToken = ""
-	a.RefreshToken = ""
-	a.ExpiresIn = "0"
-
-	config.Set(idTokenKey, "")
-	config.Set(refreshTokenKey, "")
-}
-
-func (a *Auth) SaveTokens() error {
-	config.Set(idTokenKey, a.IDToken)
-	config.Set(refreshTokenKey, a.RefreshToken)
-
-	err := config.Write()
-
-	// if err := os.Setenv(idTokenKey, a.IDToken); err != nil {
-	// 	return err
-	// }
-	// if err := os.Setenv(refreshTokenKey, a.RefreshToken); err != nil {
-	// 	return err
-	// }
-	return err
-}
-
-func (a *Auth) LoadTokens() {
-	idtok, ok := config.Get(idTokenKey).(string)
-
-	if !ok {
-		// TODO: Error
-	}
-	a.IDToken = idtok
-
-	rtok, ok := config.Get(refreshTokenKey).(string)
-	if !ok {
-		// TODO: Error
-	}
-	a.RefreshToken = rtok
-}
 
 // Exchanges a refresh token for an ID token
 func (a *Auth) RefreshIDToken() error {
@@ -74,4 +33,33 @@ func (a *Auth) RefreshIDToken() error {
 		}
 	}
 	return nil
+}
+
+func (a *Auth) saveTokens() error {
+	config.Set(idTokenKey, a.IDToken)
+	config.Set(refreshTokenKey, a.RefreshToken)
+	return config.Write()
+}
+
+func (a *Auth) loadTokens() error {
+	idtok, ok := config.Get(idTokenKey).(string)
+
+	if !ok {
+		return fmt.Errorf("Failed to get ID token from config")
+	}
+	a.IDToken = idtok
+
+	rtok, ok := config.Get(refreshTokenKey).(string)
+	if !ok {
+		return fmt.Errorf("Failed to get refresh token from config")
+	}
+	a.RefreshToken = rtok
+
+	return nil
+}
+
+func (a *Auth) clearTokens() error {
+	config.Set(idTokenKey, "")
+	config.Set(refreshTokenKey, "")
+	return config.Write()
 }

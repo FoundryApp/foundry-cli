@@ -20,7 +20,7 @@ const confFile = "./foundry.config.yaml"
 
 var (
 	debugFile = ""
-	authClient = auth.New()
+	authClient *auth.Auth
 
 	conf = FoundryConf{}
 	rootCmd = &cobra.Command{
@@ -36,10 +36,14 @@ var (
 func cobraInitCallback() {
 	logger.InitDebug(debugFile)
 
-	authClient.LoadTokens()
-	if err := authClient.RefreshIDToken(); err != nil {
+	a, err := auth.New()
+	if err != nil {
+		logger.FdebuglnFatal(err)
+	}
+	if err := a.RefreshIDToken(); err != nil {
     logger.FdebuglnFatal(err)
-  }
+	}
+	authClient = a
 }
 
 func init() {

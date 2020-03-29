@@ -88,11 +88,5 @@ func runSignUp(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	if err = authClient.SaveTokens(); err != nil {
-		color.Red("⨯ Error")
-		log.Println("Save tokens error", err)
-		return
-	}
-
 	color.Green("\n✔ Signed up")
 }

@@ -36,10 +36,16 @@ type Auth struct {
 
 	ExpiresIn			string			`json:"expiresIn"`
 	originDate		time.Time
+
+	SignedIn			bool
 }
 
-func New() *Auth {
-	return &Auth{}
+func New() (*Auth, error) {
+	a := &Auth{}
+	if err := a.loadTokens(); err != nil {
+		return nil, err
+	}
+	return a, nil
 }
 
 func (a *Auth) SignUp(email, pass string) error {
@@ -53,7 +59,16 @@ func (a *Auth) SignUp(email, pass string) error {
 	endpoint := fmt.Sprintf("accounts:signUp?key=%v", apiKey)
 	url := fmt.Sprintf("%v/%v", baseURL, endpoint)
 
-	return a.authReq(url, reqBody)
+	if err := a.authReq(url, reqBody); err != nil {
+		return err
+	}
+
+	if err := a.saveTokens(); err != nil {
+		return err
+	}
+
+	a.SignedIn = true
+	return nil
 }
 
 func (a *Auth) SignIn(email, pass string) error {
@@ -67,7 +82,26 @@ func (a *Auth) SignIn(email, pass string) error {
 	endpoint := fmt.Sprintf("accounts:signInWithPassword?key=%v", apiKey)
 	url := fmt.Sprintf("%v/%v", baseURL, endpoint)
 
-	return a.authReq(url, reqBody)
+	if err := a.authReq(url, reqBody); err != nil {
+		return err
+	}
+
+	if err := a.saveTokens(); err != nil {
+		return err
+	}
+
+	a.SignedIn = true
+	return nil
+}
+
+func (a *Auth) SignOut() error {
+	a.UserID = ""
+	a.Email = ""
+	a.IDToken = ""
+	a.RefreshToken = ""
+	a.ExpiresIn = "0"
+	a.SignedIn = false
+	return a.clearTokens()
 }
 
 func (a *Auth) authReq(url string, body interface{}) error {

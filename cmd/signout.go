@@ -1,6 +1,9 @@
 package cmd
 
 import (
+
+	"foundry/cli/logger"
+
 	"github.com/spf13/cobra"
 	"github.com/fatih/color"
 )
@@ -19,6 +22,11 @@ func init() {
 }
 
 func runSignOut(cmd *cobra.Command, args []string) {
-	authClient.ClearTokens()
+	if err := authClient.SignOut(); err != nil {
+		logger.Fdebugln(err)
+
+		color.Red("⨯ Error")
+		logger.Logln("Sign out error:", err)
+	}
 	color.Green("✔ Signed Out")
 }
