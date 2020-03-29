@@ -48,14 +48,14 @@ func runGo(cmd *cobra.Command, args []string) {
   switch authClient.AuthState {
   case auth.AuthStateTypeSignedOut:
     // Sign in anonmoysly + notify user
-    if err := authClient.SignInAnonymously(); err != nil {
-      logger.ErrorLogln(err)
-      logger.FdebuglnFatal(err)
+    if err := authClient.SignUpAnonymously(); err != nil {
+      logger.Fdebugln(err)
+      logger.ErrorLoglnFatal(err)
     }
 
     if authClient.Error != nil {
-      logger.ErrorLogln(authClient.Error)
-      logger.FdebuglnFatal(authClient.Error)
+      logger.Fdebugln(authClient.Error)
+      logger.ErrorLoglnFatal(authClient.Error)
     }
 
     logger.WarningLogln(warningText)
@@ -71,8 +71,8 @@ func runGo(cmd *cobra.Command, args []string) {
   // Create a new connection to the cloud env
   c, err := conn.New(authClient.IDToken)
   if err != nil {
-    logger.FdebuglnFatal("Connection error", err)
-    logger.LoglnFatal(err)
+    logger.Fdebugln("Connection error", err)
+    logger.ErrorLoglnFatal(err)
   }
   defer c.Close()
 
@@ -109,8 +109,8 @@ func runGo(cmd *cobra.Command, args []string) {
         uploadStart = time.Now()
         files.Upload(c, conf.RootDir)
       case err := <-w.Errors:
-        logger.FdebuglnFatal("watcher error", err)
-        logger.LoglnFatal(err)
+        logger.Fdebugln("watcher error", err)
+        logger.ErrorLoglnFatal(err)
       }
     }
   }()

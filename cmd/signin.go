@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 
+	"foundry/cli/logger"
+
 	"github.com/spf13/cobra"
 	"github.com/fatih/color"
 	"github.com/AlecAivazis/survey/v2"
@@ -52,15 +54,13 @@ func runSignIn(cmd *cobra.Command, args []string) {
 	}
 
 	if err = authClient.SignIn(creds.Email, creds.Pass); err != nil {
-		color.Red("⨯ Error")
-		log.Println("HTTP request error", err)
-		return
+		logger.Fdebugln(err)
+		logger.ErrorLoglnFatal(err)
 	}
 
 	if authClient.Error != nil {
-		color.Red("⨯ Error")
-		log.Println("Auth error", authClient.Error)
-		return
+		logger.Fdebugln(err)
+		logger.ErrorLoglnFatal(authClient.Error)
 	}
 
 	color.Green("✔ Signed in")

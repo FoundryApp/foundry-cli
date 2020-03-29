@@ -22,6 +22,12 @@ func ErrorLogln(args ...interface{}) {
 	fmt.Println(t)
 }
 
+func ErrorLoglnFatal(args ...interface{}) {
+	t := fmt.Sprintf("%s %s", errorPrefix, fmt.Sprint(args...))
+	fmt.Println(t)
+	os.Exit(1)
+}
+
 func WarningLogln(args ...interface{}) {
 	t := fmt.Sprintf("%s %s", warningPrefix, fmt.Sprint(args...))
 	fmt.Println(t)

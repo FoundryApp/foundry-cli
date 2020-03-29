@@ -97,6 +97,10 @@ func (a *Auth) SignUp(email, pass string) error {
 		return err
 	}
 
+	if a.Error != nil {
+		return nil
+	}
+
 	oldState := a.AuthState
 	a.AuthState = AuthStateTypeSignedIn
 	if err := a.saveTokensAndState(); err != nil {
@@ -106,9 +110,9 @@ func (a *Auth) SignUp(email, pass string) error {
 	return nil
 }
 
-func (a *Auth) SignInAnonymously() error {
+func (a *Auth) SignUpAnonymously() error {
 	reqBody := struct {
-		ReturnSecureToken	bool		`json:"returnSecureToken"`
+		ReturnSecureToken	bool `json:"returnSecureToken"`
 	}{true}
 
 	baseURL := "https://identitytoolkit.googleapis.com/v1"
@@ -117,6 +121,10 @@ func (a *Auth) SignInAnonymously() error {
 
 	if err := a.doAuthReq(url, reqBody); err != nil {
 		return err
+	}
+
+	if a.Error != nil {
+		return nil
 	}
 
 	oldState := a.AuthState
@@ -141,6 +149,10 @@ func (a *Auth) SignIn(email, pass string) error {
 
 	if err := a.doAuthReq(url, reqBody); err != nil {
 		return err
+	}
+
+	if a.Error != nil {
+		return nil
 	}
 
 	oldState := a.AuthState

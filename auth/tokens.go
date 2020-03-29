@@ -50,7 +50,12 @@ func (a *Auth) loadTokensAndState() error {
 	a.RefreshToken = rtok
 
 	state := config.GetInt(authStateKey)
-	a.AuthState = AuthStateType(state)
+	// State is 0 when the config file is empty
+	if state != 0 {
+		a.AuthState = AuthStateType(state)
+	} else {
+		a.AuthState = AuthStateTypeSignedOut
+	}
 
 	logger.Fdebugln("Loaded AuthState from config (1 = signed out, 2 = signed in, 3 = anonymous):", a.AuthState)
 
