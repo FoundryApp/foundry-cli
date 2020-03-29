@@ -9,6 +9,7 @@ import (
   "encoding/json"
   "strings"
 
+  "foundry/cli/auth"
   conn "foundry/cli/connection"
   connMsg "foundry/cli/connection/msg"
   pc "foundry/cli/prompt/cmd"
@@ -41,8 +42,29 @@ func init() {
 }
 
 func runGo(cmd *cobra.Command, args []string) {
-  // TODO: Check if user is signed in
+  logger.Log("\n")
+  warningText := "You aren't signed in. Some features aren't available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\n"
 
+  switch authClient.AuthState {
+  case auth.AuthStateTypeSignedOut:
+    // Sign in anonmoysly + notify user
+    if err := authClient.SignInAnonymously(); err != nil {
+      logger.ErrorLogln(err)
+      logger.FdebuglnFatal(err)
+    }
+
+    if authClient.Error != nil {
+      logger.ErrorLogln(authClient.Error)
+      logger.FdebuglnFatal(authClient.Error)
+    }
+
+    logger.WarningLogln(warningText)
+    time.Sleep(time.Second)
+  case auth.AuthStateTypeSignedInAnonymous:
+    // Notify user
+    logger.WarningLogln(warningText)
+    time.Sleep(time.Second)
+  }
 
   done := make(chan struct{})
 
@@ -50,7 +72,7 @@ func runGo(cmd *cobra.Command, args []string) {
   c, err := conn.New(authClient.IDToken)
   if err != nil {
     logger.FdebuglnFatal("Connection error", err)
-    logger.LogFatal(err)
+    logger.LoglnFatal(err)
   }
   defer c.Close()
 
@@ -74,7 +96,7 @@ func runGo(cmd *cobra.Command, args []string) {
   w, err := rwatch.New()
   if err != nil {
     logger.FdebuglnFatal("Watcher error", err)
-    logger.LogFatal(err)
+    logger.LoglnFatal(err)
   }
   defer w.Close()
 
@@ -88,7 +110,7 @@ func runGo(cmd *cobra.Command, args []string) {
         files.Upload(c, conf.RootDir)
       case err := <-w.Errors:
         logger.FdebuglnFatal("watcher error", err)
-        logger.LogFatal(err)
+        logger.LoglnFatal(err)
       }
     }
   }()
@@ -96,7 +118,7 @@ func runGo(cmd *cobra.Command, args []string) {
   err = w.AddRecursive(conf.RootDir)
   if err != nil {
     logger.FdebuglnFatal("watcher AddRecursive", err)
-    logger.LogFatal(err)
+    logger.LoglnFatal(err)
   }
 
   // Don't wait for first save to send the code - send it as soon
@@ -121,7 +143,7 @@ func listenCallback(data []byte, err error) {
     elapsed := time.Since(start)
     logger.Fdebugln("<timer> Elapsed time -", elapsed)
     logger.FdebuglnFatal("WS error", err)
-    logger.LogFatal(err)
+    logger.LoglnFatal(err)
   }
 
 
@@ -130,7 +152,7 @@ func listenCallback(data []byte, err error) {
     elapsed := time.Since(start)
     logger.Fdebugln("<timer> Elapsed time -", elapsed)
     logger.FdebuglnFatal("Unmarshaling response error", err)
-    logger.LogFatal(err)
+    logger.LoglnFatal(err)
   }
 
   switch t.Type {
@@ -156,7 +178,7 @@ func listenCallback(data []byte, err error) {
       elapsed := time.Since(start)
       logger.Fdebugln("<timer> Elapsed time -", elapsed)
       logger.FdebuglnFatal("Unmarshaling response error", err)
-      logger.LogFatal(err)
+      logger.LoglnFatal(err)
     }
 
     p := fmt.Sprintf("[%s] > ", strings.Join(s.Content.Run, ", "))

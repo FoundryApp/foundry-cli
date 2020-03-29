@@ -4,17 +4,32 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
+	"io/ioutil"
 	"net/url"
 	"strings"
 	"time"
+
+	"foundry/cli/logger"
 )
 
 const (
 	apiKey 					= "AIzaSyAqL--IsyZd3cQTUgXR3KRWZZN-M6jR1kE"
 	idTokenKey			= "FOUNDRY_AUTH_ID_TOKEN"
 	refreshTokenKey = "FOUNDRY_AUTH_REFRESH_TOKEN"
+	authStateKey 		= "FOUNDRY_AUTH_STATE"
+)
+
+type AuthStateType int
+
+// WARNING: It's important the order doesn't change because the AuthState field on Auth struct
+// is serialized in the config file.
+// Changing the order of the following consts would cause that serialized values would have
+// a different logical meaning
+const (
+	AuthStateTypeSignedOut					AuthStateType = iota + 1 // +1 so the first const's value is different from zero int value
+	AuthStateTypeSignedIn
+	AuthStateTypeSignedInAnonymous
 )
 
 type AuthError struct {
@@ -37,37 +52,79 @@ type Auth struct {
 	ExpiresIn			string			`json:"expiresIn"`
 	originDate		time.Time
 
-	SignedIn			bool
+	AuthState			AuthStateType
 }
 
 func New() (*Auth, error) {
-	a := &Auth{}
-	if err := a.loadTokens(); err != nil {
+	a := &Auth{
+		AuthState: AuthStateTypeSignedOut,
+	}
+	if err := a.loadTokensAndState(); err != nil {
 		return nil, err
 	}
 	return a, nil
 }
 
 func (a *Auth) SignUp(email, pass string) error {
+	baseURL := "https://identitytoolkit.googleapis.com/v1"
+	var endpoint string
+	var reqBody interface{}
+
+	if a.AuthState == AuthStateTypeSignedInAnonymous {
+		logger.Fdebugln("Signing up an anonymous user (= linking email + pass)")
+		// Check if auth state is AuthStateTypeSignedInAnonymous
+		// If so, link the anonymous user with the new account
+		endpoint = fmt.Sprintf("accounts:update?key=%v", apiKey)
+		reqBody = struct{
+			IDToken						string 	`json:"idToken`
+			Email							string	`json:"email"`
+			Password					string	`json:"password"`
+			ReturnSecureToken	bool		`json:"returnSecureToken"`
+		}{a.IDToken, email, pass, true}
+	} else {
+		logger.Fdebugln("Signing up a new user")
+		endpoint = fmt.Sprintf("accounts:signUp?key=%v", apiKey)
+		reqBody = struct{
+			Email							string	`json:"email"`
+			Password					string	`json:"password"`
+			ReturnSecureToken	bool		`json:"returnSecureToken"`
+		}{email, pass, true}
+	}
+
+	url := fmt.Sprintf("%v/%v", baseURL, endpoint)
+
+	if err := a.doAuthReq(url, reqBody); err != nil {
+		return err
+	}
+
+	oldState := a.AuthState
+	a.AuthState = AuthStateTypeSignedIn
+	if err := a.saveTokensAndState(); err != nil {
+		a.AuthState = oldState
+		return err
+	}
+	return nil
+}
+
+func (a *Auth) SignInAnonymously() error {
 	reqBody := struct {
-		Email							string	`json:"email"`
-		Password					string	`json:"password"`
 		ReturnSecureToken	bool		`json:"returnSecureToken"`
-	}{email, pass, true}
+	}{true}
 
 	baseURL := "https://identitytoolkit.googleapis.com/v1"
 	endpoint := fmt.Sprintf("accounts:signUp?key=%v", apiKey)
 	url := fmt.Sprintf("%v/%v", baseURL, endpoint)
 
-	if err := a.authReq(url, reqBody); err != nil {
+	if err := a.doAuthReq(url, reqBody); err != nil {
 		return err
 	}
 
-	if err := a.saveTokens(); err != nil {
+	oldState := a.AuthState
+	a.AuthState = AuthStateTypeSignedInAnonymous
+	if err := a.saveTokensAndState(); err != nil {
+		a.AuthState = oldState
 		return err
 	}
-
-	a.SignedIn = true
 	return nil
 }
 
@@ -82,15 +139,17 @@ func (a *Auth) SignIn(email, pass string) error {
 	endpoint := fmt.Sprintf("accounts:signInWithPassword?key=%v", apiKey)
 	url := fmt.Sprintf("%v/%v", baseURL, endpoint)
 
-	if err := a.authReq(url, reqBody); err != nil {
+	if err := a.doAuthReq(url, reqBody); err != nil {
 		return err
 	}
 
-	if err := a.saveTokens(); err != nil {
+	oldState := a.AuthState
+	a.AuthState = AuthStateTypeSignedIn
+	if err := a.saveTokensAndState(); err != nil {
+		a.AuthState = oldState
 		return err
 	}
 
-	a.SignedIn = true
 	return nil
 }
 
@@ -100,11 +159,11 @@ func (a *Auth) SignOut() error {
 	a.IDToken = ""
 	a.RefreshToken = ""
 	a.ExpiresIn = "0"
-	a.SignedIn = false
-	return a.clearTokens()
+	a.AuthState = AuthStateTypeSignedOut
+	return a.clearTokensAndState()
 }
 
-func (a *Auth) authReq(url string, body interface{}) error {
+func (a *Auth) doAuthReq(url string, body interface{}) error {
 	jBody, err := json.Marshal(body)
 	if err != nil {
 		return err

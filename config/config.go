@@ -2,6 +2,9 @@ package config
 
 import (
 	"os"
+
+	"foundry/cli/logger"
+
 	"github.com/spf13/viper"
 )
 
@@ -45,14 +48,21 @@ func Init() error {
 }
 
 func Set(key string, val interface{}) {
+	logger.Fdebugln("Set to config (key, val)", key, val)
 	viper.Set(key, val)
 }
 
-func Get(key string) interface{} {
-	val := viper.Get(key)
-	return val
+func GetString(key string) string {
+	logger.Fdebugln("Get string from config:", key)
+	return viper.GetString(key)
+}
+
+func GetInt(key string) int {
+	logger.Fdebugln("Get int from config:", key)
+	return viper.GetInt(key)
 }
 
 func Write() error {
+	logger.Fdebugln("Write config")
 	return viper.WriteConfig()
 }

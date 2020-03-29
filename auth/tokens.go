@@ -1,11 +1,11 @@
 package auth
 
 import (
-	"fmt"
 	"strconv"
 	"time"
 
 	"foundry/cli/config"
+	"foundry/cli/logger"
 )
 
 // Exchanges a refresh token for an ID token
@@ -35,31 +35,31 @@ func (a *Auth) RefreshIDToken() error {
 	return nil
 }
 
-func (a *Auth) saveTokens() error {
+func (a *Auth) saveTokensAndState() error {
 	config.Set(idTokenKey, a.IDToken)
 	config.Set(refreshTokenKey, a.RefreshToken)
+	config.Set(authStateKey, a.AuthState)
 	return config.Write()
 }
 
-func (a *Auth) loadTokens() error {
-	idtok, ok := config.Get(idTokenKey).(string)
-
-	if !ok {
-		return fmt.Errorf("Failed to get ID token from config")
-	}
+func (a *Auth) loadTokensAndState() error {
+	idtok := config.GetString(idTokenKey)
 	a.IDToken = idtok
 
-	rtok, ok := config.Get(refreshTokenKey).(string)
-	if !ok {
-		return fmt.Errorf("Failed to get refresh token from config")
-	}
+	rtok := config.GetString(refreshTokenKey)
 	a.RefreshToken = rtok
+
+	state := config.GetInt(authStateKey)
+	a.AuthState = AuthStateType(state)
+
+	logger.Fdebugln("Loaded AuthState from config (1 = signed out, 2 = signed in, 3 = anonymous):", a.AuthState)
 
 	return nil
 }
 
-func (a *Auth) clearTokens() error {
+func (a *Auth) clearTokensAndState() error {
 	config.Set(idTokenKey, "")
 	config.Set(refreshTokenKey, "")
+	config.Set(authStateKey, AuthStateTypeSignedOut)
 	return config.Write()
 }

@@ -18,7 +18,7 @@ func Watch(cn *c.Connection) *prompt.Cmd {
 
 func runWatch(args []string) error {
 	if len(args) == 0 {
-		logger.Log("Write 'watch all' to watch all functions or 'watch <function-name1> <function-name2> ...' to watch specific functions")
+		logger.Logln("Write 'watch all' to watch all functions or 'watch <function-name1> <function-name2> ...' to watch specific functions")
 		return nil
 	}
 

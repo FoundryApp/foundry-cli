@@ -75,7 +75,7 @@ func NewPrompt(cmds []*Cmd) *Prompt {
 // 			// logger.Fdebugln("BUFFER:", string(b))
 // 		} else if err != nil && err != io.EOF {
 // 			logger.FdebuglnFatal(err)
-// 			logger.LogFatal(err)
+// 			logger.LoglnFatal(err)
 // 		}
 
 // 		// time.Sleep(time.Millisecond * 10)
@@ -226,7 +226,7 @@ func (p *Prompt) executor(s string) {
 
 		if err := cmd.Do(args); err != nil {
 			logger.FdebuglnFatal(err)
-			logger.LogFatal(err)
+			logger.LoglnFatal(err)
 		}
 	} else {
 		p.wGoToAndEraseError()

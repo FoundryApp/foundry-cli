@@ -65,7 +65,7 @@ func (c *Connection) Ping(pm *msg.PingMsg, ticker *time.Ticker, stop <-chan stru
 		case <-ticker.C:
 			if err := pm.Send(); err != nil {
 				logger.FdebuglnFatal("Failed to ping the server", err)
-				logger.LogFatal(err)
+				logger.LoglnFatal(err)
 			}
 		case <-stop:
 			logger.Fdebugln("Stop pinging")

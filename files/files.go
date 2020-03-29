@@ -20,7 +20,7 @@ func Upload(c *conn.Connection, rootDir string) {
   // Zip the project
   buf, err := zip.ArchiveDir(rootDir, ignore)
   if err != nil {
-    logger.LogFatal(err)
+    logger.LoglnFatal(err)
   }
 
   archiveChecksum := checksum(buf.Bytes())
@@ -39,7 +39,7 @@ func Upload(c *conn.Connection, rootDir string) {
   for i := 0; i < chunkCount; i++ {
     bytesread, err := buf.Read(buffer)
     if err != nil {
-      logger.LogFatal(err)
+      logger.LoglnFatal(err)
     }
 
     previousChecksum = checksum
@@ -53,7 +53,7 @@ func Upload(c *conn.Connection, rootDir string) {
 
 		chunk := connMsg.NewChunkMsg(bytes, checkStr, prevCheckStr, lastChunk)
 		if err = c.Send(chunk); err != nil {
-			logger.LogFatal(err)
+			logger.LoglnFatal(err)
 		}
   }
 }

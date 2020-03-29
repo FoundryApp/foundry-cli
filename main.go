@@ -11,7 +11,7 @@ import (
 
 func main() {
 	if err := config.Init(); err != nil {
-		logger.Log("Couldn't init config", err)
+		logger.Logln("Couldn't init config", err)
 		os.Exit(1)
 	}
 
