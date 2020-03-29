@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 
-	"foundry/cli/auth"
 	"github.com/spf13/cobra"
 	"github.com/fatih/color"
 	"github.com/AlecAivazis/survey/v2"
@@ -12,11 +11,11 @@ import (
 )
 
 var (
-	signupCmd = &cobra.Command{
-		Use: 		"signup",
+	signUpCmd = &cobra.Command{
+		Use: 		"sign-up",
 		Short: 	"Sign up for Foundry in your terminal",
 		Long: 	"",
-		Run:		runSignup,
+		Run:		runSignUp,
 	}
 
 	emailQ = []*survey.Question{
@@ -42,10 +41,10 @@ var (
 )
 
 func init() {
-	rootCmd.AddCommand(signupCmd)
+	rootCmd.AddCommand(signUpCmd)
 }
 
-func runSignup(cmd *cobra.Command, args []string) {
+func runSignUp(cmd *cobra.Command, args []string) {
 	creds := struct {
 		Email 		string 	`survey:"email`
 		Pass			string	`survey:"pass`
@@ -77,20 +76,19 @@ func runSignup(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	a := auth.New()
-	if err = a.SignUp(creds.Email, creds.Pass); err != nil {
+	if err = authClient.SignUp(creds.Email, creds.Pass); err != nil {
 		color.Red("⨯ Error")
 		log.Println("HTTP request error", err)
 		return
 	}
 
-	if a.Error != nil {
+	if authClient.Error != nil {
 		color.Red("⨯ Error")
-		log.Println("Auth error", a.Error)
+		log.Println("Auth error", authClient.Error)
 		return
 	}
 
-	if err = a.SaveTokens(); err != nil {
+	if err = authClient.SaveTokens(); err != nil {
 		color.Red("⨯ Error")
 		log.Println("Save tokens error", err)
 		return

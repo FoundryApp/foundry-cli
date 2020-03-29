@@ -8,6 +8,17 @@ import (
 )
 
 
+func (a *Auth) ClearTokens() {
+	a.UserID = ""
+	a.Email = ""
+	a.IDToken = ""
+	a.RefreshToken = ""
+	a.ExpiresIn = "0"
+
+	config.Set(idTokenKey, "")
+	config.Set(refreshTokenKey, "")
+}
+
 func (a *Auth) SaveTokens() error {
 	config.Set(idTokenKey, a.IDToken)
 	config.Set(refreshTokenKey, a.RefreshToken)

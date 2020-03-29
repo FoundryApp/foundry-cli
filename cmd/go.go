@@ -9,7 +9,6 @@ import (
   "encoding/json"
   "strings"
 
-  "foundry/cli/auth"
   conn "foundry/cli/connection"
   connMsg "foundry/cli/connection/msg"
   pc "foundry/cli/prompt/cmd"
@@ -42,16 +41,13 @@ func init() {
 }
 
 func runGo(cmd *cobra.Command, args []string) {
-  token, err := getToken()
-  if err != nil {
-    logger.FdebuglnFatal("getToken error", err)
-    logger.LogFatal(err)
-  }
+  // TODO: Check if user is signed in
+
 
   done := make(chan struct{})
 
   // Create a new connection to the cloud env
-  c, err := conn.New(token)
+  c, err := conn.New(authClient.IDToken)
   if err != nil {
     logger.FdebuglnFatal("Connection error", err)
     logger.LogFatal(err)
@@ -62,7 +58,7 @@ func runGo(cmd *cobra.Command, args []string) {
   go c.Listen(listenCallback)
 
   // Start periodically pinging server so the env isn't killed
-  pingMsg := connMsg.NewPingMsg(conn.PingURL(), token)
+  pingMsg := connMsg.NewPingMsg(conn.PingURL(), authClient.IDToken)
   ticker := time.NewTicker(time.Second * 10)
   go c.Ping(pingMsg, ticker, done)
 
@@ -110,15 +106,6 @@ func runGo(cmd *cobra.Command, args []string) {
   files.Upload(c, conf.RootDir)
 
   <-done
-}
-
-func getToken() (string, error) {
-  a := auth.New()
-  a.LoadTokens()
-  if err := a.RefreshIDToken(); err != nil {
-    return "", err
-  }
-  return a.IDToken, nil
 }
 
 func listenCallback(data []byte, err error) {

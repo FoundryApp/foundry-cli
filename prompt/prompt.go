@@ -213,7 +213,7 @@ func (p *Prompt) completer(d goprompt.Document) []goprompt.Suggest {
 	}
 
 	return []goprompt.Suggest{}
-	//return goprompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
+	// return goprompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
 }
 
 func (p *Prompt) executor(s string) {
