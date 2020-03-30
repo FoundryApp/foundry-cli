@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"io/ioutil"
-	"log"
 	"os"
 
 	"foundry/cli/auth"
@@ -28,7 +27,7 @@ var (
 		Short: "Better serverless dev",
 		Run: func(cmd *cobra.Command, args []string) {
 			// Do Stuff Here
-			log.Println("Root command - add my description and implementation!")
+			logger.Logln("Root command - add my description and implementation!")
 		},
 	}
 )
@@ -49,26 +48,31 @@ func cobraInitCallback() {
 func init() {
 	cobra.OnInitialize(cobraInitCallback)
 
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
+	// DEBUG:
 	rootCmd.PersistentFlags().StringVar(&debugFile, "debug-file", "", "A file where the debug logs are saved (required)")
+
+	if _, err := os.Stat(confFile); os.IsNotExist(err) {
+		logger.Fdebugln("Foundry config file (foundry.config.yaml) not found in the current directory")
+		logger.ErrorLoglnFatal("Foundry config file (foundry.config.yaml) not found in the current directory")
+	}
 
 	confData, err := ioutil.ReadFile(confFile)
 	if err != nil {
-		log.Fatal("Read file error", err)
+		logger.Fdebugln("Can't read foundry.config.yaml file", err)
+		logger.ErrorLoglnFatal("Can't read foundry.config.yaml file", err)
 	}
 
 	err = yaml.Unmarshal(confData, &conf)
 	if err != nil {
-		log.Fatal("YAML error", err)
+		logger.Fdebugln("foundry.config.yaml file isn't valid YAML file or doesn't contain field 'RootDir'", err)
+		logger.ErrorLoglnFatal("foundry.config.yaml file isn't valid YAML file or doesn't contain field 'RootDir'", err)
 	}
 }
 
 func Execute() {
 	logger.Close()
 	if err := rootCmd.Execute(); err != nil {
-    log.Println(err)
-    os.Exit(1)
+		logger.Fdebugln(err)
+		logger.ErrorLoglnFatal(err)
 	}
 }

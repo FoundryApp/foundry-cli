@@ -53,6 +53,8 @@ type Auth struct {
 	originDate		time.Time
 
 	AuthState			AuthStateType
+
+	DisplayName		string			`json:"displayName"`
 }
 
 func New() (*Auth, error) {
@@ -71,12 +73,12 @@ func (a *Auth) SignUp(email, pass string) error {
 	var reqBody interface{}
 
 	if a.AuthState == AuthStateTypeSignedInAnonymous {
-		logger.Fdebugln("Signing up an anonymous user (= linking email + pass)")
 		// Check if auth state is AuthStateTypeSignedInAnonymous
-		// If so, link the anonymous user with the new account
+		// If so, link the anonymous user with email, password, and IDToken
+		logger.Fdebugln("Signing up an anonymous user (= linking email + pass)")
 		endpoint = fmt.Sprintf("accounts:update?key=%v", apiKey)
 		reqBody = struct{
-			IDToken						string 	`json:"idToken`
+			IDToken						string 	`json:"idToken"`
 			Email							string	`json:"email"`
 			Password					string	`json:"password"`
 			ReturnSecureToken	bool		`json:"returnSecureToken"`
@@ -166,6 +168,7 @@ func (a *Auth) SignIn(email, pass string) error {
 }
 
 func (a *Auth) SignOut() error {
+	a.Error = nil
 	a.UserID = ""
 	a.Email = ""
 	a.IDToken = ""
@@ -176,6 +179,8 @@ func (a *Auth) SignOut() error {
 }
 
 func (a *Auth) doAuthReq(url string, body interface{}) error {
+	a.Error = nil
+
 	jBody, err := json.Marshal(body)
 	if err != nil {
 		return err
@@ -197,20 +202,20 @@ func (a *Auth) doAuthReq(url string, body interface{}) error {
 		return err
 	}
 
+	if a.Error != nil {
+		return nil
+	}
+
 	// Save the time when we originaly acquired the ID token
 	// for checking whether we need to refresh it
 	a.originDate = time.Now()
-
-	// TODO: Remove
-	err = a.RefreshIDToken()
-	if err != nil {
-		return err
-	}
 
 	return nil
 }
 
 func (a *Auth) doRefreshReq() error {
+	logger.Fdebugln("Refreshing ID token")
+
 	u := fmt.Sprintf("https://securetoken.googleapis.com/v1/token?key=%v", apiKey)
 	data := url.Values{}
 	data.Set("refresh_token", a.RefreshToken)

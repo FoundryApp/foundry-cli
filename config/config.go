@@ -53,13 +53,15 @@ func Set(key string, val interface{}) {
 }
 
 func GetString(key string) string {
-	logger.Fdebugln("Get string from config:", key)
-	return viper.GetString(key)
+	val := viper.GetString(key)
+	logger.Fdebugln("Get string from config (key, val):", key, val)
+	return val
 }
 
 func GetInt(key string) int {
-	logger.Fdebugln("Get int from config:", key)
-	return viper.GetInt(key)
+	val := viper.GetInt(key)
+	logger.Fdebugln("Get int from config (key, val):", key, val)
+	return val
 }
 
 func Write() error {

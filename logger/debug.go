@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+	"time"
 )
 
 type PrefixType int
@@ -31,7 +32,7 @@ func InitDebug(path string) {
 	}
 	debugFile = dfile
 
-	Fdebugln("==== STARTING ====")
+	Fdebugln("################## STARTING SESSION")
 }
 
 func Close() {
@@ -55,6 +56,9 @@ func FdebuglnFatal(v ...interface{}) {
 }
 
 func prefix(t PrefixType) (prefix string) {
+	h, m, s := time.Now().Clock()
+	timePrefix := fmt.Sprintf("%d:%02d:%02d", h, m, s)
+
 	bold 		:= "\x1b[1m"
 	red 		:= "\x1b[31m"
 	endSeq 	:= "\x1b[0m"
@@ -72,5 +76,5 @@ func prefix(t PrefixType) (prefix string) {
 	pc, _, line, _ := runtime.Caller(2)
 	debugInfo := fmt.Sprintf("[%s:%d]", runtime.FuncForPC(pc).Name(), line)
 
-	return fmt.Sprintf("%s %s", prefix, debugInfo)
+	return fmt.Sprintf("%s %s %s", prefix, timePrefix, debugInfo)
 }

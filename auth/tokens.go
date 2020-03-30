@@ -31,6 +31,9 @@ func (a *Auth) RefreshIDToken() error {
 		if err := a.doRefreshReq(); err != nil {
 			return err
 		}
+		if err := a.saveTokensAndState(); err != nil {
+			return err
+		}
 	}
 	return nil
 }

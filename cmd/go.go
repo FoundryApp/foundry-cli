@@ -137,8 +137,6 @@ func listenCallback(data []byte, err error) {
   // time.Sleep(time.Millisecond * 20)
   logger.Fdebugln(string(data))
 
-
-
   if err != nil {
     elapsed := time.Since(start)
     logger.Fdebugln("<timer> Elapsed time -", elapsed)
