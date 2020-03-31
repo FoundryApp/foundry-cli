@@ -1,0 +1,39 @@
+==================
+WARNING: DATA RACE
+Write at 0x00c0004d5f00 by goroutine 32:
+  foundry/cli/prompt.(*PromptSafe).completer-fm()
+      /Users/vasekmlejnsky/Developer/foundry/cli/prompt/prompt-safe.go:55 +0xa7
+  github.com/mlejva/go-prompt.(*CompletionManager).Reset()
+      /Users/vasekmlejnsky/Developer/foundry/go-prompt/completion.go:68 +0x13d
+  github.com/mlejva/go-prompt.(*Prompt).handleCompletionKeyBinding()
+      /Users/vasekmlejnsky/Developer/foundry/go-prompt/prompt.go:186 +0x33b
+  github.com/mlejva/go-prompt.(*Prompt).feed()
+      /Users/vasekmlejnsky/Developer/foundry/go-prompt/prompt.go:120 +0x132
+  github.com/mlejva/go-prompt.(*Prompt).Run()
+      /Users/vasekmlejnsky/Developer/foundry/go-prompt/prompt.go:71 +0x6cf
+  foundry/cli/prompt.(*PromptSafe).Run()
+      /Users/vasekmlejnsky/Developer/foundry/cli/prompt/prompt-safe.go:137 +0x44f
+
+Previous read at 0x00c0004d5f00 by goroutine 40:
+  foundry/cli/prompt.(*PromptSafe).print()
+      /Users/vasekmlejnsky/Developer/foundry/cli/prompt/prompt-safe.go:263 +0x1211
+  foundry/cli/prompt.(*PromptSafe).Run.func2()
+      /Users/vasekmlejnsky/Developer/foundry/cli/prompt/prompt-safe.go:123 +0x8a
+
+Goroutine 32 (running) created at:
+  foundry/cli/cmd.runGo()
+      /Users/vasekmlejnsky/Developer/foundry/cli/cmd/go.go:89 +0x316
+  github.com/spf13/cobra.(*Command).execute()
+      /Users/vasekmlejnsky/Developer/go/pkg/mod/github.com/spf13/cobra@v0.0.6/command.go:844 +0x8e0
+  github.com/spf13/cobra.(*Command).ExecuteC()
+      /Users/vasekmlejnsky/Developer/go/pkg/mod/github.com/spf13/cobra@v0.0.6/command.go:945 +0x479
+  foundry/cli/cmd.Execute()
+      /Users/vasekmlejnsky/Developer/go/pkg/mod/github.com/spf13/cobra@v0.0.6/command.go:885 +0x6d
+  main.main()
+      /Users/vasekmlejnsky/Developer/foundry/cli/main.go:18 +0xd5
+
+Goroutine 40 (running) created at:
+  foundry/cli/prompt.(*PromptSafe).Run()
+      /Users/vasekmlejnsky/Developer/foundry/cli/prompt/prompt-safe.go:119 +0x296
+==================
+Found 1 data race(s)

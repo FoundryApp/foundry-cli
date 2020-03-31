@@ -9,7 +9,8 @@ for flag in `echo $flags`; do
   build_name=$build_name-$flag
 done
 
-go build -tags "$flags" -o "./build/$build_name" .
+go build -race -tags "$flags" -o "./build/$build_name" .
+# go build -tags "$flags" -o "./build/$build_name" .
 if [ $? -eq 0 ]; then
   echo "✅ SUCCESS"
 else

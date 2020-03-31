@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"time"
 
-	"foundry/cli/logger"
-	"foundry/cli/connection/msg"
 	"foundry/cli/connection/endpoint"
+	"foundry/cli/connection/msg"
+	"foundry/cli/logger"
 
 	"github.com/gorilla/websocket"
 )
 
-type ListenCallback func(data []byte, err error) ()
+type ListenCallback func(data []byte, err error)
 
 type Connection struct {
-	token string
-	wsconn 	*websocket.Conn
+	token  string
+	wsconn *websocket.Conn
 }
 
 type ConnectionMessage interface {
@@ -51,8 +51,8 @@ func (c *Connection) Listen(cb ListenCallback) {
 func (c *Connection) Send(cm ConnectionMessage) error {
 	b := cm.Body()
 	err := c.wsconn.WriteJSON(b)
-  if err != nil {
-    return err
+	if err != nil {
+		return err
 	}
 	return nil
 }

@@ -24,7 +24,9 @@ var (
 )
 
 func InitDebug(path string) {
-	if path == "" { return }
+	if path == "" {
+		return
+	}
 
 	dfile, err := os.Create(path)
 	if err != nil {
@@ -36,19 +38,25 @@ func InitDebug(path string) {
 }
 
 func Close() {
-	if debugFile == nil { return }
+	if debugFile == nil {
+		return
+	}
 	debugFile.Close()
 }
 
 func Fdebugln(v ...interface{}) {
-	if debugFile == nil { return }
+	if debugFile == nil {
+		return
+	}
 
 	str := fmt.Sprintf("%s %s", prefix(DebugPrefix), fmt.Sprintln(v...))
 	fmt.Fprint(debugFile, str)
 }
 
 func FdebuglnFatal(v ...interface{}) {
-	if debugFile == nil { return }
+	if debugFile == nil {
+		return
+	}
 
 	str := fmt.Sprintf("%s %s", prefix(FatalPrefix), fmt.Sprintln(v...))
 	fmt.Fprint(debugFile, str)
@@ -59,9 +67,9 @@ func prefix(t PrefixType) (prefix string) {
 	h, m, s := time.Now().Clock()
 	timePrefix := fmt.Sprintf("%d:%02d:%02d", h, m, s)
 
-	bold 		:= "\x1b[1m"
-	red 		:= "\x1b[31m"
-	endSeq 	:= "\x1b[0m"
+	bold := "\x1b[1m"
+	red := "\x1b[31m"
+	endSeq := "\x1b[0m"
 
 	switch t {
 	case DebugPrefix:

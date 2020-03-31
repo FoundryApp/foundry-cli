@@ -1,12 +1,14 @@
 package prompt
 
 import (
-	// "bytes"
+	"bytes"
 	"fmt"
-	// "io"
+
+	"io"
 	"os"
 	"os/signal"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 
@@ -18,9 +20,9 @@ import (
 type CmdRunFunc func(args []string) error
 
 type Cmd struct {
-	Text 	string
-	Desc 	string
-	Do		CmdRunFunc
+	Text string
+	Desc string
+	Do   CmdRunFunc
 }
 
 func (c *Cmd) String() string {
@@ -32,32 +34,35 @@ func (c *Cmd) ToSuggest() goprompt.Suggest {
 }
 
 type Prompt struct {
-	cmds 	[]*Cmd
+	cmds []*Cmd
 	// TODO: vars should be here? At least writer
 
 	// buf *bytes.Buffer
+	buffer bytes.Buffer
+	mutex  sync.Mutex
 }
 
 var (
 	promptPrefix = "> "
 
 	promptText = ""
-	promptRow = 0
+	promptRow  = 0
 
 	errorText = ""
-	errorRow = 0
+	errorRow  = 0
 
 	totalRows = 0
-	freeRows = 0
+	freeRows  = 0
 
 	parser = goprompt.NewStandardInputParser()
 	writer = goprompt.NewStandardOutputWriter()
 
-	waitDuration = time.Millisecond * 300
+	// waitDuration = time.Millisecond * 400
+	waitDuration = time.Millisecond * 10
 )
 
 func NewPrompt(cmds []*Cmd) *Prompt {
-	return &Prompt{cmds,/* &bytes.Buffer{}*/}
+	return &Prompt{cmds: cmds, buffer: bytes.Buffer{}}
 }
 
 // func (p *Prompt) WriteToBuffer(s string) error {
@@ -82,7 +87,35 @@ func NewPrompt(cmds []*Cmd) *Prompt {
 // 	}
 // }
 
+// Write appends the contents of p to the buffer, growing the buffer as needed. It returns
+// the number of bytes written.
+func (p *Prompt) Write(b []byte) (n int, err error) {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
+	return p.buffer.Write(b)
+}
+
+func (p *Prompt) read(b []byte) (n int, err error) {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
+	return p.buffer.Read(b)
+}
+
+func (p *Prompt) print2() {
+	for {
+		b := make([]byte, 1024)
+		if n, err := p.read(b); err == nil && n > 0 {
+			p.Print(string(b[:n]))
+		} else if err != nil && err != io.EOF {
+			logger.Fdebugln(err)
+			logger.LoglnFatal(err)
+		}
+	}
+}
+
 func (p *Prompt) Print(s string) {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
 	logger.Fdebugln("[print] totalRows:", totalRows)
 	logger.Fdebugln("[print] promptRow:", promptRow)
 	logger.Fdebugln("[print] errorRow:", errorRow)
@@ -97,44 +130,59 @@ func (p *Prompt) Print(s string) {
 		logger.Fdebugln("[prompt] freeRows start:", freeRows)
 		logger.Fdebugln("[prompt] line:", l)
 
-		freeRows -= 1
+		freeRows--
+
+		// p.wGoToAndErasePrompt()
+		// writer.Flush()
 
 		writer.UnSaveCursor()
 		writer.Flush()
 
-		writer.WriteRawStr(l+"\n")
+		// t := fmt.Sprintf("[%v]%s\n", ix, l)
+		// writer.WriteRawStr(t)
+		writer.WriteRawStr(l + "\n")
 		writer.Flush()
 
 		writer.SaveCursor()
 		writer.Flush()
 
 		if freeRows <= 3 {
-			newRows := 3 - freeRows
+			newRows := 4 - freeRows
 			logger.Fdebugln("[prompt] newRows:", newRows)
 
-			p.wGoToAndEraseError()
+			// p.wGoToAndEraseError()
 			// writer.CursorGoTo(errorRow, 0)
 			// writer.Flush()
 			// writer.EraseLine()
 			// writer.Flush()
 
 			p.wGoToAndErasePrompt()
+			writer.Flush()
 			// writer.CursorGoTo(promptRow, 0)
 			// writer.Flush()
 			// writer.EraseLine()
 			// writer.Flush()
-			writer.WriteRawStr(strings.Repeat("\n", newRows))
-			writer.Flush()
+			// time.Sleep(waitDuration)
+			for i := 0; i < newRows; i++ {
+				writer.WriteRawStr("\n")
+				writer.Flush()
+			}
+			// writer.WriteRawStr(strings.Repeat("\n", newRows))
+			// writer.Flush()
 
 			freeRows += newRows
 
 			writer.UnSaveCursor()
 			writer.Flush()
+			// time.Sleep(waitDuration)
 
 			writer.CursorUp(newRows)
 			writer.Flush()
+			// if newRows > 0 {
+			// }
 			writer.SaveCursor()
 			writer.Flush()
+			// time.Sleep(waitDuration)
 		}
 
 		logger.Fdebugln("[prompt] freeRows end:", freeRows)
@@ -142,7 +190,7 @@ func (p *Prompt) Print(s string) {
 
 	p.wGoToAndRestoreError()
 	// writer.CursorGoTo(errorRow, 0)
-	// writer.Flush()
+	writer.Flush()
 	// writer.WriteRawStr(errorText)
 	// writer.Flush()
 
@@ -151,6 +199,8 @@ func (p *Prompt) Print(s string) {
 	// writer.Flush()
 	// writer.WriteRawStr(promptPrefix + promptText)
 	// writer.Flush()
+
+	writer.Flush()
 }
 
 func (p *Prompt) PrintInfo(s string) {
@@ -177,7 +227,9 @@ func (p *Prompt) Run() {
 	signal.Notify(sigwinch, syscall.SIGWINCH)
 	go func() {
 		for {
-			if _, ok := <-sigwinch; !ok { return }
+			if _, ok := <-sigwinch; !ok {
+				return
+			}
 			size = parser.GetWinSize()
 			logger.Fdebugln("Terminal size change:", size)
 			p.rerender(size)
@@ -187,10 +239,10 @@ func (p *Prompt) Run() {
 	p.rerender(size)
 
 	interupOpt := goprompt.OptionAddKeyBind(goprompt.KeyBind{
-		Key: 	goprompt.ControlC,
-		Fn: 	func(buf *goprompt.Buffer) {
-						os.Exit(0)
-					},
+		Key: goprompt.ControlC,
+		Fn: func(buf *goprompt.Buffer) {
+			os.Exit(0)
+		},
 	})
 	prefixOpt := goprompt.OptionPrefix(promptPrefix)
 	livePrefixOpt := goprompt.OptionLivePrefix(func() (prefix string, useLivePrefix bool) {
@@ -200,6 +252,8 @@ func (p *Prompt) Run() {
 	newp := goprompt.New(p.executor, p.completer, interupOpt, prefixOpt, livePrefixOpt)
 
 	// go p.watchBuffer()
+
+	go p.print2()
 
 	newp.Run()
 }
@@ -217,7 +271,9 @@ func (p *Prompt) completer(d goprompt.Document) []goprompt.Suggest {
 }
 
 func (p *Prompt) executor(s string) {
-	if s == "" { return }
+	if s == "" {
+		return
+	}
 
 	fields := strings.Fields(s)
 
@@ -252,6 +308,8 @@ func (p *Prompt) getCommand(s string) *Cmd {
 }
 
 func (p *Prompt) rerender(size *goprompt.WinSize) {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
 	totalRows = int(size.Row)
 	promptRow = totalRows
 	errorRow = promptRow - 1
@@ -266,6 +324,10 @@ func (p *Prompt) rerender(size *goprompt.WinSize) {
 	// Clears the screen and moves cursor to promptRow
 	p.wReset()
 
+	// Restore prompt + error
+	p.wGoToAndRestoreError()
+	p.wGoToAndRestorePrompt()
+
 	logger.Fdebugln("totalRows:", totalRows)
 	logger.Fdebugln("promptRow:", promptRow)
 	logger.Fdebugln("errorRow:", errorRow)
@@ -273,17 +335,23 @@ func (p *Prompt) rerender(size *goprompt.WinSize) {
 }
 
 func (p *Prompt) wReset() {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
 	writer.EraseScreen()
 	writer.CursorGoTo(promptRow, 0)
 	writer.Flush()
 }
 
 func (p *Prompt) wGoToPrompt() {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
 	writer.CursorGoTo(promptRow, 0)
 	writer.Flush()
 }
 
 func (p *Prompt) wGoToError() {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
 	writer.CursorGoTo(errorRow, 0)
 	writer.Flush()
 }
@@ -302,7 +370,6 @@ func (p *Prompt) wGoToAndEraseError() {
 
 func (p *Prompt) wGoToAndRestorePrompt() {
 	p.wGoToPrompt()
-
 	writer.SetColor(goprompt.Blue, goprompt.DefaultColor, false)
 	writer.WriteRawStr(promptPrefix)
 	writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
@@ -317,5 +384,5 @@ func (p *Prompt) wGoToAndRestoreError() {
 	writer.WriteRawStr(errorText)
 	writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
 
-	writer.Flush()
+	// writer.Flush()
 }
