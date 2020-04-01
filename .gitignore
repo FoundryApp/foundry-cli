@@ -2,10 +2,10 @@
 **/keyfile.json
 **/terraform_*
 tmp/
-tmp_air/
-air-master/air
 deploy/deploy
-air-master/
 deploy/
 cli
 build/
+race.txt*
+foundry
+debug[0-9]+.txt
