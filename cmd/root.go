@@ -15,13 +15,13 @@ type FoundryConf struct {
 	RootDir string `yaml:"rootDir"`
 }
 
-const confFile = "./foundry.config.yaml"
+const confFile = "./foundry.yaml"
 
 var (
-	debugFile = ""
+	debugFile  = ""
 	authClient *auth.Auth
 
-	conf = FoundryConf{}
+	conf    = FoundryConf{}
 	rootCmd = &cobra.Command{
 		Use:   "foundry",
 		Short: "Better serverless dev",
@@ -40,7 +40,7 @@ func cobraInitCallback() {
 		logger.FdebuglnFatal(err)
 	}
 	if err := a.RefreshIDToken(); err != nil {
-    logger.FdebuglnFatal(err)
+		logger.FdebuglnFatal(err)
 	}
 	authClient = a
 }
@@ -52,20 +52,24 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&debugFile, "debug-file", "", "A file where the debug logs are saved (required)")
 
 	if _, err := os.Stat(confFile); os.IsNotExist(err) {
-		logger.Fdebugln("Foundry config file (foundry.config.yaml) not found in the current directory")
-		logger.ErrorLoglnFatal("Foundry config file (foundry.config.yaml) not found in the current directory")
+		logger.Fdebugln("Foundry config file 'foundry.yaml' not found in the current directory")
+		logger.ErrorLoglnFatal("Foundry config file 'foundry.yaml' not found in the current directory")
 	}
 
 	confData, err := ioutil.ReadFile(confFile)
 	if err != nil {
-		logger.Fdebugln("Can't read foundry.config.yaml file", err)
-		logger.ErrorLoglnFatal("Can't read foundry.config.yaml file", err)
+		logger.Fdebugln("Can't read 'foundry.yaml' file", err)
+		logger.ErrorLoglnFatal("Can't read 'foundry.yaml' file", err)
 	}
 
 	err = yaml.Unmarshal(confData, &conf)
 	if err != nil {
-		logger.Fdebugln("foundry.config.yaml file isn't valid YAML file or doesn't contain field 'RootDir'", err)
-		logger.ErrorLoglnFatal("foundry.config.yaml file isn't valid YAML file or doesn't contain field 'RootDir'", err)
+		logger.Fdebugln("foundry.yaml file isn't a valid YAML file or doesn't contain field 'RootDir'", err)
+		logger.ErrorLoglnFatal("foundry.yaml file isn't a valid YAML file or doesn't contain field 'RootDir'", err)
+	}
+	if conf.RootDir == "" {
+		logger.Fdebugln("foundry.yaml doesn't contain field 'RootDir' or it's empty")
+		logger.ErrorLoglnFatal("foundry.yaml doesn't contain field 'RootDir' or it's empty")
 	}
 }
 

@@ -1,7 +1,8 @@
 package main
 
 import (
-	"os"
+	// "net/http"
+	// _ "net/http/pprof"
 
 	"foundry/cli/cmd"
 	"foundry/cli/config"
@@ -12,9 +13,14 @@ func main() {
 	// time.Sleep(time.Second * 20)
 
 	if err := config.Init(); err != nil {
-		logger.Logln("Couldn't init config", err)
-		os.Exit(1)
+		logger.ErrorLoglnFatal("Couldn't init config", err)
 	}
+
+	// go func() {
+	// 	if err := http.ListenAndServe("localhost:7777", nil); err != nil {
+	// 		logger.ErrorLoglnFatal(err)
+	// 	}
+	// }()
 
 	cmd.Execute()
 }

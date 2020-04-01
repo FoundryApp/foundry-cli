@@ -28,7 +28,7 @@ var (
 		Run:   runGo,
 	}
 
-	prompt *p.PromptSafe
+	prompt *p.Prompt
 	df     *os.File
 )
 
@@ -71,15 +71,10 @@ func runGo(cmd *cobra.Command, args []string) {
 	}
 	defer c.Close()
 
-	// Start an interactive prompt
-	// cmds := []*p.Cmd{
-	// 	// pc.Watch(c),
-	// 	pc.Exit(),
-	// }
 	watchCmd := promptCmd.NewWatchCmd()
 	exitCmd := promptCmd.NewExitCmd()
 	cmds := []promptCmd.Cmd{watchCmd, exitCmd}
-	prompt = p.NewPromptSafe(cmds)
+	prompt = p.NewPrompt(cmds)
 	go prompt.Run()
 
 	// Listen for messages from the WS connection

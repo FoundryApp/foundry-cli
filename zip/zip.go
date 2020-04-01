@@ -73,14 +73,14 @@ func addToZip(fname string, zw *zip.Writer) error {
 	// Get the file information
 	info, err := f.Stat()
 	if err != nil {
-			return err
+		return err
 	}
 
 	// file -> info header -> edit header -> create hader in the zip using zip writer
 
 	h, err := zip.FileInfoHeader(info)
 	if err != nil {
-			return err
+		return err
 	}
 
 	// Using FileInfoHeader() above only uses the basename of the file. If we want

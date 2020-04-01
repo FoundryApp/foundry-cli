@@ -24,7 +24,7 @@ func CursorIdentity() CursorPos {
 	return CursorPos{1, 1}
 }
 
-type PromptSafe struct {
+type Prompt struct {
 	cmds []cmd.Cmd
 
 	outBuf *Buffer
@@ -51,7 +51,7 @@ type PromptSafe struct {
 
 //////////////////////
 
-func (p *PromptSafe) completer(d goprompt.Document) []goprompt.Suggest {
+func (p *Prompt) completer(d goprompt.Document) []goprompt.Suggest {
 	p.renderMutex.Lock()
 	p.promptText = d.CurrentLine()
 	p.renderMutex.Unlock()
@@ -59,7 +59,7 @@ func (p *PromptSafe) completer(d goprompt.Document) []goprompt.Suggest {
 	return []goprompt.Suggest{}
 }
 
-func (p *PromptSafe) executor(s string) {
+func (p *Prompt) executor(s string) {
 	if s == "" {
 		return
 	}
@@ -98,7 +98,7 @@ func (p *PromptSafe) executor(s string) {
 	}
 }
 
-func (p *PromptSafe) getCommand(s string) cmd.Cmd {
+func (p *Prompt) getCommand(s string) cmd.Cmd {
 	for _, c := range p.cmds {
 		if c.Name() == s {
 			return c
@@ -109,9 +109,9 @@ func (p *PromptSafe) getCommand(s string) cmd.Cmd {
 
 /////////////
 
-func NewPromptSafe(cmds []cmd.Cmd) *PromptSafe {
+func NewPrompt(cmds []cmd.Cmd) *Prompt {
 	prefix := "> "
-	return &PromptSafe{
+	return &Prompt{
 		cmds: cmds,
 
 		outBuf: NewBuffer(),
@@ -127,7 +127,7 @@ func NewPromptSafe(cmds []cmd.Cmd) *PromptSafe {
 	}
 }
 
-func (p *PromptSafe) Run() {
+func (p *Prompt) Run() {
 	// Read buffer and print anything that gets send to the channel
 	bufCh := make(chan []byte, 128)
 	stopReadCh := make(chan struct{})
@@ -164,11 +164,11 @@ func (p *PromptSafe) Run() {
 	go p.rerenderOnTermSizeChange()
 }
 
-func (p *PromptSafe) Writeln(s string) (n int, err error) {
+func (p *Prompt) Writeln(s string) (n int, err error) {
 	return p.outBuf.Write([]byte(s + "\n"))
 }
 
-func (p *PromptSafe) rerender(initialRun bool) error {
+func (p *Prompt) rerender(initialRun bool) error {
 	p.renderMutex.Lock()
 	defer p.renderMutex.Unlock()
 
@@ -200,13 +200,13 @@ func (p *PromptSafe) rerender(initialRun bool) error {
 // Prints # of rows of "\n" - this way the visible terminal window
 // is moved down and the previous user's terminal history isn't
 //  erased on the initial rerender()
-func (p *PromptSafe) moveWindowDown(rows int) error {
+func (p *Prompt) moveWindowDown(rows int) error {
 	p.writer.CursorGoTo(rows, 0)
 	p.writer.WriteRawStr(strings.Repeat("\n", rows))
 	return p.writer.Flush()
 }
 
-func (p *PromptSafe) rerenderOnTermSizeChange() {
+func (p *Prompt) rerenderOnTermSizeChange() {
 	sigwinchCh := make(chan os.Signal, 1)
 	defer close(sigwinchCh)
 	signal.Notify(sigwinchCh, syscall.SIGWINCH)
@@ -221,7 +221,7 @@ func (p *PromptSafe) rerenderOnTermSizeChange() {
 	}
 }
 
-func (p *PromptSafe) print(b []byte) {
+func (p *Prompt) print(b []byte) {
 	p.renderMutex.Lock()
 	defer p.renderMutex.Unlock()
 
