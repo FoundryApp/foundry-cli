@@ -172,27 +172,14 @@ func listenCallback(data []byte, err error) {
 		// prompt must have a buffer and a lock that makes sure that it's printing sequentially
 
 		s1 := fmt.Sprintf("[0] %s", s.Content.Msg)
-		// s2 := fmt.Sprintf("[1] %s\n", s.Content.Msg)
+		// s2 := fmt.Sprintf("[1] %s", s.Content.Msg)
 		// s3 := fmt.Sprintf("[2] %s\n", s.Content.Msg)
 		// s4 := fmt.Sprintf("[3] %s\n", s.Content.Msg)
 		// s5 := fmt.Sprintf("[4] %s\n", s.Content.Msg)
 
-		if _, err := prompt.WriteOutputln(s1); err != nil {
+		if _, err := prompt.Writeln(s1); err != nil {
 			logger.FdebuglnFatal(err)
 		}
-
-		// if _, err := prompt.WriteOutputln(s2); err != nil {
-		// 	logger.FdebuglnFatal(err)
-		// }
-
-		// prompt.Write([]byte(s1))
-		// prompt.Write([]byte(s2))
-		// prompt.Write([]byte(s3))
-		// prompt.Write([]byte(s4))
-		// prompt.Write([]byte(s5))
-
-		// prompt.Print(0, string(s.Content.Msg))
-		// prompt.Print(1, string(s.Content.Msg))
 
 	case connMsg.WatchResponseMsg:
 		var s struct{ Content connMsg.WatchContent }

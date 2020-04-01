@@ -16,14 +16,14 @@
     //   "type": "go",
     //   "request": "launch",
     //   "mode": "exec",
-    //   "program": "/Users/vasekmlejnsky/Developer/foundry/cli/build/foundry-debug-local"
+    //   "program": "/Users/vasekmlejnsky/Developer/foundry/testing-cf-project/foundry-debug-local"
     // }
     {
       "name": "Attach to local process",
       "type": "go",
       "request": "attach",
       "mode": "local",
-      "processId": 92237
+      "processId": 29265
     }
   ]
 }

@@ -1,9 +1,7 @@
 package prompt
 
 import (
-	"bytes"
 	"foundry/cli/logger"
-	"io"
 	"os"
 	"os/signal"
 	"sync"
@@ -13,45 +11,50 @@ import (
 	goprompt "github.com/mlejva/go-prompt"
 )
 
-type SavedPos struct {
-	row int
-	col int
+type CursorPos struct {
+	Row int
+	Col int
+}
+
+func CursorIdentity() CursorPos {
+	return CursorPos{1, 1}
 }
 
 type PromptSafe struct {
 	cmds []*Cmd
 
-	outBuf      bytes.Buffer
-	outBufMutex sync.Mutex
+	outBuf *Buffer
+	// outBufMutex sync.Mutex
 
 	renderMutex sync.Mutex
 
 	promptPrefix string
 	promptText   string
-	promptRow    int
+	promptRow    int // Will be recalculated once the terminal is ready
 
 	errorText string
-	errorRow  int
+	errorRow  int // Will be recalculated once the terminal is ready
 
-	totalRows int
-	freeRows  int
+	totalRows int // Will be recalculated once the terminal is ready
+	freeRows  int // Will be recalculated once the terminal is ready
 
 	parser *goprompt.PosixParser
 	writer goprompt.ConsoleWriter
 
-	waitDuration time.Duration
-
-	savedPos SavedPos
-	col      int
-	row      int
+	savedPos   CursorPos
+	currentPos CursorPos // Current position of the cursor when printing output
 }
 
 //////////////////////
 
 func (p *PromptSafe) executor(s string) {
+	logger.Fdebugln("[EXECUTOR]:", s)
 }
 
 func (p *PromptSafe) completer(d goprompt.Document) []goprompt.Suggest {
+	p.renderMutex.Lock()
+	defer p.renderMutex.Unlock()
+
 	p.promptText = d.CurrentLine()
 	return []goprompt.Suggest{}
 }
@@ -59,63 +62,30 @@ func (p *PromptSafe) completer(d goprompt.Document) []goprompt.Suggest {
 /////////////
 
 func NewPromptSafe() *PromptSafe {
+	prefix := "> "
 	return &PromptSafe{
-		outBuf: bytes.Buffer{},
+		outBuf: NewBuffer(),
 
-		promptPrefix: "> ",
-		promptText:   "",
-		promptRow:    0,
-
-		errorText: "",
-		errorRow:  0, // Will be recalculated once the terminal is ready
-
-		totalRows: 0, // Will be recalculated once the terminal is ready
-		freeRows:  0, // Will be recalculated once the terminal is ready
+		promptPrefix: prefix,
 
 		parser: goprompt.NewStandardInputParser(),
 		writer: goprompt.NewStandardOutputWriter(),
 
 		// Terminal is indexed from 1
-		savedPos: SavedPos{1, 1},
-		row:      1,
-		col:      len("> ") + 1,
-		// waitDuration: time.Microsecond * 400,
+		savedPos:   CursorIdentity(),
+		currentPos: CursorPos{1, len(prefix) + 1},
 	}
 }
 
-func (p *PromptSafe) WriteOutputln(s string) (n int, err error) {
-	p.outBufMutex.Lock()
-	defer p.outBufMutex.Unlock()
+func (p *PromptSafe) Writeln(s string) (n int, err error) {
 	return p.outBuf.Write([]byte(s + "\n"))
 }
 
 func (p *PromptSafe) Run() {
+	// Read buffer and print anything that gets send to the channel
 	bufCh := make(chan []byte, 128)
 	stopReadCh := make(chan struct{})
-
-	if err := p.rerender(); err != nil {
-		logger.Fdebugln(err)
-		logger.LoglnFatal(err)
-	}
-
-	// Watch for terminal size changes
-	sigwinch := make(chan os.Signal, 1)
-	defer close(sigwinch)
-	signal.Notify(sigwinch, syscall.SIGWINCH)
-	go func() {
-		for {
-			if _, ok := <-sigwinch; !ok {
-				return
-			}
-			if err := p.rerender(); err != nil {
-				logger.Fdebugln(err)
-				logger.LoglnFatal(err)
-			}
-		}
-	}()
-
-	// Read buffer and print anything that gets send to the channel
-	go p.readOutBuffer(bufCh, stopReadCh)
+	go p.outBuf.Read(bufCh, stopReadCh)
 	go func() {
 		for {
 			select {
@@ -133,41 +103,28 @@ func (p *PromptSafe) Run() {
 			os.Exit(0)
 		},
 	})
-	prompt := goprompt.New(p.executor, p.completer, interupOpt)
-	prompt.Run()
-}
+	prefixOpt := goprompt.OptionPrefix(p.promptPrefix)
+	prefixColOpt := goprompt.OptionPrefixTextColor(goprompt.Green)
+	prompt := goprompt.New(p.executor, p.completer, interupOpt, prefixOpt, prefixColOpt)
+	go prompt.Run()
 
-func (p *PromptSafe) readOutBuffer(bufCh chan<- []byte, stopCh <-chan struct{}) {
-	for {
-		select {
-		case <-stopCh:
-			return
-		default:
-			p.outBufMutex.Lock()
-
-			buf := make([]byte, 1024)
-			n, err := p.outBuf.Read(buf)
-
-			if err == nil {
-				bufCh <- buf[:n]
-			} else if err != io.EOF {
-				logger.Fdebugln(err)
-				logger.LoglnFatal(err)
-			}
-
-			p.outBufMutex.Unlock()
-		}
-		time.Sleep(time.Millisecond * 10)
+	// The initial rerender for the current terminal size
+	if err := p.rerender(); err != nil {
+		logger.Fdebugln(err)
+		logger.LoglnFatal(err)
 	}
+	// Rerender a terminal for every size change
+	go p.rerenderOnTermSizeChange()
 }
 
 func (p *PromptSafe) rerender() error {
 	p.renderMutex.Lock()
 	defer p.renderMutex.Unlock()
 
-	p.row = 1
-	p.col = 1
-	p.savedPos = SavedPos{1, 1}
+	writer.EraseScreen()
+
+	p.currentPos = CursorIdentity()
+	p.savedPos = CursorIdentity()
 
 	size := p.parser.GetWinSize()
 	p.totalRows = int(size.Row)
@@ -175,100 +132,93 @@ func (p *PromptSafe) rerender() error {
 	p.errorRow = p.totalRows - 1
 	p.freeRows = p.totalRows
 
-	writer.EraseScreen()
-
-	// TODO: Restore error
-
-	// Restore prompt
-	writer.CursorGoTo(p.promptRow, 1)
-	writer.WriteRawStr(p.promptPrefix + p.promptText)
+	// TODO: Restore error that got deleted
 
 	return writer.Flush()
+}
+
+func (p *PromptSafe) rerenderOnTermSizeChange() {
+	sigwinchCh := make(chan os.Signal, 1)
+	defer close(sigwinchCh)
+	signal.Notify(sigwinchCh, syscall.SIGWINCH)
+	for {
+		if _, ok := <-sigwinchCh; !ok {
+			return
+		}
+		if err := p.rerender(); err != nil {
+			logger.FdebuglnFatal(err)
+			logger.LoglnFatal(err)
+		}
+	}
 }
 
 func (p *PromptSafe) print(b []byte) {
 	p.renderMutex.Lock()
 	defer p.renderMutex.Unlock()
 
-	writer.CursorGoTo(p.savedPos.row, p.savedPos.col)
-	if err := writer.Flush(); err != nil {
-		logger.Fdebugln(err)
-		logger.LoglnFatal(err)
-	}
+	// The invariant is that the the p.savedPos always holds
+	// a position where we stopped printing the text = where
+	// we should start printing text again.
+	writer.CursorGoTo(p.savedPos.Row, p.savedPos.Col)
 
 	s := string(b)
 	logger.Fdebugln(s)
-
 	for _, r := range s {
 		writer.WriteRawStr(string(r))
-		if err := writer.Flush(); err != nil {
-			logger.Fdebugln(err)
-			logger.LoglnFatal(err)
-		}
+		p.currentPos.Col++
 
-		p.col++
 		if r == '\n' {
-			p.col = 1
-			p.row++
+			// On a new line, the cursor moves to the start of a line
+			p.currentPos.Col = 1
 
+			p.currentPos.Row++
 			p.freeRows--
 		}
 
 		if p.freeRows == 2 {
-			p.savedPos = SavedPos{p.row, p.col}
-			if err := writer.Flush(); err != nil {
-				logger.Fdebugln(err)
-				logger.LoglnFatal(err)
-			}
+			p.savedPos = p.currentPos
 
 			// TODO: Erase error
 
+			// Go to a prompt row and create a new line so that we
+			// once again have 3 free rows.
+			// The reason we have to go to the prompt row is becauase
+			// if we had printed a new line anywhere before the prompt
+			// row, the cursor would simply move down without actually
+			// creating a new line in the terminal.
 			writer.CursorGoTo(p.promptRow, 1)
+			// Erase line so that a text on the prompt row doesn't stay
+			// when the prompt row line is moved up by 1
 			writer.EraseLine()
-			if err := writer.Flush(); err != nil {
-				logger.Fdebugln(err)
-				logger.LoglnFatal(err)
-			}
-
+			// Create a new line
 			writer.WriteRawStr("\n")
-			if err := writer.Flush(); err != nil {
-				logger.Fdebugln(err)
-				logger.LoglnFatal(err)
-			}
 
-			p.row--
-			p.col = 1
-			p.freeRows = 3
-
-			// Restore prompt
-			writer.CursorGoTo(p.promptRow, 1)
-			writer.WriteRawStr(p.promptPrefix + p.promptText)
-			if err := writer.Flush(); err != nil {
-				logger.Fdebugln(err)
-				logger.LoglnFatal(err)
-			}
-
-			// Go back to the next available output line
-			writer.CursorGoTo(p.savedPos.row, p.savedPos.col)
-			if err := writer.Flush(); err != nil {
-				logger.Fdebugln(err)
-				logger.LoglnFatal(err)
-			}
+			// Move cursor back to a position where we stopped outputting
+			// text. This will be next available new line after the last
+			// line of printed text
+			writer.CursorGoTo(p.savedPos.Row, p.savedPos.Col)
+			// The reason it's not sufficient to just go to p.savedPos
+			// is because we printed a newline. All text moved 1 line up.
 			writer.CursorUp(1)
-			if err := writer.Flush(); err != nil {
-				logger.Fdebugln(err)
-				logger.LoglnFatal(err)
-			}
+
+			p.currentPos.Row--
+			p.currentPos.Col = 1
+			p.freeRows = 3
 		}
 	}
-	p.savedPos = SavedPos{p.row, p.col}
+	p.savedPos = p.currentPos
 
-	writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+1+len(p.promptText)+1)
+	// TODO: Restore error
+
+	// Return to the prompt row and restore the prompt text
+	writer.CursorGoTo(p.promptRow, 1)
+	writer.SetColor(goprompt.Green, goprompt.DefaultColor, false)
+	writer.WriteRawStr(p.promptPrefix)
+	writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
+	writer.WriteRawStr(p.promptText)
+
 	if err := writer.Flush(); err != nil {
 		logger.Fdebugln(err)
 		logger.LoglnFatal(err)
 	}
-
-	// TODO: Restore error
-
 }
