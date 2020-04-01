@@ -1,408 +1,214 @@
-[1mDEBUG[0m 15:37:07 [foundry/cli/logger.InitDebug:37] ################## STARTING SESSION
-[1mDEBUG[0m 15:37:07 [foundry/cli/config.GetString:57] Get string from config (key, val): FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1NzQ3Nzk5LCJleHAiOjE1ODU3NTEzOTksImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.fRcsi9Xtunx_veLATmnaiSj669WIYM50DrBf5OPRIbckTIeZ_xzvWtE_eEyaCbE6AojNKEi_EJt-3ok1K-KNNo4j0eorcfXSEjNYzidcWhk6ygUlAQKIMTiYOJNPOYWQmmukKoHtRhORD-PN2t--sM6si3EEwElCcIu4DGHB-BcQtiqxaUx_6TcT_WGTnDbiYRBtsKn5IZgbr7_s9nMPY8OtcRn7oaKvZNBfLvtcieslhvKUEARpMCVzqjwcN4tXjfrdodiyyMMAoDBekeIrQnP6kfitgCimwu7lIxhPg3SJ4MPo9rAHHVi8W3VXfCR4WeGQP_Tq9oupfhhwZJBRiQ
-[1mDEBUG[0m 15:37:07 [foundry/cli/config.GetString:57] Get string from config (key, val): FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
-[1mDEBUG[0m 15:37:07 [foundry/cli/config.GetInt:63] Get int from config (key, val): FOUNDRY_AUTH_STATE 2
-[1mDEBUG[0m 15:37:07 [foundry/cli/auth.(*Auth).loadTokensAndState:63] Loaded AuthState from config (1 = signed out, 2 = signed in, 3 = anonymous): 2
-[1mDEBUG[0m 15:37:07 [foundry/cli/auth.(*Auth).doRefreshReq:217] Refreshing ID token
-[1mDEBUG[0m 15:37:08 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1NzQ4MTQ5LCJleHAiOjE1ODU3NTE3NDksImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.U-0o_3gSZFn72PRgei6iVRjwSU_0ACtsXPXZuh-BKGysI7IqLv251G5TelvTKTjR8aOhVkpQq2QgPi1g2JgJB5OHWlsj-w4hIWcRTS_GfBiuA-2kvjEEjL3Bd4ZMnE4sfee71f1b7ohYUYdrRF85rXq90Y0IWb5hwB3lWTednaSr0uhGD9DWJPe-B9eot4-xsAXgAayf7aOFLvDRW_MSEENw67c3gHB5Qq15XNDxc-Hnz1u9gUUzlOlWiuMuWPV58Qs5bXJ-5kOxCwVjQnJYlGGKtWFPvAmP5DOh2rLMeL_U4LBWSgoRdzjUrejnTISDPSmVkZk4E80w0zIaDGtmug
-[1mDEBUG[0m 15:37:08 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
-[1mDEBUG[0m 15:37:08 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_STATE 2
-[1mDEBUG[0m 15:37:08 [foundry/cli/config.Write:68] Write config
-[1mDEBUG[0m 15:37:08 [foundry/cli/connection.New:26] WS dialing
-[1mDEBUG[0m 15:37:08 [foundry/cli/connection.New:32] WS connected
-[1mDEBUG[0m 15:37:08 [foundry/cli/connection.(*Connection).Listen:43]  WS listening
-[1mDEBUG[0m 15:37:08 [foundry/cli/connection.(*Connection).Ping:62] Ping
-[1mDEBUG[0m 15:37:08 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"Preparing your environment..."}}
-[1mDEBUG[0m 15:37:08 [foundry/cli/prompt.(*PromptSafe).print:165] [0] Preparing your environment...
+[1mDEBUG[0m 18:11:51 [foundry/cli/logger.InitDebug:37] ################## STARTING SESSION
+[1mDEBUG[0m 18:11:51 [foundry/cli/config.GetString:57] Get string from config (key, val): FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1NzU3NDI2LCJleHAiOjE1ODU3NjEwMjYsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HnDLelh28GM-j05eAPTZc1yAVJzMrZTTowfAAyiTMxtjpbtc9gqs5W35T00Rr0XRZ-mpWFcQHUKkbUPlEYcKgeKPz9lhdaC6tzMiYWbb4s9UOUSdOqM7d6XCFE6yiJIY2ZhnCIlaW4cYcXlCzIIXN8sAXTCN-Ir4LEfhICfaaSCIorrpQJSUgTqDQ1okBJ0LZi27yKr00xHq6qBoM8S4SQVCiy1pPFo0cK7BbcMb3Pp_Pv8_xbcqZx3WbaOfLqrgh_RXP9VO0K164mp1M9Zu8iQqqQOpPlSOZVbfLfrscr3vPa2QAqVhNxQnjI8tVMmWbe4HABKdqtl4jVFP5tZkJQ
+[1mDEBUG[0m 18:11:51 [foundry/cli/config.GetString:57] Get string from config (key, val): FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
+[1mDEBUG[0m 18:11:51 [foundry/cli/config.GetInt:63] Get int from config (key, val): FOUNDRY_AUTH_STATE 2
+[1mDEBUG[0m 18:11:51 [foundry/cli/auth.(*Auth).loadTokensAndState:63] Loaded AuthState from config (1 = signed out, 2 = signed in, 3 = anonymous): 2
+[1mDEBUG[0m 18:11:51 [foundry/cli/auth.(*Auth).doRefreshReq:217] Refreshing ID token
+[1mDEBUG[0m 18:11:52 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1NzU3NDMyLCJleHAiOjE1ODU3NjEwMzIsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.dbIlutbQkxx0lEZUTB_Ww47LZDSi3WCBNbtG3kZR4tW_hLeeO3P-NjFYdrtwKdQwpF6CtidHOAPYre97UQ7A4Hh7Km7-JKI1PZhYGeU_ffnmfFhK4-a5GnkvFka7iCb0HAU3s15w6U2Vm7I2fCUs871N-1mdwXQ0_ELmnW4FFgvAmy09KnCB3IZoPxEiVVisvcLf-C_L31bJKZx3qd1b-4WUcoB2W8vfhMLCyj26FEvfDpJasUxVH4_JmltLeuT1VnQ0jlrJL_PxIGaChfDH7B5bfFTQlmvcBbJwKHq7UqWBWZQTEwIPL4xBaOfNIsnOYr5kwVvRrYyx056aeBb2Bg
+[1mDEBUG[0m 18:11:52 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
+[1mDEBUG[0m 18:11:52 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_STATE 2
+[1mDEBUG[0m 18:11:52 [foundry/cli/config.Write:68] Write config
+[1mDEBUG[0m 18:11:52 [foundry/cli/connection.New:26] WS dialing
+[1mDEBUG[0m 18:11:52 [foundry/cli/connection.New:32] WS connected
+[1mDEBUG[0m 18:11:52 [foundry/cli/connection.(*Connection).Listen:43]  WS listening
+[1mDEBUG[0m 18:11:52 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"Preparing your environment..."}}
+[1mDEBUG[0m 18:11:52 [foundry/cli/connection.(*Connection).Ping:62] Ping
+[1mDEBUG[0m 18:11:52 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"253"}}
+[1mDEBUG[0m 18:11:52 [foundry/cli/prompt.(*PromptSafe).print:202] [0] Preparing your environment...
+[0] 253
 
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"163"}}
-[1mDEBUG[0m 15:37:09 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 163
+[1mDEBUG[0m 18:11:52 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:11:52 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:52 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:11:52 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
 
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:09 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:09 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:09 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-
-[1mDEBUG[0m 15:37:09 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:09 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:11:52 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:09 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:11:52 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:52 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"164"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 164
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"254"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 254
 
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
+[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
+
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"255"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 255
+
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'Cannot process code change - emu is on, testing in progress: yes'
+
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
+
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'helloWorld'
+
+[1mDEBUG[0m 18:11:58 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:58 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"256"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 256
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'Cannot process code change - emu is on, testing in progress: yes'
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"165"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 165
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"257"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 257
 
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'Cannot process code change - emu is on, testing in progress: yes'
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+[0] 'helloWorld'
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"258"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 258
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'Cannot process code change - emu is on, testing in progress: yes'
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
+[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'helloWorld'
+
+[1mDEBUG[0m 18:11:59 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:11:59 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
+
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"259"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 259
+
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'Cannot process code change - emu is on, testing in progress: yes'
+
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
 [0] 'Cannot process code change - emu is on, testing in progress: yes'
 
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:10 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'helloWorld'
-[0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:10 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"166"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 166
-
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"167"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 167
-
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"168"}}
-[1mDEBUG[0m 15:37:11 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 168
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"260"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 260
 
-[1mDEBUG[0m 15:37:11 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:12 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:12 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:12 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:12 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
 
-[1mDEBUG[0m 15:37:12 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:12 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:12 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:12 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:12 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:12 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"169"}}
-[1mDEBUG[0m 15:37:12 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 169
+[1mDEBUG[0m 18:12:00 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"261"}}
+[1mDEBUG[0m 18:12:00 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 261
 
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'Cannot process code change - emu is on, testing in progress: yes'
+
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
+
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"170"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 170
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"262"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 262
 
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'Cannot process code change - emu is on, testing in progress: yes'
 
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
+
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:13 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:13 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:14 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:14 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"171"}}
-[1mDEBUG[0m 15:37:14 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 171
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"263"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 263
 
-[1mDEBUG[0m 15:37:14 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-[0] 'createWorkspace'
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
 
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:01 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:01 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"172"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 172
+[1mDEBUG[0m 18:12:02 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"264"}}
+[1mDEBUG[0m 18:12:02 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 264
 
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-[0] 'helloWorld'
+[1mDEBUG[0m 18:12:02 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
+[1mDEBUG[0m 18:12:02 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'Cannot process code change - emu is on, testing in progress: yes'
 
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"173"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 173
-
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
+[1mDEBUG[0m 18:12:02 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'createWorkspace'"}}
+[1mDEBUG[0m 18:12:02 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:02 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'createWorkspace'
 [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'helloWorld'
+[1mDEBUG[0m 18:12:02 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"'helloWorld'"}}
+[1mDEBUG[0m 18:12:02 [foundry/cli/cmd.listenCallback:141] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
+[1mDEBUG[0m 18:12:02 [foundry/cli/prompt.(*PromptSafe).print:202] [0] 'helloWorld'
 
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
+[1mDEBUG[0m 18:12:02 [foundry/cli/prompt.(*PromptSafe).print:202] [0] { data: '10th run', status: 200, statusText: 'OK' }
 
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"174"}}
-[1mDEBUG[0m 15:37:15 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 174
-
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:15 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"175"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 175
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-[0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"176"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 176
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"177"}}
-[1mDEBUG[0m 15:37:16 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 177
-
-[1mDEBUG[0m 15:37:16 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-[0] 'Cannot process code change - emu is on, testing in progress: yes'
-[0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"178"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 178
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"179"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 179
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-[0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"180"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 180
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:17 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"181"}}
-[1mDEBUG[0m 15:37:17 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 181
-
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:18 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-[0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"182"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 182
-
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-[0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:18 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:18 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:18 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:18 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
-
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"183"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 183
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'Cannot process code change - emu is on, testing in progress: yes'"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'Cannot process code change - emu is on, testing in progress: yes'
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.runGo.func1:112] <timer> reseting starting upload time
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-[0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"184"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 184
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'createWorkspace'"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: 'Created a workspace', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"'helloWorld'"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] 'createWorkspace'
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: 'Created a workspace', status: 200, statusText: 'OK' }
-[0] 'helloWorld'
-
-[1mDEBUG[0m 15:37:19 [foundry/cli/cmd.listenCallback:142] {"type":"log","content":{"msg":"{ data: '10th run', status: 200, statusText: 'OK' }"}}
-[1mDEBUG[0m 15:37:19 [foundry/cli/prompt.(*PromptSafe).print:165] [0] { data: '10th run', status: 200, statusText: 'OK' }
-
-[1mDEBUG[0m 15:37:28 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
-
-
-[1mDEBUG[0m 15:37:38 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+[1mDEBUG[0m 18:12:03 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
 
 

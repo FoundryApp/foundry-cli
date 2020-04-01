@@ -9,12 +9,12 @@ import (
 )
 
 type Watcher struct {
-	Events		chan fsnotify.Event
-	Errors		chan error
+	Events chan fsnotify.Event
+	Errors chan error
 
-	fsnotify 	*fsnotify.Watcher
+	fsnotify *fsnotify.Watcher
 
-	done			chan struct{}
+	done chan struct{}
 }
 
 var ignore = []string{".git", "node_modules", ".foundry"}
@@ -26,9 +26,9 @@ func New() (*Watcher, error) {
 	}
 	w := &Watcher{
 		fsnotify: fsw,
-		Events: make(chan fsnotify.Event),
-		Errors: make(chan error),
-		done:		make(chan struct{}),
+		Events:   make(chan fsnotify.Event),
+		Errors:   make(chan error),
+		done:     make(chan struct{}),
 	}
 
 	go w.start()
@@ -108,7 +108,6 @@ func (w *Watcher) traverse(start string, watch bool) error {
 	})
 	return err
 }
-
 
 func dirIgnored(fi os.FileInfo) bool {
 	n := fi.Name()

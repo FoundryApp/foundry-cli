@@ -1,22 +1,31 @@
 package cmd
 
 import (
+	"fmt"
 	c "foundry/cli/connection"
 	connMsg "foundry/cli/connection/msg"
-	"foundry/cli/prompt"
 	"foundry/cli/logger"
+
+	goprompt "github.com/mlejva/go-prompt"
 )
 
-var (
-	conn *c.Connection
-)
-
-func Watch(cn *c.Connection) *prompt.Cmd {
-	conn = cn
-	return &prompt.Cmd{"watch", "Watch only specific function(s)", runWatch}
+type WatchCmd struct {
+	Text  string
+	Desc  string
+	RunCh RunChannelType
 }
 
-func runWatch(args []string) error {
+func NewWatchCmd() *WatchCmd {
+	return &WatchCmd{
+		Text:  "watch",
+		Desc:  "Watch only specific function(s)",
+		RunCh: make(chan Args),
+	}
+}
+
+// Implement Cmd interface
+
+func (c *WatchCmd) Run(conn *c.Connection, args Args) error {
 	if len(args) == 0 {
 		logger.Logln("Write 'watch all' to watch all functions or 'watch <function-name1> <function-name2> ...' to watch specific functions")
 		return nil
@@ -31,4 +40,20 @@ func runWatch(args []string) error {
 
 	msg := connMsg.NewWatchfnMsg(watchAll, fns)
 	return conn.Send(msg)
+}
+
+func (c *WatchCmd) RunRequest(args Args) {
+	c.RunCh <- args
+}
+
+func (c *WatchCmd) ToSuggest() goprompt.Suggest {
+	return goprompt.Suggest{c.Text, c.Desc}
+}
+
+func (c *WatchCmd) Name() string {
+	return c.Text
+}
+
+func (c *WatchCmd) String() string {
+	return fmt.Sprintf("%s - %s", c.Text, c.Desc)
 }

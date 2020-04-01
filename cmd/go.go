@@ -14,6 +14,7 @@ import (
 	"foundry/cli/files"
 	"foundry/cli/logger"
 	p "foundry/cli/prompt"
+	promptCmd "foundry/cli/prompt/cmd"
 	"foundry/cli/rwatch"
 
 	"github.com/spf13/cobra"
@@ -27,13 +28,9 @@ var (
 		Long:  "",
 		Run:   runGo,
 	}
-	start = time.Now()
 
-	// prompt      *p.Prompt
-	prompt      *p.PromptSafe
-	uploadStart = time.Now()
-
-	df *os.File
+	prompt *p.PromptSafe
+	df     *os.File
 )
 
 func init() {
@@ -80,12 +77,10 @@ func runGo(cmd *cobra.Command, args []string) {
 	// 	// pc.Watch(c),
 	// 	pc.Exit(),
 	// }
-	// prompt = p.NewPrompt(cmds)
-	// go prompt.Run()
-
-	// time.Sleep(time.Second * 20)
-
-	prompt = p.NewPromptSafe()
+	watchCmd := promptCmd.NewWatchCmd()
+	exitCmd := promptCmd.NewExitCmd()
+	cmds := []promptCmd.Cmd{watchCmd, exitCmd}
+	prompt = p.NewPromptSafe(cmds)
 	go prompt.Run()
 
 	// Listen for messages from the WS connection
@@ -100,17 +95,33 @@ func runGo(cmd *cobra.Command, args []string) {
 	w, err := rwatch.New()
 	if err != nil {
 		logger.FdebuglnFatal("Watcher error", err)
-		logger.LoglnFatal(err)
+		logger.ErrorLoglnFatal(err)
 	}
 	defer w.Close()
 
+	err = w.AddRecursive(conf.RootDir)
+	if err != nil {
+		logger.FdebuglnFatal("watcher AddRecursive", err)
+		logger.ErrorLoglnFatal(err)
+	}
+
+	initialUploadCh := make(chan struct{}, 1)
+
+	// The main goroutine handling all file events + prompt command requests
+	// Command requests are all handled from a single goroutine because
+	// Gorilla's websocket connection supports only one concurrent reader
+	// and one concurrent writer - https://godoc.org/github.com/gorilla/websocket#hdr-Concurrency
 	go func() {
 		for {
 			select {
+			case args := <-watchCmd.RunCh:
+				watchCmd.Run(c, args)
+			case args := <-exitCmd.RunCh:
+				exitCmd.Run(c, args)
+			case <-initialUploadCh:
+				files.Upload(c, conf.RootDir)
 			case _ = <-w.Events:
 				// log.Println(e)
-				logger.Fdebugln("<timer> reseting starting upload time")
-				uploadStart = time.Now()
 				files.Upload(c, conf.RootDir)
 			case err := <-w.Errors:
 				logger.Fdebugln("watcher error", err)
@@ -119,41 +130,25 @@ func runGo(cmd *cobra.Command, args []string) {
 		}
 	}()
 
-	err = w.AddRecursive(conf.RootDir)
-	if err != nil {
-		logger.FdebuglnFatal("watcher AddRecursive", err)
-		logger.LoglnFatal(err)
-	}
-
-	// Don't wait for first save to send the code - send it as soon
-	// as user calls 'foundry go'
-	// logger.Fdebugln("<timer> reseting starting upload time")
-	// uploadStart = time.Now()
-	// files.Upload(c, conf.RootDir)
+	// Don't wait for the first save event to send the code.
+	// Send it as soon as user calls 'foundry go'
+	initialUploadCh <- struct{}{}
 
 	<-done
 }
 
 func listenCallback(data []byte, err error) {
-	// elapsed := time.Since(uploadStart)
-	// logger.Fdebugln("<timer> time until response (+ time.Sleep) -", elapsed)
-
-	// time.Sleep(time.Millisecond * 20)
 	logger.Fdebugln(string(data))
 
 	if err != nil {
-		// elapsed := time.Since(start)
-		// logger.Fdebugln("<timer> Elapsed time -", elapsed)
 		logger.FdebuglnFatal("WS error", err)
-		logger.LoglnFatal(err)
+		logger.ErrorLoglnFatal(err)
 	}
 
 	t := connMsg.ResponseMsgType{}
 	if err := json.Unmarshal(data, &t); err != nil {
-		// elapsed := time.Since(start)
-		// logger.Fdebugln("<timer> Elapsed time -", elapsed)
 		logger.FdebuglnFatal("Unmarshaling response error", err)
-		logger.LoglnFatal(err)
+		logger.ErrorLoglnFatal(err)
 	}
 
 	switch t.Type {
@@ -161,15 +156,8 @@ func listenCallback(data []byte, err error) {
 		var s struct{ Content connMsg.LogContent }
 
 		if err := json.Unmarshal(data, &s); err != nil {
-			// elapsed := time.Since(start)
-			// logger.Fdebugln("<timer> Elapsed time -", elapsed)
 			logger.FdebuglnFatal("Unmarshaling response error", err)
 		}
-
-		// logger.Logln(string(s.Content.Msg))
-
-		// TODO: listenCallback is a callback - it doesn't wait for prompt to print everything
-		// prompt must have a buffer and a lock that makes sure that it's printing sequentially
 
 		s1 := fmt.Sprintf("[0] %s", s.Content.Msg)
 		// s2 := fmt.Sprintf("[1] %s", s.Content.Msg)
@@ -185,10 +173,8 @@ func listenCallback(data []byte, err error) {
 		var s struct{ Content connMsg.WatchContent }
 
 		if err := json.Unmarshal(data, &s); err != nil {
-			// elapsed := time.Since(start)
-			// logger.Fdebugln("<timer> Elapsed time -", elapsed)
 			logger.FdebuglnFatal("Unmarshaling response error", err)
-			logger.LoglnFatal(err)
+			logger.ErrorLoglnFatal(err)
 		}
 
 		// p := fmt.Sprintf("[%s] > ", strings.Join(s.Content.Run, ", "))

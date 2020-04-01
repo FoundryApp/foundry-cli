@@ -17,11 +17,12 @@ done
 
 if [[ $is_debug == 1 ]]; then
   go build -race -tags "$flags" -o "./build/$build_name" .
+  # go build -tags "$flags" -o "./build/$build_name" .
 else
   go build -tags "$flags" -o "./build/$build_name" .
 fi
 
-if [ $? -eq 0 ]; then
+if [[ $? == 0 ]]; then
   echo "✅ SUCCESS"
 else
   echo "\n❌ FAIL"

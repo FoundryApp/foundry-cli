@@ -6,15 +6,15 @@ import (
 )
 
 const (
-	bold 		= "\x1b[1m"
-	red 		= "\x1b[31m"
-	yellow 	= "\x1b[33m"
-	endSeq 	= "\x1b[0m"
+	bold   = "\x1b[1m"
+	red    = "\x1b[31m"
+	yellow = "\x1b[33m"
+	endSeq = "\x1b[0m"
 )
 
 var (
-	warningPrefix	= fmt.Sprintf("%s%sWARNING%s", bold, yellow, endSeq)
-	errorPrefix		= fmt.Sprintf("%s%sERROR%s", bold, red, endSeq)
+	warningPrefix = fmt.Sprintf("%s%sWARNING%s", bold, yellow, endSeq)
+	errorPrefix   = fmt.Sprintf("%s%sERROR%s", bold, red, endSeq)
 )
 
 func ErrorLogln(args ...interface{}) {
@@ -39,9 +39,4 @@ func Log(args ...interface{}) {
 
 func Logln(args ...interface{}) {
 	fmt.Println(args...)
-}
-
-func LoglnFatal(args ...interface{}) {
-	Logln(args...)
-	os.Exit(1)
 }
