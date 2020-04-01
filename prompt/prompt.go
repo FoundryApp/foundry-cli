@@ -155,7 +155,7 @@ func (p *PromptSafe) Run() {
 	go prompt.Run()
 
 	// The initial rerender for the current terminal size
-	if err := p.rerender(); err != nil {
+	if err := p.rerender(true); err != nil {
 		logger.Fdebugln(err)
 		logger.ErrorLoglnFatal(err)
 	}
@@ -168,16 +168,20 @@ func (p *PromptSafe) Writeln(s string) (n int, err error) {
 	return p.outBuf.Write([]byte(s + "\n"))
 }
 
-func (p *PromptSafe) rerender() error {
+func (p *PromptSafe) rerender(initialRun bool) error {
 	p.renderMutex.Lock()
 	defer p.renderMutex.Unlock()
+
+	size := p.parser.GetWinSize()
+	if initialRun {
+		p.moveWindowDown(int(size.Row))
+	}
 
 	p.writer.EraseScreen()
 
 	p.currentPos = CursorIdentity()
 	p.savedPos = CursorIdentity()
 
-	size := p.parser.GetWinSize()
 	p.totalRows = int(size.Row)
 	p.promptRow = p.totalRows
 	p.errorRow = p.totalRows - 1
@@ -193,6 +197,15 @@ func (p *PromptSafe) rerender() error {
 	return p.writer.Flush()
 }
 
+// Prints # of rows of "\n" - this way the visible terminal window
+// is moved down and the previous user's terminal history isn't
+//  erased on the initial rerender()
+func (p *PromptSafe) moveWindowDown(rows int) error {
+	p.writer.CursorGoTo(rows, 0)
+	p.writer.WriteRawStr(strings.Repeat("\n", rows))
+	return p.writer.Flush()
+}
+
 func (p *PromptSafe) rerenderOnTermSizeChange() {
 	sigwinchCh := make(chan os.Signal, 1)
 	defer close(sigwinchCh)
@@ -201,7 +214,7 @@ func (p *PromptSafe) rerenderOnTermSizeChange() {
 		if _, ok := <-sigwinchCh; !ok {
 			return
 		}
-		if err := p.rerender(); err != nil {
+		if err := p.rerender(false); err != nil {
 			logger.FdebuglnFatal(err)
 			logger.ErrorLoglnFatal(err)
 		}

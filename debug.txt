@@ -1,25 +1,25 @@
-[1mDEBUG[0m 18:59:21 [foundry/cli/logger.InitDebug:37] ################## STARTING SESSION
-[1mDEBUG[0m 18:59:21 [foundry/cli/config.GetString:57] Get string from config (key, val): FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1NzYwMjIzLCJleHAiOjE1ODU3NjM4MjMsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.Q7NmhDLf0CXQKRo-EReVCGLACdiUgU8N-1gohJ_YfJmkUXpzA6awVK4l-rwtflhlSr9TvYqSRpGBtsM2pFW5jz-zuDhOnILW682QLGrB8-Y2d7Z5gu9IQ3edHaLm8AzjXvUWVOXiVx1G8tr1qpGr_9Z6x7Mz-B75OtxU8yNN4WsA7Ei4LzCb5ol-d1se5CdkNFAA0OYjdmua-vAuKJXxmgOxf-0Rbua3ZfLHPt__3aHe_nDNRgGR1ujRdusSblqXvDFOPgBkNH5neuqhuXSn654V-Fb_3K3ZDr3gdjjLuWJAIhkLKVp1TAAdkV0__PSIno-G2Txq5ukbnBPG35Lpug
-[1mDEBUG[0m 18:59:21 [foundry/cli/config.GetString:57] Get string from config (key, val): FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
-[1mDEBUG[0m 18:59:21 [foundry/cli/config.GetInt:63] Get int from config (key, val): FOUNDRY_AUTH_STATE 2
-[1mDEBUG[0m 18:59:21 [foundry/cli/auth.(*Auth).loadTokensAndState:63] Loaded AuthState from config (1 = signed out, 2 = signed in, 3 = anonymous): 2
-[1mDEBUG[0m 18:59:21 [foundry/cli/auth.(*Auth).doRefreshReq:217] Refreshing ID token
-[1mDEBUG[0m 18:59:21 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1NzYwMjgyLCJleHAiOjE1ODU3NjM4ODIsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.KD99AwOL3REqMCzrxNamOAoGTip3gDcBNsaOAtQ3pE2aTObvj_O-yTtzrUNzoWGF_V_4dlNQa9FZefHD0szPrX90Jg3KJpnj5Hl7QVL1mO-3k9larZn5qrwIjmF7stEjO0b9WyVPFDGjAcL3cKAsHEVnzNSEEAX6ATrwTz5upuVl3zwNS_jT3lI1xil4X20hMtJcQmSHb3G517PpGetWVbJsFqoi4UGqqiImcnkXJdFW086GB2QQTldbuVk3lr6t7038gWE8Se6Gcxkwv_zmh_eTRM2ECi16aB5dSG7l0waKz-68Jd7622_NOO17lExFh3Z7dFbCDIQpSygfC42LRA
-[1mDEBUG[0m 18:59:21 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
-[1mDEBUG[0m 18:59:21 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_STATE 2
-[1mDEBUG[0m 18:59:21 [foundry/cli/config.Write:68] Write config
-[1mDEBUG[0m 18:59:21 [foundry/cli/connection.New:26] WS dialing
-[1mDEBUG[0m 18:59:21 [foundry/cli/connection.New:32] WS connected
-[1mDEBUG[0m 18:59:21 [foundry/cli/connection.(*Connection).Listen:43]  WS listening
-[1mDEBUG[0m 18:59:21 [foundry/cli/connection.(*Connection).Ping:62] Ping
-[1mDEBUG[0m 18:59:21 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
-[1mDEBUG[0m 18:59:21 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\n███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗\n██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝\n█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝\n██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝\n██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║\n╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝\n"}}
-[1mDEBUG[0m 18:59:21 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
-[1mDEBUG[0m 18:59:21 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
-[1mDEBUG[0m 18:59:21 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"Preparing your environment..."}}
-[1mDEBUG[0m 18:59:21 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
-[1mDEBUG[0m 18:59:21 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
-[1mDEBUG[0m 18:59:21 [foundry/cli/prompt.(*PromptSafe).print:221]  
+[1mDEBUG[0m 19:55:53 [foundry/cli/logger.InitDebug:37] ################## STARTING SESSION
+[1mDEBUG[0m 19:55:53 [foundry/cli/config.GetString:57] Get string from config (key, val): FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1NzYzNTc1LCJleHAiOjE1ODU3NjcxNzUsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.SqS4MvZ4aDyi_gMi-qnTNrdQkOpfWiTlc9PBWiLMHagGD2uh5UG7sopPsNX1SlZG2McIUj3Krn7mcD06KUBub9eZIFKghKGzdHJ3d2cSgnWMPk-2NCg3wmhbbwbvxKHhS14vRI4r8TjiqnPNIYYVLDUuvjMEW0W_7D3Nhb0nZzsFQM4-bdYnrGs6S4i6BcUvnzr0z-8sVKeAoSdWjUlb0VMeXe3i-PLoerTaMHN8TottRZdGBZKCapVGOkCSi2Wvbmt-nLURuShB5PUuAYAlSfK13PxTR0SZjgZ5M_m0rN8I1hhhHmFAS1MmP0c1QEuIdYYFbgrsUDBDksLnqW3niw
+[1mDEBUG[0m 19:55:53 [foundry/cli/config.GetString:57] Get string from config (key, val): FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
+[1mDEBUG[0m 19:55:53 [foundry/cli/config.GetInt:63] Get int from config (key, val): FOUNDRY_AUTH_STATE 2
+[1mDEBUG[0m 19:55:53 [foundry/cli/auth.(*Auth).loadTokensAndState:63] Loaded AuthState from config (1 = signed out, 2 = signed in, 3 = anonymous): 2
+[1mDEBUG[0m 19:55:53 [foundry/cli/auth.(*Auth).doRefreshReq:217] Refreshing ID token
+[1mDEBUG[0m 19:55:53 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1NzYzNjc0LCJleHAiOjE1ODU3NjcyNzQsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.SVYBbvBcVCOrpu4-RIMBI3E21KVi2rNGj3gqsX4eB43xspKP_NBGkKgEZmvCTdzD1OPupH64RO8mq-EpEJgym0i2FgNRwiz4Q06uLftwiEIpzeU9MGz3NjW3oJXppKK4tG6Q5gZO45DN0OKJkyKwTqwgiCMfuzwpExl9ryLMH_8XBsb2iqLl1VnGgxfnE6WPSxVZFa0avLuQMDE6KgJI__anwQTlQVZPPHfMWusL3nNr7E91kzXhysjlWO3WAp2PaP0IdWXJnCm5yh8lZWY1r5zY-6D14WjF6lsewUFcoHnE3M3dV1srxX60qW0tOpIC9q7pBIFfu2IqC10NgLb_yA
+[1mDEBUG[0m 19:55:53 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
+[1mDEBUG[0m 19:55:53 [foundry/cli/config.Set:51] Set to config (key, val) FOUNDRY_AUTH_STATE 2
+[1mDEBUG[0m 19:55:53 [foundry/cli/config.Write:68] Write config
+[1mDEBUG[0m 19:55:53 [foundry/cli/connection.New:26] WS dialing
+[1mDEBUG[0m 19:55:53 [foundry/cli/connection.New:32] WS connected
+[1mDEBUG[0m 19:55:53 [foundry/cli/connection.(*Connection).Listen:43]  WS listening
+[1mDEBUG[0m 19:55:53 [foundry/cli/connection.(*Connection).Ping:62] Ping
+[1mDEBUG[0m 19:55:53 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
+[1mDEBUG[0m 19:55:53 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\n███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗\n██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝\n█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝\n██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝\n██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║\n╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝\n"}}
+[1mDEBUG[0m 19:55:53 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
+[1mDEBUG[0m 19:55:53 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
+[1mDEBUG[0m 19:55:53 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"Preparing your environment..."}}
+[1mDEBUG[0m 19:55:53 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
+[1mDEBUG[0m 19:55:53 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":" "}}
+[1mDEBUG[0m 19:55:53 [foundry/cli/prompt.(*PromptSafe).print:234]  
 
 ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
 ██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
@@ -34,108 +34,19 @@ Preparing your environment...
  
  
 
-[1mDEBUG[0m 18:59:21 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m 18:59:21 [foundry/cli/prompt.(*PromptSafe).print:221] [37m...[39m
+[1mDEBUG[0m 19:55:54 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
+[1mDEBUG[0m 19:55:54 [foundry/cli/prompt.(*PromptSafe).print:234] [37m...[39m
 
-[1mDEBUG[0m 18:59:24 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:24 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
+[1mDEBUG[0m 19:55:54 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
+[1mDEBUG[0m 19:55:54 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m 19:55:54 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
+[1mDEBUG[0m 19:55:54 [foundry/cli/prompt.(*PromptSafe).print:234] [34m[39m
 [34m[4m[34mcreateWorkspace[39m[34m[24m[39m
 
-[1mDEBUG[0m 18:59:24 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:25 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:25 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'Created a workspace'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:25 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:25 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mhelloWorld[39m[34m[24m[39m
-
-[1mDEBUG[0m 18:59:25 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:27 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m 18:59:27 [foundry/cli/prompt.(*PromptSafe).print:221] [37m...[39m
-
-[1mDEBUG[0m 18:59:27 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:27 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:27 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
-{ data: [32m'Created a workspace'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:27 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:27 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mhelloWorld[39m[34m[24m[39m
-
-[1mDEBUG[0m 18:59:27 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:27 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:28 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m 18:59:28 [foundry/cli/prompt.(*PromptSafe).print:221] [37m...[39m
-
-[1mDEBUG[0m 18:59:28 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:28 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
-
-[1mDEBUG[0m 18:59:28 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:28 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:28 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:28 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'Created a workspace'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1mDEBUG[0m 19:55:54 [foundry/cli/prompt.(*PromptSafe).print:234] { data: [32m'Created a workspace'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
 [34m[39m
 [34m[4m[34mhelloWorld[39m[34m[24m[39m
 
-[1mDEBUG[0m 18:59:28 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:29 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m 18:59:29 [foundry/cli/prompt.(*PromptSafe).print:221] [37m...[39m
-
-[1mDEBUG[0m 18:59:29 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:29 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:29 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
-{ data: [32m'Created a workspace'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:29 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:29 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mhelloWorld[39m[34m[24m[39m
-
-[1mDEBUG[0m 18:59:29 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:29 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:31 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m 18:59:31 [foundry/cli/prompt.(*PromptSafe).print:221] [37m...[39m
-
-[1mDEBUG[0m 18:59:31 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:31 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:31 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:31 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
-
-[1mDEBUG[0m 18:59:31 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'Created a workspace'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-[34m[39m
-[34m[4m[34mhelloWorld[39m[34m[24m[39m
-
-[1mDEBUG[0m 18:59:31 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:31 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:32 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
-
-
-[1mDEBUG[0m 18:59:33 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[37m...\u001b[39m"}}
-[1mDEBUG[0m 18:59:33 [foundry/cli/prompt.(*PromptSafe).print:221] [37m...[39m
-
-[1mDEBUG[0m 18:59:33 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mcreateWorkspace\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:33 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'Created a workspace'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:33 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"\u001b[34m\u001b[39m\n\u001b[34m\u001b[4m\u001b[34mhelloWorld\u001b[39m\u001b[34m\u001b[24m\u001b[39m"}}
-[1mDEBUG[0m 18:59:33 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mcreateWorkspace[39m[34m[24m[39m
-{ data: [32m'Created a workspace'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:33 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 18:59:33 [foundry/cli/prompt.(*PromptSafe).print:221] [34m[39m
-[34m[4m[34mhelloWorld[39m[34m[24m[39m
-
-[1mDEBUG[0m 18:59:33 [foundry/cli/prompt.(*PromptSafe).print:221] { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 18:59:39 [foundry/cli/prompt.(*PromptSafe).executor:66] asd
-[1mDEBUG[0m 18:59:40 [foundry/cli/prompt.(*PromptSafe).executor:66] list
-[1mDEBUG[0m 18:59:42 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
-
+[1mDEBUG[0m 19:55:54 [foundry/cli/cmd.listenCallback:140] {"type":"log","content":{"msg":"{ data: \u001b[32m'10th run'\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m 19:55:54 [foundry/cli/prompt.(*PromptSafe).print:234] { data: [32m'10th run'[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
 
