@@ -4,7 +4,6 @@ package cmd
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"time"
 
@@ -159,15 +158,18 @@ func listenCallback(data []byte, err error) {
 			logger.FdebuglnFatal("Unmarshaling response error", err)
 		}
 
-		s1 := fmt.Sprintf("[0] %s", s.Content.Msg)
+		if _, err := prompt.Writeln(s.Content.Msg); err != nil {
+			logger.FdebuglnFatal(err)
+		}
+
+		// s1 := fmt.Sprintf("[0] %s", s.Content.Msg)
 		// s2 := fmt.Sprintf("[1] %s", s.Content.Msg)
 		// s3 := fmt.Sprintf("[2] %s\n", s.Content.Msg)
 		// s4 := fmt.Sprintf("[3] %s\n", s.Content.Msg)
 		// s5 := fmt.Sprintf("[4] %s\n", s.Content.Msg)
-
-		if _, err := prompt.Writeln(s1); err != nil {
-			logger.FdebuglnFatal(err)
-		}
+		// if _, err := prompt.Writeln(s1); err != nil {
+		// 	logger.FdebuglnFatal(err)
+		// }
 
 	case connMsg.WatchResponseMsg:
 		var s struct{ Content connMsg.WatchContent }

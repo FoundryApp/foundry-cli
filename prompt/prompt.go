@@ -1,6 +1,7 @@
 package prompt
 
 import (
+	"fmt"
 	"foundry/cli/logger"
 	"os"
 	"os/signal"
@@ -71,17 +72,29 @@ func (p *PromptSafe) executor(s string) {
 		args := fields[1:]
 		cmd.RunRequest(args)
 	} else {
-		// TODO: Show error message
-		// p.wGoToAndEraseError()
+		// Delete an old error message and show the new one
 
-		// writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
-		// // errorText = fmt.Sprintf("Unknown command '%s'. Write 'help' to list available commands.\n", fields[0])
-		// errorText = fmt.Sprintf("Unknown command '%s'", fields[0])
-		// writer.WriteStr(errorText)
-		// writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
-		// writer.Flush()
+		p.renderMutex.Lock()
 
-		// p.wGoToPrompt()
+		// Delete an old error message
+		p.writer.CursorGoTo(p.errorRow, 1)
+		p.writer.EraseLine()
+
+		// Print the new error
+		p.writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
+		p.errorText = fmt.Sprintf("Unknown command '%s'", fields[0])
+		p.writer.WriteRawStr(p.errorText)
+		p.writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
+
+		// Move cursor back to the prompt
+		p.writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+len(p.promptText)+1)
+
+		if err := p.writer.Flush(); err != nil {
+			logger.Fdebugln(err)
+			logger.ErrorLoglnFatal(err)
+		}
+
+		p.renderMutex.Unlock()
 	}
 }
 
@@ -146,6 +159,7 @@ func (p *PromptSafe) Run() {
 		logger.Fdebugln(err)
 		logger.ErrorLoglnFatal(err)
 	}
+
 	// Rerender a terminal for every size change
 	go p.rerenderOnTermSizeChange()
 }
@@ -169,7 +183,12 @@ func (p *PromptSafe) rerender() error {
 	p.errorRow = p.totalRows - 1
 	p.freeRows = p.totalRows
 
-	// TODO: Restore error that got deleted
+	// Move to the error row and restore the error text
+	p.writer.CursorGoTo(p.errorRow, 1)
+	p.writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
+	p.writer.WriteRawStr(p.errorText)
+
+	p.writer.CursorGoTo(p.promptRow, 1)
 
 	return p.writer.Flush()
 }
@@ -214,19 +233,20 @@ func (p *PromptSafe) print(b []byte) {
 
 		if p.freeRows == 2 {
 			p.savedPos = p.currentPos
-
-			// TODO: Erase error
-
 			// Go to a prompt row and create a new line so that we
 			// once again have 3 free rows.
 			// The reason we have to go to the prompt row is becauase
 			// if we had printed a new line anywhere before the prompt
 			// row, the cursor would simply move down without actually
 			// creating a new line in the terminal.
-			p.writer.CursorGoTo(p.promptRow, 1)
-			// Erase line so that a text on the prompt row doesn't stay
-			// when the prompt row line is moved up by 1
+
+			// Erase the error row and prompt row  so that a text doesn't stay there
+			// when the everything is moved up by 1 row
+			p.writer.CursorGoTo(p.errorRow, 1)
 			p.writer.EraseLine()
+			p.writer.CursorGoTo(p.promptRow, 1)
+			p.writer.EraseLine()
+
 			// Create a new line
 			p.writer.WriteRawStr("\n")
 
@@ -245,9 +265,12 @@ func (p *PromptSafe) print(b []byte) {
 	}
 	p.savedPos = p.currentPos
 
-	// TODO: Restore error
+	// Move to the error row and restore the error text
+	p.writer.CursorGoTo(p.errorRow, 1)
+	p.writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
+	p.writer.WriteRawStr(p.errorText)
 
-	// Return to the prompt row and restore the prompt text
+	// Move to the prompt row and restore the text
 	p.writer.CursorGoTo(p.promptRow, 1)
 	p.writer.SetColor(goprompt.Green, goprompt.DefaultColor, false)
 	p.writer.WriteRawStr(p.promptPrefix)
