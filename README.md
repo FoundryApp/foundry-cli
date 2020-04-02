@@ -1,10 +1,9 @@
 # Foundry - The fastest way to develop serverless functions
 
 ## Overview
-detailed description
+CLI that creates the same environment as is the environment where your cloud functions run in the production. The environment is pre-configured, with the copy of your production data, and automatically runs your code with the near-instant feedback.
 
 Foundry [website](https://www.foundryapp.co/)
-
 
 ### Table of content
 - **[Installation](#Installation)**
@@ -19,11 +18,11 @@ Foundry [website](https://www.foundryapp.co/)
 
 ### Homebrew
 
-    brew 
+    brew
 
 ### Standalone Binary
 
-The you can download it here:
+The you can download it here
 
 - **[OSX](github release link)**
 
@@ -31,21 +30,25 @@ The you can download it here:
 
 (Add to PATH?)
 
-### Go Package
+### Go Package (Compile from source)
 
-Make sure you have all the [requirements] installed, then clone the repo
+Make sure you have all the [requirements](#Compilation%20requirements) installed, then clone the repo
 
     git clone (this repo)
 
-Then build the binary with
+then go to the cloned folder
+
+    cd
+
+and build the binary with
 
 [//]: #
 
     go build
 
-You can then add the binary to your PATH with
+you can then add the binary to your PATH with
 
-    export 
+    export PATH=$PATH:
 
 (Add to path optional?)
 (Some installing script?)
@@ -61,9 +64,13 @@ and just code. Your code is evaluated on each save and the results are streamed 
 
 ### Prompt Commands
 
+you can watch only some functions from the config by using the `watch` command in prompt
 
+    > watch <functionToWatch> <anotherFunctionToWatch>
 
-how to use/what to do
+to reset this setting type
+
+    > (reset)
 
 ### Registration
 
@@ -72,6 +79,14 @@ The basic version can be used without registration, but
 ## Config
 
 You can describe the emulated environment in the `foundry.yaml` file in your project root directory.
+
+### Root Directory
+
+    rootDir: .
+
+### Service Account
+
+    serviceAcc: <relativePathToServiceAccountJSON>
 
 ### Firestore
 
@@ -83,9 +98,9 @@ Before every run you can fill the emulated Firestore with values by adding this 
           - id: ''
             data: '{"":""}'
 
-or if you added a [service account key](#How%20to%20get%20a%20service%20account%20JSON%20for%20your%20Firebase%20project) to config with 
+or if you added a [service account key](#How%20to%20get%20a%20service%20account%20JSON%20for%20your%20Firebase%20project) to config with
 
-    serviceAcc: </path/to/serviceAcc.json>
+    serviceAcc: <path/to/serviceAcc.json>
 
 you can fill the emulated Firestore directly from your production environment
 
@@ -103,13 +118,13 @@ you can fill the emulated Firestore directly from your production environment
 If you want a function to automatically run in our emulated environment
 
     functions:
-      - name: <exportedName>
+      - name: <exportedFunctionName>
         type: <https/firestore/auth>
         trigger: <onCreate/onDelete/onUpdate>
 
-
-
-
+      - name: <exportedFunctionName>
+        type: <https/firestore/auth>
+        trigger: <onCreate/onDelete/onUpdate>
 
 
 
@@ -117,9 +132,12 @@ If you want a function to automatically run in our emulated environment
 
 ### How to get a service account JSON for your Firebase project
 
-Go to
+Go to [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and choose your project
+
+or from [Firebase Console](https://console.firebase.google.com/project)
 
 ### Are you storing my code or data from my production environment?
 
 We don't store your code or data for duration that is longer than the lifetime of your session (specify until pod dies?).
 
+## Compilation requirements
