@@ -3519,3 +3519,18 @@ ggg
 [1mDEBUG[0m 15:15:04 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
 
 
+[1mDEBUG[0m 15:15:14 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 15:15:24 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 15:15:34 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 15:15:44 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 15:15:54 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
