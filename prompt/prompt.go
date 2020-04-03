@@ -20,7 +20,7 @@ type CursorPos struct {
 	Col int
 }
 
-func CursorIdentity() CursorPos {
+func CursorOutputStart() CursorPos {
 	return CursorPos{1, 1}
 }
 
@@ -36,8 +36,8 @@ type Prompt struct {
 	promptText   string
 	promptRow    int // Will be recalculated once the terminal is ready
 
-	errorText string
-	errorRow  int // Will be recalculated once the terminal is ready
+	infoText string
+	infoRow  int // Will be recalculated once the terminal is ready
 
 	totalRows int // Will be recalculated once the terminal is ready
 	freeRows  int // Will be recalculated once the terminal is ready
@@ -72,26 +72,26 @@ func (p *Prompt) executor(s string) {
 		args := fields[1:]
 		cmd.RunRequest(args)
 	} else {
-		// Delete an old error message and show the new one
+		// Delete an old info message and show the new one
 
 		p.renderMutex.Lock()
 
-		// Delete an old error message
-		p.writer.CursorGoTo(p.errorRow, 1)
+		// Delete an old info message
+		p.writer.CursorGoTo(p.infoRow, 1)
 		p.writer.EraseLine()
 
-		// Print the new error
+		// Print the new info message
 		p.writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
-		p.errorText = fmt.Sprintf("Unknown command '%s'", fields[0])
-		p.writer.WriteRawStr(p.errorText)
+		p.infoText = fmt.Sprintf("Unknown command '%s'", fields[0])
+		p.writer.WriteRawStr(p.infoText)
 		p.writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
 
 		// Move cursor back to the prompt
 		p.writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+len(p.promptText)+1)
 
 		if err := p.writer.Flush(); err != nil {
-			logger.Fdebugln(err)
-			logger.ErrorLoglnFatal(err)
+			logger.FdebuglnFatal("Error flushing prompt buffer", err)
+			logger.ErrorLoglnFatal("Error flushing prompt buffer", err)
 		}
 
 		p.renderMutex.Unlock()
@@ -122,7 +122,7 @@ func NewPrompt(cmds []cmd.Cmd) *Prompt {
 		writer: goprompt.NewStandardOutputWriter(),
 
 		// Terminal is indexed from 1
-		savedPos:   CursorIdentity(),
+		savedPos:   CursorOutputStart(),
 		currentPos: CursorPos{1, len(prefix) + 1},
 	}
 }
@@ -156,8 +156,8 @@ func (p *Prompt) Run() {
 
 	// The initial rerender for the current terminal size
 	if err := p.rerender(true); err != nil {
-		logger.Fdebugln(err)
-		logger.ErrorLoglnFatal(err)
+		logger.Fdebugln("Error during the initial rerender", err)
+		logger.ErrorLoglnFatal("Error during the initial rerender", err)
 	}
 
 	// Rerender a terminal for every size change
@@ -166,6 +166,23 @@ func (p *Prompt) Run() {
 
 func (p *Prompt) Writeln(s string) (n int, err error) {
 	return p.outBuf.Write([]byte(s + "\n"))
+}
+
+func (p *Prompt) SetInfoln(s string) error {
+	p.renderMutex.Lock()
+	defer p.renderMutex.Unlock()
+
+	p.writer.CursorGoTo(p.infoRow, 1)
+	p.writer.EraseLine()
+
+	p.writer.SetColor(goprompt.Green, goprompt.DefaultColor, true)
+	t := strings.TrimSpace(s)
+	p.writer.WriteStr(t)
+	p.writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, true)
+
+	p.writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+len(p.promptText)+1)
+
+	return p.writer.Flush()
 }
 
 func (p *Prompt) rerender(initialRun bool) error {
@@ -179,18 +196,18 @@ func (p *Prompt) rerender(initialRun bool) error {
 
 	p.writer.EraseScreen()
 
-	p.currentPos = CursorIdentity()
-	p.savedPos = CursorIdentity()
+	p.currentPos = CursorOutputStart()
+	p.savedPos = CursorOutputStart()
 
 	p.totalRows = int(size.Row)
 	p.promptRow = p.totalRows
-	p.errorRow = p.totalRows - 1
+	p.infoRow = p.totalRows - 1
 	p.freeRows = p.totalRows
 
-	// Move to the error row and restore the error text
-	p.writer.CursorGoTo(p.errorRow, 1)
+	// Move to the info row and restore the text
+	p.writer.CursorGoTo(p.infoRow, 1)
 	p.writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
-	p.writer.WriteRawStr(p.errorText)
+	p.writer.WriteRawStr(p.infoText)
 
 	p.writer.CursorGoTo(p.promptRow, 1)
 
@@ -215,8 +232,8 @@ func (p *Prompt) rerenderOnTermSizeChange() {
 			return
 		}
 		if err := p.rerender(false); err != nil {
-			logger.FdebuglnFatal(err)
-			logger.ErrorLoglnFatal(err)
+			logger.FdebuglnFatal("Error during the rerender", err)
+			logger.ErrorLoglnFatal("Error during the rerender", err)
 		}
 	}
 }
@@ -253,9 +270,9 @@ func (p *Prompt) print(b []byte) {
 			// row, the cursor would simply move down without actually
 			// creating a new line in the terminal.
 
-			// Erase the error row and prompt row  so that a text doesn't stay there
+			// Erase the info row and prompt row so that a text doesn't stay there
 			// when the everything is moved up by 1 row
-			p.writer.CursorGoTo(p.errorRow, 1)
+			p.writer.CursorGoTo(p.infoRow, 1)
 			p.writer.EraseLine()
 			p.writer.CursorGoTo(p.promptRow, 1)
 			p.writer.EraseLine()
@@ -278,10 +295,10 @@ func (p *Prompt) print(b []byte) {
 	}
 	p.savedPos = p.currentPos
 
-	// Move to the error row and restore the error text
-	p.writer.CursorGoTo(p.errorRow, 1)
+	// Move to the info row and restore the info text
+	p.writer.CursorGoTo(p.infoRow, 1)
 	p.writer.SetColor(goprompt.Red, goprompt.DefaultColor, true)
-	p.writer.WriteRawStr(p.errorText)
+	p.writer.WriteRawStr(p.infoText)
 
 	// Move to the prompt row and restore the text
 	p.writer.CursorGoTo(p.promptRow, 1)
@@ -291,7 +308,7 @@ func (p *Prompt) print(b []byte) {
 	p.writer.WriteRawStr(p.promptText)
 
 	if err := p.writer.Flush(); err != nil {
-		logger.Fdebugln(err)
-		logger.ErrorLoglnFatal(err)
+		logger.FdebuglnFatal("Error flushing prompt buffer (2)", err)
+		logger.ErrorLoglnFatal("Error flushing prompt buffer", err)
 	}
 }

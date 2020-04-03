@@ -3,6 +3,8 @@ package files
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"io"
+	"regexp"
 
 	conn "foundry/cli/connection"
 	connMsg "foundry/cli/connection/msg"
@@ -12,15 +14,15 @@ import (
 )
 
 var (
-	ignore              = []string{"node_modules", ".git"}
 	lastArchiveChecksum = ""
 )
 
-func Upload(c *conn.Connection, rootDir string) {
+func Upload(c *conn.Connection, rootDir string, ignore ...*regexp.Regexp) {
 	// Zip the project
 	buf, err := zip.ArchiveDir(rootDir, ignore)
 	if err != nil {
-		logger.ErrorLoglnFatal(err)
+		logger.FdebuglnFatal("ArchiveDir error", err)
+		logger.ErrorLoglnFatal("Error archiving the directorye", err)
 	}
 
 	archiveChecksum := checksum(buf.Bytes())
@@ -38,8 +40,10 @@ func Upload(c *conn.Connection, rootDir string) {
 
 	for i := 0; i < chunkCount; i++ {
 		bytesread, err := buf.Read(buffer)
-		if err != nil {
-			logger.ErrorLoglnFatal(err)
+		// TODO: HEEEEEEEEEEEEEEEEEEEEEEEEEEEREE EOF
+		if err != nil && err != io.EOF {
+			logger.FdebuglnFatal("Error reading chunk from buffer", err)
+			logger.ErrorLoglnFatal("Error reading chunk from buffer", err)
 		}
 
 		previousChecksum = checksum
@@ -53,7 +57,8 @@ func Upload(c *conn.Connection, rootDir string) {
 
 		chunk := connMsg.NewChunkMsg(bytes, checkStr, prevCheckStr, lastChunk)
 		if err = c.Send(chunk); err != nil {
-			logger.ErrorLoglnFatal(err)
+			logger.FdebuglnFatal("Error sending chunk", err)
+			logger.ErrorLoglnFatal("Error sending chunk", err)
 		}
 	}
 }

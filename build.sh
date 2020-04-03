@@ -16,8 +16,8 @@ for flag in `echo $flags`; do
 done
 
 if [[ $is_debug == 1 ]]; then
-  # go build -race -tags "$flags" -o "./build/$build_name" .
-  go build -tags "$flags" -o "./build/$build_name" .
+  go build -race -tags "$flags" -o "./build/$build_name" .
+  # go build -tags "$flags" -o "./build/$build_name" .
 else
   go build -tags "$flags" -o "./build/$build_name" .
 fi

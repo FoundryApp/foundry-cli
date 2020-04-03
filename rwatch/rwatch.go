@@ -1,9 +1,11 @@
 package rwatch
 
 import (
+	"foundry/cli/logger"
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 
 	"github.com/fsnotify/fsnotify"
 )
@@ -13,13 +15,14 @@ type Watcher struct {
 	Errors chan error
 
 	fsnotify *fsnotify.Watcher
+	done     chan struct{}
 
-	done chan struct{}
+	ignore []*regexp.Regexp
 }
 
-var ignore = []string{".git", "node_modules", ".foundry"}
+// var ignore = []string{".git", "node_modules", ".foundry"}
 
-func New() (*Watcher, error) {
+func New(ignore []*regexp.Regexp) (*Watcher, error) {
 	fsw, err := fsnotify.NewWatcher()
 	if err != nil {
 		return nil, err
@@ -29,6 +32,7 @@ func New() (*Watcher, error) {
 		Events:   make(chan fsnotify.Event),
 		Errors:   make(chan error),
 		done:     make(chan struct{}),
+		ignore:   ignore,
 	}
 
 	go w.start()
@@ -36,10 +40,7 @@ func New() (*Watcher, error) {
 }
 
 func (w *Watcher) AddRecursive(dir string) error {
-	if err := w.traverse(dir, true); err != nil {
-		return err
-	}
-	return nil
+	return w.traverse(dir, true)
 }
 
 func (w *Watcher) Close() {
@@ -83,39 +84,36 @@ func (w *Watcher) start() {
 }
 
 // Traverses the root directory and adds watcher for each directory along the way
+// We don't care for files, only for directories because we are watching whole dirs
 func (w *Watcher) traverse(start string, watch bool) error {
-	err := filepath.Walk(start, func(path string, info os.FileInfo, err error) error {
+	walkfn := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 
 		if info.IsDir() {
-			if dirIgnored(info) {
-				return filepath.SkipDir
+			fname := info.Name()
+			logger.Fdebugln("")
+			logger.Fdebugln("fname in rwatch:", fname)
+			logger.Fdebugln("ignore in rwatch:", w.ignore)
+
+			for _, r := range w.ignore {
+				logger.Fdebugln("\t- regex:", r)
+				logger.Fdebugln("\t- match:", r.MatchString(fname))
+				if r.MatchString(fname) {
+					logger.Fdebugln("\t- Skipping dir")
+					return filepath.SkipDir
+				}
 			}
 
 			if watch {
-				if err = w.fsnotify.Add(path); err != nil {
-					return err
-				}
-			} else {
-				if err = w.fsnotify.Remove(path); err != nil {
-					return err
-				}
+				logger.Fdebugln("\t- Adding dir to rwatch")
+				return w.fsnotify.Add(path)
 			}
+			logger.Fdebugln("\t- Removing dir from rwatch")
+			return w.fsnotify.Remove(path)
 		}
 		return nil
-	})
-	return err
-}
-
-func dirIgnored(fi os.FileInfo) bool {
-	n := fi.Name()
-	for _, i := range ignore {
-
-		if i == n {
-			return true
-		}
 	}
-	return false
+	return filepath.Walk(start, walkfn)
 }

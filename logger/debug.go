@@ -13,28 +13,27 @@ type PrefixType int
 
 const (
 	DebugPrefix PrefixType = iota
+	ErrorPrefix
 	FatalPrefix
 )
 
 var (
 	debugFile *os.File
-
-	fatalPrefix = ""
-	debugPrefix = ""
 )
 
-func InitDebug(path string) {
+func InitDebug(path string) error {
 	if path == "" {
-		return
+		return nil
 	}
 
 	dfile, err := os.Create(path)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	debugFile = dfile
 
 	Fdebugln("################## STARTING SESSION")
+	return nil
 }
 
 func Close() {
@@ -53,6 +52,15 @@ func Fdebugln(v ...interface{}) {
 	fmt.Fprint(debugFile, str)
 }
 
+func FdebuglnError(v ...interface{}) {
+	if debugFile == nil {
+		return
+	}
+
+	str := fmt.Sprintf("%s %s", prefix(ErrorPrefix), fmt.Sprintln(v...))
+	fmt.Fprint(debugFile, str)
+}
+
 func FdebuglnFatal(v ...interface{}) {
 	if debugFile == nil {
 		return
@@ -60,6 +68,25 @@ func FdebuglnFatal(v ...interface{}) {
 
 	str := fmt.Sprintf("%s %s", prefix(FatalPrefix), fmt.Sprintln(v...))
 	fmt.Fprint(debugFile, str)
+	os.Exit(1)
+}
+
+// Doesn't write to the debug file
+func Debugln(v ...interface{}) {
+	str := fmt.Sprintf("%s %s", prefix(DebugPrefix), fmt.Sprintln(v...))
+	fmt.Print(str)
+}
+
+// Doesn't write to the debug file
+func DebuglnError(v ...interface{}) {
+	str := fmt.Sprintf("%s %s", prefix(ErrorPrefix), fmt.Sprintln(v...))
+	fmt.Print(str)
+}
+
+// Doesn't write to the debug file
+func DebuglnFatal(v ...interface{}) {
+	str := fmt.Sprintf("%s %s", prefix(FatalPrefix), fmt.Sprintln(v...))
+	fmt.Print(str)
 	os.Exit(1)
 }
 
@@ -76,6 +103,8 @@ func prefix(t PrefixType) (prefix string) {
 		prefix = fmt.Sprintf("%sDEBUG%s", bold, endSeq)
 	case FatalPrefix:
 		prefix = fmt.Sprintf("%s%sFATAL%s", red, bold, endSeq)
+	case ErrorPrefix:
+		prefix = fmt.Sprintf("%s%sERROR%s", red, bold, endSeq)
 	default:
 		prefix = fmt.Sprintf("%sDEBUG%s", bold, endSeq)
 	}

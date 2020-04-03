@@ -15,9 +15,6 @@ func Init() error {
 		return err
 	}
 
-
-	// configDir = "/Users/vasekmlejnsky/Developer"
-
 	dirPath := configDir + "/foundrycli"
 	confName := "config"
 	ext := "json"

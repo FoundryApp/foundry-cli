@@ -6,31 +6,31 @@ import (
 
 	"foundry/cli/logger"
 
-	"github.com/spf13/cobra"
-	"github.com/fatih/color"
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
+	"github.com/fatih/color"
+	"github.com/spf13/cobra"
 )
 
 var (
 	signInCmd = &cobra.Command{
-		Use: 		"sign-in",
-		Short: 	"Sign in to your Foundry account",
-		Long:		"",
-		Run:		runSignIn,
+		Use:   "sign-in",
+		Short: "Sign in to your Foundry account",
+		Long:  "",
+		Run:   runSignIn,
 	}
 
 	qs = []*survey.Question{
-			{
-					Name:     "email",
-					Prompt:   &survey.Input{Message: "Email:"},
-					Validate: survey.Required,
-			},
-			{
-					Name: 		"pass",
-					Prompt:   &survey.Password{Message: "Password:"},
-					Validate: survey.Required,
-			},
+		{
+			Name:     "email",
+			Prompt:   &survey.Input{Message: "Email:"},
+			Validate: survey.Required,
+		},
+		{
+			Name:     "pass",
+			Prompt:   &survey.Password{Message: "Password:"},
+			Validate: survey.Required,
+		},
 	}
 )
 
@@ -40,8 +40,8 @@ func init() {
 
 func runSignIn(cmd *cobra.Command, args []string) {
 	creds := struct {
-		Email string 	`survey:"email`
-		Pass	string	`survey:"pass`
+		Email string `survey:"email`
+		Pass  string `survey:"pass`
 	}{}
 
 	err := survey.Ask(qs, &creds)
@@ -54,13 +54,13 @@ func runSignIn(cmd *cobra.Command, args []string) {
 	}
 
 	if err = authClient.SignIn(creds.Email, creds.Pass); err != nil {
-		logger.Fdebugln(err)
-		logger.ErrorLoglnFatal(err)
+		logger.FdebuglnFatal("Sign in error", err)
+		logger.ErrorLoglnFatal("Sign in error (1)", err)
 	}
 
 	if authClient.Error != nil {
-		logger.Fdebugln(err)
-		logger.ErrorLoglnFatal(authClient.Error)
+		logger.FdebuglnFatal("Sign in error", err)
+		logger.ErrorLoglnFatal("Sign in error (2)", authClient.Error)
 	}
 
 	color.Green("✔ Signed in")

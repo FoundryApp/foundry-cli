@@ -3,6 +3,7 @@ package cmd
 import (
 	"io/ioutil"
 	"os"
+	"regexp"
 
 	"foundry/cli/auth"
 	"foundry/cli/logger"
@@ -12,17 +13,21 @@ import (
 )
 
 type FoundryConf struct {
-	RootDir string `yaml:"rootDir"`
+	RootDir           string   `yaml:"rootDir"`
+	IgnoreStrPatterns []string `yaml:"ignore"`
+
+	Ignore []*regexp.Regexp `yaml:"-"`
 }
 
+// Search a Foundry config file in the same directory from what was the foundry CLI called
 const confFile = "./foundry.yaml"
 
 var (
 	debugFile  = ""
 	authClient *auth.Auth
 
-	conf    = FoundryConf{}
-	rootCmd = &cobra.Command{
+	foundryConf = FoundryConf{}
+	rootCmd     = &cobra.Command{
 		Use:   "foundry",
 		Short: "Better serverless dev",
 		Run: func(cmd *cobra.Command, args []string) {
@@ -33,14 +38,18 @@ var (
 )
 
 func cobraInitCallback() {
-	logger.InitDebug(debugFile)
+	if err := logger.InitDebug(debugFile); err != nil {
+		logger.DebuglnFatal("Failed to initialized debug file for logger")
+	}
 
 	a, err := auth.New()
 	if err != nil {
-		logger.FdebuglnFatal(err)
+		logger.FdebuglnError("Error initializing Auth", err)
+		logger.ErrorLoglnFatal("Error initializing Auth", err)
 	}
 	if err := a.RefreshIDToken(); err != nil {
-		logger.FdebuglnFatal(err)
+		logger.FdebuglnError("Error refreshing ID token", err)
+		logger.ErrorLoglnFatal("Error refreshing ID token", err)
 	}
 	authClient = a
 }
@@ -51,32 +60,47 @@ func init() {
 	// DEBUG:
 	rootCmd.PersistentFlags().StringVar(&debugFile, "debug-file", "", "A file where the debug logs are saved (required)")
 
+	// WARNING: logger's debug file isn't initialized yet. We can log only to the stdout or stderr.
+
 	if _, err := os.Stat(confFile); os.IsNotExist(err) {
-		logger.Fdebugln("Foundry config file 'foundry.yaml' not found in the current directory")
+		logger.DebuglnError("Foundry config file 'foundry.yaml' not found in the current directory")
 		logger.ErrorLoglnFatal("Foundry config file 'foundry.yaml' not found in the current directory")
 	}
 
 	confData, err := ioutil.ReadFile(confFile)
 	if err != nil {
-		logger.Fdebugln("Can't read 'foundry.yaml' file", err)
+		logger.DebuglnError("Can't read 'foundry.yaml' file", err)
 		logger.ErrorLoglnFatal("Can't read 'foundry.yaml' file", err)
 	}
 
-	err = yaml.Unmarshal(confData, &conf)
+	err = yaml.Unmarshal(confData, &foundryConf)
 	if err != nil {
-		logger.Fdebugln("foundry.yaml file isn't a valid YAML file or doesn't contain field 'RootDir'", err)
+		logger.DebuglnError("foundry.yaml file isn't a valid YAML file or doesn't contain field 'RootDir'", err)
 		logger.ErrorLoglnFatal("foundry.yaml file isn't a valid YAML file or doesn't contain field 'RootDir'", err)
 	}
-	if conf.RootDir == "" {
-		logger.Fdebugln("foundry.yaml doesn't contain field 'RootDir' or it's empty")
+	if foundryConf.RootDir == "" {
+		logger.DebuglnError("foundry.yaml doesn't contain field 'RootDir' or it's empty")
 		logger.ErrorLoglnFatal("foundry.yaml doesn't contain field 'RootDir' or it's empty")
 	}
+
+	// Parse IgnoreStr to regexps
+	for _, p := range foundryConf.IgnoreStrPatterns {
+		r, err := regexp.Compile(p)
+		if err != nil {
+			logger.DebuglnError("Invalid regexp pattern in the 'ignore' field in the foundry.yaml file")
+			logger.ErrorLoglnFatal("Invalid regexp pattern in the 'ignore' field in the foundry.yaml file")
+		}
+		foundryConf.Ignore = append(foundryConf.Ignore, r)
+	}
+
+	logger.Debugln("Ignore str", foundryConf.IgnoreStrPatterns)
+	logger.Debugln("Ignore regexp", foundryConf.Ignore)
 }
 
 func Execute() {
 	logger.Close()
 	if err := rootCmd.Execute(); err != nil {
-		logger.Fdebugln(err)
-		logger.ErrorLoglnFatal(err)
+		logger.FdebuglnError("Error executing root command", err)
+		logger.ErrorLoglnFatal("Error executing root command", err)
 	}
 }

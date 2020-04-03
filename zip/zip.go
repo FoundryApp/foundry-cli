@@ -3,14 +3,16 @@ package zip
 import (
 	"archive/zip"
 	"bytes"
+	"foundry/cli/logger"
 	"io"
 	"os"
 	"path/filepath"
+	"regexp"
 	"time"
 )
 
 // Recursively zips the directory
-func ArchiveDir(dir string, ignore []string) (*bytes.Buffer, error) {
+func ArchiveDir(dir string, ignore []*regexp.Regexp) (*bytes.Buffer, error) {
 	buf := new(bytes.Buffer)
 	zw := zip.NewWriter(buf)
 	defer zw.Close()
@@ -19,8 +21,6 @@ func ArchiveDir(dir string, ignore []string) (*bytes.Buffer, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	// log.Println(fs)
 
 	for _, f := range fs {
 		err = addToZip(f, zw)
@@ -32,17 +32,32 @@ func ArchiveDir(dir string, ignore []string) (*bytes.Buffer, error) {
 	return buf, nil
 }
 
-func walk(start string, ignore []string) ([]string, error) {
+func walk(start string, ignore []*regexp.Regexp) ([]string, error) {
 	var arr []string
 
-	err := filepath.Walk(start, func(path string, info os.FileInfo, err error) error {
+	walkfn := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 
 		fname := info.Name()
-		if isInArr(fname, ignore) {
-			return filepath.SkipDir
+		logger.Fdebugln("")
+		logger.Fdebugln("fname in zip:", fname)
+		logger.Fdebugln("ignore in zip:", ignore)
+		for _, r := range ignore {
+			logger.Fdebugln("\t- regex:", r)
+			logger.Fdebugln("\t- match:", r.MatchString(fname))
+			// Check if the file name matches the regexp
+			if r.MatchString(fname) {
+				// If it's a directory, skip the whole directory
+				if info.IsDir() {
+					logger.Fdebugln("\t- Skipping dir")
+					return filepath.SkipDir
+				}
+				// If it's a file, skip the file by returning nil
+				logger.Fdebugln("\t- Skipping file")
+				return nil
+			}
 		}
 
 		// Dirs aren't zipped - zip file creates a folder structure
@@ -51,12 +66,10 @@ func walk(start string, ignore []string) ([]string, error) {
 			arr = append(arr, path)
 		}
 
-		// if fname == "main.go" {
-		// 	arr = append(arr, path)
-		// }
-
 		return nil
-	})
+	}
+
+	err := filepath.Walk(start, walkfn)
 
 	return arr, err
 }
@@ -104,13 +117,4 @@ func addToZip(fname string, zw *zip.Writer) error {
 
 	_, err = io.Copy(w, f)
 	return err
-}
-
-func isInArr(str string, arr []string) bool {
-	for _, s := range arr {
-		if s == str {
-			return true
-		}
-	}
-	return false
 }
