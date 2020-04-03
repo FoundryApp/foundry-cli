@@ -2,7 +2,7 @@
 
 package logger
 
-func InitDebug(path string)          {}
+func InitDebug(path string) error    { return nil }
 func Close()                         {}
 func Fdebugln(v ...interface{})      {}
 func FdebuglnError(v ...interface{}) {}

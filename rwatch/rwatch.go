@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"regexp"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/gobwas/glob"
 )
 
 type Watcher struct {
@@ -17,12 +17,12 @@ type Watcher struct {
 	fsnotify *fsnotify.Watcher
 	done     chan struct{}
 
-	ignore []*regexp.Regexp
+	ignore []glob.Glob
 }
 
 // var ignore = []string{".git", "node_modules", ".foundry"}
 
-func New(ignore []*regexp.Regexp) (*Watcher, error) {
+func New(ignore []glob.Glob) (*Watcher, error) {
 	fsw, err := fsnotify.NewWatcher()
 	if err != nil {
 		return nil, err
@@ -97,10 +97,10 @@ func (w *Watcher) traverse(start string, watch bool) error {
 			logger.Fdebugln("fname in rwatch:", fname)
 			logger.Fdebugln("ignore in rwatch:", w.ignore)
 
-			for _, r := range w.ignore {
-				logger.Fdebugln("\t- regex:", r)
-				logger.Fdebugln("\t- match:", r.MatchString(fname))
-				if r.MatchString(fname) {
+			for _, g := range w.ignore {
+				logger.Fdebugln("\t- glob:", g)
+				logger.Fdebugln("\t- match:", g.Match(fname))
+				if g.Match(fname) {
 					logger.Fdebugln("\t- Skipping dir")
 					return filepath.SkipDir
 				}

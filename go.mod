@@ -6,6 +6,7 @@ require (
 	github.com/AlecAivazis/survey/v2 v2.0.7
 	github.com/fatih/color v1.9.0
 	github.com/fsnotify/fsnotify v1.4.7
+	github.com/gobwas/glob v0.2.3
 	github.com/gorilla/websocket v1.4.0
 	github.com/mattn/go-runewidth v0.0.8 // indirect
 	github.com/mattn/go-tty v0.0.3 // indirect

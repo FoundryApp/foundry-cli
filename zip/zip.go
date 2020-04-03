@@ -7,12 +7,13 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"regexp"
 	"time"
+
+	"github.com/gobwas/glob"
 )
 
 // Recursively zips the directory
-func ArchiveDir(dir string, ignore []*regexp.Regexp) (*bytes.Buffer, error) {
+func ArchiveDir(dir string, ignore []glob.Glob) (*bytes.Buffer, error) {
 	buf := new(bytes.Buffer)
 	zw := zip.NewWriter(buf)
 	defer zw.Close()
@@ -32,7 +33,7 @@ func ArchiveDir(dir string, ignore []*regexp.Regexp) (*bytes.Buffer, error) {
 	return buf, nil
 }
 
-func walk(start string, ignore []*regexp.Regexp) ([]string, error) {
+func walk(start string, ignore []glob.Glob) ([]string, error) {
 	var arr []string
 
 	walkfn := func(path string, info os.FileInfo, err error) error {
@@ -44,11 +45,11 @@ func walk(start string, ignore []*regexp.Regexp) ([]string, error) {
 		logger.Fdebugln("")
 		logger.Fdebugln("fname in zip:", fname)
 		logger.Fdebugln("ignore in zip:", ignore)
-		for _, r := range ignore {
-			logger.Fdebugln("\t- regex:", r)
-			logger.Fdebugln("\t- match:", r.MatchString(fname))
-			// Check if the file name matches the regexp
-			if r.MatchString(fname) {
+		for _, g := range ignore {
+			logger.Fdebugln("\t- glob:", g)
+			logger.Fdebugln("\t- match:", g.Match(fname))
+			// Check if the file name matches the glob pattern
+			if g.Match(fname) {
 				// If it's a directory, skip the whole directory
 				if info.IsDir() {
 					logger.Fdebugln("\t- Skipping dir")

@@ -3,11 +3,11 @@ package cmd
 import (
 	"io/ioutil"
 	"os"
-	"regexp"
 
 	"foundry/cli/auth"
 	"foundry/cli/logger"
 
+	"github.com/gobwas/glob"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 )
@@ -16,7 +16,7 @@ type FoundryConf struct {
 	RootDir           string   `yaml:"rootDir"`
 	IgnoreStrPatterns []string `yaml:"ignore"`
 
-	Ignore []*regexp.Regexp `yaml:"-"`
+	Ignore []glob.Glob `yaml:"-"`
 }
 
 // Search a Foundry config file in the same directory from what was the foundry CLI called
@@ -83,18 +83,18 @@ func init() {
 		logger.ErrorLoglnFatal("foundry.yaml doesn't contain field 'RootDir' or it's empty")
 	}
 
-	// Parse IgnoreStr to regexps
+	// Parse IgnoreStr to globs
 	for _, p := range foundryConf.IgnoreStrPatterns {
-		r, err := regexp.Compile(p)
+		g, err := glob.Compile(p)
 		if err != nil {
-			logger.DebuglnError("Invalid regexp pattern in the 'ignore' field in the foundry.yaml file")
-			logger.ErrorLoglnFatal("Invalid regexp pattern in the 'ignore' field in the foundry.yaml file")
+			logger.DebuglnError("Invalid glob pattern in the 'ignore' field in the foundry.yaml file")
+			logger.ErrorLoglnFatal("Invalid glob pattern in the 'ignore' field in the foundry.yaml file")
 		}
-		foundryConf.Ignore = append(foundryConf.Ignore, r)
+		foundryConf.Ignore = append(foundryConf.Ignore, g)
 	}
 
 	logger.Debugln("Ignore str", foundryConf.IgnoreStrPatterns)
-	logger.Debugln("Ignore regexp", foundryConf.Ignore)
+	logger.Debugln("Ignore glob", foundryConf.Ignore)
 }
 
 func Execute() {

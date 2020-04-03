@@ -4,20 +4,21 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"io"
-	"regexp"
 
 	conn "foundry/cli/connection"
 	connMsg "foundry/cli/connection/msg"
 	"foundry/cli/logger"
 
 	"foundry/cli/zip"
+
+	"github.com/gobwas/glob"
 )
 
 var (
 	lastArchiveChecksum = ""
 )
 
-func Upload(c *conn.Connection, rootDir string, ignore ...*regexp.Regexp) {
+func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 	// Zip the project
 	buf, err := zip.ArchiveDir(rootDir, ignore)
 	if err != nil {
