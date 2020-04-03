@@ -2,7 +2,6 @@ package rwatch
 
 import (
 	"foundry/cli/logger"
-	"log"
 	"os"
 	"path/filepath"
 
@@ -44,7 +43,7 @@ func (w *Watcher) AddRecursive(dir string) error {
 }
 
 func (w *Watcher) Close() {
-	log.Println("Closing rwatch")
+	logger.Fdebugln("Closing rwatch")
 	w.fsnotify.Close()
 	close(w.done)
 }
@@ -87,33 +86,70 @@ func (w *Watcher) start() {
 // We don't care for files, only for directories because we are watching whole dirs
 func (w *Watcher) traverse(start string, watch bool) error {
 	walkfn := func(path string, info os.FileInfo, err error) error {
+		logger.Fdebugln("")
+		logger.Fdebugln("path in rwatch", path)
+
+		// Prepend path with the "./" so the prefix
+		// is same as the ignore array in the config
+		// file.
+		// TODO: Should the prefix be foundryConf.RootDir?
+		// path = "." + string(os.PathSeparator) + path
+
 		if err != nil {
+			// TODO: If path is in the ignored array, should we ignore the error?
+			// Note: we can't use info.IsDir() here because of the error - the file
+			// might not even exist. Using info.IsDir() would cause panic
+			logger.FdebuglnError("rwatch walk error - path", path)
+			logger.FdebuglnError("rwatch walk error - error", err)
+			if w.ignored(path) {
+				return nil
+			}
 			return err
 		}
 
-		if info.IsDir() {
-			fname := info.Name()
-			logger.Fdebugln("")
-			logger.Fdebugln("fname in rwatch:", fname)
-			logger.Fdebugln("ignore in rwatch:", w.ignore)
+		isIgnored := w.ignored(path)
+		logger.Fdebugln("is ignored?", isIgnored)
 
-			for _, g := range w.ignore {
-				logger.Fdebugln("\t- glob:", g)
-				logger.Fdebugln("\t- match:", g.Match(fname))
-				if g.Match(fname) {
-					logger.Fdebugln("\t- Skipping dir")
-					return filepath.SkipDir
-				}
+		if isIgnored {
+			// If it's a directory, skip the whole directory
+			if info.IsDir() {
+				logger.Fdebugln("\t- Skipping dir")
+				// No need to remove watcher on an ignored dir because watcher isn't recursive
+				// i.e.: if we have following folder structure:
+				// rootDir/
+				//	file1
+				//	subDir/
+				//		file2
+				// then when we add rootDir to watcher, the subDir isn't added
+				return filepath.SkipDir
 			}
 
-			if watch {
-				logger.Fdebugln("\t- Adding dir to rwatch")
-				return w.fsnotify.Add(path)
-			}
-			logger.Fdebugln("\t- Removing dir from rwatch")
+			// Always remove watcher on an ignored file because the file could be in a folder that is watched
+			logger.Fdebugln("\t- Skipping file (removing watch)")
 			return w.fsnotify.Remove(path)
 		}
+
+		if watch && !isIgnored {
+			logger.Fdebugln("\t- Adding file/dir to rwatch")
+			return w.fsnotify.Add(path)
+		} else if !watch {
+			logger.Fdebugln("\t- Removing file/dir from rwatch")
+			return w.fsnotify.Remove(path)
+		}
+
 		return nil
 	}
 	return filepath.Walk(start, walkfn)
+}
+
+func (w *Watcher) ignored(s string) bool {
+	logger.Fdebugln("string to match:", s)
+	for _, g := range w.ignore {
+		logger.Fdebugln("\t- glob:", g)
+		logger.Fdebugln("\t- match:", g.Match(s))
+		if g.Match(s) {
+			return true
+		}
+	}
+	return false
 }

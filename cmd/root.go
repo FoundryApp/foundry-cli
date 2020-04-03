@@ -85,6 +85,30 @@ func init() {
 
 	// Parse IgnoreStr to globs
 	for _, p := range foundryConf.IgnoreStrPatterns {
+		// addPrefix := true
+		// // if len(p) > 2 {
+		// // 	fst := string(p[0])
+		// // 	snd := string(p[1])
+		// // 	// We don't want to add "./" prefix to the
+		// // 	// glob patterns that start with **.
+		// // 	// Because some matching wouldn't work.
+		// // 	// Example:
+		// // 	// glob: **/index.js
+		// // 	addPrefix = fst != "*" && snd != "*"
+		// // }
+
+		// Add "./" as a prefix to every glob pattern so
+		// the prefix is same with file paths from watcher
+		// zipper
+		// if addPrefix {
+		// last := foundryConf.RootDir[len(foundryConf.RootDir)-1:]
+		// if last != string(os.PathSeparator) {
+		// 	p = foundryConf.RootDir + string(os.PathSeparator) + p
+		// } else {
+		// 	p = foundryConf.RootDir + p
+		// }
+		// }
+
 		g, err := glob.Compile(p)
 		if err != nil {
 			logger.DebuglnError("Invalid glob pattern in the 'ignore' field in the foundry.yaml file")
@@ -95,6 +119,8 @@ func init() {
 
 	logger.Debugln("Ignore str", foundryConf.IgnoreStrPatterns)
 	logger.Debugln("Ignore glob", foundryConf.Ignore)
+
+	// panic("")
 }
 
 func Execute() {

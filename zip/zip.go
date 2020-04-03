@@ -37,28 +37,34 @@ func walk(start string, ignore []glob.Glob) ([]string, error) {
 	var arr []string
 
 	walkfn := func(path string, info os.FileInfo, err error) error {
+		logger.Fdebugln("")
+		logger.Fdebugln("path in zip", path)
+
+		// Prepend path with the "./" so the prefix
+		// is same as the ignore array in the config
+		// file.
+		// TODO: Should the prefix be foundryConf.RootDir?
+		// path = "." + string(os.PathSeparator) + path
+
 		if err != nil {
+			// TODO: If path is in the ignored array, should we ignore the error?
+			if ignored(path, ignore) {
+				return nil
+			}
+			logger.FdebuglnError("Zip walk error - path", path)
+			logger.FdebuglnError("Zip walk error - error", err)
 			return err
 		}
 
-		fname := info.Name()
-		logger.Fdebugln("")
-		logger.Fdebugln("fname in zip:", fname)
-		logger.Fdebugln("ignore in zip:", ignore)
-		for _, g := range ignore {
-			logger.Fdebugln("\t- glob:", g)
-			logger.Fdebugln("\t- match:", g.Match(fname))
-			// Check if the file name matches the glob pattern
-			if g.Match(fname) {
-				// If it's a directory, skip the whole directory
-				if info.IsDir() {
-					logger.Fdebugln("\t- Skipping dir")
-					return filepath.SkipDir
-				}
-				// If it's a file, skip the file by returning nil
-				logger.Fdebugln("\t- Skipping file")
-				return nil
+		if ignored(path, ignore) {
+			// If it's a directory, skip the whole directory
+			if info.IsDir() {
+				logger.Fdebugln("\t- Skipping dir")
+				return filepath.SkipDir
 			}
+			// If it's a file, skip the file by returning nil
+			logger.Fdebugln("\t- Skipping file")
+			return nil
 		}
 
 		// Dirs aren't zipped - zip file creates a folder structure
@@ -73,6 +79,18 @@ func walk(start string, ignore []glob.Glob) ([]string, error) {
 	err := filepath.Walk(start, walkfn)
 
 	return arr, err
+}
+
+func ignored(s string, globs []glob.Glob) bool {
+	logger.Fdebugln("string to match:", s)
+	for _, g := range globs {
+		logger.Fdebugln("\t- glob:", g)
+		logger.Fdebugln("\t- match:", g.Match(s))
+		if g.Match(s) {
+			return true
+		}
+	}
+	return false
 }
 
 func addToZip(fname string, zw *zip.Writer) error {

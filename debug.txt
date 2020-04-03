@@ -1,139 +1,152 @@
-[1mDEBUG[0m 15:46:45 [foundry/cli/logger.InitDebug:35] ################## STARTING SESSION
-[1mDEBUG[0m 15:46:45 [foundry/cli/config.GetString:54] Get string from config (key, val): FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1OTIxNDYyLCJleHAiOjE1ODU5MjUwNjIsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.C8FRevC4_ZnQ2uaKHXArrXjn0xV1_S3U8mSu-zQiOcRO4JU78MCiHo0t_zzc9HgaZHyVydr0fnj5QnwjzjVTVybq40UhY5VeWFJ9k9g08zN24mBjceN49H3XcZ13TKIoK51H2FEQnp8P1gN_idYOeEKKZoMg8XgninnJPEDWW-Zgb0tmssjj-EafTzltQLZwFy98wq52WIQmESGnX6aCUgf4oypfE-sjSR8jfgIjtIhbyGLokCGztLAgKPgfGeBERt5xcVQb71vKj16_FABt0u7STMuIVfv0vOBSwsVxcf9KmzutDis2-wmtCpayhOz5mhJNizlYsSXLk3iVCIcokg
-[1mDEBUG[0m 15:46:45 [foundry/cli/config.GetString:54] Get string from config (key, val): FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
-[1mDEBUG[0m 15:46:45 [foundry/cli/config.GetInt:60] Get int from config (key, val): FOUNDRY_AUTH_STATE 2
-[1mDEBUG[0m 15:46:45 [foundry/cli/auth.(*Auth).loadTokensAndState:63] Loaded AuthState from config (1 = signed out, 2 = signed in, 3 = anonymous): 2
-[1mDEBUG[0m 15:46:45 [foundry/cli/auth.(*Auth).doRefreshReq:217] Refreshing ID token
-[1mDEBUG[0m 15:46:46 [foundry/cli/config.Set:48] Set to config (key, val) FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1OTIxNTI0LCJleHAiOjE1ODU5MjUxMjQsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.MMm0gcFVWptZIsWZqsM-LbosptggBzxBr3NQaCd9iYDRIj16MRm2CIyqk6FzqUAw4pF3v7_9iATEM4L3wZVhvta_mAPG3Dp0P4sqXHRPG7LeLc8T1mtHL3AIeF60HFcfAx7AyeNZKlCr5GdPuGqGZayk4ZD5QbbWbnqkXAAUnQ57ZvWHTrfF1ArOqb-vPbg9QsFV03RMQmCjqZVKfn-6CtIXVx12kwa882LNvLUmXHngtCTeh1EwuDgoWXgsa4oGCh98_xKBCYDyJzYsSW_XSWHIxlSkVlZWteivjc32kK9eEhri9MLBrx8cdhjDGVuDx40QsTXcdyTK1wFnR4JpRQ
-[1mDEBUG[0m 15:46:46 [foundry/cli/config.Set:48] Set to config (key, val) FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
-[1mDEBUG[0m 15:46:46 [foundry/cli/config.Set:48] Set to config (key, val) FOUNDRY_AUTH_STATE 2
-[1mDEBUG[0m 15:46:46 [foundry/cli/config.Write:65] Write config
-[1mDEBUG[0m 15:46:46 [foundry/cli/connection.New:26] WS dialing
-[1mDEBUG[0m 15:46:46 [foundry/cli/connection.New:32] WS connected
-[1mDEBUG[0m 15:46:46 [foundry/cli/connection.(*Connection).Listen:43]  WS listening
-[1mDEBUG[0m 15:46:46 [foundry/cli/connection.(*Connection).Ping:62] Ping
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":" "}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:96] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:97] fname in rwatch: .
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\n███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗\n██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝\n█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝\n██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝\n██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║\n╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝\n"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:98] ignore in rwatch: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":" "}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":" "}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"Environment ready"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:110] 	- Adding dir to rwatch
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:96] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:97] fname in rwatch: .git
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:98] ignore in rwatch: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: true
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:104] 	- Skipping dir
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:96] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:97] fname in rwatch: node_modules
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:98] ignore in rwatch: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:101] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:102] 	- match: true
-[1mDEBUG[0m 15:46:46 [foundry/cli/rwatch.(*Watcher).traverse.func1:104] 	- Skipping dir
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:46] fname in zip: .
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:46] fname in zip: .git
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: true
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:55] 	- Skipping dir
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:46] fname in zip: .gitignore
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:46] fname in zip: foundry.yaml
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:46] fname in zip: index.js
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:46] fname in zip: node_modules
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: true
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:55] 	- Skipping dir
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:46] fname in zip: package-lock.json
-[1mDEBUG[0m 15:46:46 [foundry/cli/prompt.(*Prompt).print:251]  
+[1mDEBUG[0m 20:39:55 [foundry/cli/logger.InitDebug:35] ################## STARTING SESSION
+[1mDEBUG[0m 20:39:55 [foundry/cli/config.GetString:54] Get string from config (key, val): FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1OTM4ODU0LCJleHAiOjE1ODU5NDI0NTQsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.fhuMBeRM-vmzIBmF-j0SOn1kCUDv6o8ubanRnFDM7g3tJiCb_oma5mVcBaqKyBw2RvGK3Dx4IFFofuTg5jKYs8yi0irJWOobtyVgobc0A2jvZHs4pfYE16sITDntc1h0XgrmSdFZgSbib_cDEZEWkDKQl6ySBr5k4Is7BPHl_GsMfnoEdrd-gnOTjiiKV7hhKlVoroSY9s5kHLI3Z-SJJFNHkZC08USh1jbQ_sJxJ91oqB6ruQKb_ut8sO5sals2SAFhbiEmWMeEZmjUdYHoeC0Q76yy_jTp0G_3W24nJYe_7enYOq7idQ4MY0BbM-xUaugXkKLcb7zyDGtHov99Bw
+[1mDEBUG[0m 20:39:55 [foundry/cli/config.GetString:54] Get string from config (key, val): FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
+[1mDEBUG[0m 20:39:55 [foundry/cli/config.GetInt:60] Get int from config (key, val): FOUNDRY_AUTH_STATE 2
+[1mDEBUG[0m 20:39:55 [foundry/cli/auth.(*Auth).loadTokensAndState:63] Loaded AuthState from config (1 = signed out, 2 = signed in, 3 = anonymous): 2
+[1mDEBUG[0m 20:39:55 [foundry/cli/auth.(*Auth).doRefreshReq:217] Refreshing ID token
+[1mDEBUG[0m 20:39:56 [foundry/cli/config.Set:48] Set to config (key, val) FOUNDRY_AUTH_ID_TOKEN eyJhbGciOiJSUzI1NiIsImtpZCI6IjgzYTczOGUyMWI5MWNlMjRmNDM0ODBmZTZmZWU0MjU4Yzg0ZGI0YzUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTGlua2VkVXNlciIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mb3VuZHJ5YXBwIiwiYXVkIjoiZm91bmRyeWFwcCIsImF1dGhfdGltZSI6MTU4NTU3MDc3MSwidXNlcl9pZCI6IkRiSkQzN2RoeDRWcU5GM2R0Tjd6cks2Q0NCMTMiLCJzdWIiOiJEYkpEMzdkaHg0VnFORjNkdE43enJLNkNDQjEzIiwiaWF0IjoxNTg1OTM5MTEzLCJleHAiOjE1ODU5NDI3MTMsImVtYWlsIjoidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidmFzZWsrc2Rmb2lqQGZvdW5kcnlhcHAuY28iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.ijiBlyuhm55l6oCYuLQWSm3M8WjTwNst4c4qTHzRx_0Mlu3Ma9C28CHHT6Ge4jS27sPd5Gh2cTJn-4mRfogFl0tv2HwXhjsPurfpCzc0_9QQ80u60DMrDPEFTA3ibPORlYNLe0KYK04W3wyDHEsZuU5PCLJNuLLtWu3C5BA_kmc-8QSIU1V7xjpKk8xZayxjge1E0y5XyerY61VK8haHwMDL1yFoY5FYSgeIYapB8e2zl75N319e7wuotP-xYUoCPrFUHUcExXxXo9zKYNwlzdNu6UnaPEBByKadl1mD1YFE3sKy7SRSHtp7qo8VDCVvGLaE1gGTYEFKiQlnHGxwAw
+[1mDEBUG[0m 20:39:56 [foundry/cli/config.Set:48] Set to config (key, val) FOUNDRY_AUTH_REFRESH_TOKEN AE0u-Nc4PRyBdpL5CvoA_AzbGoUh6fyRQ15HypggEOZF6EkDflCYv6-NVejJGNtr1b3iQxtYI8BYiFSKbRixIJNldn2JYYqx8ySEUmGb9q2H61QzFN3maEmbQrJOyk2ajtQ3cetZKMn4GOys6624DzypKFxxPpB5eAN3BiRaOXd4OW4hu6Zie8u9dPfReSp_TKQA6s4WMfv0Jm_FE5me5332QX3DvQh3E5jifCI38hgMEMYIWLmVxAo
+[1mDEBUG[0m 20:39:56 [foundry/cli/config.Set:48] Set to config (key, val) FOUNDRY_AUTH_STATE 2
+[1mDEBUG[0m 20:39:56 [foundry/cli/config.Write:65] Write config
+[1mDEBUG[0m 20:39:56 [foundry/cli/connection.New:26] WS dialing
+[1mDEBUG[0m 20:39:56 [foundry/cli/connection.New:32] WS connected
+[1mDEBUG[0m 20:39:56 [foundry/cli/connection.(*Connection).Listen:43]  WS listening
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":" "}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch .
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\n███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗\n██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝\n█████╗  ██║   ██║██║   ██║██╔██╗ ██║██║  ██║██████╔╝ ╚████╔╝\n██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██║  ██║██╔══██╗  ╚██╔╝\n██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝██║  ██║   ██║\n╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝\n"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: .
+[1mDEBUG[0m 20:39:56 [foundry/cli/connection.(*Connection).Ping:62] Ping
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":" "}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":" "}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"Environment ready"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:133] 	- Adding file/dir to rwatch
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch .git
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: .git
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: true
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? true
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:116] 	- Skipping dir
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch .gitignore
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: .gitignore
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:133] 	- Adding file/dir to rwatch
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch foundry.yaml
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: foundry.yaml
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:133] 	- Adding file/dir to rwatch
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch index.js
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: index.js
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:133] 	- Adding file/dir to rwatch
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch mydir
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: mydir
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:133] 	- Adding file/dir to rwatch
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch mydir/myfile.js
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: mydir/myfile.js
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:133] 	- Adding file/dir to rwatch
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch node_modules
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: node_modules
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: true
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? true
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:116] 	- Skipping dir
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch package-lock.json
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: package-lock.json
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:133] 	- Adding file/dir to rwatch
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:89] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:90] path in rwatch package.json
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:146] string to match: package.json
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:148] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).ignored:149] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:111] is ignored? false
+[1mDEBUG[0m 20:39:56 [foundry/cli/rwatch.(*Watcher).traverse.func1:133] 	- Adding file/dir to rwatch
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip .
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: .
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/prompt.(*Prompt).print:251]  
 
 ███████╗ ██████╗ ██╗   ██╗███╗   ██╗██████╗ ██████╗ ██╗   ██╗
 ██╔════╝██╔═══██╗██║   ██║████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
@@ -146,207 +159,733 @@
  
 Environment ready
 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:46] fname in zip: package.json
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:46 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"----------------------------"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/prompt.(*Prompt).print:251] ----------------------------
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip .git
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: .git
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip .gitignore
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: .gitignore
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip foundry.yaml
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: foundry.yaml
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip index.js
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: index.js
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip mydir
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: mydir
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip mydir/myfile.js
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: mydir/myfile.js
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip node_modules
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: node_modules
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip package-lock.json
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: package-lock.json
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.walk.func1:41] path in zip package.json
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:85] string to match: package.json
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:39:56 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"----------------------------"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/prompt.(*Prompt).print:251] ----------------------------
 
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\u001b[1m\u001b[94m[14] hello\u001b[39m\u001b[22m"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"gg"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"ggg"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\u001b[1m\u001b[94mresponse:\u001b[39m\u001b[22m { data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/prompt.(*Prompt).print:251] [1m[94m[14] hello[39m[22m
-gg
-ggg
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\u001b[1m\u001b[94m[86] hello\u001b[39m\u001b[22m"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"From: VIM!"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\u001b[1m\u001b[94mresponse:\u001b[39m\u001b[22m { data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\u001b[1m\u001b[94m[86] hello\u001b[39m\u001b[22m"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"From: VIM!"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\u001b[1m\u001b[94mresponse:\u001b[39m\u001b[22m { data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m 20:39:56 [foundry/cli/prompt.(*Prompt).print:251] [1m[94m[86] hello[39m[22m
+From: VIM!
+[1m[94mresponse:[39m[22m { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1m[94m[86] hello[39m[22m
+
+[1mDEBUG[0m 20:39:56 [foundry/cli/prompt.(*Prompt).print:251] From: VIM!
 [1m[94mresponse:[39m[22m { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
 
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\u001b[1m\u001b[94m[14] hello\u001b[39m\u001b[22m"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/prompt.(*Prompt).print:251] [1m[94m[14] hello[39m[22m
+[1mDEBUG[0m 20:40:00 [foundry/cli/cmd.ignored:141] string to match: ./.index.js.swp
+[1mDEBUG[0m 20:40:00 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:00 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:00 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:00 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:00 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:00 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:05 [foundry/cli/cmd.ignored:141] string to match: ./.index.js.swp
+[1mDEBUG[0m 20:40:05 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:05 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:05 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:05 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:05 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:05 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:07 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
 
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"gg"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"ggg"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\u001b[1m\u001b[94mresponse:\u001b[39m\u001b[22m { data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 15:46:46 [foundry/cli/prompt.(*Prompt).print:251] gg
-ggg
+
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:141] string to match: ./index.js~
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:141] string to match: ./index.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.runGo.func1:123] Watcher event index.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip .
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: .
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip .git
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: .git
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip .gitignore
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: .gitignore
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip .index.js.swp
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: .index.js.swp
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip foundry.yaml
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: foundry.yaml
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip index.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: index.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip mydir
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: mydir
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip mydir/myfile.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: mydir/myfile.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip node_modules
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: node_modules
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip package-lock.json
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: package-lock.json
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip package.json
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: package.json
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:141] string to match: ./.index.js.swp
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"----------------------------"}}
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:141] string to match: ./index.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.runGo.func1:123] Watcher event index.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip .
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: .
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip .git
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: .git
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip .gitignore
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: .gitignore
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip .index.js.swp
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: .index.js.swp
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip foundry.yaml
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: foundry.yaml
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip index.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: index.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip mydir
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: mydir
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip mydir/myfile.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: mydir/myfile.js
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip node_modules
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: node_modules
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip package-lock.json
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: package-lock.json
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.walk.func1:41] path in zip package.json
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:85] string to match: package.json
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/prompt.(*Prompt).print:251] ----------------------------
+
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:141] string to match: ./.index.js.swp
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:141] string to match: ./index.js~
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:143] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\u001b[1m\u001b[94m[87] hello\u001b[39m\u001b[22m"}}
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"From: VIM !"}}
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\u001b[1m\u001b[94mresponse:\u001b[39m\u001b[22m { data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\u001b[1m\u001b[94m[87] hello\u001b[39m\u001b[22m"}}
+[1mDEBUG[0m 20:40:10 [foundry/cli/prompt.(*Prompt).print:251] [1m[94m[87] hello[39m[22m
+
+[1mDEBUG[0m 20:40:10 [foundry/cli/prompt.(*Prompt).print:251] From: VIM !
+[1m[94mresponse:[39m[22m { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
+[1m[94m[87] hello[39m[22m
+
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"From: VIM !"}}
+[1mDEBUG[0m 20:40:10 [foundry/cli/cmd.listenCallback:153] {"type":"log","content":{"msg":"\u001b[1m\u001b[94mresponse:\u001b[39m\u001b[22m { data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
+[1mDEBUG[0m 20:40:10 [foundry/cli/prompt.(*Prompt).print:251] From: VIM !
 [1m[94mresponse:[39m[22m { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:46] fname in zip: .
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:46] fname in zip: .git
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: true
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:55] 	- Skipping dir
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:46] fname in zip: .gitignore
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:46] fname in zip: foundry.yaml
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:46] fname in zip: index.js
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:46] fname in zip: node_modules
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: true
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:55] 	- Skipping dir
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:46] fname in zip: package-lock.json
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:45] 
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:46] fname in zip: package.json
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:47] ignore in zip: [<text:`node_modules`> <text:`.git`> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]> <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]> <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]> <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]> <suffix:~>]
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`node_modules`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <text:`.git`>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.s`>,<range:[a,v]>,<range:[a,z]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <btree:[<btree:[<nil><-<list:[._]>-><super>]><-<row_4:[<text:`.sw`>,<range:[a,p]>]>-><nil>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`s`>,<range:[a,v]>,<range:[a,z]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <row_4:[<list:[._]>,<text:`sw`>,<range:[a,p]>]>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:49] 	- glob: <suffix:~>
-[1mDEBUG[0m 15:46:53 [foundry/cli/zip.walk.func1:50] 	- match: false
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"----------------------------"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/prompt.(*Prompt).print:251] ----------------------------
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:141] string to match: ./index.js~
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:143] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:141] string to match: ./index.js
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:143] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/cmd.runGo.func1:123] Watcher event index.js
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip .
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: .
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip .git
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: .git
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip .gitignore
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: .gitignore
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip .index.js.swp
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: .index.js.swp
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip foundry.yaml
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: foundry.yaml
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip index.js
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: index.js
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip mydir
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: mydir
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip mydir/myfile.js
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: mydir/myfile.js
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip node_modules
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: node_modules
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip package-lock.json
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: package-lock.json
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.walk.func1:41] path in zip package.json
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:85] string to match: package.json
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:11 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:141] string to match: ./index.js~
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:141] string to match: ./index.js
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.runGo.func1:123] Watcher event index.js
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip .
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: .
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip .git
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: .git
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip .gitignore
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: .gitignore
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip .index.js.swp
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: .index.js.swp
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip foundry.yaml
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: foundry.yaml
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip index.js
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: index.js
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip mydir
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: mydir
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip mydir/myfile.js
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: mydir/myfile.js
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip node_modules
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: node_modules
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: true
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:62] 	- Skipping dir
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip package-lock.json
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: package-lock.json
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:40] 
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.walk.func1:41] path in zip package.json
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:85] string to match: package.json
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:87] 	- glob: <btree:[<contains:[/]><-<text:`~`>-><nil>]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/zip.ignored:88] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:141] string to match: ./.index.js.swp
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <text:`node_modules`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <text:`.git`>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: false
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:143] 	- glob: <contains:[/.]>
+[1mDEBUG[0m 20:40:12 [foundry/cli/cmd.ignored:144] 	- match: true
+[1mDEBUG[0m 20:40:16 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
 
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\u001b[1m\u001b[94m[15] hello\u001b[39m\u001b[22m"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/prompt.(*Prompt).print:251] [1m[94m[15] hello[39m[22m
 
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"gg"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"ggg"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\u001b[1m\u001b[94mresponse:\u001b[39m\u001b[22m { data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\u001b[1m\u001b[94m[15] hello\u001b[39m\u001b[22m"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/prompt.(*Prompt).print:251] gg
-ggg
-[1m[94mresponse:[39m[22m { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-[1m[94m[15] hello[39m[22m
-
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"gg"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"ggg"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/cmd.listenCallback:137] {"type":"log","content":{"msg":"\u001b[1m\u001b[94mresponse:\u001b[39m\u001b[22m { data: \u001b[32m''\u001b[39m, status: \u001b[33m200\u001b[39m, statusText: \u001b[32m'OK'\u001b[39m }"}}
-[1mDEBUG[0m 15:46:53 [foundry/cli/prompt.(*Prompt).print:251] gg
-ggg
-[1m[94mresponse:[39m[22m { data: [32m''[39m, status: [33m200[39m, statusText: [32m'OK'[39m }
-
-[1mDEBUG[0m 15:46:57 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+[1mDEBUG[0m 20:40:26 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
 
 
-[1mDEBUG[0m 15:47:06 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+[1mDEBUG[0m 20:40:36 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
 
 
-[1mDEBUG[0m 15:47:17 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+[1mDEBUG[0m 20:40:46 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
 
 
-[1mDEBUG[0m 15:47:27 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+[1mDEBUG[0m 20:40:56 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 20:41:06 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 20:41:16 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 20:41:26 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 20:41:36 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 20:41:46 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 20:41:56 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
+
+
+[1mDEBUG[0m 20:42:06 [foundry/cli/connection/msg.(*PingMsg).Send:47] [ping] non-ok response: Failed to ping: User 'DbJD37dhx4VqNF3dtN7zrK6CCB13' has no active pod
 
 

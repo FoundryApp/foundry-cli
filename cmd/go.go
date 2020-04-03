@@ -18,6 +18,7 @@ import (
 	promptCmd "foundry/cli/prompt/cmd"
 	"foundry/cli/rwatch"
 
+	"github.com/gobwas/glob"
 	"github.com/spf13/cobra"
 )
 
@@ -116,9 +117,12 @@ func runGo(cmd *cobra.Command, args []string) {
 				exitCmd.Run(c, args)
 			case <-initialUploadCh:
 				files.Upload(c, foundryConf.RootDir, foundryConf.Ignore...)
-			case _ = <-w.Events:
-				// log.Println(e)
-				files.Upload(c, foundryConf.RootDir, foundryConf.Ignore...)
+			case e := <-w.Events:
+				path := "." + string(os.PathSeparator) + e.Name
+				if !ignored(path, foundryConf.Ignore) {
+					logger.Fdebugln("Watcher event", e.Name)
+					files.Upload(c, foundryConf.RootDir, foundryConf.Ignore...)
+				}
 			case err := <-w.Errors:
 				logger.FdebuglnFatal("File watcher error", err)
 				logger.ErrorLoglnFatal("File watcher error", err)
@@ -131,6 +135,18 @@ func runGo(cmd *cobra.Command, args []string) {
 	initialUploadCh <- struct{}{}
 
 	<-done
+}
+
+func ignored(s string, globs []glob.Glob) bool {
+	logger.Fdebugln("string to match:", s)
+	for _, g := range globs {
+		logger.Fdebugln("\t- glob:", g)
+		logger.Fdebugln("\t- match:", g.Match(s))
+		if g.Match(s) {
+			return true
+		}
+	}
+	return false
 }
 
 func listenCallback(data []byte, err error) {

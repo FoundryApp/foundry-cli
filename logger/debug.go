@@ -68,7 +68,8 @@ func FdebuglnFatal(v ...interface{}) {
 
 	str := fmt.Sprintf("%s %s", prefix(FatalPrefix), fmt.Sprintln(v...))
 	fmt.Fprint(debugFile, str)
-	os.Exit(1)
+	// fmt.FPrint(debugFile, runtimeDebug.Stack())
+	panic(str)
 }
 
 // Doesn't write to the debug file
@@ -86,8 +87,7 @@ func DebuglnError(v ...interface{}) {
 // Doesn't write to the debug file
 func DebuglnFatal(v ...interface{}) {
 	str := fmt.Sprintf("%s %s", prefix(FatalPrefix), fmt.Sprintln(v...))
-	fmt.Print(str)
-	os.Exit(1)
+	panic(str)
 }
 
 func prefix(t PrefixType) (prefix string) {
