@@ -81,7 +81,7 @@
 // // 			// logger.Fdebugln("BUFFER:", string(b))
 // // 		} else if err != nil && err != io.EOF {
 // // 			logger.FdebuglnFatal(err)
-// // 			logger.LoglnFatal(err)
+// // 			logger.FatalLogln(err)
 // // 		}
 
 // // 		// time.Sleep(time.Millisecond * 10)
@@ -109,7 +109,7 @@
 // 			p.Print(string(b[:n]))
 // 		} else if err != nil && err != io.EOF {
 // 			logger.Fdebugln(err)
-// 			logger.ErrorLoglnFatal(err)
+// 			logger.FatalLogln(err)
 // 		}
 // 	}
 // }
@@ -283,7 +283,7 @@
 
 // 		if err := cmd.Do(args); err != nil {
 // 			logger.FdebuglnFatal(err)
-// 			logger.ErrorLoglnFatal(err)
+// 			logger.FatalLogln(err)
 // 		}
 // 	} else {
 // 		p.wGoToAndEraseError()

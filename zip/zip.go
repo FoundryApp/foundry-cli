@@ -12,9 +12,13 @@ import (
 	"github.com/gobwas/glob"
 )
 
+var (
+	buf = new(bytes.Buffer)
+)
+
 // Recursively zips the directory
 func ArchiveDir(dir string, ignore []glob.Glob) (*bytes.Buffer, error) {
-	buf := new(bytes.Buffer)
+	buf.Reset()
 	zw := zip.NewWriter(buf)
 	defer zw.Close()
 

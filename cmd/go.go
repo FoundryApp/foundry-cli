@@ -41,23 +41,23 @@ func init() {
 
 func runGo(cmd *cobra.Command, args []string) {
 	logger.Log("\n")
-	warningText := "You aren't signed in. Some features aren't available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\n"
+	warningText := "You aren't signed in. Some features aren't available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\nThis message will self-destruct in 5s...\n"
 
 	switch authClient.AuthState {
 	case auth.AuthStateTypeSignedOut:
 		// Sign in anonmoysly + notify user
 		if err := authClient.SignUpAnonymously(); err != nil {
 			logger.FdebuglnFatal(err)
-			logger.ErrorLoglnFatal(err)
+			logger.FatalLogln(err)
 		}
 
 		if authClient.Error != nil {
 			logger.FdebuglnFatal(authClient.Error)
-			logger.ErrorLoglnFatal(authClient.Error)
+			logger.FatalLogln(authClient.Error)
 		}
 
 		logger.WarningLogln(warningText)
-		time.Sleep(time.Second)
+		time.Sleep(time.Second * 5)
 	case auth.AuthStateTypeSignedInAnonymous:
 		// Notify user
 		logger.WarningLogln(warningText)
@@ -70,7 +70,7 @@ func runGo(cmd *cobra.Command, args []string) {
 	c, err := conn.New(authClient.IDToken)
 	if err != nil {
 		logger.FdebuglnFatal("Connection error", err)
-		logger.ErrorLoglnFatal(err)
+		logger.FatalLogln(err)
 	}
 	defer c.Close()
 
@@ -92,14 +92,14 @@ func runGo(cmd *cobra.Command, args []string) {
 	w, err := rwatch.New(foundryConf.Ignore)
 	if err != nil {
 		logger.FdebuglnFatal("Watcher error", err)
-		logger.ErrorLoglnFatal(err)
+		logger.FatalLogln(err)
 	}
 	defer w.Close()
 
 	err = w.AddRecursive(foundryConf.RootDir)
 	if err != nil {
 		logger.FdebuglnFatal("watcher AddRecursive", err)
-		logger.ErrorLoglnFatal(err)
+		logger.FatalLogln(err)
 	}
 
 	initialUploadCh := make(chan struct{}, 1)
@@ -125,7 +125,7 @@ func runGo(cmd *cobra.Command, args []string) {
 				}
 			case err := <-w.Errors:
 				logger.FdebuglnFatal("File watcher error", err)
-				logger.ErrorLoglnFatal("File watcher error", err)
+				logger.FatalLogln("File watcher error", err)
 			}
 		}
 	}()
@@ -154,13 +154,13 @@ func listenCallback(data []byte, err error) {
 
 	if err != nil {
 		logger.FdebuglnFatal("WebSocket error", err)
-		logger.ErrorLoglnFatal("WebSocket error", err)
+		logger.FatalLogln("WebSocket error", err)
 	}
 
 	t := connMsg.ResponseMsgType{}
 	if err := json.Unmarshal(data, &t); err != nil {
 		logger.FdebuglnFatal("Unmarshaling response error", err)
-		logger.ErrorLoglnFatal("Parsing server JSON response error", err)
+		logger.FatalLogln("Parsing server JSON response error", err)
 	}
 
 	switch t.Type {
@@ -169,12 +169,12 @@ func listenCallback(data []byte, err error) {
 
 		if err := json.Unmarshal(data, &s); err != nil {
 			logger.FdebuglnFatal("Unmarshaling response error", err)
-			logger.ErrorLoglnFatal("Parsing server log message error", err)
+			logger.FatalLogln("Parsing server log message error", err)
 		}
 
 		if _, err := prompt.Writeln(s.Content.Msg); err != nil {
 			logger.FdebuglnFatal("Error writing output", err)
-			logger.ErrorLoglnFatal("Error writing output", err)
+			logger.FatalLogln("Error writing output", err)
 		}
 
 		// s1 := fmt.Sprintf("[0] %s", s.Content.Msg)
@@ -191,7 +191,7 @@ func listenCallback(data []byte, err error) {
 
 		if err := json.Unmarshal(data, &s); err != nil {
 			logger.FdebuglnFatal("Unmarshaling response error", err)
-			logger.ErrorLoglnFatal("Parsing server wathc message error", err)
+			logger.FatalLogln("Parsing server wathc message error", err)
 		}
 
 		p := fmt.Sprintf("Watching only functions: %s", strings.Join(s.Content.Run, ", "))

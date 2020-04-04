@@ -91,7 +91,7 @@ func (p *Prompt) executor(s string) {
 
 		if err := p.writer.Flush(); err != nil {
 			logger.FdebuglnFatal("Error flushing prompt buffer", err)
-			logger.ErrorLoglnFatal("Error flushing prompt buffer", err)
+			logger.FatalLogln("Error flushing prompt buffer", err)
 		}
 
 		p.renderMutex.Unlock()
@@ -157,7 +157,7 @@ func (p *Prompt) Run() {
 	// The initial rerender for the current terminal size
 	if err := p.rerender(true); err != nil {
 		logger.Fdebugln("Error during the initial rerender", err)
-		logger.ErrorLoglnFatal("Error during the initial rerender", err)
+		logger.FatalLogln("Error during the initial rerender", err)
 	}
 
 	// Rerender a terminal for every size change
@@ -233,7 +233,7 @@ func (p *Prompt) rerenderOnTermSizeChange() {
 		}
 		if err := p.rerender(false); err != nil {
 			logger.FdebuglnFatal("Error during the rerender", err)
-			logger.ErrorLoglnFatal("Error during the rerender", err)
+			logger.FatalLogln("Error during the rerender", err)
 		}
 	}
 }
@@ -309,6 +309,6 @@ func (p *Prompt) print(b []byte) {
 
 	if err := p.writer.Flush(); err != nil {
 		logger.FdebuglnFatal("Error flushing prompt buffer (2)", err)
-		logger.ErrorLoglnFatal("Error flushing prompt buffer", err)
+		logger.FatalLogln("Error flushing prompt buffer", err)
 	}
 }

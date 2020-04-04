@@ -23,14 +23,15 @@ func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 	buf, err := zip.ArchiveDir(rootDir, ignore)
 	if err != nil {
 		logger.FdebuglnFatal("ArchiveDir error:", err)
-		logger.ErrorLoglnFatal("Error archiving the directory:", err)
+		logger.FatalLogln("Error archiving the directory:", err)
 	}
 
 	archiveChecksum := checksum(buf.Bytes())
 
-	if lastArchiveChecksum == archiveChecksum {
-		return
-	}
+	// TODO: Remove
+	// if lastArchiveChecksum == archiveChecksum {
+	// 	return
+	// }
 	lastArchiveChecksum = archiveChecksum
 
 	bufferSize := 1024 // 1024B, size of a single chunk
@@ -45,7 +46,7 @@ func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 		// TODO: HEEEEEEEEEEEEEEEEEEEEEEEEEEEREE EOF
 		if err != nil && err != io.EOF {
 			logger.FdebuglnFatal("Error reading chunk from buffer:", err)
-			logger.ErrorLoglnFatal("Error reading chunk from buffer:", err)
+			logger.FatalLogln("Error reading chunk from buffer:", err)
 		}
 
 		previousChecksum = checksum
@@ -60,7 +61,7 @@ func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 		chunk := connMsg.NewChunkMsg(bytes, checkStr, prevCheckStr, lastChunk)
 		if err = c.Send(chunk); err != nil {
 			logger.FdebuglnFatal("Error sending chunk", err)
-			logger.ErrorLoglnFatal("Error sending chunk", err)
+			logger.FatalLogln("Error sending chunk", err)
 		}
 	}
 }

@@ -55,12 +55,12 @@ func runSignIn(cmd *cobra.Command, args []string) {
 
 	if err = authClient.SignIn(creds.Email, creds.Pass); err != nil {
 		logger.FdebuglnFatal("Sign in error", err)
-		logger.ErrorLoglnFatal("Sign in error (1)", err)
+		logger.FatalLogln("Sign in error (1)", err)
 	}
 
 	if authClient.Error != nil {
 		logger.FdebuglnFatal("Sign in error", err)
-		logger.ErrorLoglnFatal("Sign in error (2)", authClient.Error)
+		logger.FatalLogln("Sign in error (2)", authClient.Error)
 	}
 
 	color.Green("✔ Signed in")

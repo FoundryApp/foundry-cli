@@ -40,7 +40,7 @@ func (b *Buffer) Read(bufCh chan<- []byte, stopCh <-chan struct{}) {
 				bufCh <- buf[:n]
 			} else if err != io.EOF {
 				logger.FdebuglnFatal("Error reading from prompt buffer", err)
-				logger.ErrorLoglnFatal("Error reading from prompt buffer", err)
+				logger.FatalLogln("Error reading from prompt buffer", err)
 			}
 
 			b.mut.Unlock()
