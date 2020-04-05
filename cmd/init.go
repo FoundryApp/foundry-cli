@@ -57,7 +57,7 @@ ignore:
   - .git # Skip the whole .git directory
   - "**/.*" # Skip all hidden files
   - "**/*~" # Skip vim's temp files
-# An array of Firebase functions that should evaluated by Foundry. All these functions must be exported in your root index.js
+# An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 functions:
 #   - name: hello
 #     type: https
