@@ -28,10 +28,9 @@ func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 
 	archiveChecksum := checksum(buf.Bytes())
 
-	// TODO: Remove
-	// if lastArchiveChecksum == archiveChecksum {
-	// 	return
-	// }
+	if lastArchiveChecksum == archiveChecksum {
+		return
+	}
 	lastArchiveChecksum = archiveChecksum
 
 	bufferSize := 1024 // 1024B, size of a single chunk
@@ -43,7 +42,7 @@ func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 
 	for i := 0; i < chunkCount; i++ {
 		bytesread, err := buf.Read(buffer)
-		// TODO: HEEEEEEEEEEEEEEEEEEEEEEEEEEEREE EOF
+		// TODO: What this worked without err != io.EOF?
 		if err != nil && err != io.EOF {
 			logger.FdebuglnFatal("Error reading chunk from buffer:", err)
 			logger.FatalLogln("Error reading chunk from buffer:", err)
