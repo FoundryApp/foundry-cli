@@ -16,7 +16,7 @@ import (
 )
 
 type FoundryConf struct {
-	ServiceAccPath    string   `yaml:"serviceAccount"`
+	ServiceAccPath    string   `yaml:"serviceAcc"`
 	IgnoreStrPatterns []string `yaml:"ignore"`
 
 	CurrentDir string      `yaml:"-"` // Current working directory of CLI
@@ -159,8 +159,10 @@ func cobraInitCallback(isInitCmd bool) {
 
 func Execute() {
 	defer func() {
-		defer connectionClient.Close()
-		defer logger.Close()
+		if connectionClient != nil {
+			connectionClient.Close()
+		}
+		logger.Close()
 	}()
 
 	if err := rootCmd.Execute(); err != nil {

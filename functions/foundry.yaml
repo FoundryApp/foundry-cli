@@ -1,0 +1,24 @@
+# An array of glob patterns for files that should be ignored. The path is relative to the root dir.
+# If the array is changed, the CLI must be restarted for it to take the effect
+ignore:
+  - node_modules # Skip the whole node_modules directory
+  - .git # Skip the whole .git directory
+  - "**/*.*[0-9]" # Skip all tmp files ending with number
+  - "**/.*" # Skip all hidden files
+  - "**/*~" # Skip vim's temp files
+# An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
+
+serviceAcc: "/Users/vasekmlejnsky/Downloads/foundryapp-firebase-adminsdk-9hj8q-20401ed01c.json"
+
+auth:
+  - getFromProd: ["DbJD37dhx4VqNF3dtN7zrK6CCB13"]
+
+firestore:
+  - collection: envs
+    getFromProd: 5
+
+functions:
+  - name: getUserEnvs
+    type: httpsCallable
+    auth: DbJD37dhx4VqNF3dtN7zrK6CCB13
+    payload: "{}"

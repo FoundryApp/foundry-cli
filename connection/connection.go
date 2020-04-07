@@ -39,6 +39,9 @@ func New(token string) (*Connection, error) {
 }
 
 func (c *Connection) Close() {
+	if c.wsconn == nil {
+		return
+	}
 	logger.Fdebugln("WS closing")
 	c.wsconn.Close()
 }

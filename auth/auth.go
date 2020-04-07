@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"io/ioutil"
+	"net/http"
 	"net/url"
 	"strings"
 	"time"
@@ -14,10 +14,10 @@ import (
 )
 
 const (
-	apiKey 					= "AIzaSyAqL--IsyZd3cQTUgXR3KRWZZN-M6jR1kE"
-	idTokenKey			= "FOUNDRY_AUTH_ID_TOKEN"
+	apiKey          = "AIzaSyAqL--IsyZd3cQTUgXR3KRWZZN-M6jR1kE"
+	idTokenKey      = "FOUNDRY_AUTH_ID_TOKEN"
 	refreshTokenKey = "FOUNDRY_AUTH_REFRESH_TOKEN"
-	authStateKey 		= "FOUNDRY_AUTH_STATE"
+	authStateKey    = "FOUNDRY_AUTH_STATE"
 )
 
 type AuthStateType int
@@ -27,14 +27,14 @@ type AuthStateType int
 // Changing the order of the following consts would cause that serialized values would have
 // a different logical meaning
 const (
-	AuthStateTypeSignedOut					AuthStateType = iota + 1 // +1 so the first const's value is different from zero int value
+	AuthStateTypeSignedOut AuthStateType = iota + 1 // +1 so the first const's value is different from zero int value
 	AuthStateTypeSignedIn
 	AuthStateTypeSignedInAnonymous
 )
 
 type AuthError struct {
-	Message 		string	`json:"message"`
-	StatusCode 	int			`json:"code"`
+	Message    string `json:"message"`
+	StatusCode int    `json:"code"`
 }
 
 func (ae *AuthError) Error() string {
@@ -43,18 +43,18 @@ func (ae *AuthError) Error() string {
 
 // TODO: Find out if we can serialize structures using viper
 type Auth struct {
-	Error					*AuthError	`json:"error"`
-	UserID				string			`json:"localId"`
-	Email					string			`json:"email"`
-	IDToken				string			`json:"idToken"`
-	RefreshToken 	string 			`json:"refreshToken"`
+	Error        *AuthError `json:"error"`
+	UserID       string     `json:"localId"`
+	Email        string     `json:"email"`
+	IDToken      string     `json:"idToken"`
+	RefreshToken string     `json:"refreshToken"`
 
-	ExpiresIn			string			`json:"expiresIn"`
-	originDate		time.Time
+	ExpiresIn  string `json:"expiresIn"`
+	originDate time.Time
 
-	AuthState			AuthStateType
+	AuthState AuthStateType
 
-	DisplayName		string			`json:"displayName"`
+	DisplayName string `json:"displayName"`
 }
 
 func New() (*Auth, error) {
@@ -77,19 +77,19 @@ func (a *Auth) SignUp(email, pass string) error {
 		// If so, link the anonymous user with email, password, and IDToken
 		logger.Fdebugln("Signing up an anonymous user (= linking email + pass)")
 		endpoint = fmt.Sprintf("accounts:update?key=%v", apiKey)
-		reqBody = struct{
-			IDToken						string 	`json:"idToken"`
-			Email							string	`json:"email"`
-			Password					string	`json:"password"`
-			ReturnSecureToken	bool		`json:"returnSecureToken"`
+		reqBody = struct {
+			IDToken           string `json:"idToken"`
+			Email             string `json:"email"`
+			Password          string `json:"password"`
+			ReturnSecureToken bool   `json:"returnSecureToken"`
 		}{a.IDToken, email, pass, true}
 	} else {
 		logger.Fdebugln("Signing up a new user")
 		endpoint = fmt.Sprintf("accounts:signUp?key=%v", apiKey)
-		reqBody = struct{
-			Email							string	`json:"email"`
-			Password					string	`json:"password"`
-			ReturnSecureToken	bool		`json:"returnSecureToken"`
+		reqBody = struct {
+			Email             string `json:"email"`
+			Password          string `json:"password"`
+			ReturnSecureToken bool   `json:"returnSecureToken"`
 		}{email, pass, true}
 	}
 
@@ -114,7 +114,7 @@ func (a *Auth) SignUp(email, pass string) error {
 
 func (a *Auth) SignUpAnonymously() error {
 	reqBody := struct {
-		ReturnSecureToken	bool `json:"returnSecureToken"`
+		ReturnSecureToken bool `json:"returnSecureToken"`
 	}{true}
 
 	baseURL := "https://identitytoolkit.googleapis.com/v1"
@@ -140,9 +140,9 @@ func (a *Auth) SignUpAnonymously() error {
 
 func (a *Auth) SignIn(email, pass string) error {
 	reqBody := struct {
-		Email 						string 	`json:"email"`
-		Password 					string 	`json:"password"`
-		ReturnSecureToken bool 		`json:"returnSecureToken"`
+		Email             string `json:"email"`
+		Password          string `json:"password"`
+		ReturnSecureToken bool   `json:"returnSecureToken"`
 	}{email, pass, true}
 
 	baseURL := "https://identitytoolkit.googleapis.com/v1"
@@ -227,7 +227,7 @@ func (a *Auth) doRefreshReq() error {
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	client := &http.Client{}
+	client := &http.Client{Timeout: time.Second * 30}
 	res, err := client.Do(req)
 	if err != nil {
 		return err
@@ -244,9 +244,9 @@ func (a *Auth) doRefreshReq() error {
 	// in flow. Also, its content-type isn't application/json but
 	// application/x-www-form-urlencoded.
 	var j struct {
-		ExpiresIn 		string `json:"expires_in"`
-		RefreshToken 	string `json:"refresh_token"`
-		IDToken				string `json:"id_token"`
+		ExpiresIn    string `json:"expires_in"`
+		RefreshToken string `json:"refresh_token"`
+		IDToken      string `json:"id_token"`
 	}
 
 	err = json.Unmarshal(bodyBytes, &j)

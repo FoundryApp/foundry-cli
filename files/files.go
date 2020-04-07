@@ -26,6 +26,9 @@ func Upload(c *conn.Connection, rootDir, serviceAccPath string, promptNotifCh ch
 		logger.FatalLogln("Error archiving the directory:", err)
 	}
 
+	// err = ioutil.WriteFile("./source.zip", buf.Bytes(), 0644)
+	// logger.FatalLogln("Written", err)
+
 	archiveChecksum := checksum(buf.Bytes())
 
 	if lastArchiveChecksum == archiveChecksum {
