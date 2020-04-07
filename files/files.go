@@ -18,7 +18,7 @@ var (
 	lastArchiveChecksum = ""
 )
 
-func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
+func Upload(c *conn.Connection, rootDir string, promptNotifCh chan<- string, ignore ...glob.Glob) {
 	// Zip the project
 	buf, err := zip.ArchiveDir(rootDir, ignore)
 	if err != nil {
@@ -29,7 +29,8 @@ func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 	archiveChecksum := checksum(buf.Bytes())
 
 	if lastArchiveChecksum == archiveChecksum {
-		logger.WarningLogln("No change in the code detected")
+		promptNotifCh <- "No change in the code detected"
+		// logger.WarningLogln()
 		return
 	}
 	lastArchiveChecksum = archiveChecksum
@@ -43,7 +44,7 @@ func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 
 	for i := 0; i < chunkCount; i++ {
 		bytesread, err := buf.Read(buffer)
-		// TODO: What this worked without err != io.EOF?
+		// TODO: Why did this work without err != io.EOF?
 		if err != nil && err != io.EOF {
 			logger.FdebuglnFatal("Error reading chunk from buffer:", err)
 			logger.FatalLogln("Error reading chunk from buffer:", err)

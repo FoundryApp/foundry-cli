@@ -70,6 +70,16 @@ func runGo(cmd *cobra.Command, args []string) {
 	}
 
 	initialUploadCh := make(chan struct{}, 1)
+	promptNotifCh := make(chan string)
+
+	go func() {
+		for {
+			select {
+			case msg := <-promptNotifCh:
+				prompt.SetInfoln(msg)
+			}
+		}
+	}()
 
 	// The main goroutine handling all file events + prompt command requests
 	// Command requests are all handled from a single goroutine because
@@ -83,12 +93,12 @@ func runGo(cmd *cobra.Command, args []string) {
 			case args := <-exitCmd.RunCh:
 				exitCmd.Run(connectionClient, args)
 			case <-initialUploadCh:
-				files.Upload(connectionClient, foundryConf.RootDir, foundryConf.Ignore...)
+				files.Upload(connectionClient, foundryConf.RootDir, promptNotifCh, foundryConf.Ignore...)
 			case e := <-w.Events:
 				path := "." + string(os.PathSeparator) + e.Name
 				if !ignored(path, foundryConf.Ignore) {
 					logger.Fdebugln("Watcher event", e.Name)
-					files.Upload(connectionClient, foundryConf.RootDir, foundryConf.Ignore...)
+					files.Upload(connectionClient, foundryConf.RootDir, promptNotifCh, foundryConf.Ignore...)
 				}
 			case err := <-w.Errors:
 				logger.FdebuglnFatal("File watcher error", err)
