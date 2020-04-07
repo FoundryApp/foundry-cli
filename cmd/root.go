@@ -3,6 +3,7 @@ package cmd
 import (
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"time"
 
 	"foundry/cli/auth"
@@ -15,10 +16,11 @@ import (
 )
 
 type FoundryConf struct {
-	RootDir           string   `yaml:"rootDir"`
+	ServiceAccPath    string   `yaml:"serviceAccount"`
 	IgnoreStrPatterns []string `yaml:"ignore"`
 
-	Ignore []glob.Glob `yaml:"-"`
+	CurrentDir string      `yaml:"-"` // Current working directory of CLI
+	Ignore     []glob.Glob `yaml:"-"`
 }
 
 // Search a Foundry config file in the same directory from what was the foundry CLI called
@@ -66,19 +68,22 @@ func init() {
 
 		err = yaml.Unmarshal(confData, &foundryConf)
 		if err != nil {
-			logger.DebuglnError("foundry.yaml file isn't a valid YAML file or doesn't contain field 'RootDir'", err)
-			logger.FatalLogln("foundry.yaml file isn't a valid YAML file or doesn't contain field 'RootDir'", err)
+			logger.DebuglnError("Config file 'foundry.yaml' isn't valid", err)
+			logger.FatalLogln("Config file 'foundry.yaml' isn't valid", err)
 		}
-		if foundryConf.RootDir == "" {
-			logger.DebuglnError("foundry.yaml doesn't contain field 'RootDir' or it's empty")
-			logger.FatalLogln("foundry.yaml doesn't contain field 'RootDir' or it's empty")
+
+		dir, err := os.Getwd()
+		if err != nil {
+			logger.DebuglnError("Couldn't get current working directory", err)
+			logger.FatalLogln("Couldn't get current working directory", err)
 		}
+		foundryConf.CurrentDir = dir
 
 		// Parse IgnoreStr to globs
 		for _, p := range foundryConf.IgnoreStrPatterns {
-			// Add "./" as a prefix to every glob pattern so
-			// the prefix is same with file paths from watcher
-			// zipper
+			// Add foundryConf.CurrentDir as a prefix to every glob pattern so
+			// the prefix is same with file paths from watcher and  zipper
+
 			// last := foundryConf.RootDir[len(foundryConf.RootDir)-1:]
 			// if last != string(os.PathSeparator) {
 			// 	p = foundryConf.RootDir + string(os.PathSeparator) + p
@@ -86,6 +91,7 @@ func init() {
 			// 	p = foundryConf.RootDir + p
 			// }
 
+			p = filepath.Join(foundryConf.CurrentDir, p)
 			g, err := glob.Compile(p)
 			if err != nil {
 				logger.DebuglnError("Invalid glob pattern in the 'ignore' field in the foundry.yaml file")

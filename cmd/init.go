@@ -28,7 +28,7 @@ func runInit(cmd *cobra.Command, args []string) {
 		logger.FatalLogln("Foundry config file 'foundry.yaml' already exists")
 	}
 
-	dest := filepath.Join(foundryConf.RootDir, "foundry.yaml")
+	dest := filepath.Join(foundryConf.CurrentDir, "foundry.yaml")
 	err := ioutil.WriteFile(dest, []byte(getInitYaml()), 0644)
 	if err != nil {
 		logger.FdebuglnError("Error writing foundry.yaml:", err)

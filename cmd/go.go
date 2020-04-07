@@ -63,7 +63,7 @@ func runGo(cmd *cobra.Command, args []string) {
 	}
 	defer w.Close()
 
-	err = w.AddRecursive(foundryConf.RootDir)
+	err = w.AddRecursive(foundryConf.CurrentDir)
 	if err != nil {
 		logger.FdebuglnFatal("watcher AddRecursive", err)
 		logger.FatalLogln(err)
@@ -93,12 +93,12 @@ func runGo(cmd *cobra.Command, args []string) {
 			case args := <-exitCmd.RunCh:
 				exitCmd.Run(connectionClient, args)
 			case <-initialUploadCh:
-				files.Upload(connectionClient, foundryConf.RootDir, promptNotifCh, foundryConf.Ignore...)
+				files.Upload(connectionClient, foundryConf.CurrentDir, foundryConf.ServiceAccPath, promptNotifCh, foundryConf.Ignore...)
 			case e := <-w.Events:
 				path := "." + string(os.PathSeparator) + e.Name
 				if !ignored(path, foundryConf.Ignore) {
 					logger.Fdebugln("Watcher event", e.Name)
-					files.Upload(connectionClient, foundryConf.RootDir, promptNotifCh, foundryConf.Ignore...)
+					files.Upload(connectionClient, foundryConf.CurrentDir, foundryConf.ServiceAccPath, promptNotifCh, foundryConf.Ignore...)
 				}
 			case err := <-w.Errors:
 				logger.FdebuglnFatal("File watcher error", err)

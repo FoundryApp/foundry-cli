@@ -18,9 +18,9 @@ var (
 	lastArchiveChecksum = ""
 )
 
-func Upload(c *conn.Connection, rootDir string, promptNotifCh chan<- string, ignore ...glob.Glob) {
-	// Zip the project
-	buf, err := zip.ArchiveDir(rootDir, ignore)
+func Upload(c *conn.Connection, rootDir, serviceAccPath string, promptNotifCh chan<- string, ignore ...glob.Glob) {
+	// Zip the project in the memory and send the file in chunks
+	buf, err := zip.ArchiveDir(rootDir, serviceAccPath, ignore)
 	if err != nil {
 		logger.FdebuglnFatal("ArchiveDir error:", err)
 		logger.FatalLogln("Error archiving the directory:", err)
@@ -30,7 +30,6 @@ func Upload(c *conn.Connection, rootDir string, promptNotifCh chan<- string, ign
 
 	if lastArchiveChecksum == archiveChecksum {
 		promptNotifCh <- "No change in the code detected"
-		// logger.WarningLogln()
 		return
 	}
 	lastArchiveChecksum = archiveChecksum
