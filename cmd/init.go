@@ -41,8 +41,6 @@ func runInit(cmd *cobra.Command, args []string) {
 func getInitYaml() string {
 	// TODO: Update to a final version of the init config yaml
 	return `
-# A path to your project
-rootDir: .
 # An array of glob patterns for files that should be ignored. The path is relative to the root dir.
 # If the array is changed, the CLI must be restarted for it to take the effect
 ignore:

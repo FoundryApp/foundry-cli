@@ -56,12 +56,6 @@ func walk(start string, ignore []glob.Glob) ([]string, error) {
 		logger.Fdebugln("")
 		logger.Fdebugln("path in zip", path)
 
-		// Prepend path with the "./" so the prefix
-		// is same as the ignore array in the config
-		// file.
-		// TODO: Should the prefix be foundryConf.RootDir?
-		// path = "." + string(os.PathSeparator) + path
-
 		if err != nil {
 			// TODO: If path is in the ignored array, should we ignore the error?
 			if ignored(path, ignore) {
