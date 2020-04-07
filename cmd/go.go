@@ -9,7 +9,6 @@ import (
 	"strings"
 	"time"
 
-	"foundry/cli/auth"
 	conn "foundry/cli/connection"
 	connMsg "foundry/cli/connection/msg"
 	"foundry/cli/files"
@@ -40,39 +39,7 @@ func init() {
 }
 
 func runGo(cmd *cobra.Command, args []string) {
-	logger.Log("\n")
-	warningText := "You aren't signed in. Some features aren't available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\nThis message will self-destruct in 5s...\n"
-
-	switch authClient.AuthState {
-	case auth.AuthStateTypeSignedOut:
-		// Sign in anonmoysly + notify user
-		if err := authClient.SignUpAnonymously(); err != nil {
-			logger.FdebuglnFatal(err)
-			logger.FatalLogln(err)
-		}
-
-		if authClient.Error != nil {
-			logger.FdebuglnFatal(authClient.Error)
-			logger.FatalLogln(authClient.Error)
-		}
-
-		logger.WarningLogln(warningText)
-		time.Sleep(time.Second * 5)
-	case auth.AuthStateTypeSignedInAnonymous:
-		// Notify user
-		logger.WarningLogln(warningText)
-		time.Sleep(time.Second)
-	}
-
 	done := make(chan struct{})
-
-	// Create a new connection to the cloud env
-	c, err := conn.New(authClient.IDToken)
-	if err != nil {
-		logger.FdebuglnFatal("Connection error", err)
-		logger.FatalLogln(err)
-	}
-	defer c.Close()
 
 	watchCmd := promptCmd.NewWatchCmd()
 	exitCmd := promptCmd.NewExitCmd()
@@ -81,12 +48,12 @@ func runGo(cmd *cobra.Command, args []string) {
 	go prompt.Run()
 
 	// Listen for messages from the WS connection
-	go c.Listen(listenCallback)
+	go connectionClient.Listen(listenCallback)
 
 	// Start periodically pinging server so the env isn't killed
 	pingMsg := connMsg.NewPingMsg(conn.PingURL(), authClient.IDToken)
 	ticker := time.NewTicker(time.Second * 10)
-	go c.Ping(pingMsg, ticker, done)
+	go connectionClient.Ping(pingMsg, ticker, done)
 
 	// Start the file watcher
 	w, err := rwatch.New(foundryConf.Ignore)
@@ -112,16 +79,16 @@ func runGo(cmd *cobra.Command, args []string) {
 		for {
 			select {
 			case args := <-watchCmd.RunCh:
-				watchCmd.Run(c, args)
+				watchCmd.Run(connectionClient, args)
 			case args := <-exitCmd.RunCh:
-				exitCmd.Run(c, args)
+				exitCmd.Run(connectionClient, args)
 			case <-initialUploadCh:
-				files.Upload(c, foundryConf.RootDir, foundryConf.Ignore...)
+				files.Upload(connectionClient, foundryConf.RootDir, foundryConf.Ignore...)
 			case e := <-w.Events:
 				path := "." + string(os.PathSeparator) + e.Name
 				if !ignored(path, foundryConf.Ignore) {
 					logger.Fdebugln("Watcher event", e.Name)
-					files.Upload(c, foundryConf.RootDir, foundryConf.Ignore...)
+					files.Upload(connectionClient, foundryConf.RootDir, foundryConf.Ignore...)
 				}
 			case err := <-w.Errors:
 				logger.FdebuglnFatal("File watcher error", err)

@@ -28,13 +28,6 @@ func runInit(cmd *cobra.Command, args []string) {
 		logger.FatalLogln("Foundry config file 'foundry.yaml' already exists")
 	}
 
-	// source := "./init.foundry.yaml"
-	// input, err := ioutil.ReadFile(source)
-	// if err != nil {
-	// 	logger.FdebuglnError("Error reading init.foundry.yaml:", err)
-	// 	logger.FatalLogln("Error creating Foundry config file 'foundry.yaml':", err)
-	// }
-
 	dest := filepath.Join(foundryConf.RootDir, "foundry.yaml")
 	err := ioutil.WriteFile(dest, []byte(getInitYaml()), 0644)
 	if err != nil {

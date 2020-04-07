@@ -22,6 +22,10 @@ type ConnectionMessage interface {
 	Body() interface{}
 }
 
+// TODO: Use channels so the Connection struct is thread safe.
+// Gorilla's websocket.Conn can be accessed only from a single
+// goroutine.
+
 func New(token string) (*Connection, error) {
 	logger.Fdebugln("WS dialing")
 	url := WebSocketURL(token)

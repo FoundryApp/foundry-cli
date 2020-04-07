@@ -1,9 +1,20 @@
-# Foundry - The fastest way to develop serverless functions
+# Foundry - The fastest way to develop Firebase Functions
 
 ## Overview
-CLI that creates the same environment as is the environment where your cloud functions run in the production. The environment is pre-configured, with the copy of your production data, and automatically runs your code with the near-instant feedback.
 
-Foundry [website](https://www.foundryapp.co/)
+[Foundry](https) is a CLI tool that creates the same environment as is the environment where your cloud functions run in the production. The environment is pre-configured, with the copy of your production data, and automatically runs your code with the near-instant feedback.
+
+Foundry let's you to develop your Firebase Functions in the same environment as is your production environemnt with access to the production data from your Firestore database. Your code is evaluated in the cloud environmentEverything happens in your p
+
+Foundry is a tool for building, debugging, and testing Firebase Functions.
+
+The key features of Foundry are:
+- **Extremely short deploy time**: TODO
+- **Instant feedback**: TODO
+- **Access to the production data**: TODO
+- **Discovery of production bugs**: TODO
+
+[https://www.foundryapp.co/](https://www.foundryapp.co/)
 
 ### Table of content
 - **[Installation](#Installation)**
@@ -16,15 +27,11 @@ Foundry [website](https://www.foundryapp.co/)
 
 ## Installation
 
-### Homebrew
-
-    brew
-
 ### Standalone Binary
 
 The you can download it here
 
-- **[OSX](github release link)**
+- **[macOS](github release link)**
 
 - **[Windows](github release link)**
 

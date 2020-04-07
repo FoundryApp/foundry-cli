@@ -14,13 +14,13 @@ type PingBody struct {
 }
 
 type PingMsg struct {
-	URL		string
-	Body 	PingBody
+	URL  string
+	Body PingBody
 }
 
 func NewPingMsg(url, t string) *PingMsg {
 	return &PingMsg{
-		URL: 	url,
+		URL:  url,
 		Body: PingBody{t},
 	}
 }
@@ -39,12 +39,12 @@ func (pm *PingMsg) Send() error {
 	if res.StatusCode != http.StatusOK {
 		bodyBytes, err := ioutil.ReadAll(res.Body)
 		if err != nil {
-			logger.Fdebugln("[ping] Error reading ping response body: ", err)
+			logger.FdebuglnError("[ping] Error reading ping response body: ", err)
 			return err
 		}
 
 		bodyString := string(bodyBytes)
-		logger.Fdebugln("[ping] non-ok response:", bodyString)
+		logger.FdebuglnError("[ping] non-ok response:", bodyString)
 	}
 
 	return nil

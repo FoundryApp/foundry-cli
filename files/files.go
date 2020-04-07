@@ -29,6 +29,7 @@ func Upload(c *conn.Connection, rootDir string, ignore ...glob.Glob) {
 	archiveChecksum := checksum(buf.Bytes())
 
 	if lastArchiveChecksum == archiveChecksum {
+		logger.WarningLogln("No change in the code detected")
 		return
 	}
 	lastArchiveChecksum = archiveChecksum

@@ -3,8 +3,10 @@ package cmd
 import (
 	"io/ioutil"
 	"os"
+	"time"
 
 	"foundry/cli/auth"
+	conn "foundry/cli/connection"
 	"foundry/cli/logger"
 
 	"github.com/gobwas/glob"
@@ -23,8 +25,9 @@ type FoundryConf struct {
 const confFile = "./foundry.yaml"
 
 var (
-	debugFile  = ""
-	authClient *auth.Auth
+	debugFile        = ""
+	authClient       *auth.Auth
+	connectionClient *conn.Connection
 
 	foundryConf = FoundryConf{}
 	rootCmd     = &cobra.Command{
@@ -37,33 +40,19 @@ var (
 	}
 )
 
-func cobraInitCallback() {
-	if err := logger.InitDebug(debugFile); err != nil {
-		logger.DebuglnFatal("Failed to initialized debug file for logger")
-	}
-
-	a, err := auth.New()
-	if err != nil {
-		logger.FdebuglnError("Error initializing Auth", err)
-		logger.FatalLogln("Error initializing Auth", err)
-	}
-	if err := a.RefreshIDToken(); err != nil {
-		logger.FdebuglnError("Error refreshing ID token", err)
-		logger.FatalLogln("Error refreshing ID token", err)
-	}
-	authClient = a
-}
-
 func init() {
 	// WARNING: logger's debug file isn't initialized yet. We can log only to the stdout or stderr.
 
-	cobra.OnInitialize(cobraInitCallback)
+	cmd := os.Args[1]
+	isInitCmd := cmd == "init"
+
+	cobra.OnInitialize(func() { cobraInitCallback(isInitCmd) })
 
 	// DEBUG:
 	rootCmd.PersistentFlags().StringVar(&debugFile, "debug-file", "", "A file where the debug logs are saved (required)")
 
-	cmd := os.Args[1]
-	if cmd != "init" {
+	// TODO: Can this be in cobraInitCallback instead of here?
+	if !isInitCmd {
 		if _, err := os.Stat(confFile); os.IsNotExist(err) {
 			logger.DebuglnError("Foundry config file 'foundry.yaml' not found in the current directory")
 			logger.FatalLogln("Foundry config file 'foundry.yaml' not found in the current directory. Run '\x1b[1mfoundry init\x1b[0m'.")
@@ -108,11 +97,66 @@ func init() {
 		logger.Debugln("Ignore str", foundryConf.IgnoreStrPatterns)
 		logger.Debugln("Ignore glob", foundryConf.Ignore)
 	}
+}
 
+func cobraInitCallback(isInitCmd bool) {
+	if err := logger.InitDebug(debugFile); err != nil {
+		logger.DebuglnFatal("Failed to initialized debug file for logger")
+	}
+
+	a, err := auth.New()
+	if err != nil {
+		logger.FdebuglnError("Error initializing Auth", err)
+		logger.FatalLogln("Error initializing Auth", err)
+	}
+	if err := a.RefreshIDToken(); err != nil {
+		logger.FdebuglnError("Error refreshing ID token", err)
+		logger.FatalLogln("Error refreshing ID token", err)
+	}
+	authClient = a
+
+	if !isInitCmd {
+		logger.Log("\n")
+		warningText := "You aren't signed in. Some features aren't available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\nThis message will self-destruct in 5s...\n"
+
+		// Check if user signed in
+		switch authClient.AuthState {
+		case auth.AuthStateTypeSignedOut:
+			// Sign in anonmoysly + notify user
+			if err := authClient.SignUpAnonymously(); err != nil {
+				logger.FdebuglnFatal(err)
+				logger.FatalLogln(err)
+			}
+
+			if authClient.Error != nil {
+				logger.FdebuglnFatal(authClient.Error)
+				logger.FatalLogln(authClient.Error)
+			}
+
+			logger.WarningLogln(warningText)
+			time.Sleep(time.Second * 5)
+		case auth.AuthStateTypeSignedInAnonymous:
+			// Notify user
+			logger.WarningLogln(warningText)
+			time.Sleep(time.Second)
+		}
+
+		// Create a new connection to the cloud env
+		c, err := conn.New(authClient.IDToken)
+		if err != nil {
+			logger.FdebuglnFatal("Connection error", err)
+			logger.FatalLogln(err)
+		}
+		connectionClient = c
+	}
 }
 
 func Execute() {
-	defer logger.Close()
+	defer func() {
+		defer connectionClient.Close()
+		defer logger.Close()
+	}()
+
 	if err := rootCmd.Execute(); err != nil {
 		logger.FdebuglnError("Error executing root command", err)
 		logger.FatalLogln("Error executing root command", err)
