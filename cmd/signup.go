@@ -13,7 +13,7 @@ import (
 var (
 	signUpCmd = &cobra.Command{
 		Use:     "sign-up",
-		Short:   "Sign up for Foundry in your terminal",
+		Short:   "Create new Foundry account in your terminal",
 		Example: "foundry sign-up",
 		Run:     runSignUp,
 	}
