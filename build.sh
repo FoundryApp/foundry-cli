@@ -26,6 +26,7 @@ if [[ $? == 0 ]]; then
   echo "✅ SUCCESS"
 else
   echo "\n❌ FAIL"
+  exit 1
 fi
 
 echo  "\nMoving $build_name to /usr/local/bin..."
