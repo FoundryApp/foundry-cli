@@ -8,7 +8,7 @@ ignore:
   - "**/*~" # Skip vim's temp files
 # An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 
-serviceAcc: "/Users/vasekmlejnsky/Downloads/foundryapp-firebase-adminsdk-9hj8q-20401ed01c.json"
+serviceAcc: "/Users/vasekmlejnsky/Downloads/foundryapp-firebase-adminsdk-9hj8q-20401ed01c@.json"
 
 auth:
   - getFromProd: ["DbJD37dhx4VqNF3dtN7zrK6CCB13"]

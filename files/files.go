@@ -23,7 +23,7 @@ func Upload(c *conn.Connection, rootDir, serviceAccPath string, promptNotifCh ch
 	buf, err := zip.ArchiveDir(rootDir, serviceAccPath, ignore)
 	if err != nil {
 		logger.FdebuglnFatal("ArchiveDir error:", err)
-		logger.FatalLogln("Error archiving the directory:", err)
+		logger.FatalLogln("Error uploading files:", err)
 	}
 
 	// err = ioutil.WriteFile("./source.zip", buf.Bytes(), 0644)
