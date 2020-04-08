@@ -13,6 +13,8 @@ Foundry is a CLI tool for building Firebase Functions. Foundry connects you to a
 With Foundry CLI, you can feel sure that your code behaves correctly and same as in the production already during the development.
 
 
+**TODO: GIF HERE**
+
 The key features of Foundry are:
 - **Out of the box environment**: Foundry connects you to a pre-configured cloud environment where you can interactively develop your Firebase Functions. No need to configure anything.
 
@@ -26,9 +28,7 @@ The key features of Foundry are:
 
 - **Discover production bugs**: TODO
 
-[https://www.foundryapp.co/](https://www.foundryapp.co/)
-
-### Table of content
+## Table of contents
 - **[Installation](#Installation)**
 - **[Usage](#Usage)**
 - **[Config](#Config)**
@@ -37,40 +37,50 @@ The key features of Foundry are:
   - **[Functions](#Functions)**
 - **[FAQ](#FAQ)**
 
-## Installation
+## Download
 
-### Standalone Binary
+Download the latest version of Foundry
 
-The you can download it here
+- **[macOS](https://github.com/FoundryApp/foundry-cli/releases)**
 
-- **[macOS](github release link)**
+- **[Linux](TODO)**
 
-- **[Windows](github release link)**
+Add the downloaded binary to one of folders in your system's `PATH` variable.
 
-(Add to PATH?)
+## Supported languages
+Javascript
 
-### Go Package (compile from source)
+## Config file `foundry.yaml`
+The Foundry's config file is needed to start Foundry with your Firebase Functions. To generate the initial config file run `$ foundry init`. Make sure to call this command from a folder where is placed your `package.json` for your Firebase Functions. The `foundry.yaml` config file must be placed next to `package.json` for your Firebase Functions.
 
-Make sure you have all the [requirements](#Compilation%20requirements) installed, then clone the repo
+```yaml
+# [OPTIONAL] An array of glob patterns for files that should be ignored. The path is relative to the file's dir.
+# If the array is changed, the CLI must be restarted for it to take the effect
+ignore:
+  - node_modules # Skip the whole node_modules directory
+  - .git # Skip the whole .git directory
+  - "**/*.*[0-9]" # Skip all temp files ending with number
+  - "**/.*" # Skip all hidden files
+  - "**/*~" # Skip vim's temp files
 
-    git clone (this repo)
 
-then go to the cloned folder
+# [OPTIONAL] Path to your
+# serviceAcc: ""
 
-    cd
 
-and build the binary with
+# [OPTIONAL] Describe emulated Firebase Auth users
+auth:
 
-[//]: #
 
-    go build
+# [OPTIONAL] Describe emulated Firestore in your cloud environment
+firestore:
 
-you can then add the binary to your PATH with
 
-    export PATH=$PATH:
+# [REQUIRED] An array of Firebase functions that should be evaluated by Foundry. All described functions must be exported in your root index.js
+functions:
 
-(Add to path optional?)
-(Some installing script?)
+```
+
 
 ## Usage
 
@@ -149,7 +159,7 @@ If you want a function to automatically run in our emulated environment
 
 ## FAQ
 
-### How to get a service account JSON for your Firebase project
+### How do I get a service account JSON for my Firebase project?
 
 Go to [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and choose your project
 
@@ -158,8 +168,6 @@ or from [Firebase Console](https://console.firebase.google.com/project)
 ### Are you storing my code or data from my production environment?
 
 We don't store your code or data for duration that is longer than the lifetime of your session (specify until pod dies?).
-
-## Compilation requirements
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
