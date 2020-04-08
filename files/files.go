@@ -32,7 +32,7 @@ func Upload(c *conn.Connection, rootDir, serviceAccPath string, promptNotifCh ch
 	archiveChecksum := checksum(buf.Bytes())
 
 	if lastArchiveChecksum == archiveChecksum {
-		promptNotifCh <- "No change in the code detected"
+		promptNotifCh <- "No change in the code detected. Make change to upload the code."
 		return
 	}
 	lastArchiveChecksum = archiveChecksum

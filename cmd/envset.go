@@ -10,19 +10,20 @@ import (
 )
 
 var (
-	setEnvCmd = &cobra.Command{
-		Use:   "set-env",
-		Short: "Set environment variable in your development environment",
-		Long:  "",
-		Run:   runSetEnv,
+	envSetCmd = &cobra.Command{
+		Use:     "env-set",
+		Short:   "Set environment variable(s) in your cloud environment",
+		Example: "foundry env-set env-name=env-value",
+		Args:    cobra.MinimumNArgs(1),
+		Run:     runEnvSet,
 	}
 )
 
 func init() {
-	rootCmd.AddCommand(setEnvCmd)
+	rootCmd.AddCommand(envSetCmd)
 }
 
-func runSetEnv(cmd *cobra.Command, args []string) {
+func runEnvSet(cmd *cobra.Command, args []string) {
 	envs := []msg.Env{}
 	for _, env := range args {
 		arr := strings.Split(env, "=")

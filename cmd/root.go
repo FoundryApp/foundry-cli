@@ -50,7 +50,7 @@ func init() {
 
 	cobra.OnInitialize(func() { cobraInitCallback(isInitCmd) })
 
-	// DEBUG:
+	// TODO: Only for debug build
 	rootCmd.PersistentFlags().StringVar(&debugFile, "debug-file", "", "A file where the debug logs are saved (required)")
 
 	// TODO: Can this be in cobraInitCallback instead of here?
@@ -167,6 +167,6 @@ func Execute() {
 
 	if err := rootCmd.Execute(); err != nil {
 		logger.FdebuglnError("Error executing root command", err)
-		logger.FatalLogln("Error executing root command", err)
+		logger.FatalLogln(err)
 	}
 }

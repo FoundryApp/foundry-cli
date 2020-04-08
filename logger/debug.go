@@ -113,5 +113,5 @@ func prefix(t PrefixType) (prefix string) {
 	pc, _, line, _ := runtime.Caller(2)
 	debugInfo := fmt.Sprintf("[%s:%d]", runtime.FuncForPC(pc).Name(), line)
 
-	return fmt.Sprintf("%s %s %s", prefix, timePrefix, debugInfo)
+	return fmt.Sprintf("%s %s %s", timePrefix, prefix, debugInfo)
 }

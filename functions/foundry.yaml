@@ -21,4 +21,8 @@ functions:
   - name: getUserEnvs
     type: httpsCallable
     auth: DbJD37dhx4VqNF3dtN7zrK6CCB13
-    payload: "{}"
+
+  - name: deleteUserEnvs
+    type: httpsCallable
+    auth: DbJD37dhx4VqNF3dtN7zrK6CCB13
+    payload: '{"delete": ["env1", "env2"]}'

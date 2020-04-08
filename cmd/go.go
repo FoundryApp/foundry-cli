@@ -25,8 +25,7 @@ var (
 	lastArchiveChecksum = ""
 	goCmd               = &cobra.Command{
 		Use:   "go",
-		Short: "Connect Foundry to your cloud environment and GO!",
-		Long:  "",
+		Short: "Connect to your cloud environment and start watching your Firebase Functions",
 		Run:   runGo,
 	}
 
