@@ -30,14 +30,14 @@ var (
 	debugFile        = ""
 	authClient       *auth.Auth
 	connectionClient *conn.Connection
+	foundryConf      = FoundryConf{}
 
-	foundryConf = FoundryConf{}
-	rootCmd     = &cobra.Command{
-		Use:   "foundry",
-		Short: "Better serverless dev",
+	rootCmd = &cobra.Command{
+		Use:     "foundry",
+		Short:   "Better serverless dev",
+		Example: "foundry --help",
 		Run: func(cmd *cobra.Command, args []string) {
-			// Do Stuff Here
-			logger.Logln("Root command - add my description and implementation!")
+			logger.Logln("No subcommand was specified. To see all commands type 'foundry --help	'")
 		},
 	}
 )
@@ -51,7 +51,8 @@ func init() {
 	cobra.OnInitialize(func() { cobraInitCallback(isInitCmd) })
 
 	// TODO: Only for debug build
-	rootCmd.PersistentFlags().StringVar(&debugFile, "debug-file", "", "A file where the debug logs are saved (required)")
+	AddRootFlags(rootCmd)
+	// rootCmd.PersistentFlags().StringVarP(&debugFile, "debug-file", "d", "", "path to file where the debug logs are written --d='path/to/file.txt'")
 
 	// TODO: Can this be in cobraInitCallback instead of here?
 	if !isInitCmd {
