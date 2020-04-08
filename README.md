@@ -51,7 +51,8 @@ Add the downloaded binary to one of folders in your system's `PATH` variable.
 Javascript
 
 ## Config file `foundry.yaml`
-The Foundry's config file is needed to start Foundry with your Firebase Functions. To generate the initial config file run `$ foundry init`. Make sure to call this command from a folder where is placed your `package.json` for your Firebase Functions. The `foundry.yaml` config file must be placed next to `package.json` for your Firebase Functions.
+For Foundry to work, it requires that its config file - `foundry.yaml` - is present. You can use `$ foundry init` To generate the initial config file.<br/>
+Make sure to call this command from a folder where is placed your `package.json` for your Firebase Functions. The `foundry.yaml` config file must be placed next to `package.json` for your Firebase Functions.
 
 ```yaml
 # [OPTIONAL] An array of glob patterns for files that should be ignored. The path is relative to the file's dir.
