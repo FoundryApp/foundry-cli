@@ -1,18 +1,21 @@
-# Foundry - The fastest way to develop Firebase Functions
+# Foundry - The fastest way to build Firebase Functions
 
-## Overview
+<!-- [Foundry](https://foundryapp.co) is a CLI tool that creates the same environment as is the environment where your cloud functions run in the production. The environment is pre-configured, with the copy of your production data, and automatically runs your code with the near-instant feedback.
 
-[Foundry](https) is a CLI tool that creates the same environment as is the environment where your cloud functions run in the production. The environment is pre-configured, with the copy of your production data, and automatically runs your code with the near-instant feedback.
+Foundry let's you to develop your Firebase Functions in the same environment as is your production environemnt with access to the production data from your Firestore database. Your code is evaluated in the cloud environmentEverything happens in your p -->
 
-Foundry let's you to develop your Firebase Functions in the same environment as is your production environemnt with access to the production data from your Firestore database. Your code is evaluated in the cloud environmentEverything happens in your p
+<!-- Foundry watches your functions' code and creates a copy of your Firebase Function production environment for your development.  -->
 
-Foundry is a tool for building, debugging, and testing Firebase Functions.
+Foundry is a tool for building Firebase Functions. Foundry connects you to a pre-configured cloud environment that is identical to the production environment of your Firebase Functions. Together with the [config file](#Config), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.
+
 
 The key features of Foundry are:
-- **Extremely short deploy time**: TODO
-- **Instant feedback**: TODO
-- **Access to the production data**: TODO
-- **Discovery of production bugs**: TODO
+- **Out of the box environment**: Foundry connects to a pre-configured cloud environment where you can interactively develop your Firebase Functions. No need to configure anything.
+- **REPL for you Firebase Functions**: Foundry watches your functions' code for changes. With every change, it sends your code to the cloud environment, evaluates the code there, triggers your functions and sends back the results. Everything is automated, you can just keep coding.
+- **Short deploy times and instant feedback**: Your code is always deployed by default. Every code change to your Firebase Functions triggers the CLI that pushes your code to the cloud environment. The output is sent back to you usually within 2 seconds. There isn't any waiting for your code to get deployed, it's always deployed.
+- **Access to the production data**: The [config file](#Config) makes it easy to specify what part of your production Firestore and Auth users should be copied to the emulated Firestore in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup)
+- **Automatic triggers for Firebase Functions**: Pre-define with what data should each Firebase Function be triggered in the [config file](#Config). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly.
+- **Discover production bugs**: TODO
 
 [https://www.foundryapp.co/](https://www.foundryapp.co/)
 
@@ -37,7 +40,7 @@ The you can download it here
 
 (Add to PATH?)
 
-### Go Package (Compile from source)
+### Go Package (compile from source)
 
 Make sure you have all the [requirements](#Compilation%20requirements) installed, then clone the repo
 
@@ -148,3 +151,6 @@ or from [Firebase Console](https://console.firebase.google.com/project)
 We don't store your code or data for duration that is longer than the lifetime of your session (specify until pod dies?).
 
 ## Compilation requirements
+
+## License
+[Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
