@@ -6,11 +6,15 @@ Foundry let's you to develop your Firebase Functions in the same environment as 
 
 <!-- Foundry watches your functions' code and creates a copy of your Firebase Function production environment for your development.  -->
 
-Foundry is a tool for building Firebase Functions. Foundry connects you to a pre-configured cloud environment that is identical to the production environment of your Firebase Functions. Together with the [config file](#Config), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.
+<img alt="Foundry" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/foundry-logo.svg?alt=media&token=9625306d-3577-4aab-ab12-bbde0daae849" width="600px">
+
+
+Foundry is a CLI tool for building Firebase Functions. Foundry connects you to a cloud environment that is identical to the production environment of your Firebase Functions where everything works out-of-the-box. Together with the [config file](#Config), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.<br/>
+With Foundry CLI, you can feel sure that your code behaves correctly and same as in the production already during the development.
 
 
 The key features of Foundry are:
-- **Out of the box environment**: Foundry connects to a pre-configured cloud environment where you can interactively develop your Firebase Functions. No need to configure anything.
+- **Out of the box environment**: Foundry connects you to a pre-configured cloud environment where you can interactively develop your Firebase Functions. No need to configure anything.
 
 - **REPL for you Firebase Functions**: Foundry watches your functions' code for changes. With every change, it sends your code to the cloud environment, evaluates the code there, triggers your functions and sends back the results. Everything is automated, you can just keep coding.
 
@@ -18,7 +22,7 @@ The key features of Foundry are:
 
 - **Access to the production data**: The [config file](#Config) makes it easy to specify what part of your production Firestore and Auth users should be copied to the emulated Firestore in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup)
 
-- **Automatic triggers for Firebase Functions**: Pre-define with what data should each Firebase Function be triggered in the [config file](#Config). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly.
+- **Continuous feedback**: Pre-define with what data should each Firebase Function be triggered in the [config file](#Config). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly against your production data.
 
 - **Discover production bugs**: TODO
 
