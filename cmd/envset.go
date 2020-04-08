@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"os"
 	"strings"
 
 	"foundry/cli/connection/msg"
@@ -13,8 +14,7 @@ var (
 	envSetCmd = &cobra.Command{
 		Use:     "env-set",
 		Short:   "Set environment variable(s) in your cloud environment",
-		Example: "foundry env-set env-name=env-value",
-		Args:    cobra.MinimumNArgs(1),
+		Example: "foundry env-set MY_ENV=ENV_VALUE ANOTHER_ENV=ANOTHER_VALUE",
 		Run:     runEnvSet,
 	}
 )
@@ -25,6 +25,11 @@ func init() {
 
 func runEnvSet(cmd *cobra.Command, args []string) {
 	envs := []msg.Env{}
+	if len(envs) == 0 {
+		logger.WarningLogln("No envs specified. Example usage: 'foundry env-set MY_ENV=ENV_VALUE ANOTHER_ENV=ANOTHER_VALUE'")
+		os.Exit(0)
+	}
+
 	for _, env := range args {
 		arr := strings.Split(env, "=")
 
