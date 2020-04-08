@@ -24,9 +24,10 @@ import (
 var (
 	lastArchiveChecksum = ""
 	goCmd               = &cobra.Command{
-		Use:   "go",
-		Short: "Connect to your cloud environment and start watching your Firebase Functions",
-		Run:   runGo,
+		Use:     "go",
+		Short:   "Connect to your cloud environment and start watching your Firebase Functions",
+		Example: "foundy go",
+		Run:     runGo,
 	}
 
 	prompt *p.Prompt

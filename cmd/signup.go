@@ -4,36 +4,36 @@ import (
 	"log"
 	"os"
 
-	"github.com/spf13/cobra"
-	"github.com/fatih/color"
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
+	"github.com/fatih/color"
+	"github.com/spf13/cobra"
 )
 
 var (
 	signUpCmd = &cobra.Command{
-		Use: 		"sign-up",
-		Short: 	"Sign up for Foundry in your terminal",
-		Long: 	"",
-		Run:		runSignUp,
+		Use:     "sign-up",
+		Short:   "Sign up for Foundry in your terminal",
+		Example: "foundry sign-up",
+		Run:     runSignUp,
 	}
 
 	emailQ = []*survey.Question{
-			{
-					Name:     "email",
-					Prompt:   &survey.Input{Message: "Email:"},
-					Validate: survey.Required,
-			},
+		{
+			Name:     "email",
+			Prompt:   &survey.Input{Message: "Email:"},
+			Validate: survey.Required,
+		},
 	}
 
 	passQs = []*survey.Question{
 		{
-			Name: "pass",
+			Name:     "pass",
 			Prompt:   &survey.Password{Message: "Password:"},
 			Validate: survey.Required,
 		},
 		{
-			Name: "passAgain",
+			Name:     "passAgain",
 			Prompt:   &survey.Password{Message: "Password again:"},
 			Validate: survey.Required,
 		},
@@ -46,9 +46,9 @@ func init() {
 
 func runSignUp(cmd *cobra.Command, args []string) {
 	creds := struct {
-		Email 		string 	`survey:"email`
-		Pass			string	`survey:"pass`
-		PassAgain	string	`survey:"passAgain`
+		Email     string `survey:"email`
+		Pass      string `survey:"pass`
+		PassAgain string `survey:"passAgain`
 	}{}
 
 	// Ask for email

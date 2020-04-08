@@ -9,10 +9,10 @@ import (
 
 var (
 	signOutCmd = &cobra.Command{
-		Use:   "sign-out",
-		Short: "Sign out from your Foundry account",
-		Long:  "",
-		Run:   runSignOut,
+		Use:     "sign-out",
+		Short:   "Sign out from your Foundry account",
+		Example: "foundry sign-out",
+		Run:     runSignOut,
 	}
 )
 

@@ -11,10 +11,10 @@ import (
 
 var (
 	initCmd = &cobra.Command{
-		Use:   "init",
-		Short: "Create the initial foundry.yaml config file",
-		Long:  "",
-		Run:   runInit,
+		Use:     "init",
+		Short:   "Create the initial foundry.yaml config file",
+		Example: "foundry init",
+		Run:     runInit,
 	}
 )
 

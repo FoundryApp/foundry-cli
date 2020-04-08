@@ -14,10 +14,10 @@ import (
 
 var (
 	signInCmd = &cobra.Command{
-		Use:   "sign-in",
-		Short: "Sign in to your Foundry account",
-		Long:  "",
-		Run:   runSignIn,
+		Use:     "sign-in",
+		Short:   "Sign in to your Foundry account",
+		Example: "foundry sign-in",
+		Run:     runSignIn,
 	}
 
 	qs = []*survey.Question{
