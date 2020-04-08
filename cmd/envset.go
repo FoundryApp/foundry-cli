@@ -14,7 +14,7 @@ var (
 	envSetCmd = &cobra.Command{
 		Use:     "env-set",
 		Short:   "Set environment variable(s) in your cloud environment",
-		Example: "foundry env-set MY_ENV=ENV_VALUE ANOTHER_ENV=ANOTHER_VALUE",
+		Example: "foundry env-set ENV_1=VALUE_1 ENV_2=VALUE_2",
 		Run:     runEnvSet,
 	}
 )

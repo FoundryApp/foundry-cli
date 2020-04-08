@@ -14,7 +14,7 @@ var (
 	envDelCmd = &cobra.Command{
 		Use:     "env-delete",
 		Short:   "Delete environment variable(s) from your cloud environment",
-		Example: "foundry env-delete MY_ENV ANOTHER ENV",
+		Example: "foundry env-delete ENV_1 ENV_2",
 		Run:     runEnvDel,
 	}
 )
