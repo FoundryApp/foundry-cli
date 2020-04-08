@@ -11,10 +11,10 @@ import (
 
 var (
 	envPrintCmd = &cobra.Command{
-		Use:   "env-print",
-		Short: "Print all environment variables in your cloud environment",
-		Long:  "",
-		Run:   runEnvPrint,
+		Use:     "env-print",
+		Short:   "Print all environment variables in your cloud environment",
+		Example: "foundry env-print",
+		Run:     runEnvPrint,
 	}
 )
 
