@@ -556,6 +556,15 @@ Deletes the environment variable(s) in your cloud development environment
 - `$ foundry env-print`<br/>
 Prints environment variable(s) in your cloud development environment
 
+- `$ foundry sign-up`<br/>
+Create new Foundry account in your terminal
+
+- `$ foundry sign-in`<br/>
+Sign in to your Foundry account
+
+- `$ foundry sign-out`<br/>
+Sign out from your Foundry account
+
 
 
 ### Initialization
