@@ -108,7 +108,7 @@ users:
   - getFromProd: [id-of-a-user-in-production, another-id]
 
   # You can use both the direct and 'geFromProd' approach simultaneously
-  # The final users collection will be a merge of these
+  # The final Firebase Auth users will be a merge of these
 
 # [OPTIONAL]
 # An array describing emulated Firestore in your cloud environment
@@ -328,7 +328,7 @@ If you want a function to automatically run in our emulated environment
         trigger: <onCreate/onDelete/onUpdate>
 
 ## Supported Firebase features
-TIDI
+TODO
 
 ## FAQ
 
