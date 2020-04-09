@@ -22,27 +22,33 @@ The key features of Foundry are:
 
 - **REPL for you Firebase Functions**: Foundry watches your functions' code for changes. With every change, it sends your code to the cloud environment, evaluates the code there, triggers your functions and sends back the results. Everything is automated, you can just keep coding.
 
-- **Short deploy times and instant feedback**: Your code is always deployed by default. Every code change to your Firebase Functions triggers the CLI that pushes your code to the cloud environment. The output is sent back to you usually within 2 seconds. There isn't any waiting for your code to get deployed, it's always deployed.
+- **Short deploy times and instant feedback**: Your code is always deployed by default. Every code change to your Firebase Functions triggers the CLI that pushes your code to the cloud environment. The output is sent back to you usually within 1-2 seconds. There isn't any waiting for your code to get deployed, it's always deployed.
 
-- **Access to the production data**: The [config file](#Config) makes it easy to specify what part of your production Firestore and Auth users should be copied to the emulated Firestore in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup). No need to create separate Firebase projects to test your functions.
+- **Access to the production data**: The [config file](#config-file) makes it easy to specify what part of your production Firestore and Auth users should be **copied** to the emulated Firestore and Firebase Auth in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup). There's no need to create separate Firebase projects or maintain local scripts to test your functions so you don't corrupt your production data.
 
-- **Continuous feedback**: Pre-define with what data should each Firebase Function be triggered in the [config file](#Config). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly against your production data.
+- **Continuous feedback**: Pre-define with what data should each Firebase Function be triggered in the [config file](#config-file). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly against your production data. There isn't any context switching and no need to leave your coding editor.
 
 - **Discover production bugs**: TODO
 
 ## Table of contents
-- **[How it works](##how-it-works)**
-- **[Download](##download)**
-- **[Supported languages](##supported-languages)**
-- **[Config file](#config)**
+- **[How Foundry works](#how-foundry-works)**
+- **[Download](#download)**
+- **[Supported languages](#supported-languages)**
+- **[Config file](#config-file)**
   - **[Functions](#functions)**
   - **[Firestore](#firestore)**
   - **[Auth](#auth)**
   - **[Ignore files](#ignore-files)**
   - **[Service account](#authentication)**
-- **[Examples](##examples)**
+- **[Getting started](#getting-started)**
+- **[Interactive prompt](#interactive-prompt)**
+- **[Supported Firebase features](#supported-firebase-features)**
+- **[Examples](#examples)**
 - **[FAQ](#faq)**
 - **[Slack community](#slack-community)**
+
+## How Foundry works
+TODO
 
 ## Download
 
@@ -55,12 +61,12 @@ Add the downloaded binary to one of the folders in your system's `PATH` variable
 ## Supported languages
 Javascript
 
-## Config file `foundry.yaml`
+## Config file
 For Foundry to work, it requires that its config file - `foundry.yaml` - is present. You can run `$ foundry init` to generate a basic config file.<br/>
 Make sure to call this command from a folder where your `package.json` for your Firebase Functions is placed - `foundry.yaml` must always be placed next to the Firebase Function's `package.json` file. 
 <br/>
 
-An example of a full config file is below
+Here's a full example of the config file:
 ```yaml
 # [OPTIONAL]
 # An array of glob patterns for files that should be ignored. The path is relative 
@@ -75,7 +81,7 @@ ignore:
   - "**/*.*[0-9]" 
     # Skip all hidden files
   - "**/.*"
-    # Skip vim's temp files
+    # Skip Vim's temp files
   - "**/*~"
 
 
@@ -85,25 +91,14 @@ ignore:
 serviceAcc: path/to/service/account.json
 
 
-# TODO:
-# users:
-#   - id:
-#     data:
-#   - id:
-#     data:
-#   - getFromProd:
-#   - getFromProd:
 
 # [OPTIONAL] 
 # An array describing emulated Firebase Auth users in your cloud environment
-auth:
+users:
   # You can describe your emulated Auth users either directly
-  # in the 'users' array:
-  - users:
-      - id: user-id-1
-        # The 'data' field takes JSON
-        data: '{"email": "user-id-1-email@email.com"}'
-  
+  - id: user-id-1
+    # The 'data' field takes a JSON string
+    data: '{"email": "user-id-1-email@email.com"}'
   # Or you can copy your production users from Firebae Auth by using 'geFromProd'
   # (WARNING: service account is required!):
   # If the value is a number, Foundry takes first N users from Firebase Auth
@@ -112,7 +107,7 @@ auth:
   # are real IDs of your Firebase Auth users
   - getFromProd: [id-of-a-user-in-production, another-id]
 
-  # You can use both 'users' and 'geFromProd' field simultaneously
+  # You can use both the direct and 'geFromProd' approach simultaneously
   # The final users collection will be a merge of these
 
 # [OPTIONAL]
@@ -160,18 +155,20 @@ firestore:
 # In this array, you describe how Foundry should trigger each function in every run.
 functions:
   # Foundry currently supports following types of Firebase Functions:
-  # https
-  # httpsCallable
-  # auth
-  # firestory
+  # - https
+  # - httpsCallable
+  # - auth
+  # - firestory
   
   # Each function has at least 2 fields:
   # 'name' - the same name under which your function is exported from your function's root index.js file
   # 'type' - one of the following: https, httpsCallable, auth, firestore
   
   
-  
-  # Function: https
+  # -----------------------
+  # Type: https
+  # A 'https' functions is the equivalent of
+  # https://firebase.google.com/docs/functions/http-events
   - name: myHttpsFunction
     type: https
     # The payload field can either be a JSON string
@@ -188,21 +185,69 @@ functions:
         collection: path/to/collection
         id: doc-id
   
-  # Function: httpsCallable
-  # A 'httpsCallable' function is similar to the 'https' type
-  # The difference is that 
-  # More info on httpsCallable functions can be found here
+  # -----------------------
+  # Type: httpsCallable
+  # A 'httpsCallable' is the equivalent of  
   # https://firebase.google.com/docs/functions/callable
   - name: myHttpsCallableFunction
     type: httpsCallable
+    # Since 'httpsCallable' function is meant to be called
+    # from inside your app by your users, it expects a 
+    # field 'asUser'
+    # With this field you specify as what user should this
+    # function be triggered
+    asUser:
+      # A user with this ID must be present in the emulated Firebase Auth users
+      id: user-id
+    # The 'payload' field is the same as in the 'https' function
+    payload: '{}'
+      
     
+  # -----------------------
+  # Type: auth
+  # An 'auth' function is the equivalent of
+  # https://firebase.google.com/docs/functions/auth-events
+  # Based on the 'trigger' field, there are 2 sub-types of 
+  # an 'auth' function: onCreate, onDelete
+  - name: myAuthOnDreateFunction
+    type: auth
+    trigger: onCreate
+    # The 'createUser' field specifies a new user record
+    # that will trigger this auth function.
+    # Keep in mind that this user will actually be created
+    # in the emulated Firebase Auth users!
+    createUser:    
+      id: new-user-id
+      data: '{"email": "new-user@email.com"}'
+    # You can also reference a Firebase auth user from your
+    # production. This user will get copied to the emulated
+    # Firebase auth users and triggers this auth function:
+    createUser:
+      getFromProd:
+        id: user-id-in-production
     
-  # Function: auth
-  # A 'auth' function is a function that is triggered when
-  # user either 
+  - name: myAuthOnDeleteFunction
+    type: auth
+    trigger: onDelete    
+    # This auth function will get triggered by deleting
+    # a user with the specified ID from your emulated
+    # Firebase Auth users.
+    # Keep in mind that this user will actually be deleted
+    # from the emulated Firebase Auth users!
+    deleteUser:
+      # A user with this ID must be present in the emulated Firebase Auth users
+      id: existing-user-id  
+  
+  # -----------------------
+  # Type: firestore
+  # A 'firestore' function is the equivalent of
+  # https://firebase.google.com/docs/functions/firestore-events
+  # Based on the 'trigger' field, there are 3 sub-types of 
+  # a 'firestore' function: onCreate, onDelete, onUpdate
 ```
 
-### FIeld `functions`
+### Field `functions`
+It's important to understand how trigger functions work. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both of these can be specified in the config file under fields `firestore` and `users` respectively.
 ### Field `firestore`
 ### Field `auth`
 ### Field `ignore`
@@ -282,7 +327,8 @@ If you want a function to automatically run in our emulated environment
         type: <https/firestore/auth>
         trigger: <onCreate/onDelete/onUpdate>
 
-
+## Supported Firebase features
+TIDI
 
 ## FAQ
 
