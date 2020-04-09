@@ -15,6 +15,8 @@ With Foundry CLI, you can feel sure that your code behaves correctly and same as
 
 **TODO: GIF HERE**
 
+Mention that logs are sent back right into your terminal, while you code.
+
 The key features of Foundry are:
 - **Out of the box environment**: Foundry connects you to a pre-configured cloud environment where you can interactively develop your Firebase Functions. No need to configure anything.
 
@@ -22,65 +24,98 @@ The key features of Foundry are:
 
 - **Short deploy times and instant feedback**: Your code is always deployed by default. Every code change to your Firebase Functions triggers the CLI that pushes your code to the cloud environment. The output is sent back to you usually within 2 seconds. There isn't any waiting for your code to get deployed, it's always deployed.
 
-- **Access to the production data**: The [config file](#Config) makes it easy to specify what part of your production Firestore and Auth users should be copied to the emulated Firestore in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup)
+- **Access to the production data**: The [config file](#Config) makes it easy to specify what part of your production Firestore and Auth users should be copied to the emulated Firestore in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup). No need to create separate Firebase projects to test your functions.
 
 - **Continuous feedback**: Pre-define with what data should each Firebase Function be triggered in the [config file](#Config). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly against your production data.
 
 - **Discover production bugs**: TODO
 
 ## Table of contents
-- **[Installation](#Installation)**
-- **[Usage](#Usage)**
-- **[Config](#Config)**
-  - **[Firestore](#Firestore)**
-  - **[Authentication](#Authentication)**
-  - **[Functions](#Functions)**
-- **[FAQ](#FAQ)**
+- **[Download](##download)**
+- **[Supported languages](##supported-languages)**
+- **[Config file](#config)**
+  - **[Functions](#functions)**
+  - **[Firestore](#firestore)**
+  - **[Auth](#auth)**
+  - **[Ignore files](#ignore-files)**
+  - **[Service account](#authentication)**
+- **[Examples](##examples)**
+- **[FAQ](#faq)**
+- **[Slack community](#slack-community)**
 
 ## Download
-
-Download the latest version of Foundry
 
 - **[macOS](https://github.com/FoundryApp/foundry-cli/releases)**
 
 - **[Linux](TODO)**
 
-Add the downloaded binary to one of folders in your system's `PATH` variable.
+Add the downloaded binary to one of the folders in your system's `PATH` variable.
 
 ## Supported languages
 Javascript
 
 ## Config file `foundry.yaml`
-For Foundry to work, it requires that its config file - `foundry.yaml` - is present. You can use `$ foundry init` To generate the initial config file.<br/>
-Make sure to call this command from a folder where your `package.json` for your Firebase Functions is placed.
+For Foundry to work, it requires that its config file - `foundry.yaml` - is present. You can run `$ foundry init` to generate a basic config file.<br/>
+Make sure to call this command from a folder where your `package.json` for your Firebase Functions is placed - `foundry.yaml` must always be placed next to the Firebase Function's `package.json` file.
 
 ```yaml
-# [OPTIONAL] An array of glob patterns for files that should be ignored. The path is relative to the file's dir.
-# If the array is changed, the CLI must be restarted for it to take the effect
+# [OPTIONAL]
+# An array of glob patterns for files that should be ignored. The path is relative to the file's dir.
+# If the array is changed, the CLI must be restarted for it to take the effect.
 ignore:
-  - node_modules # Skip the whole node_modules directory
-  - .git # Skip the whole .git directory
-  - "**/*.*[0-9]" # Skip all temp files ending with number
-  - "**/.*" # Skip all hidden files
-  - "**/*~" # Skip vim's temp files
+    # Skip all node_modules directories
+  - "**/node_modules"
+    # Skip the whole .git directory
+  - .git 
+    # Skip all temp files ending with number
+  - "**/*.*[0-9]" 
+    # Skip all hidden files
+  - "**/.*"
+    # Skip vim's temp files
+  - "**/*~"
 
 
-# [OPTIONAL] Path to your
-# serviceAcc: ""
+# [OPTIONAL] 
+# A path to a service account for your Firebase project. 
+# See <TODO:URL> for more info how to obtain your service account.
+# serviceAcc: path/to/service/account.json
 
 
-# [OPTIONAL] Describe emulated Firebase Auth users
+# [OPTIONAL] 
+# An array describing emulated Firebase Auth users in your cloud environment
 auth:
+  # You can describe your users directly
+  - users:
+      - id: user-id-1
+        # The 'data' field takes JSON
+        data: '{"email": "user-id-1-email@email.com"}'
+  
+  # Or you can copy your production users (service account is required)
+  # from Firebae Auth by using 'geFromProd':
+  # If the value is a number, Foundry takes first N users from Firebase Auth
+  - getFromProd: 2
+  # If the value is a string array, Foundry expects that the array's elements
+  # are real IDs of your Firebase Auth users
+  - getFromProd: ['id-of-a-user-in-production', 'another-id']
 
+  # You can use 'users' and 'geFromProd' fields at the same time
 
-# [OPTIONAL] Describe emulated Firestore in your cloud environment
+# [OPTIONAL]
+# An array dDescribe emulated Firestore in your cloud environment
 firestore:
 
 
-# [REQUIRED] An array of Firebase functions that should be evaluated by Foundry. All described functions must be exported in your root index.js
+# [REQUIRED] 
+# An array of Firebase functions that should be evaluated by Foundry. 
+# All described functions must be exported in the function's root index.js file
 functions:
-
 ```
+
+### FIeld `functions`
+### Field `firestore`
+### Field `auth`
+### Field `ignore`
+### Field `serviceAcc`
 
 
 ## Usage
@@ -168,7 +203,7 @@ or from [Firebase Console](https://console.firebase.google.com/project)
 
 ### Are you storing my code or data from my production environment?
 
-We don't store your code or data for duration that is longer than the lifetime of your session (specify until pod dies?).
+We don't store your code for a duration longer than the lifetime of your session. Once your session ends, your cloud environment is killed and only metadata (environment variables) is preserved.
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
