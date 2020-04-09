@@ -586,7 +586,6 @@ Deletes the specified environment variables.
 - `$ foundry env-print`<br/>
 Prints all existing environment variables.
 
-
 ## Supported Firebase features
 TODO
 
@@ -602,10 +601,8 @@ We don't store your code or any data for a duration longer than is the lifetime 
 The service account is needed for any action that requires copying data from your production Firestore database or production Firebase Auth to their emulated equivalents.<br/>
 You can definitely use Foundry without specifying a path to your service account. Some features just won't be available though.
 ### How do I get a service account JSON for my Firebase project?
-TODO
-Go to [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and choose your project
+Go to [https://console.firebase.google.com/](https://console.firebase.google.com/) and select your project.
 
-or from [Firebase Console](https://console.firebase.google.com/project)
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
