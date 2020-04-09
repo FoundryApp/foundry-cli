@@ -601,8 +601,20 @@ We don't store your code or any data for a duration longer than is the lifetime 
 The service account is needed for any action that requires copying data from your production Firestore database or production Firebase Auth to their emulated equivalents.<br/>
 You can definitely use Foundry without specifying a path to your service account. Some features just won't be available though.
 ### How do I get a service account JSON for my Firebase project?
-Go to [https://console.firebase.google.com/](https://console.firebase.google.com/) and select your project.
 
+1. Go to [https://console.firebase.google.com/](https://console.firebase.google.com/) and select your project.<br/>
+2. In your Firebase dashboard, select the settings icon. The icon is place up in the left sidebar.<br/>
+<img alt="Service-Account-Step-1" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-1.png?alt=media&token=3887c551-2aa6-4555-bd8e-7e0fe6e73c5e">
+3. A popup menu will appear, select "Project settings".<br/>
+<img alt="Service-Account-Step-2" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-2.png?alt=media&token=f6ae3f0c-069c-4f76-8712-203f4ba07e39">
+4. This will take you to your projects settings with links to different sections on top. Select "Service accounts"<br/>
+<img alt="Service-Account-Step-3" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-3.png?alt=media&token=7726fba0-ba90-4aa4-89d4-86727df595df">
+5. A window with info about the Firebase Admin SDK will appear. There, click on "Generate new private key" at the bottom.<br/>
+<img alt="Service-Account-Step-4" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-4.png?alt=media&token=caa3f666-59fc-4917-b736-1169e95b471e">
+6. This will present a modal window informing you about security implications. Read the text and then click on the "Generate key" button at the bottom. This will download a JSON file that is your service account key.<br/>
+<img alt="Service-Account-Step-5" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-5.png?alt=media&token=05e630f8-4dd8-4c43-baed-2a80b8096691">
+
+7. Copy the path of your service account key file as the field's `serviceAcc` value in the `foundry.yaml` config file.
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
