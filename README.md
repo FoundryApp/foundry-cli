@@ -8,27 +8,24 @@ Foundry let's you to develop your Firebase Functions in the same environment as 
 
 <img alt="Foundry" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/foundry-logo.svg?alt=media&token=9625306d-3577-4aab-ab12-bbde0daae849" width="600px">
 
-
-Foundry is a command-line tool for building Firebase Functions. Foundry connects you to a cloud environment that is identical to the production environment of your Firebase Functions where everything works out-of-the-box. Together with the [config file](#Config), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.<br/>
+Foundry is a command-line tool for building Firebase Functions. Foundry connects you to a cloud environment where everything works out-of-the-box and that is as much as possible identical to the production environment of your Firebase Functions. Together with the [config file](#config-file-foundryyaml), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.<br/>
 With Foundry, you can feel sure that your code behaves correctly and same as in the production already during the development.
 
 
 **TODO: GIF/VIDEO HERE**
 
-Mention that logs are sent back right into your terminal, while you code.
-
 The key features of Foundry are:
-- **Out of the box environment**: Foundry connects you to a pre-configured cloud environment where you can interactively develop your Firebase Functions. No need to configure anything.
+- **Out of the box environment**: Foundry connects you to a pre-configured cloud environment where you can interactively develop your Firebase Functions. You don't have to configure anything to debug & test your functions.
 
-- **REPL for you Firebase Functions**: Foundry watches your functions' code for changes. With every change, it sends your code to the cloud environment, evaluates the code there, triggers your functions and sends back the results. Everything is automated, you can just keep coding.
+- **REPL for you Firebase Functions**: Foundry watches your functions' code for changes. With every change, it sends your code to the cloud environment, evaluates the code there, triggers your functions and sends back the results to your terminal. Everything is automated, no need for context switching, you can just keep coding.
 
-- **Short upload times and quick response**: Your code is always deployed in the development environment by default. Every code change to your Firebase Functions triggers the CLI that pushes your code to the cloud environment. The output is sent back to you usually within 1-2 seconds. There isn't any waiting for your code to get deployed, it's always deployed.
+- **Short upload times and quick response**: Your code is always deployed in the development cloud environment by default. Every code change notifies Foundry to push your code to your environment. The output is sent back to you usually within 1-2 seconds. There isn't any waiting for your code to get deployed, it's always deployed and you always know whether it's working.
 
-- **Access to production data during development**: The [config file](#config-file) makes it easy to specify what part of your production Firestore and Auth users should be **copied** to the emulated Firestore and Firebase Auth in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup). There's no need to create separate Firebase projects or maintain local scripts to test your functions so you don't corrupt your production data.
+- **Access to production data during development**: The [config file](#config-file-foundryyaml) makes it easy to specify what part of your production Firestore database and Firebase Auth users should be **copied** to the emulated Firestore and Firebase Auth in your development cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup). There's no need to create separate Firebase projects or maintain local scripts to test your functions so you don't corrupt your production data.
 
-- **Continuous feedback**: Pre-define with what data should each Firebase Function be triggered in the [config file](#config-file). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly against your production data. There isn't any context switching and no need to leave your coding editor.
+- **Continuous feedback**: Pre-define with what data should each Firebase Function be triggered in the [config file](#config-file-foundryyaml). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly with your production data.
 
-- **Discover production bugs**: TODO
+- **Discover production bugs**: A lot of bugs happen only after you deploy your Functions onto the production. The biggest reason for this is not having an easy access to your production data. Foundry solves that by copying your production Firestore database and production Firebase Auth users based on your [`foundry.yaml` config file](#config-file-foundryyaml).
 
 
 ## TL;DR to start Foundry
@@ -341,7 +338,7 @@ ignore:
 
 # [OPTIONAL] 
 # A path to a service account for your Firebase project. 
-# See <TODO:URL> for more info on how to obtain your service account.
+# See https://github.com/FoundryApp/foundry-cli#field-serviceAcc for more info on how to obtain your service account.
 serviceAcc: path/to/service/account.json
 
 
