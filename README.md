@@ -13,7 +13,7 @@ Foundry is a CLI tool for building Firebase Functions. Foundry connects you to a
 With Foundry CLI, you can feel sure that your code behaves correctly and same as in the production already during the development.
 
 
-**TODO: GIF HERE**
+**TODO: GIF/VIDEO HERE**
 
 Mention that logs are sent back right into your terminal, while you code.
 
@@ -140,7 +140,7 @@ firestore:
   # You can use both the direct and 'geFromProd' approach simultaneously
   # The final documents will be a merge of these
     
-  # To create a collection or a document that is inside another collection:
+  # To create a nested collection:
   - collection: collection/doc-id/subcollection
     docs:
       - id: doc-in-subcollection
@@ -242,6 +242,55 @@ functions:
   # https://firebase.google.com/docs/functions/firestore-events
   # Based on the 'trigger' field, there are 3 sub-types of 
   # a 'firestore' function: onCreate, onDelete, onUpdate
+  - name: myFirestoreOnCreateFunction
+    type: firestore
+    trigger: onCreate
+    # The 'createDoc' field creates a new specified document
+    # that will trigger this firestore function.
+    # Keep in mind that this document will actually be
+    # create in the emulated Firestore!
+    createDoc:
+      collection: path/to/collection
+      id: new-doc-id
+      data: '{}'
+    # You can also reference a document from your production
+    # Firestore database.
+    # This document will be copied to the emulated Firestore
+    # database and will trigger this function.
+    createDoc:
+      getFromProd:
+        collection: path/to/collection
+        id: existing-doc-id
+  
+  - name: myFirestoreOnDeleteFunction
+    type: firestore
+    trigger: onDelete
+    # The 'deleteDoc' field deletes a specified document from
+    # the emulated Firestore database. The deletion will
+    # trigger this firestore function.
+    # Keep in mind that this document will actually be
+    # deleted from the emulated Firestore database. So it must
+    # exist first!
+    deleteDoc:
+      # A document inside this collection must exist in the
+      # emulated Firestore database
+      collection: path/to/collection
+      id: existing-doc-id
+
+  - name: myFirestoreOnUpdateFunction
+    type: firestore
+    trigger: onUpdate
+    # The 'updateDoc' field updates a specified document
+    # from the emulated Firestore database with a new
+    # data. The update will trigger this firestore function.
+    # Keep in mind that this document will actually be
+    # updated in the emulated Firestore database. So it must
+    # exist first!
+    updateDoc:
+      collection: path/to/collection
+      id: existing-doc-id
+      # A JSON string specifying new document's data
+      data: '{}'
 ```
 
 
