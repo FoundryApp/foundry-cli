@@ -165,7 +165,7 @@ func (p *Prompt) Run() {
 }
 
 func (p *Prompt) Writeln(s string) (n int, err error) {
-	return p.outBuf.Write([]byte(s + "\n"))
+	return p.outBuf.Write([]byte(s))
 }
 
 func (p *Prompt) SetInfoln(s string) error {
