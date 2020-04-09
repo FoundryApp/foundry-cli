@@ -9,8 +9,8 @@ Foundry let's you to develop your Firebase Functions in the same environment as 
 <img alt="Foundry" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/foundry-logo.svg?alt=media&token=9625306d-3577-4aab-ab12-bbde0daae849" width="600px">
 
 
-Foundry is a CLI tool for building Firebase Functions. Foundry connects you to a cloud environment that is identical to the production environment of your Firebase Functions where everything works out-of-the-box. Together with the [config file](#Config), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.<br/>
-With Foundry CLI, you can feel sure that your code behaves correctly and same as in the production already during the development.
+Foundry is a command-line tool for building Firebase Functions. Foundry connects you to a cloud environment that is identical to the production environment of your Firebase Functions where everything works out-of-the-box. Together with the [config file](#Config), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.<br/>
+With Foundry, you can feel sure that your code behaves correctly and same as in the production already during the development.
 
 
 **TODO: GIF/VIDEO HERE**
@@ -87,6 +87,9 @@ Check out the full config file example [here](#full-config-file-example).
 
 ### Field `functions`
 An array describing your Firebase functions that should be evaluated by Foundry. All described functions must be exported in the function's root index.js file. In this array, you describe how Foundry should trigger each function in every run.<br/>
+
+It's important to understand how trigger functions work in Foundry. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both can be specified in the config file under fields `firestore` and `users` respectively. So all of your code where you manipulate with Firestore or Firebase Auth happens against the emulated Firestore database and emulated Firebase Auth.<br/>
+The same is true for function triggers you describe in the Foundry config file. The triggers usually describe how should the emulated Firestore database or emulated Firebase Auth users be mutated. In return, these mutations will trigger your functions.<br/>
 
 Currently, Foundry supports following Firebase functions:
 #### HTTPS Functions
@@ -226,9 +229,6 @@ Equivalent of - [https://firebase.google.com/docs/functions/firestore-events](ht
     # A JSON string specifying new document's data
     data: '{}'
 ```
-
-It's important to understand how trigger functions work in Foundry. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both can be specified in the config file under fields `firestore` and `users` respectively. So all of your code where you manipulate with Firestore or Firebase Auth happens against the emulated Firestore database and emulated Firebase Auth.<br/>
-The same is true for function triggers you describe in the Foundry config file. The triggers usually describe how should the emulated Firestore database or emulated Firebase Auth users be mutated. In return, these mutations will trigger your functions.
 
 ### Field `firestore`
 The field `firestore` gives you an option to have a separate Firestore database from your production Firestore database. This separate Firestore is an emulated Firestore database that lives in your cloud environment for the duration of your session. <br/>
@@ -536,18 +536,28 @@ functions:
 
 
 ## How to use the Foundry CLI
-All available commands can be found by calling `$ foundry --help`.
-
-``
-
-### Initialization
+All available commands can be printed by calling `$ foundry --help`.
 TODO
 
+
+### Initialization
+Foundry needs 
+TODO
 ### Interactive prompt
+To connect to your cloud development environment and start your session run `$ foundry go`. If you aren't signed in, this will create an anonymous account for you that can be linked to your actual account later once you sign up.
 TODO
 
 ### Environment variables
-TODO
+You can set, delete, and print all  environment variables in your cloud development environment. 
+
+- `$ foundry env-set ENV_1=VAL_1 ENV_2=VAL_2`<br/>
+Sets the specified environment variables.
+
+- `$ foundry env-delete ENV_1 ENV_2`<br/>
+Deletes the specified environment variables.
+
+- `$ foundry env-print`<br/>
+Prints all existing environment variables.
 
 
 ## Supported Firebase features
