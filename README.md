@@ -31,6 +31,11 @@ The key features of Foundry are:
 - **Discover production bugs**: TODO
 
 
+## TL;DR to start Foundry
+1. `$ cd <directory where is a package.json for your Firebase Functions>`
+2. `$ foundry init`
+3. `$ foundry go`
+
 ## Table of contents
 - **[How Foundry works](#how-foundry-works)**
 - **[What Foundry doesn't do](#what-foundry-doesnt-do)**
@@ -45,7 +50,7 @@ The key features of Foundry are:
   - **[Full config file example](#full-config-file-example)**
 - **[How to use the Foundry CLI](#how-to-use-the-foundry-cli)**
   - **[Initialization](#initalization)**
-  - **[Interactive prompt](#interactive-prompt)**
+  - **[Connecting to your cloud environment](#connecting-to-your-cloud-environment)**
   - **[Environment variables](#environment-variables)**
 - **[Supported Firebase features](#supported-firebase-features)**
 - **[Examples](#examples)**
@@ -537,15 +542,37 @@ functions:
 
 ## How to use the Foundry CLI
 All available commands can be printed by calling `$ foundry --help`.
-TODO
+
+- `$ foundry init`<br/>
+Creates an initial `foundry.yaml` config file in the current directory
+
+- `$ foundry go`<br/>
+Start an interactive prompt and connects you to your cloud development environment
+
+- `$ foundry env-set ENV_NAME=VAL`<br/>
+Sets the environment variable(s) in your cloud development environment
+
+- `$ foundry env-delete ENV_NAME`<br/>
+Deletes the environment variable(s) in your cloud development environment
+
+- `$ foundry env-print`<br/>
+Prints environment variable(s) in your cloud development environment
+
 
 
 ### Initialization
-Foundry needs 
-TODO
-### Interactive prompt
-To connect to your cloud development environment and start your session run `$ foundry go`. If you aren't signed in, this will create an anonymous account for you that can be linked to your actual account later once you sign up.
-TODO
+For Foundry to work it needs to have a [`foundry.yaml` config file](#config-file-foundryyaml). This config file must placed in the same directory as is the `package.json` file for your Firebase Functions.<br/>
+
+To generate a basic config file run `$ foundry init`.
+
+### Connecting to your cloud environment
+To connect to your cloud development environment and start your session run `$ foundry go`. If you aren't signed in, this will create an anonymous account for you that can be linked to your actual account later once you sign up.<br/>
+
+Foundry starts an interactive prompt, connects you to your cloud environment and starts watching your code for changes. Each change notifies the CLI to send your code into the environment where your functions are triggered. You see the outpout and errors from your functions inside the interactive prompt.
+
+#### Filtering functions
+Often, you have many functions and orienting in the output is hard. To trigger only specific functions in each run you can execute the `watch` command inside the prompt. Its format is `watch function_name_1 function_name_2`.<br/>
+To stop filtering functions execute the command `watch:all`.
 
 ### Environment variables
 You can set, delete, and print all  environment variables in your cloud development environment. 
@@ -572,9 +599,10 @@ The cloud environment exists only for the time being your session is active. Onc
 We don't store your code or any data for a duration longer than is the lifetime duration of your session. Once your session ends, your cloud environment is terminated and only metadata (environment variables) is preserved.
 
 ### Why do you need a service account to my Firebase project?
-TODO
-
+The service account is needed for any action that requires copying data from your production Firestore database or production Firebase Auth to their emulated equivalents.<br/>
+You can definitely use Foundry without specifying a path to your service account. Some features just won't be available though.
 ### How do I get a service account JSON for my Firebase project?
+TODO
 Go to [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and choose your project
 
 or from [Firebase Console](https://console.firebase.google.com/project)
