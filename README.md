@@ -307,7 +307,13 @@ ignore:
 ```
 
 ### Field `serviceAcc`
-For Foundry to able to copy some of your production data to your development cloud environment it must have an access to your Firebase project.
+For Foundry to able to copy some of your production data to your development cloud environment it must have an access to your Firebase project. This is done through a [service account](https://firebase.google.com/support/guides/service-accounts).
+The field `serviceAcc` expects a path to a service account JSON file for your Firebase project.<br/>
+
+Of course, if you aren't copying any of your production data you don't need to specify `serviceAcc`.<br/>
+
+
+[See FAQ](#how-do-i-get-a-service-account-json-for-my-firebase-project) to learn how to obtain a service account to your Firebase project.
 
 ### Full config file example
 ```yaml
