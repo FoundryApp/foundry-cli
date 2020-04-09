@@ -43,10 +43,10 @@ The key features of Foundry are:
   - **[Field `ignore`](#field-ignore)**
   - **[Field `serviceAcc`](#field-serviceAcc)**  
   - **[Full config file example](#full-config-file-example)**
-- **[How to use the Foundry CLI](#getting-started)**
+- **[How to use the Foundry CLI](#how-to-use-the-foundry-cli)**
   - **[Initialization](#initalization)**
   - **[Interactive prompt](#interactive-prompt)**
-  - **[Env variables](#interactive-prompt)**
+  - **[Environment variables](#environment-variables)**
 - **[Supported Firebase features](#supported-firebase-features)**
 - **[Examples](#examples)**
 - **[FAQ](#faq)**
@@ -535,78 +535,20 @@ functions:
 ```
 
 
-## Usage
+## How to use the Foundry CLI
+All available commands can be found by calling `$ foundry --help`.
 
-### Run
-In the project directory type
+``
 
-    foundry go
+### Initialization
+TODO
 
-and just code. Your code is evaluated on each save and the results are streamed right back.
+### Interactive prompt
+TODO
 
-### Prompt Commands
+### Environment variables
+TODO
 
-you can watch only some functions from the config by using the `watch` command in prompt
-
-    > watch <functionToWatch> <anotherFunctionToWatch>
-
-to reset this setting type
-
-    > (reset)
-
-### Registration
-
-The basic version can be used without registration, but
-
-## Config
-
-You can describe the emulated environment in the `foundry.yaml` file in your project root directory.
-
-### Root Directory
-
-    rootDir: .
-
-### Service Account
-
-    serviceAcc: <relativePathToServiceAccountJSON>
-
-### Firestore
-
-Before every run you can fill the emulated Firestore with values by adding this code into the config
-
-    firestore:
-      - collection: ''
-        docs:
-          - id: ''
-            data: '{"":""}'
-
-or if you added a [service account key](#How%20to%20get%20a%20service%20account%20JSON%20for%20your%20Firebase%20project) to config with
-
-    serviceAcc: <path/to/serviceAcc.json>
-
-you can fill the emulated Firestore directly from your production environment
-
-    firestore:
-      - collection: ''
-        getFromProd: 5
-
-      - collection: ''
-        getFromProd: ['id1', 'id2']
-
-### Authentication
-
-### Functions
-
-If you want a function to automatically run in our emulated environment
-
-    functions:
-      - name: <exportedFunctionName>
-        type: <https/firestore/auth>
-        trigger: <onCreate/onDelete/onUpdate>
-
-      - name: <exportedFunctionName>
-        type: <https/firestore/auth>
-        trigger: <onCreate/onDelete/onUpdate>
 
 ## Supported Firebase features
 TODO
@@ -626,8 +568,6 @@ TODO
 Go to [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and choose your project
 
 or from [Firebase Console](https://console.firebase.google.com/project)
-
-
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
