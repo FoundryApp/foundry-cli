@@ -9,11 +9,11 @@ Foundry let's you to develop your Firebase Functions in the same environment as 
 <img alt="Foundry" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/foundry-logo.svg?alt=media&token=9625306d-3577-4aab-ab12-bbde0daae849" width="600px">
 
 
-Foundry is a CLI tool for building Firebase Functions. Foundry connects you to a cloud environment that is identical to the production environment of your Firebase Functions where everything works out-of-the-box. Together with the [config file](#Config), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.<br/>
-With Foundry CLI, you can feel sure that your code behaves correctly and same as in the production already during the development.
+Foundry is a command-line tool for building Firebase Functions. Foundry connects you to a cloud environment that is identical to the production environment of your Firebase Functions where everything works out-of-the-box. Together with the [config file](#Config), the cloud environment gives you an access to a copy of your production Firestore database and Firebase Auth users.<br/>
+With Foundry, you can feel sure that your code behaves correctly and same as in the production already during the development.
 
 
-**TODO: GIF HERE**
+**TODO: GIF/VIDEO HERE**
 
 Mention that logs are sent back right into your terminal, while you code.
 
@@ -22,51 +22,305 @@ The key features of Foundry are:
 
 - **REPL for you Firebase Functions**: Foundry watches your functions' code for changes. With every change, it sends your code to the cloud environment, evaluates the code there, triggers your functions and sends back the results. Everything is automated, you can just keep coding.
 
-- **Short deploy times and instant feedback**: Your code is always deployed by default. Every code change to your Firebase Functions triggers the CLI that pushes your code to the cloud environment. The output is sent back to you usually within 1-2 seconds. There isn't any waiting for your code to get deployed, it's always deployed.
+- **Short upload times and quick response**: Your code is always deployed in the development environment by default. Every code change to your Firebase Functions triggers the CLI that pushes your code to the cloud environment. The output is sent back to you usually within 1-2 seconds. There isn't any waiting for your code to get deployed, it's always deployed.
 
-- **Access to the production data**: The [config file](#config-file) makes it easy to specify what part of your production Firestore and Auth users should be **copied** to the emulated Firestore and Firebase Auth in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup). There's no need to create separate Firebase projects or maintain local scripts to test your functions so you don't corrupt your production data.
+- **Access to production data during development**: The [config file](#config-file) makes it easy to specify what part of your production Firestore and Auth users should be **copied** to the emulated Firestore and Firebase Auth in the cloud environment. You access this data the same way as you would in the production - with the official [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup). There's no need to create separate Firebase projects or maintain local scripts to test your functions so you don't corrupt your production data.
 
 - **Continuous feedback**: Pre-define with what data should each Firebase Function be triggered in the [config file](#config-file). The functions are then automatically triggered with every code change. This ensures that you always know whether your functions behave correctly against your production data. There isn't any context switching and no need to leave your coding editor.
 
 - **Discover production bugs**: TODO
 
+
+## TL;DR to start Foundry
+1. `$ cd <directory where is a package.json for your Firebase Functions>`
+2. `$ foundry init`
+3. `$ foundry go`
+
 ## Table of contents
 - **[How Foundry works](#how-foundry-works)**
-- **[Download](#download)**
+- **[What Foundry doesn't do](#what-foundry-doesnt-do)**
+- **[Download and installation](#download-and-installation)**
 - **[Supported languages](#supported-languages)**
-- **[Config file](#config-file)**
-  - **[Functions](#functions)**
-  - **[Firestore](#firestore)**
-  - **[Auth](#auth)**
-  - **[Ignore files](#ignore-files)**
-  - **[Service account](#authentication)**
-- **[Getting started](#getting-started)**
-- **[Interactive prompt](#interactive-prompt)**
+- **[Config file `foundry.yaml`](#config-file-foundryyaml)**
+  - **[Field `functions`](#field-functions)**
+  - **[Field `firestore`](#field-firestore)**
+  - **[Field `users`](#field-users)**
+  - **[Field `ignore`](#field-ignore)**
+  - **[Field `serviceAcc`](#field-serviceAcc)**  
+  - **[Full config file example](#full-config-file-example)**
+- **[How to use the Foundry CLI](#how-to-use-the-foundry-cli)**
+  - **[Initialization](#initalization)**
+  - **[Connecting to your cloud environment](#connecting-to-your-cloud-environment)**
+  - **[Environment variables](#environment-variables)**
 - **[Supported Firebase features](#supported-firebase-features)**
 - **[Examples](#examples)**
 - **[FAQ](#faq)**
 - **[Slack community](#slack-community)**
 
 ## How Foundry works
-TODO
+Foundry helps you to develop Firebase Functions faster and with a copy of your production data. It's a command-line tool that connects you to your own cloud environment. This cloud development environment is as much as possible similar to the actual environment where you Firebase Functions run after the deployment and have everything pre-configured.<br/>
+Once connected to your development environment, Foundry starts watching your code for changes. Every change notifies the CLI and your code is uploaded to your cloud development environment. Foundry then triggers all your Firebase Functions according to rules specified in your `foundry.yaml` config file. <br/>
+Both `stdout` and `stderr` of your functions is sent back to you after each of such runs. The whole upload loop with the transmition of data back to you usually takes about 1-2 seconds. This loop creates a REPL-like tool for you functions and makes it really easy to be sure that your functions' code behave correctly with the production data.<br/>
 
-## Download
+The [config](#config-file-foundryyaml) `foundry.yaml` file is a critical part of Foundry. There you describe 3 main things:
+1. [What Firebase Functions should Foundry register and **how** it should trigger them in each run](#field-functions)
+2. [How should the emulated Firestore database look like](#field-firestore)
+3. [How should the emulated Firebase Auth users look like](#field-auth)
+<br/>
+
+Having an emulated Firestore database and Firebase Auth users in your development environment makes it easy to test new things. 
+
+## What Foundry doesn't do
+Foundry doesn't deploy your Firebase Functions onto the production. To deploy functions onto the production use the official [Firebase tool](https://github.com/firebase/firebase-tools).
+
+## Download and installation
 
 - **[macOS](https://github.com/FoundryApp/foundry-cli/releases)**
 
 - **[Linux](TODO)**
 
-Add the downloaded binary to one of the folders in your system's `PATH` variable.
+To install Foundry, Add the downloaded binary to one of the folders in your system's `PATH` variable.
 
 ## Supported languages
-Javascript
+JavaScript
 
-## Config file
-For Foundry to work, it requires that its config file - `foundry.yaml` - is present. You can run `$ foundry init` to generate a basic config file.<br/>
-Make sure to call this command from a folder where your `package.json` for your Firebase Functions is placed - `foundry.yaml` must always be placed next to the Firebase Function's `package.json` file. 
+## Config file `foundry.yaml`
+For Foundry to work, it requires that its config file - `foundry.yaml` - is present. The config file must always be placed next to the Firebase Function's `package.json` file.<br/>
+You can run `$ foundry init` to generate a basic config file. Make sure to call this command from a folder where your `package.json` for your Firebase Functions is placed.<br/>
+
+Check out the full config file example [here](#full-config-file-example).
+
+### Field `functions`
+An array describing your Firebase functions that should be evaluated by Foundry. All described functions must be exported in the function's root index.js file. In this array, you describe how Foundry should trigger each function in every run.<br/>
+
+It's important to understand how trigger functions work in Foundry. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both can be specified in the config file under fields `firestore` and `users` respectively. So all of your code where you manipulate with Firestore or Firebase Auth happens against the emulated Firestore database and emulated Firebase Auth.<br/>
+The same is true for function triggers you describe in the Foundry config file. The triggers usually describe how should the emulated Firestore database or emulated Firebase Auth users be mutated. In return, these mutations will trigger your functions.<br/>
+
+Currently, Foundry supports following Firebase functions:
+#### HTTPS Functions
+Equivalent of - [https://firebase.google.com/docs/functions/http-events]((https://firebase.google.com/docs/functions/http-events))
+```yaml
+- name: myHttpsFunction
+  type: https
+  # The payload field can either be a JSON string
+  payload: '{"field":"value"}'
+  # or you can reference a document from your production Firestore
+  payload:
+    doc:
+      getFromProd:
+        collection: path/to/collection
+        id: doc-id
+  # or you can reference a document from the emulated Firestore
+  payload:
+    doc:
+      collection: path/to/collection
+      id: doc-id
+```
+
+#### HTTPS Callable Functions
+Equivalent of - [https://firebase.google.com/docs/functions/callable](https://firebase.google.com/docs/functions/callable)
+```yaml
+- name: myHttpsCallableFunction
+  type: httpsCallable
+  # Since 'httpsCallable' function is meant to be called
+  # from inside your app by your users, it expects a 
+  # field 'asUser'
+  # With this field you specify as what user should this
+  # function be triggered
+  asUser:
+    # A user with this ID must be present in the emulated Firebase Auth users
+    id: user-id
+  # The 'payload' field is the same as in the 'https' function
+  payload: '{}'
+```
+
+#### Auth Trigger Functions
+Equivalent of - [https://firebase.google.com/docs/functions/auth-events](https://firebase.google.com/docs/functions/auth-events)<br/>
+
+`onCreate` trigger
+```yaml
+- name: myAuthOnCreateFunction
+  type: auth
+  trigger: onCreate 
+  # The 'createUser' field specifies a new user record
+  # that will trigger this auth function.
+  # Keep in mind that this user will actually be created
+  # in the emulated Firebase Auth users!
+  createUser:    
+    id: new-user-id
+    data: '{"email": "new-user@email.com"}'
+  # You can also reference a Firebase auth user from your
+  # production by using the 'getFromProd' field. 
+  # This user will be copied to the emulated Firebase auth users 
+  # and will trigger this auth function:
+  createUser:
+    getFromProd:
+      id: user-id-in-production
+```
+
+`onDelete` trigger
+```yaml
+- name: myAuthOnDeleteFunction
+  type: auth
+  trigger: onDelete    
+  # This auth function will be triggered by deleting
+  # a user with the specified ID from your emulated
+  # Firebase Auth users.
+  # Keep in mind that this user will actually be deleted
+  # from the emulated Firebase Auth users!
+  deleteUser:
+    # A user with this ID must be present in the emulated Firebase Auth users
+    id: existing-user-id  
+```
+
+#### Firestore Trigger Functions
+Equivalent of - [https://firebase.google.com/docs/functions/firestore-events](https://firebase.google.com/docs/functions/firestore-events)<br/>
+
+`onCreate` trigger
+```yaml
+- name: myFirestoreOnCreateFunction
+  type: firestore
+  trigger: onCreate
+  # The 'createDoc' field creates a new specified document
+  # that will trigger this firestore function.
+  # Keep in mind that this document will actually be
+  # create in the emulated Firestore!
+  createDoc:
+    collection: path/to/collection
+    id: new-doc-id
+    data: '{}'
+  # You can also reference a document from your production
+  # Firestore database.
+  # This document will be copied to the emulated Firestore
+  # database and will trigger this function.
+  createDoc:
+    getFromProd:
+      collection: path/to/collection
+      id: existing-doc-id
+```
+
+`onDelete` trigger
+```yaml
+- name: myFirestoreOnDeleteFunction
+  type: firestore
+  trigger: onDelete
+  # The 'deleteDoc' field deletes a specified document from
+  # the emulated Firestore database. The deletion will
+  # trigger this firestore function.
+  # Keep in mind that this document will actually be
+  # deleted from the emulated Firestore database. So it must
+  # exist first!
+  deleteDoc:
+    # A document inside this collection must exist in the
+    # emulated Firestore database
+    collection: path/to/collection
+    id: existing-doc-id
+```
+
+`onUpdate` trigger
+```yaml
+- name: myFirestoreOnUpdateFunction
+  type: firestore
+  trigger: onUpdate
+  # The 'updateDoc' field updates a specified document
+  # from the emulated Firestore database with a new
+  # data. The update will trigger this firestore function.
+  # Keep in mind that this document will actually be
+  # updated in the emulated Firestore database. So it must
+  # exist first!
+  updateDoc:
+    collection: path/to/collection
+    id: existing-doc-id
+    # A JSON string specifying new document's data
+    data: '{}'
+```
+
+### Field `firestore`
+The field `firestore` gives you an option to have a separate Firestore database from your production Firestore database. This separate Firestore is an emulated Firestore database that lives in your cloud environment for the duration of your session. <br/>
+
+The `firestore` field expects an array of collections.
+You have two options how to fill an emulated Firestore database. 
+
+1. Specify documents directly with JSON strings<br/>
+```yaml
+firestore:    
+  - collection: workspaces
+    docs:
+      - id: ws-id-1
+        data: '{"userId": "user-id-1"}'
+      - id: ws-id-2
+        data: '{"userId": "user-id-2"}'      
+```
+
+2. Specify what documents should be copied from your production Firestore database<br/>
+Note that this approach requires you to specify the [`serviceAcc`](#field-serviceacc) field.
+```yaml
+firestore:
+  - collection: workspaces
+    docs:
+      - getFromProd: [workspace-id-1, workspace-id-2]
+      # This option tells Foundry to take first 2 documents from collection 'workspaces'
+      # in your production Firestore database
+      - getFromProd: 2
+```
+
+You can combine both the direct approach and `getFromProd` approach.
 <br/>
 
-Here's a full example of the config file:
+To create a nested collections specify full collection's path
+```yaml
+firestore:
+  - collection: my/nested/collection
+    docs: ...
+```
+
+### Field `users`
+Same as you can [emulate](#field-firestore) Firestore database for your development you can also emulate Firebase Auth users.<br/>
+
+You have two options how to fill the emulated uses:
+1. Directly with JSON strings
+```yaml
+users:    
+    - id: user-id-1
+      # The 'data' field takes a JSON string
+      data: '{"email": "user-id-1-email@email.com"}'  
+```
+
+2. Specify what users should be copied from your production Firebase Auth<br/>
+Note that this approach requires you to specify the [`serviceAcc`](#field-serviceacc) field.
+```yaml
+users:  
+    - getFromProd: [user-id-1, user-id-2]
+      # If the value is a number, Foundry takes first N users from Firebase Auth
+    - getFromProd: 2  
+```
+
+### Field `ignore`
+Often there are files and folders that you don't want to upload are watch. To ignore these, you can use an array of glob patterns. For example:
+```yaml
+ignore:
+    # Skip all node_modules directories
+  - "**/node_modules"
+    # Skip the whole .git directory
+  - .git 
+    # Skip all temp files ending with number
+  - "**/*.*[0-9]" 
+    # Skip all hidden files
+  - "**/.*"
+    # Skip Vim's temp files
+  - "**/*~"
+```
+
+### Field `serviceAcc`
+For Foundry to able to copy some of your production data to your development cloud environment it must have an access to your Firebase project. This is done through a [service account](https://firebase.google.com/support/guides/service-accounts).
+The field `serviceAcc` expects a path to a service account JSON file for your Firebase project.<br/>
+
+Of course, if you aren't copying any of your production data you don't need to specify `serviceAcc`.<br/>
+
+
+[See FAQ](#how-do-i-get-a-service-account-json-for-my-firebase-project) to learn how to obtain a service account to your Firebase project.
+
+### Full config file example
 ```yaml
 # [OPTIONAL]
 # An array of glob patterns for files that should be ignored. The path is relative 
@@ -91,7 +345,6 @@ ignore:
 serviceAcc: path/to/service/account.json
 
 
-
 # [OPTIONAL] 
 # An array describing emulated Firebase Auth users in your cloud environment
 users:
@@ -112,17 +365,7 @@ users:
 
 # [OPTIONAL]
 # An array describing emulated Firestore in your cloud environment
-firestore:
-  # TODO:
-  # - collection: workspaces
-  #   docs:
-  #     - id: ws-id-1
-  #       data: '{"userId": "user-id-1"}'
-  #     - id: ws-id-2
-  #       data: '{"userId": "user-id-2"}'
-  #     - getFromProd: 2
-  #     - getFromProd: [wp-id-in-prod]
-  
+firestore:    
   # You can describe your emulated Firestore either directly
   - collection: workspaces
     docs:
@@ -130,24 +373,24 @@ firestore:
         data: '{"userId": "user-id-1"}'
       - id: ws-id-2
         data: '{"userId": "user-id-2"}'
-      
-  # Or you can copy data from your production Firestore by using 'getFromProd'
-  # (WARNING: service account is required!):
-  - collection: workspaces
-    # If the value is a number, Foundry takes first N documents from the 
-    # specified collection (here 'workspaces')
-    getFromProd: 2
-    # If the value is an array, Foundry expects that the array's elements
-    # are real IDs of documents in the specified collection (here documents
-    # in the 'workspaces' collection)
-    getFromProd: [workspace-id-1, workspace-id-2]
+      # Or you can copy data from your production Firestore by using 'getFromProd'
+      # (WARNING: service account is required!):
+      # If the value is a number, Foundry takes first N documents from the 
+      # specified collection (here 'workspaces')
+      - getFromProd: 2
+      # If the value is an array, Foundry expects that the array's elements
+      # are real IDs of documents in the specified collection (here documents
+      # in the 'workspaces' collection)
+      - getFromProd: [workspace-id-1, workspace-id-2]
+
+  # You can use both the direct and 'geFromProd' approach simultaneously
+  # The final documents will be a merge of these
     
-  # To create a collection or a document that is inside another collection:
+  # To create a nested collection:
   - collection: collection/doc-id/subcollection
     docs:
       - id: doc-in-subcollection
         data: '{}'
-
 
 # [REQUIRED] 
 # An array describing your Firebase functions that should be evaluated by Foundry. 
@@ -161,7 +404,7 @@ functions:
   # - firestory
   
   # Each function has at least 2 fields:
-  # 'name' - the same name under which your function is exported from your function's root index.js file
+  # 'name' - the same name under which a function is exported from your function's root index.js file
   # 'type' - one of the following: https, httpsCallable, auth, firestore
   
   
@@ -209,7 +452,7 @@ functions:
   # https://firebase.google.com/docs/functions/auth-events
   # Based on the 'trigger' field, there are 2 sub-types of 
   # an 'auth' function: onCreate, onDelete
-  - name: myAuthOnDreateFunction
+  - name: myAuthOnCreateFunction
     type: auth
     trigger: onCreate
     # The 'createUser' field specifies a new user record
@@ -220,8 +463,9 @@ functions:
       id: new-user-id
       data: '{"email": "new-user@email.com"}'
     # You can also reference a Firebase auth user from your
-    # production. This user will get copied to the emulated
-    # Firebase auth users and triggers this auth function:
+    # production by using the 'getFromProd' field. 
+    # This user will be copied to the emulated Firebase auth users 
+    # and will trigger this auth function:
     createUser:
       getFromProd:
         id: user-id-in-production
@@ -229,7 +473,7 @@ functions:
   - name: myAuthOnDeleteFunction
     type: auth
     trigger: onDelete    
-    # This auth function will get triggered by deleting
+    # This auth function will be triggered by deleting
     # a user with the specified ID from your emulated
     # Firebase Auth users.
     # Keep in mind that this user will actually be deleted
@@ -244,106 +488,124 @@ functions:
   # https://firebase.google.com/docs/functions/firestore-events
   # Based on the 'trigger' field, there are 3 sub-types of 
   # a 'firestore' function: onCreate, onDelete, onUpdate
+  - name: myFirestoreOnCreateFunction
+    type: firestore
+    trigger: onCreate
+    # The 'createDoc' field creates a new specified document
+    # that will trigger this firestore function.
+    # Keep in mind that this document will actually be
+    # create in the emulated Firestore!
+    createDoc:
+      collection: path/to/collection
+      id: new-doc-id
+      data: '{}'
+    # You can also reference a document from your production
+    # Firestore database.
+    # This document will be copied to the emulated Firestore
+    # database and will trigger this function.
+    createDoc:
+      getFromProd:
+        collection: path/to/collection
+        id: existing-doc-id
+  
+  - name: myFirestoreOnDeleteFunction
+    type: firestore
+    trigger: onDelete
+    # The 'deleteDoc' field deletes a specified document from
+    # the emulated Firestore database. The deletion will
+    # trigger this firestore function.
+    # Keep in mind that this document will actually be
+    # deleted from the emulated Firestore database. So it must
+    # exist first!
+    deleteDoc:
+      # A document inside this collection must exist in the
+      # emulated Firestore database
+      collection: path/to/collection
+      id: existing-doc-id
+
+  - name: myFirestoreOnUpdateFunction
+    type: firestore
+    trigger: onUpdate
+    # The 'updateDoc' field updates a specified document
+    # from the emulated Firestore database with a new
+    # data. The update will trigger this firestore function.
+    # Keep in mind that this document will actually be
+    # updated in the emulated Firestore database. So it must
+    # exist first!
+    updateDoc:
+      collection: path/to/collection
+      id: existing-doc-id
+      # A JSON string specifying new document's data
+      data: '{}'
 ```
 
-### Field `functions`
-It's important to understand how trigger functions work. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both of these can be specified in the config file under fields `firestore` and `users` respectively.
-### Field `firestore`
-### Field `auth`
-### Field `ignore`
-### Field `serviceAcc`
+
+## How to use the Foundry CLI
+All available commands can be printed by calling `$ foundry --help`.
+
+- `$ foundry init`<br/>
+Creates an initial `foundry.yaml` config file in the current directory
+
+- `$ foundry go`<br/>
+Start an interactive prompt and connects you to your cloud development environment
+
+- `$ foundry env-set ENV_NAME=VAL`<br/>
+Sets the environment variable(s) in your cloud development environment
+
+- `$ foundry env-delete ENV_NAME`<br/>
+Deletes the environment variable(s) in your cloud development environment
+
+- `$ foundry env-print`<br/>
+Prints environment variable(s) in your cloud development environment
 
 
-## Usage
 
-### Run
-In the project directory type
+### Initialization
+For Foundry to work it needs to have a [`foundry.yaml` config file](#config-file-foundryyaml). This config file must placed in the same directory as is the `package.json` file for your Firebase Functions.<br/>
 
-    foundry go
+To generate a basic config file run `$ foundry init`.
 
-and just code. Your code is evaluated on each save and the results are streamed right back.
+### Connecting to your cloud environment
+To connect to your cloud development environment and start your session run `$ foundry go`. If you aren't signed in, this will create an anonymous account for you that can be linked to your actual account later once you sign up.<br/>
 
-### Prompt Commands
+Foundry starts an interactive prompt, connects you to your cloud environment and starts watching your code for changes. Each change notifies the CLI to send your code into the environment where your functions are triggered. You see the outpout and errors from your functions inside the interactive prompt.
 
-you can watch only some functions from the config by using the `watch` command in prompt
+#### Filtering functions
+Often, you have many functions and orienting in the output is hard. To trigger only specific functions in each run you can execute the `watch` command inside the prompt. Its format is `watch function_name_1 function_name_2`.<br/>
+To stop filtering functions execute the command `watch:all`.
 
-    > watch <functionToWatch> <anotherFunctionToWatch>
+### Environment variables
+You can set, delete, and print all  environment variables in your cloud development environment. 
 
-to reset this setting type
+- `$ foundry env-set ENV_1=VAL_1 ENV_2=VAL_2`<br/>
+Sets the specified environment variables.
 
-    > (reset)
+- `$ foundry env-delete ENV_1 ENV_2`<br/>
+Deletes the specified environment variables.
 
-### Registration
+- `$ foundry env-print`<br/>
+Prints all existing environment variables.
 
-The basic version can be used without registration, but
-
-## Config
-
-You can describe the emulated environment in the `foundry.yaml` file in your project root directory.
-
-### Root Directory
-
-    rootDir: .
-
-### Service Account
-
-    serviceAcc: <relativePathToServiceAccountJSON>
-
-### Firestore
-
-Before every run you can fill the emulated Firestore with values by adding this code into the config
-
-    firestore:
-      - collection: ''
-        docs:
-          - id: ''
-            data: '{"":""}'
-
-or if you added a [service account key](#How%20to%20get%20a%20service%20account%20JSON%20for%20your%20Firebase%20project) to config with
-
-    serviceAcc: <path/to/serviceAcc.json>
-
-you can fill the emulated Firestore directly from your production environment
-
-    firestore:
-      - collection: ''
-        getFromProd: 5
-
-      - collection: ''
-        getFromProd: ['id1', 'id2']
-
-### Authentication
-
-### Functions
-
-If you want a function to automatically run in our emulated environment
-
-    functions:
-      - name: <exportedFunctionName>
-        type: <https/firestore/auth>
-        trigger: <onCreate/onDelete/onUpdate>
-
-      - name: <exportedFunctionName>
-        type: <https/firestore/auth>
-        trigger: <onCreate/onDelete/onUpdate>
 
 ## Supported Firebase features
 TODO
 
 ## FAQ
 
-### How do I get a service account JSON for my Firebase project?
+### How long is my cloud development environment active after I end the session?
+The cloud environment exists only for the time being your session is active. Once your session ends, the environment is terminated.
 
+### Are you storing my code or data?
+We don't store your code or any data for a duration longer than is the lifetime duration of your session. Once your session ends, your cloud environment is terminated and only metadata (environment variables) is preserved.
+
+### Why do you need a service account to my Firebase project?
+The service account is needed for any action that requires copying data from your production Firestore database or production Firebase Auth to their emulated equivalents.<br/>
+You can definitely use Foundry without specifying a path to your service account. Some features just won't be available though.
+### How do I get a service account JSON for my Firebase project?
+TODO
 Go to [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and choose your project
 
 or from [Firebase Console](https://console.firebase.google.com/project)
-
-### Why do you need a service account to my Firebase project?
-TODO
-
-### Are you storing my code or data from my production environment?
-
-We don't store your code for a duration longer than the lifetime of your session. Once your session ends, your cloud environment is killed and only metadata (environment variables) is preserved.
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
