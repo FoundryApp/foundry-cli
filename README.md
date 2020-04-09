@@ -286,12 +286,25 @@ Note that this approach requires you to specify the [`serviceAcc`](#field-servic
 ```yaml
 users:  
     - getFromProd: [user-id-1, user-id-2]
-    # If the value is a number, Foundry takes first N users from Firebase Auth
+      # If the value is a number, Foundry takes first N users from Firebase Auth
     - getFromProd: 2  
 ```
 
 ### Field `ignore`
-Often there are files and folders that you don't want to upload are watch. To ignore these, you can use ``
+Often there are files and folders that you don't want to upload are watch. To ignore these, you can use an array of glob patterns. For example:
+```yaml
+ignore:
+    # Skip all node_modules directories
+  - "**/node_modules"
+    # Skip the whole .git directory
+  - .git 
+    # Skip all temp files ending with number
+  - "**/*.*[0-9]" 
+    # Skip all hidden files
+  - "**/.*"
+    # Skip Vim's temp files
+  - "**/*~"
+```
 
 ### Field `serviceAcc`
 For Foundry to able to copy some of your production data to your development cloud environment it must have an access to your Firebase project.
