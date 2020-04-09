@@ -46,7 +46,7 @@ The key features of Foundry are:
   - **[Field `serviceAcc`](#field-serviceAcc)**  
   - **[Full config file example](#full-config-file-example)**
 - **[How to use the Foundry CLI](#how-to-use-the-foundry-cli)**
-  - **[Initialization](#initalization)**
+  - **[Initialization](#initialization)**
   - **[Connecting to your cloud environment](#connecting-to-your-cloud-environment)**
   - **[Environment variables](#environment-variables)**
 - **[Supported Firebase features](#supported-firebase-features)**
@@ -55,17 +55,17 @@ The key features of Foundry are:
 - **[Slack community](#slack-community)**
 
 ## How Foundry works
-Foundry helps you to develop Firebase Functions faster and with a copy of your production data. It's a command-line tool that connects you to your own cloud environment. This cloud development environment is as much as possible similar to the actual environment where you Firebase Functions run after the deployment and have everything pre-configured.<br/>
-Once connected to your development environment, Foundry starts watching your code for changes. Every change notifies the CLI and your code is uploaded to your cloud development environment. Foundry then triggers all your Firebase Functions according to rules specified in your `foundry.yaml` config file. <br/>
-Both `stdout` and `stderr` of your functions is sent back to you after each of such runs. The whole upload loop with the transmition of data back to you usually takes about 1-2 seconds. This loop creates a REPL-like tool for you functions and makes it really easy to be sure that your functions' code behave correctly with the production data.<br/>
+Foundry makes the development of Firebase Functions faster and with an access to a [copy of your production data](#field-firestore). It's a command-line tool that connects you to your own cloud environment for development of Firebase Functions. This environment is as much as possible identical to the actual environment where you Firebase Functions run after the deployment. Your environment is pre-configured and your functions work out-of-the-box.<br/>
+Once connected to your development environment, Foundry starts watching your code for changes. Every change notifies the CLI and your code is uploaded to your cloud environment. Foundry then triggers all of your Firebase Functions based on the [rules](#field-functions) specified in your `foundry.yaml` [config file](#config-file-foundryyaml). <br/>
+Both `stdout` and `stderr` of your functions is sent back to your terminal after each of such runs. The whole upload loop with the transmition of data back to you usually takes about 1-2 seconds. This loop creates a REPL-like tool for your functions and makes it really easy to be sure that your functions' code behave correctly with the production data.<br/>
 
-The [config](#config-file-foundryyaml) `foundry.yaml` file is a critical part of Foundry. There you describe 3 main things:
+The [config](#config-file-foundryyaml) `foundry.yaml` file is a critical part of Foundry. It describes 3 main things:
 1. [What Firebase Functions should Foundry register and **how** it should trigger them in each run](#field-functions)
 2. [How should the emulated Firestore database look like](#field-firestore)
 3. [How should the emulated Firebase Auth users look like](#field-auth)
 <br/>
 
-Having an emulated Firestore database and Firebase Auth users in your development environment makes it easy to test new things. 
+Having an emulated Firestore database and Firebase Auth users in your development environment makes it easy to test the full logic of your functions.
 
 ## What Foundry doesn't do
 Foundry doesn't deploy your Firebase Functions onto the production. To deploy functions onto the production use the official [Firebase tool](https://github.com/firebase/firebase-tools).
@@ -76,7 +76,7 @@ Foundry doesn't deploy your Firebase Functions onto the production. To deploy fu
 
 - **[Linux](TODO)**
 
-To install Foundry, Add the downloaded binary to one of the folders in your system's `PATH` variable.
+To install Foundry, add the downloaded binary to one of the folders in your system's `PATH` variable.
 
 ## Supported languages
 JavaScript
@@ -88,9 +88,9 @@ You can run `$ foundry init` to generate a basic config file. Make sure to call 
 Check out the full config file example [here](#full-config-file-example).
 
 ### Field `functions`
-An array describing your Firebase functions that should be evaluated by Foundry. All described functions must be exported in the function's root index.js file. In this array, you describe how Foundry should trigger each function in every run.<br/>
+An array describing your Firebase functions that should be evaluated by Foundry. All described functions must be exported in the function's root `index.js` file. In this array, you describe how Foundry should trigger each function in every run.<br/>
 
-It's important to understand how trigger functions work in Foundry. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both can be specified in the config file under fields `firestore` and `users` respectively. So all of your code where you manipulate with Firestore or Firebase Auth happens against the emulated Firestore database and emulated Firebase Auth.<br/>
+It's important to understand how trigger functions work in Foundry. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both can be specified in the config file under fields [`firestore`](#field-firestore) and [`users`](#field-users) respectively. So all of your code where you manipulate with Firestore or Firebase Auth happens against the emulated Firestore database and emulated Firebase Auth.<br/>
 The same is true for function triggers you describe in the Foundry config file. The triggers usually describe how should the emulated Firestore database or emulated Firebase Auth users be mutated. In return, these mutations will trigger your functions.<br/>
 
 Currently, Foundry supports following Firebase functions:
@@ -264,7 +264,7 @@ firestore:
 You can combine both the direct approach and `getFromProd` approach.
 <br/>
 
-To create a nested collections specify full collection's path
+To create a nested collections specify a full collection's path
 ```yaml
 firestore:
   - collection: my/nested/collection
@@ -272,7 +272,7 @@ firestore:
 ```
 
 ### Field `users`
-Same as you can [emulate](#field-firestore) Firestore database for your development you can also emulate Firebase Auth users.<br/>
+The same way you can [emulate](#field-firestore) Firestore database for your development you can also emulate Firebase Auth users.<br/>
 
 You have two options how to fill the emulated uses:
 1. Directly with JSON strings
@@ -293,7 +293,7 @@ users:
 ```
 
 ### Field `ignore`
-Often there are files and folders that you don't want to upload are watch. To ignore these, you can use an array of glob patterns. For example:
+Often there are files and folders that you don't want Foundry to upload or watch. To ignore them, you can use an array of glob patterns. For example:
 ```yaml
 ignore:
     # Skip all node_modules directories
@@ -338,7 +338,8 @@ ignore:
 
 # [OPTIONAL] 
 # A path to a service account for your Firebase project. 
-# See https://github.com/FoundryApp/foundry-cli#field-serviceAcc for more info on how to obtain your service account.
+# See https://github.com/FoundryApp/foundry-cli#field-serviceAcc 
+# for more info on how to obtain your service account.
 serviceAcc: path/to/service/account.json
 
 
@@ -572,27 +573,30 @@ Often, you have many functions and orienting in the output is hard. To trigger o
 To stop filtering functions execute the command `watch:all`.
 
 ### Environment variables
-You can set, delete, and print all  environment variables in your cloud development environment. 
+You can set, delete, and print all  environment variables in your cloud development environment with the following commands respectivelly:
 
-- `$ foundry env-set ENV_1=VAL_1 ENV_2=VAL_2`<br/>
+`$ foundry env-set ENV_1=VAL_1 ENV_2=VAL_2`<br/>
 Sets the specified environment variables.
 
-- `$ foundry env-delete ENV_1 ENV_2`<br/>
+`$ foundry env-delete ENV_1 ENV_2`<br/>
 Deletes the specified environment variables.
 
-- `$ foundry env-print`<br/>
+`$ foundry env-print`<br/>
 Prints all existing environment variables.
 
 ## Supported Firebase features
 TODO
 
+## Examples
+TODO
+
 ## FAQ
 
-### How long is my cloud development environment active after I end the session?
-The cloud environment exists only for the time being your session is active. Once your session ends, the environment is terminated.
+### How long is my development cloud environment active after I end the session?
+The cloud environment exists only for the time of your session. Once your session ends, the environment is terminated.
 
-### Are you storing my code or data?
-We don't store your code or any data for a duration longer than is the lifetime duration of your session. Once your session ends, your cloud environment is terminated and only metadata (environment variables) is preserved.
+### Do you store my code or data?
+We don't store your code or any data for a duration longer than is a duration of your session. Once your session ends, your cloud environment is terminated and only metadata (environment variables) is preserved.
 
 ### Why do you need a service account to my Firebase project?
 The service account is needed for any action that requires copying data from your production Firestore database or production Firebase Auth to their emulated equivalents.<br/>
@@ -600,18 +604,23 @@ You can definitely use Foundry without specifying a path to your service account
 ### How do I get a service account JSON for my Firebase project?
 
 1. Go to [https://console.firebase.google.com/](https://console.firebase.google.com/) and select your project.<br/>
-2. In your Firebase dashboard, select the settings icon. The icon is place up in the left sidebar.<br/>
+2. In your Firebase dashboard, select the settings icon. The icon is placed at the top of the left sidebar.<br/>
 <img alt="Service-Account-Step-1" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-1.png?alt=media&token=3887c551-2aa6-4555-bd8e-7e0fe6e73c5e">
 3. A popup menu will appear, select "Project settings".<br/>
 <img alt="Service-Account-Step-2" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-2.png?alt=media&token=f6ae3f0c-069c-4f76-8712-203f4ba07e39">
-4. This will take you to your projects settings with links to different sections on top. Select "Service accounts"<br/>
+4. This will take you to your projects settings with links to different sections on top. Select "Service accounts."<br/>
 <img alt="Service-Account-Step-3" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-3.png?alt=media&token=7726fba0-ba90-4aa4-89d4-86727df595df">
 5. A window with info about the Firebase Admin SDK will appear. There, click on "Generate new private key" at the bottom.<br/>
 <img alt="Service-Account-Step-4" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-4.png?alt=media&token=caa3f666-59fc-4917-b736-1169e95b471e">
 6. This will present a modal window informing you about security implications. Read the text and then click on the "Generate key" button at the bottom. This will download a JSON file that is your service account key.<br/>
 <img alt="Service-Account-Step-5" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-5.png?alt=media&token=05e630f8-4dd8-4c43-baed-2a80b8096691">
 
-7. Copy the path of your service account key file as the field's `serviceAcc` value in the `foundry.yaml` config file.
+7. Copy the path of your service account key file you just download to the field's `serviceAcc` value in the `foundry.yaml` config file.
+
+## Slack community
+TODO
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
+
+
