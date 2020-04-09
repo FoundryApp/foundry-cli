@@ -31,6 +31,7 @@ The key features of Foundry are:
 - **Discover production bugs**: TODO
 
 ## Table of contents
+- **[How it works](##how-it-works)**
 - **[Download](##download)**
 - **[Supported languages](##supported-languages)**
 - **[Config file](#config)**
@@ -56,11 +57,14 @@ Javascript
 
 ## Config file `foundry.yaml`
 For Foundry to work, it requires that its config file - `foundry.yaml` - is present. You can run `$ foundry init` to generate a basic config file.<br/>
-Make sure to call this command from a folder where your `package.json` for your Firebase Functions is placed - `foundry.yaml` must always be placed next to the Firebase Function's `package.json` file.
+Make sure to call this command from a folder where your `package.json` for your Firebase Functions is placed - `foundry.yaml` must always be placed next to the Firebase Function's `package.json` file. 
+<br/>
 
+An example of a full config file is below
 ```yaml
 # [OPTIONAL]
-# An array of glob patterns for files that should be ignored. The path is relative to the file's dir.
+# An array of glob patterns for files that should be ignored. The path is relative 
+# to the config file's path.
 # If the array is changed, the CLI must be restarted for it to take the effect.
 ignore:
     # Skip all node_modules directories
@@ -77,38 +81,125 @@ ignore:
 
 # [OPTIONAL] 
 # A path to a service account for your Firebase project. 
-# See <TODO:URL> for more info how to obtain your service account.
-# serviceAcc: path/to/service/account.json
+# See <TODO:URL> for more info on how to obtain your service account.
+serviceAcc: path/to/service/account.json
 
+
+# TODO:
+# users:
+#   - id:
+#     data:
+#   - id:
+#     data:
+#   - getFromProd:
+#   - getFromProd:
 
 # [OPTIONAL] 
 # An array describing emulated Firebase Auth users in your cloud environment
 auth:
-  # You can describe your users directly
+  # You can describe your emulated Auth users either directly
+  # in the 'users' array:
   - users:
       - id: user-id-1
         # The 'data' field takes JSON
         data: '{"email": "user-id-1-email@email.com"}'
   
-  # Or you can copy your production users (service account is required)
-  # from Firebae Auth by using 'geFromProd':
+  # Or you can copy your production users from Firebae Auth by using 'geFromProd'
+  # (WARNING: service account is required!):
   # If the value is a number, Foundry takes first N users from Firebase Auth
   - getFromProd: 2
-  # If the value is a string array, Foundry expects that the array's elements
+  # If the value is an array, Foundry expects that the array's elements
   # are real IDs of your Firebase Auth users
-  - getFromProd: ['id-of-a-user-in-production', 'another-id']
+  - getFromProd: [id-of-a-user-in-production, another-id]
 
-  # You can use 'users' and 'geFromProd' fields at the same time
+  # You can use both 'users' and 'geFromProd' field simultaneously
+  # The final users collection will be a merge of these
 
 # [OPTIONAL]
-# An array dDescribe emulated Firestore in your cloud environment
+# An array describing emulated Firestore in your cloud environment
 firestore:
+  # TODO:
+  # - collection: workspaces
+  #   docs:
+  #     - id: ws-id-1
+  #       data: '{"userId": "user-id-1"}'
+  #     - id: ws-id-2
+  #       data: '{"userId": "user-id-2"}'
+  #     - getFromProd: 2
+  #     - getFromProd: [wp-id-in-prod]
+  
+  # You can describe your emulated Firestore either directly
+  - collection: workspaces
+    docs:
+      - id: ws-id-1
+        data: '{"userId": "user-id-1"}'
+      - id: ws-id-2
+        data: '{"userId": "user-id-2"}'
+      
+  # Or you can copy data from your production Firestore by using 'getFromProd'
+  # (WARNING: service account is required!):
+  - collection: workspaces
+    # If the value is a number, Foundry takes first N documents from the 
+    # specified collection (here 'workspaces')
+    getFromProd: 2
+    # If the value is an array, Foundry expects that the array's elements
+    # are real IDs of documents in the specified collection (here documents
+    # in the 'workspaces' collection)
+    getFromProd: [workspace-id-1, workspace-id-2]
+    
+  # To create a collection or a document that is inside another collection:
+  - collection: collection/doc-id/subcollection
+    docs:
+      - id: doc-in-subcollection
+        data: '{}'
 
 
 # [REQUIRED] 
-# An array of Firebase functions that should be evaluated by Foundry. 
-# All described functions must be exported in the function's root index.js file
+# An array describing your Firebase functions that should be evaluated by Foundry. 
+# All described functions must be exported in the function's root index.js file.
+# In this array, you describe how Foundry should trigger each function in every run.
 functions:
+  # Foundry currently supports following types of Firebase Functions:
+  # https
+  # httpsCallable
+  # auth
+  # firestory
+  
+  # Each function has at least 2 fields:
+  # 'name' - the same name under which your function is exported from your function's root index.js file
+  # 'type' - one of the following: https, httpsCallable, auth, firestore
+  
+  
+  
+  # Function: https
+  - name: myHttpsFunction
+    type: https
+    # The payload field can either be a JSON string
+    payload: '{"field":"value"}'
+    # or you can reference a document from your production Firestore
+    payload:
+      doc:
+        getFromProd:
+          collection: path/to/collection
+          id: doc-id
+    # or you can reference a document from the emulated Firestore
+    payload:
+      doc:
+        collection: path/to/collection
+        id: doc-id
+  
+  # Function: httpsCallable
+  # A 'httpsCallable' function is similar to the 'https' type
+  # The difference is that 
+  # More info on httpsCallable functions can be found here
+  # https://firebase.google.com/docs/functions/callable
+  - name: myHttpsCallableFunction
+    type: httpsCallable
+    
+    
+  # Function: auth
+  # A 'auth' function is a function that is triggered when
+  # user either 
 ```
 
 ### FIeld `functions`
@@ -200,6 +291,9 @@ If you want a function to automatically run in our emulated environment
 Go to [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and choose your project
 
 or from [Firebase Console](https://console.firebase.google.com/project)
+
+### Why do you need a service account to my Firebase project?
+TODO
 
 ### Are you storing my code or data from my production environment?
 
