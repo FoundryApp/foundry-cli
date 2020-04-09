@@ -64,9 +64,16 @@ Javascript
 ## Config file
 For Foundry to work, it requires that its config file - `foundry.yaml` - is present. You can run `$ foundry init` to generate a basic config file.<br/>
 Make sure to call this command from a folder where your `package.json` for your Firebase Functions is placed - `foundry.yaml` must always be placed next to the Firebase Function's `package.json` file. 
-<br/>
 
-Here's a full example of the config file:
+### Field `functions`
+It's important to understand how trigger functions work. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both of these can be specified in the config file under fields `firestore` and `users` respectively.
+### Field `firestore`
+### Field `auth`
+### Field `ignore`
+### Field `serviceAcc`
+
+
+Here's a full example of the config YAML file:
 ```yaml
 # [OPTIONAL]
 # An array of glob patterns for files that should be ignored. The path is relative 
@@ -112,17 +119,7 @@ users:
 
 # [OPTIONAL]
 # An array describing emulated Firestore in your cloud environment
-firestore:
-  # TODO:
-  # - collection: workspaces
-  #   docs:
-  #     - id: ws-id-1
-  #       data: '{"userId": "user-id-1"}'
-  #     - id: ws-id-2
-  #       data: '{"userId": "user-id-2"}'
-  #     - getFromProd: 2
-  #     - getFromProd: [wp-id-in-prod]
-  
+firestore:    
   # You can describe your emulated Firestore either directly
   - collection: workspaces
     docs:
@@ -130,24 +127,24 @@ firestore:
         data: '{"userId": "user-id-1"}'
       - id: ws-id-2
         data: '{"userId": "user-id-2"}'
-      
-  # Or you can copy data from your production Firestore by using 'getFromProd'
-  # (WARNING: service account is required!):
-  - collection: workspaces
-    # If the value is a number, Foundry takes first N documents from the 
-    # specified collection (here 'workspaces')
-    getFromProd: 2
-    # If the value is an array, Foundry expects that the array's elements
-    # are real IDs of documents in the specified collection (here documents
-    # in the 'workspaces' collection)
-    getFromProd: [workspace-id-1, workspace-id-2]
+      # Or you can copy data from your production Firestore by using 'getFromProd'
+      # (WARNING: service account is required!):
+      # If the value is a number, Foundry takes first N documents from the 
+      # specified collection (here 'workspaces')
+      - getFromProd: 2
+      # If the value is an array, Foundry expects that the array's elements
+      # are real IDs of documents in the specified collection (here documents
+      # in the 'workspaces' collection)
+      - getFromProd: [workspace-id-1, workspace-id-2]
+
+  # You can use both the direct and 'geFromProd' approach simultaneously
+  # The final documents will be a merge of these
     
   # To create a collection or a document that is inside another collection:
   - collection: collection/doc-id/subcollection
     docs:
       - id: doc-in-subcollection
         data: '{}'
-
 
 # [REQUIRED] 
 # An array describing your Firebase functions that should be evaluated by Foundry. 
@@ -161,7 +158,7 @@ functions:
   # - firestory
   
   # Each function has at least 2 fields:
-  # 'name' - the same name under which your function is exported from your function's root index.js file
+  # 'name' - the same name under which a function is exported from your function's root index.js file
   # 'type' - one of the following: https, httpsCallable, auth, firestore
   
   
@@ -220,8 +217,9 @@ functions:
       id: new-user-id
       data: '{"email": "new-user@email.com"}'
     # You can also reference a Firebase auth user from your
-    # production. This user will get copied to the emulated
-    # Firebase auth users and triggers this auth function:
+    # production by using the 'getFromProd' field. 
+    # This user will be copied to the emulated Firebase auth users 
+    # and will trigger this auth function:
     createUser:
       getFromProd:
         id: user-id-in-production
@@ -229,7 +227,7 @@ functions:
   - name: myAuthOnDeleteFunction
     type: auth
     trigger: onDelete    
-    # This auth function will get triggered by deleting
+    # This auth function will be triggered by deleting
     # a user with the specified ID from your emulated
     # Firebase Auth users.
     # Keep in mind that this user will actually be deleted
@@ -245,13 +243,6 @@ functions:
   # Based on the 'trigger' field, there are 3 sub-types of 
   # a 'firestore' function: onCreate, onDelete, onUpdate
 ```
-
-### Field `functions`
-It's important to understand how trigger functions work. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both of these can be specified in the config file under fields `firestore` and `users` respectively.
-### Field `firestore`
-### Field `auth`
-### Field `ignore`
-### Field `serviceAcc`
 
 
 ## Usage
