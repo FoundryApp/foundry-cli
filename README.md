@@ -34,7 +34,7 @@ The key features of Foundry are:
 ## Table of contents
 - **[How Foundry works](#how-foundry-works)**
 - **[What Foundry doesn't do](#what-foundry-doesnt-do)**
-- **[Download](#download)**
+- **[Download and installation](#download-and-installation)**
 - **[Supported languages](#supported-languages)**
 - **[Config file `foundry.yaml`](#config-file-foundryyaml)**
   - **[Field `functions`](#field-functions)**
@@ -68,13 +68,13 @@ Having an emulated Firestore database and Firebase Auth users in your developmen
 ## What Foundry doesn't do
 Foundry doesn't deploy your Firebase Functions onto the production. To deploy functions onto the production use the official [Firebase tool](https://github.com/firebase/firebase-tools).
 
-## Download
+## Download and installation
 
 - **[macOS](https://github.com/FoundryApp/foundry-cli/releases)**
 
 - **[Linux](TODO)**
 
-Add the downloaded binary to one of the folders in your system's `PATH` variable.
+To install Foundry, Add the downloaded binary to one of the folders in your system's `PATH` variable.
 
 ## Supported languages
 JavaScript
@@ -231,9 +231,64 @@ It's important to understand how trigger functions work in Foundry. Everything h
 The same is true for function triggers you describe in the Foundry config file. The triggers usually describe how should the emulated Firestore database or emulated Firebase Auth users be mutated. In return, these mutations will trigger your functions.
 
 ### Field `firestore`
-The field `firestore` gives you an option to have a separate Firestore database from your production Firestore database. This separate Firestore is emulated Firestore that lives in your cloud environment for
+The field `firestore` gives you an option to have a separate Firestore database from your production Firestore database. This separate Firestore is an emulated Firestore database that lives in your cloud environment for the duration of your session. <br/>
+
+The `firestore` field expects an array of collections.
+You have two options how to fill an emulated Firestore database. 
+
+1. Specify documents directly with JSON strings<br/>
+```yaml
+firestore:    
+  - collection: workspaces
+    docs:
+      - id: ws-id-1
+        data: '{"userId": "user-id-1"}'
+      - id: ws-id-2
+        data: '{"userId": "user-id-2"}'      
+```
+
+2. Specify what documents should be copied from your production Firestore database<br/>
+Note that this approach requires you to specify the [`serviceAcc`](#field-serviceacc) field.
+```yaml
+firestore:
+  - collection: workspaces
+    docs:
+      - getFromProd: [workspace-id-1, workspace-id-2]
+      # This option tells Foundry to take first 2 documents from collection 'workspaces'
+      # in your production Firestore database
+      - getFromProd: 2
+```
+
+You can combine both the direct approach and `getFromProd` approach.
+<br/>
+
+To create a nested collections specify full collection's path
+```yaml
+firestore:
+  - collection: my/nested/collection
+    docs: ...
+```
 
 ### Field `users`
+Same as you can [emulate](#field-firestore) Firestore database for your development you can also emulate Firebase Auth users.<br/>
+
+You have two options how to fill the emulated uses:
+1. Directly with JSON strings
+```yaml
+users:    
+    - id: user-id-1
+      # The 'data' field takes a JSON string
+      data: '{"email": "user-id-1-email@email.com"}'  
+```
+
+2. Specify what users should be copied from your production Firebase Auth<br/>
+Note that this approach requires you to specify the [`serviceAcc`](#field-serviceacc) field.
+```yaml
+users:  
+    - getFromProd: [user-id-1, user-id-2]
+    # If the value is a number, Foundry takes first N users from Firebase Auth
+    - getFromProd: 2  
+```
 
 ### Field `ignore`
 Often there are files and folders that you don't want to upload are watch. To ignore these, you can use ``
