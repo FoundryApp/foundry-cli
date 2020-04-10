@@ -10,19 +10,22 @@ ignore:
 
 serviceAcc: "/Users/vasekmlejnsky/Downloads/foundryapp-firebase-adminsdk-9hj8q-20401ed01c.json"
 
-auth:
+users:
   - getFromProd: ["DbJD37dhx4VqNF3dtN7zrK6CCB13"]
 
 firestore:
   - collection: envs
-    getFromProd: 5
+    docs:
+      - getFromProd: 5
 
 functions:
   - name: getUserEnvs
     type: httpsCallable
-    auth: DbJD37dhx4VqNF3dtN7zrK6CCB13
+    asUser:
+      id: DbJD37dhx4VqNF3dtN7zrK6CCB13
 
   - name: deleteUserEnvs
     type: httpsCallable
-    auth: DbJD37dhx4VqNF3dtN7zrK6CCB13
+    asUser:
+      id: DbJD37dhx4VqNF3dtN7zrK6CCB13
     payload: '{"delete": ["env1", "env2"]}'
