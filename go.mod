@@ -7,6 +7,7 @@ require (
 	github.com/fatih/color v1.9.0
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/gobwas/glob v0.2.3
+	github.com/golang/gddo v0.0.0-20200324184333-3c2cc9a6329d
 	github.com/gorilla/websocket v1.4.2
 	github.com/mattn/go-runewidth v0.0.8 // indirect
 	github.com/mattn/go-tty v0.0.3 // indirect

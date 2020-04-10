@@ -47,16 +47,15 @@ func init() {
 	// WARNING: logger's debug file isn't initialized yet. We can log only to the stdout or stderr.
 
 	cmd := os.Args[1]
-	isInitCmd := cmd == "init"
 
-	cobra.OnInitialize(func() { cobraInitCallback(isInitCmd) })
+	cobra.OnInitialize(func() { cobraInitCallback(cmd) })
 
-	// TODO: Only for debug build
 	AddRootFlags(rootCmd)
-	// rootCmd.PersistentFlags().StringVarP(&debugFile, "debug-file", "d", "", "path to file where the debug logs are written --d='path/to/file.txt'")
 
 	// TODO: Can this be in cobraInitCallback instead of here?
-	if !isInitCmd {
+	if cmd != "init" && cmd != "sign-out" {
+		fmt.Println("Loading foundry.yaml...")
+
 		if _, err := os.Stat(confFile); os.IsNotExist(err) {
 			logger.DebuglnError("Foundry config file 'foundry.yaml' not found in the current directory")
 			logger.FatalLogln("Foundry config file 'foundry.yaml' not found in the current directory. Run '\x1b[1mfoundry init\x1b[0m'.")
@@ -104,7 +103,7 @@ func init() {
 	}
 }
 
-func cobraInitCallback(isInitCmd bool) {
+func cobraInitCallback(cmd string) {
 	if err := logger.InitDebug(debugFile); err != nil {
 		logger.DebuglnFatal("Failed to initialized debug file for logger")
 	}
@@ -120,9 +119,9 @@ func cobraInitCallback(isInitCmd bool) {
 	}
 	authClient = a
 
-	if !isInitCmd {
+	if cmd != "init" && cmd != "sign-out" {
 		logger.Log("\n")
-		warningText := "You aren't signed in. Some features aren't available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\nThis message will self-destruct in 5s...\n"
+		warningText := "You aren't signed in. Some features won't be available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\nThis message will self-destruct in 5s...\n"
 
 		// Check if user signed in
 		switch authClient.AuthState {
@@ -147,7 +146,7 @@ func cobraInitCallback(isInitCmd bool) {
 		}
 
 		// Create a new connection to the cloud env
-		fmt.Println("Connecting to your environment...")
+		fmt.Println("Connecting to your cloud environment...")
 		c, err := conn.New(authClient.IDToken)
 		if err != nil {
 			logger.FdebuglnFatal("Connection error", err)
