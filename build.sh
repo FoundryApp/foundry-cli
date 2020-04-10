@@ -31,4 +31,4 @@ fi
 
 echo  "\nMoving $build_name to /usr/local/bin..."
 cp ./build/$build_name /usr/local/bin
-echo "...Done"
+echo "...done"

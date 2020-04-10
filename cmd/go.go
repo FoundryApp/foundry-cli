@@ -85,7 +85,8 @@ func runGo(cmd *cobra.Command, args []string) {
 	// The main goroutine handling all file events + prompt command requests
 	// Command requests are all handled from a single goroutine because
 	// Gorilla's websocket connection supports only one concurrent reader
-	// and one concurrent writer - https://godoc.org/github.com/gorilla/websocket#hdr-Concurrency
+	// and one concurrent writer.
+	// More info - https://godoc.org/github.com/gorilla/websocket#hdr-Concurrency
 	go func() {
 		for {
 			select {
@@ -156,15 +157,6 @@ func listenCallback(data []byte, err error) {
 			logger.FdebuglnFatal("Error writing output", err)
 			logger.FatalLogln("Error writing output", err)
 		}
-
-		// s1 := fmt.Sprintf("[0] %s", s.Content.Msg)
-		// s2 := fmt.Sprintf("[1] %s", s.Content.Msg)
-		// s3 := fmt.Sprintf("[2] %s\n", s.Content.Msg)
-		// s4 := fmt.Sprintf("[3] %s\n", s.Content.Msg)
-		// s5 := fmt.Sprintf("[4] %s\n", s.Content.Msg)
-		// if _, err := prompt.Writeln(s1); err != nil {
-		// 	logger.FdebuglnFatal(err)
-		// }
 
 	case connMsg.WatchResponseMsg:
 		var s struct{ Content connMsg.WatchContent }

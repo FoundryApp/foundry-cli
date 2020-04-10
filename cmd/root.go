@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -100,9 +101,6 @@ func init() {
 			}
 			foundryConf.Ignore = append(foundryConf.Ignore, g)
 		}
-
-		logger.Debugln("Ignore str", foundryConf.IgnoreStrPatterns)
-		logger.Debugln("Ignore glob", foundryConf.Ignore)
 	}
 }
 
@@ -149,6 +147,7 @@ func cobraInitCallback(isInitCmd bool) {
 		}
 
 		// Create a new connection to the cloud env
+		fmt.Println("Connecting to your environment...")
 		c, err := conn.New(authClient.IDToken)
 		if err != nil {
 			logger.FdebuglnFatal("Connection error", err)
