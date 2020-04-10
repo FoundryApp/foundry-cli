@@ -6,7 +6,6 @@ let FieldValue = admin.firestore.FieldValue;
 
 ////// getUserEnvs
 exports.getUserEnvs = functions.https.onCall(async (data, context) => {
-  console.log(process.env);
   const envsDoc = await admin.firestore()
     .collection('envs')
     .doc(context.auth.uid)
