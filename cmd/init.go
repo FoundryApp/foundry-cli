@@ -45,10 +45,16 @@ func getInitYaml() string {
 # If the array is changed, the CLI must be restarted for it to take the effect
 # See https://github.com/foundryapp/foundry-cli#field-ignore
 ignore:
-  - node_modules # Skip the whole node_modules directory
-  - .git # Skip the whole .git directory
-  - "**/.*" # Skip all hidden files
-  - "**/*~" # Skip vim's temp files
+    # Skip the whole node_modules directory
+  - node_modules
+    # Skip the whole .git directory
+  - .git
+    # Skip all hidden files
+  - "**/.*"
+    # Skip vim's temp files
+  - "**/*~"
+    # Ignore Firebase log files
+  - "**/firebase-debug.log"
 
 
 # An array describing emulated Firebase Auth users in your cloud environment
