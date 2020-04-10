@@ -150,14 +150,18 @@ func cobraInitCallback(cmd string) {
 			time.Sleep(time.Second)
 		}
 
-		// Create a new connection to the cloud env
-		fmt.Println("Connecting to your cloud environment...")
-		c, err := conn.New(authClient.IDToken)
-		if err != nil {
-			logger.FdebuglnFatal("Connection error", err)
-			logger.FatalLogln(err)
+		// TODO: Now only 'go' command can use connectionClient variable
+		// This should be handled better
+		if cmd == "go" {
+			// Create a new connection to the cloud env
+			fmt.Println("Connecting to your cloud environment...")
+			c, err := conn.New(authClient.IDToken)
+			if err != nil {
+				logger.FdebuglnFatal("Connection error", err)
+				logger.FatalLogln(err)
+			}
+			connectionClient = c
 		}
-		connectionClient = c
 	}
 }
 
