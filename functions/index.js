@@ -6,6 +6,7 @@ let FieldValue = admin.firestore.FieldValue;
 
 ////// getUserEnvs
 exports.getUserEnvs = functions.https.onCall(async (data, context) => {
+  console.log(process.env);
   const envsDoc = await admin.firestore()
     .collection('envs')
     .doc(context.auth.uid)
@@ -39,7 +40,8 @@ exports.deleteUserEnvs = functions.https.onCall(async (data, context) => {
 
   try {
     await envsDocRef.update({ envs: newEnvs });
-    console.log("New envs:", newEnvs);
+    console.log("New envs:", Object.keys(newEnvs));
+    return newEnvs;
   } catch (error) {
     throw new functions.https.HttpsError('internal', `Error updating user envs: ${error}`);
   }

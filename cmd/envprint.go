@@ -23,20 +23,20 @@ func init() {
 }
 
 func runEnvPrint(cmd *cobra.Command, args []string) {
-	resp, err := firebase.Call("getUserEnvs", authClient.IDToken, nil)
+	res, err := firebase.Call("getUserEnvs", authClient.IDToken, nil)
 	if err != nil {
 		logger.FdebuglnFatal("Error calling getUserEnvs:", err)
 		logger.FatalLogln("Error printing environment variables (1):", err)
 	}
-	if resp.Error != nil {
-		logger.FdebuglnFatal("Error calling getUserEnvs:", resp.Error)
-		logger.FatalLogln("Error printing environment variables (2):", resp.Error)
+	if res.Error != nil {
+		logger.FdebuglnFatal("Error calling getUserEnvs:", res.Error)
+		logger.FatalLogln("Error printing environment variables (2):", res.Error)
 	}
 
-	envs, ok := resp.Result.(map[string]interface{})
+	envs, ok := res.Result.(map[string]interface{})
 	if !ok {
 		logger.FdebuglnFatal("Failed to type assert res.Result")
-		logger.FatalLogln("Error printing environment variables. Failed to convert the response")
+		logger.FatalLogln("Error printing environment variables. Failed to convert the resonse")
 	}
 
 	if len(envs) == 0 {

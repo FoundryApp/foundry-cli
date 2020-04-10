@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"foundry/cli/connection/msg"
 	"foundry/cli/firebase"
 	"foundry/cli/logger"
 	"os"
@@ -46,6 +47,28 @@ func runEnvDel(cmd *cobra.Command, args []string) {
 		logger.FatalLogln("Error deleting environment variables (2):", res.Error)
 	}
 
-	logger.SuccessLogln("Env variables deleted")
+	logger.Fdebugln("====== res.Result:")
+	logger.Fdebugln(res.Result)
+	logger.Fdebugln("/////////")
 
+	envsMap, ok := res.Result.(map[string]interface{})
+	if !ok {
+		logger.FdebuglnFatal("Failed to type assert res.Result")
+		logger.FatalLogln("Error deleting environment variables (3)")
+	}
+
+	envs := []msg.Env{}
+	for name, val := range envsMap {
+		envs = append(envs, msg.Env{name, val.(string)})
+	}
+	logger.Fdebugln("Sending new envs vars to Autorun:", envs)
+
+	envMsg := msg.NewEnvMsg(authClient.IDToken, envs)
+	if err := envMsg.Send(); err != nil {
+		logger.FdebuglnError("Failed to report new env vars (after deletion) to Autorun", err)
+		logger.DebuglnError("Error deleting environment variables (4)", err)
+		return
+	}
+
+	logger.SuccessLogln("Env variables deleted")
 }
