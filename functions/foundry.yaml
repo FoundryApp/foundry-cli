@@ -3,6 +3,7 @@
 ignore:
   - node_modules # Skip the whole node_modules directory
   - .git # Skip the whole .git directory
+  - "*.zip"
   - "**/*.*[0-9]" # Skip all tmp files ending with number
   - "**/.*" # Skip all hidden files
   - "**/*~" # Skip vim's temp files
