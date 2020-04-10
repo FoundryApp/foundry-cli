@@ -12,7 +12,7 @@ Foundry is a command-line tool for building Firebase Functions. Foundry connects
 With Foundry, you can feel sure that your code behaves correctly and the same as in the production already during the development.
 
 
-**TODO: GIF/VIDEO HERE**
+<!-- **TODO: GIF/VIDEO HERE** -->
 
 The key features of Foundry are:
 - **Out of the box environment**: Foundry connects you to a pre-configured cloud environment where you can interactively develop your Firebase Functions. You don't have to configure anything to debug & test your functions.
