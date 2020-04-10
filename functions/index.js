@@ -4,6 +4,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 let FieldValue = admin.firestore.FieldValue;
 
+////// getUserEnvs
 exports.getUserEnvs = functions.https.onCall(async (data, context) => {
   const envsDoc = await admin.firestore()
     .collection('envs')
@@ -12,6 +13,8 @@ exports.getUserEnvs = functions.https.onCall(async (data, context) => {
   return envsDoc.data().envs;
 });
 
+
+////// deleteUserEnvs
 exports.deleteUserEnvs = functions.https.onCall(async (data, context) => {
   const toDeleteArr = data.delete;
   if (!toDeleteArr) {

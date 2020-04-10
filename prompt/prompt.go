@@ -39,14 +39,17 @@ type Prompt struct {
 	infoText string
 	infoRow  int // Will be recalculated once the terminal is ready
 
-	totalRows int // Will be recalculated once the terminal is ready
-	freeRows  int // Will be recalculated once the terminal is ready
+	totalColumns int // Will be recalculated once the terminal is ready
+	totalRows    int // Will be recalculated once the terminal is ready
+	freeRows     int // Will be recalculated once the terminal is ready
 
 	parser *goprompt.PosixParser
 	writer goprompt.ConsoleWriter
 
 	savedPos   CursorPos
 	currentPos CursorPos // Current position of the cursor when printing output
+
+	lastEscapeCode string // Last VT100 terminal escape code that should be applied next time the print() method is called
 }
 
 //////////////////////
@@ -201,6 +204,7 @@ func (p *Prompt) rerender(initialRun bool) error {
 	p.savedPos = CursorOutputStart()
 
 	p.totalRows = int(size.Row)
+	p.totalColumns = int(size.Col)
 	p.promptRow = p.totalRows
 	p.infoRow = p.totalRows - 1
 	p.freeRows = p.totalRows
@@ -249,15 +253,50 @@ func (p *Prompt) print(b []byte) {
 	p.writer.CursorGoTo(p.savedPos.Row, p.savedPos.Col)
 
 	s := string(b)
+	// s = "\n====================\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur \nsint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 	logger.Fdebugln(s)
+
+	escapeStart := false
 	for _, r := range s {
+		p.writer.WriteRawStr(p.lastEscapeCode)
 		p.writer.WriteRawStr(string(r))
+
+		// Don't increase p.currentPos.Col while we are processing a terminal VT100 escape code
+		if r == '\u001b' {
+			// Reset the the last escape code
+			p.lastEscapeCode = string('\u001b')
+			escapeStart = true
+			continue
+		}
+
+		if escapeStart {
+			p.lastEscapeCode += string(r)
+			// 'm' character signals that the escaped code is ending
+			if r == 'm' {
+				escapeStart = false
+				continue
+			} else {
+				continue
+			}
+		}
+
 		p.currentPos.Col++
 
 		if r == '\n' {
 			// On a new line, the cursor moves to the start of a line
 			p.currentPos.Col = 1
 
+			p.currentPos.Row++
+			p.freeRows--
+		}
+
+		// TODO: Is this required?
+		// This hardcoded solution makes it impossible to have resizable text
+		// as you resize your terminal
+		if p.currentPos.Col == p.totalColumns {
+			// Make a new line
+			p.writer.WriteRawStr("\n")
+			p.currentPos.Col = 1
 			p.currentPos.Row++
 			p.freeRows--
 		}
