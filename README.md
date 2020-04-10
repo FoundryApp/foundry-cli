@@ -600,7 +600,7 @@ TODO
 Check out a separate repo with [example projects](https://github.com/FoundryApp/examples)
 
 ## Slack community
-[Join Foundry community on Slack](#https://join.slack.com/t/community-foundry/shared_invite/zt-dj92yjw4-tnFyIo8iWmbWTVrbpbOQzA)
+[Join Foundry community on Slack](#https://join.slack.com/t/community-foundry/shared_invite/zt-dcpyblnb-JSSWviMFbRvjGnikMAWJeA)
 
 ## FAQ
 
