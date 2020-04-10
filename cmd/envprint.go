@@ -23,8 +23,8 @@ func init() {
 }
 
 func runEnvPrint(cmd *cobra.Command, args []string) {
-	resp, err := firebase.Call("UserEnvs", authClient.IDToken, nil)
-	if err != nil || resp.Error != nil {
+	resp, err := firebase.Call("getUserEnvs", authClient.IDToken, nil)
+	if err != nil {
 		logger.FdebuglnFatal("Error calling getUserEnvs:", err)
 		logger.FatalLogln("Error printing environment variables (1):", err)
 	}

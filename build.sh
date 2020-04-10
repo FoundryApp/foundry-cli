@@ -17,9 +17,9 @@ done
 
 if [[ $is_debug == 1 ]]; then
   # go build -race -tags "$flags" -o "./build/$build_name" .
-  go build -tags "$flags" -o "./build/$build_name" .
+  env GOOS=darwin GOARCH=amd64 go build -tags "$flags" -o "./build/$build_name" .
 else
-  go build -tags "$flags" -o "./build/$build_name" .
+  env GOOS=darwin GOARCH=amd64 go build -tags "$flags" -o "./build/$build_name" .
 fi
 
 if [[ $? == 0 ]]; then

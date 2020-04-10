@@ -110,7 +110,7 @@ func init() {
 
 func cobraInitCallback(cmd string) {
 	if err := logger.InitDebug(debugFile); err != nil {
-		logger.DebuglnFatal("Failed to initialized debug file for logger")
+		logger.DebuglnFatal("Failed to initialize a debug file for logger", err)
 	}
 
 	a, err := auth.New()
