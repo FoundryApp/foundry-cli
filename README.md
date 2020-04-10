@@ -597,7 +597,10 @@ Prints all existing environment variables.
 TODO
 
 ## Examples
-TODO
+Check out a separate repo with [example projects](https://github.com/FoundryApp/examples)
+
+## Slack community
+[Join Foundry community on Slack](#https://join.slack.com/t/community-foundry/shared_invite/zt-dj92yjw4-tnFyIo8iWmbWTVrbpbOQzA)
 
 ## FAQ
 
@@ -625,9 +628,6 @@ You can definitely use Foundry without specifying a path to your service account
 <img alt="Service-Account-Step-5" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/service-acc-tutorial%2Fservice-acc-step-5.png?alt=media&token=05e630f8-4dd8-4c43-baed-2a80b8096691">
 
 7. Copy the path of your service account key file you just download to the field's `serviceAcc` value in the `foundry.yaml` config file.
-
-## Slack community
-TODO
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
