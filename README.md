@@ -36,15 +36,10 @@ The key features of Foundry are:
 <br/>
 
 Once your cloud environment is ready, you can start coding. Once Foundry install all You will see that Foundry triggers all functions you mentioned in the config file each time you save your code.
- 
-<br/>
 
 - [Read more on how to access production Firestore data and users](#config-file-foundryyaml)
-
 - [Read more on how to set environment variables](#environment-variables)
-
 - [Read more on how you to filter Foundry's output](#filtering-functions)
-
 - [Read more on currently supported Firebase features](#supported-firebase-features)
 
 
