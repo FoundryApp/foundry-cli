@@ -63,13 +63,14 @@ func (p *Prompt) executor(s string) {
 	if s == "" {
 		return
 	}
-	logger.Fdebugln(s)
+	logger.Fdebugln("Executor:", s)
 
 	fields := strings.Fields(s)
 
 	if cmd := p.getCommand(fields[0]); cmd != nil {
-		logger.Fdebugln(cmd)
+		logger.Fdebugln("cmd:", cmd)
 		args := fields[1:]
+		logger.Fdebugln("args:", args)
 		cmd.RunRequest(args)
 	} else {
 		// Delete an old info message and show the new one

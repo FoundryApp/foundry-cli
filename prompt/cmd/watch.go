@@ -4,7 +4,6 @@ import (
 	"fmt"
 	c "foundry/cli/connection"
 	connMsg "foundry/cli/connection/msg"
-	"foundry/cli/logger"
 
 	goprompt "github.com/mlejva/go-prompt"
 )
@@ -23,19 +22,27 @@ func NewWatchCmd() *WatchCmd {
 	}
 }
 
-// Implement Cmd interface
-
-func (c *WatchCmd) Run(conn *c.Connection, args Args) error {
-	if len(args) == 0 {
-		logger.Logln("Write 'watch all' to watch all functions or 'watch <function-name1> <function-name2> ...' to watch specific functions")
-		return nil
+func NewWatchAllCmd() *WatchCmd {
+	return &WatchCmd{
+		Text:  "watch:all",
+		Desc:  "Disable all active watch filters and watch all functions",
+		RunCh: make(chan Args),
 	}
+}
+
+// Implement Cmd interface
+func (c *WatchCmd) Run(conn *c.Connection, args Args) error {
 
 	watchAll := false
 	fns := args
-	if args[0] == "all" {
+	if c.Text == "watch:all" {
 		watchAll = true
 		fns = []string{}
+	} else {
+		if len(args) == 0 {
+			// TODO: Inform user that the 'watch' command requires function name(s) as arguments
+			return nil
+		}
 	}
 
 	msg := connMsg.NewWatchfnMsg(watchAll, fns)

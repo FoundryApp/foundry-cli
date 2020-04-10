@@ -42,8 +42,9 @@ func runGo(cmd *cobra.Command, args []string) {
 	done := make(chan struct{})
 
 	watchCmd := promptCmd.NewWatchCmd()
+	watchAllCmd := promptCmd.NewWatchAllCmd()
 	exitCmd := promptCmd.NewExitCmd()
-	cmds := []promptCmd.Cmd{watchCmd, exitCmd}
+	cmds := []promptCmd.Cmd{watchCmd, watchAllCmd, exitCmd}
 	prompt = p.NewPrompt(cmds)
 	go prompt.Run()
 
@@ -88,6 +89,8 @@ func runGo(cmd *cobra.Command, args []string) {
 	go func() {
 		for {
 			select {
+			case args := <-watchAllCmd.RunCh:
+				watchAllCmd.Run(connectionClient, args)
 			case args := <-watchCmd.RunCh:
 				watchCmd.Run(connectionClient, args)
 			case args := <-exitCmd.RunCh:
@@ -171,7 +174,13 @@ func listenCallback(data []byte, err error) {
 			logger.FatalLogln("Parsing server wathc message error", err)
 		}
 
-		p := fmt.Sprintf("Watching only functions: %s", strings.Join(s.Content.Run, ", "))
+		var p string
+		if s.Content.RunAll {
+			p = "All filters disabledd. Will display output from all functions."
+		} else {
+			p = fmt.Sprintf("Displaying output from: %s.", strings.Join(s.Content.Run, ", "))
+		}
+
 		prompt.SetInfoln(p)
 	}
 }

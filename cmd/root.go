@@ -117,8 +117,8 @@ func cobraInitCallback(isInitCmd bool) {
 		logger.FatalLogln("Error initializing Auth", err)
 	}
 	if err := a.RefreshIDToken(); err != nil {
-		logger.FdebuglnError("Error refreshing ID token", err)
-		logger.FatalLogln("Error refreshing ID token", err)
+		logger.FdebuglnError("Error refreshing ID token: ", err)
+		logger.FatalLogln("Error refreshing ID token: ", err)
 	}
 	authClient = a
 
