@@ -31,12 +31,29 @@ The key features of Foundry are:
 ## TL;DR to start Foundry
 1. `$ cd <directory where is a package.json for your Firebase Functions>`
 2. `$ foundry init`
+3. [Add your Firebase Functions into Foundry `foundry.yaml` config file](#field-functions)
 3. `$ foundry go`
+<br/>
+
+Once your cloud environment is ready, you can start coding. Once Foundry install all You will see that Foundry triggers all functions you mentioned in the config file each time you save your code.
+ 
+<br/>
+
+- [Read more on how to access production Firestore data and users](#config-file-foundryyaml)
+
+- [Read more on how to set environment variables](#environment-variables)
+
+- [Read more on how you to filter Foundry's output](#filtering-functions)
+
+- [Read more on currently supported Firebase features](#supported-firebase-features)
+
 
 ## Table of contents
 - **[How Foundry works](#how-foundry-works)**
 - **[What Foundry doesn't do](#what-foundry-doesnt-do)**
 - **[Download and installation](#download-and-installation)**
+- **[Examples](#examples)**
+- **[Slack community](#slack-community)**
 - **[Supported languages](#supported-languages)**
 - **[Config file `foundry.yaml`](#config-file-foundryyaml)**
   - **[Field `functions`](#field-functions)**
@@ -50,9 +67,8 @@ The key features of Foundry are:
   - **[Connecting to your cloud environment](#connecting-to-your-cloud-environment)**
   - **[Environment variables](#environment-variables)**
 - **[Supported Firebase features](#supported-firebase-features)**
-- **[Examples](#examples)**
 - **[FAQ](#faq)**
-- **[Slack community](#slack-community)**
+
 
 ## How Foundry works
 Foundry makes the development of Firebase Functions faster and with an access to a [copy of your production data](#field-firestore). It's a command-line tool that connects you to your own cloud environment for development of Firebase Functions. This environment is as much as possible identical to the actual environment where you Firebase Functions run after the deployment. Your environment is pre-configured and your functions work out-of-the-box.<br/>
@@ -77,6 +93,12 @@ Foundry doesn't deploy your Firebase Functions onto the production. To deploy fu
 - **[Linux](TODO)**
 
 To install Foundry, add the downloaded binary to one of the folders in your system's `PATH` variable.
+
+## Examples
+Check out a separate repo with [example projects](https://github.com/FoundryApp/examples)
+
+## Slack community
+[Join Foundry community on Slack](#https://join.slack.com/t/community-foundry/shared_invite/zt-dcpyblnb-JSSWviMFbRvjGnikMAWJeA)
 
 ## Supported languages
 JavaScript
@@ -595,12 +617,6 @@ Prints all existing environment variables.
 
 ## Supported Firebase features
 TODO
-
-## Examples
-Check out a separate repo with [example projects](https://github.com/FoundryApp/examples)
-
-## Slack community
-[Join Foundry community on Slack](#https://join.slack.com/t/community-foundry/shared_invite/zt-dcpyblnb-JSSWviMFbRvjGnikMAWJeA)
 
 ## FAQ
 
