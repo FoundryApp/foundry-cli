@@ -24,9 +24,9 @@ func NewExitCmd() *ExitCmd {
 
 // Implement Cmd interface
 
-func (c *ExitCmd) Run(conn *c.Connection, args Args) error {
+func (c *ExitCmd) Run(conn *c.Connection, args Args) (promptOutput string, promptInfo string, err error) {
 	os.Exit(0)
-	return nil
+	return "", "", err
 }
 
 func (c *ExitCmd) RunRequest(args Args) {

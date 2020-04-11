@@ -47,7 +47,8 @@ func runEnvDel(cmd *cobra.Command, args []string) {
 		logger.FatalLogln("Error deleting environment variables (2):", res.Error)
 	}
 
-	logger.Fdebugln("Will report new env vars after deletion to Autorun:", res.Result)
+	// Send new envs to Autorun
+	logger.Fdebugln("New env vars after deletion:", res.Result)
 
 	envsMap, ok := res.Result.(map[string]interface{})
 	if !ok {
@@ -68,6 +69,7 @@ func runEnvDel(cmd *cobra.Command, args []string) {
 		return
 	}
 
+	// Print new envs
 	logger.SuccessLogln("Deleted")
 	logger.Logln("---------------")
 

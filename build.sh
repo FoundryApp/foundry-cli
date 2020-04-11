@@ -15,9 +15,8 @@ for flag in `echo $flags`; do
   build_name=$build_name-$flag
 done
 
-if [[ $is_debug == 1 ]]; then
-  # go build -race -tags "$flags" -o "./build/$build_name" .
-  env GOOS=darwin GOARCH=amd64 go build -tags "$flags" -o "./build/$build_name" .
+if [[ $is_debug == 1 ]]; then  
+  env GOOS=darwin GOARCH=amd64 go build -race -tags "$flags" -o "./build/$build_name" .
 else
   env GOOS=darwin GOARCH=amd64 go build -tags "$flags" -o "./build/$build_name" .
 fi

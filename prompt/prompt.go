@@ -59,8 +59,14 @@ type Prompt struct {
 	Events chan PromptEvent
 }
 
+type InfoLineSeverity int
+
 const (
 	PromptEventTypeRerender PromptEventType = "rerender"
+
+	InfoLineSeverityNormal InfoLineSeverity = iota
+	InfoLineSeverityWarning
+	InfoLineSeverityError
 )
 
 //////////////////////
@@ -185,17 +191,55 @@ func (p *Prompt) Writeln(s string) (n int, err error) {
 	return p.outBuf.Write([]byte(s))
 }
 
-func (p *Prompt) SetInfoln(s string) error {
+func (p *Prompt) SetInfoln(s string, severity InfoLineSeverity) error {
 	p.renderMutex.Lock()
 	defer p.renderMutex.Unlock()
 
 	p.writer.CursorGoTo(p.infoRow, 1)
 	p.writer.EraseLine()
 
-	p.writer.SetColor(goprompt.Green, goprompt.DefaultColor, true)
+	red := "\x1b[31m"
+	yellow := "\x1b[33m"
+	bold := "\x1b[1m"
+	endSeq := "\x1b[0m"
+	// resetColor := "\x1b[39m"
+	var prefix string
+	switch severity {
+	case InfoLineSeverityNormal:
+		// prefix = fmt.Sprintf("%s", endSeq)
+		prefix = ""
+	case InfoLineSeverityWarning:
+		prefix = fmt.Sprintf("%s%sWARNING:%s ", bold, yellow, endSeq)
+	case InfoLineSeverityError:
+		prefix = fmt.Sprintf("%s%sERROR:%s ", bold, red, endSeq)
+	default:
+		prefix = ""
+	}
+
+	// p.writer.SetColor(goprompt.Green, goprompt.DefaultColor, true)
 	t := strings.TrimSpace(s)
-	p.writer.WriteStr(t)
+	info := fmt.Sprintf("%s%s", prefix, t)
+	logger.Fdebugln("Info line text:", info)
+	p.infoText = info
+
+	p.writer.WriteRawStr(info)
 	p.writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, true)
+
+	p.writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+len(p.promptText)+1)
+
+	return p.writer.Flush()
+}
+
+func (p *Prompt) ShowLoading() error {
+	p.renderMutex.Lock()
+	defer p.renderMutex.Unlock()
+
+	p.writer.CursorGoTo(p.infoRow, 1)
+	p.writer.EraseLine()
+
+	msg := "Loading..."
+	p.writer.WriteRawStr(msg)
+	p.infoText = msg
 
 	p.writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+len(p.promptText)+1)
 

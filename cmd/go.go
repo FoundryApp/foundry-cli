@@ -44,7 +44,11 @@ func runGo(cmd *cobra.Command, args []string) {
 	watchCmd := promptCmd.NewWatchCmd()
 	watchAllCmd := promptCmd.NewWatchAllCmd()
 	exitCmd := promptCmd.NewExitCmd()
-	cmds := []promptCmd.Cmd{watchCmd, watchAllCmd, exitCmd}
+	envPrintCmd := promptCmd.NewEnvPrintCmd(authClient.IDToken)
+	envSetCmd := promptCmd.NewEnvSetCmd(authClient.IDToken)
+	envDelCmd := promptCmd.NewEnvDelCmd(authClient.IDToken)
+
+	cmds := []promptCmd.Cmd{watchCmd, watchAllCmd, exitCmd, envPrintCmd, envSetCmd, envDelCmd}
 	prompt = p.NewPrompt(cmds)
 	go prompt.Run()
 
@@ -86,13 +90,42 @@ func runGo(cmd *cobra.Command, args []string) {
 					files.Upload(connectionClient, foundryConf.CurrentDir, foundryConf.ServiceAccPath, promptNotifCh, foundryConf.Ignore...)
 				}
 			case msg := <-promptNotifCh:
-				prompt.SetInfoln(msg)
+				prompt.SetInfoln(msg, p.InfoLineSeverityNormal)
+			case args := <-envDelCmd.RunCh:
+				_ = prompt.ShowLoading()
+				pOut, pInfo, err := envDelCmd.Run(connectionClient, args)
+				if err != nil {
+					prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
+					continue
+				}
+				prompt.SetInfoln(pInfo, p.InfoLineSeverityNormal)
+				prompt.Writeln(pOut)
+			case args := <-envSetCmd.RunCh:
+				_ = prompt.ShowLoading()
+				pOut, pInfo, err := envSetCmd.Run(connectionClient, args)
+				if err != nil {
+					prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
+					continue
+				}
+				prompt.SetInfoln(pInfo, p.InfoLineSeverityNormal)
+				prompt.Writeln(pOut)
+			case args := <-envPrintCmd.RunCh:
+				_ = prompt.ShowLoading()
+				pOut, pInfo, err := envPrintCmd.Run(connectionClient, args)
+				if err != nil {
+					prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
+					continue
+				}
+				prompt.SetInfoln(pInfo, p.InfoLineSeverityNormal)
+				prompt.Writeln(pOut)
 			case args := <-watchAllCmd.RunCh:
-				watchAllCmd.Run(connectionClient, args)
+				_, _, err := watchAllCmd.Run(connectionClient, args)
+				prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
 			case args := <-watchCmd.RunCh:
-				watchCmd.Run(connectionClient, args)
+				_, _, err := watchCmd.Run(connectionClient, args)
+				prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
 			case args := <-exitCmd.RunCh:
-				exitCmd.Run(connectionClient, args)
+				_, _, _ = exitCmd.Run(connectionClient, args)
 			case <-initialUploadCh:
 				files.Upload(connectionClient, foundryConf.CurrentDir, foundryConf.ServiceAccPath, promptNotifCh, foundryConf.Ignore...)
 			case e := <-w.Events:
@@ -163,13 +196,13 @@ func listenCallback(data []byte, err error) {
 			logger.FatalLogln("Parsing server wathc message error", err)
 		}
 
-		var p string
+		var info string
 		if s.Content.RunAll {
-			p = "All filters disabledd. Will display output from all functions."
+			info = "All filters disabled. Will display output from all functions."
 		} else {
-			p = fmt.Sprintf("Displaying output from: %s.", strings.Join(s.Content.Run, ", "))
+			info = fmt.Sprintf("Displaying output from: %s.", strings.Join(s.Content.Run, ", "))
 		}
 
-		prompt.SetInfoln(p)
+		prompt.SetInfoln(info, p.InfoLineSeverityWarning)
 	}
 }
