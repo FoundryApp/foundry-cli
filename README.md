@@ -630,12 +630,29 @@ To connect to your cloud development environment and start your session run `$ f
 
 Foundry starts an interactive prompt, connects you to your cloud environment and starts watching your code for changes. Each change notifies the CLI to send your code into the environment where your functions are loaded and triggered. You see the output and errors from your functions inside the interactive prompt.
 
+#### Interactive prompt
+You get into the interactive prompt by running `$ foundry go`.<br/>
+There, following commands are available:
+- `watch function_name_1 function_name_2`<br/>
+  Only the specified functions will be triggered and showed in the output
+- `watch:all`<br/>
+  Reverses the `watch` command - resets the output so it shows all functions
+- `env-print`<br/>
+  Prints all previously set environment variables in your cloud environment
+- `env-set ENV_1=VALUE ENV_2=VALUE`<br/>
+  Sets the specified environment variables in your cloud environment
+- `env-delete ENV_1 ENV_2`<br/>
+  Deletes the specified environment variables from your cloud environment
+
 #### Filtering functions
 Often, you have many functions and orienting in the output is hard. To load and trigger only specific functions in each run you can execute the `watch` command inside the prompt. Its format is `watch function_name_1 function_name_2`.<br/>
 To stop filtering functions execute the command `watch:all`.
 
 ### Environment variables
+Note: you can also set environment variables through the [interactive prompt](#interactive-prompt)<br/>
+
 You can set, delete, and print all  environment variables in your cloud development environment with the following commands respectively:
+
 
 `$ foundry env-set ENV_1=VAL_1 ENV_2=VAL_2`<br/>
 Sets the specified environment variables.
