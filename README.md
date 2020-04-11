@@ -55,7 +55,7 @@ Once your cloud environment is ready, you can start coding. Once Foundry install
   - **[Field `firestore`](#field-firestore)**
   - **[Field `users`](#field-users)**
   - **[Field `ignore`](#field-ignore)**
-  - **[Field `serviceAcc`](#field-serviceAcc)**  
+  - **[Field `serviceAcc`](#field-serviceAcc)**
   - **[Full config file example](#full-config-file-example)**
 - **[How to use the Foundry CLI](#how-to-use-the-foundry-cli)**
   - **[Initialization](#initialization)**
@@ -93,7 +93,7 @@ To install Foundry, add the downloaded binary to one of the folders in your syst
 Check out a separate repo with [example projects](https://github.com/FoundryApp/examples)
 
 ## Slack community
-[Join Foundry community on Slack](#https://join.slack.com/t/community-foundry/shared_invite/zt-dcpyblnb-JSSWviMFbRvjGnikMAWJeA)
+[Join Foundry community on Slack](https://join.slack.com/t/community-foundry/shared_invite/zt-dcpyblnb-JSSWviMFbRvjGnikMAWJeA)
 
 ## Supported languages
 JavaScript
@@ -112,7 +112,7 @@ The same is true for function triggers you describe in the Foundry config file. 
 
 Currently, Foundry supports following Firebase functions:
 #### HTTPS Functions
-Equivalent of - [https://firebase.google.com/docs/functions/http-events]((https://firebase.google.com/docs/functions/http-events))
+Equivalent of - [https://firebase.google.com/docs/functions/http-events](https://firebase.google.com/docs/functions/http-events)
 ```yaml
 - name: myHttpsFunction
   type: https
@@ -137,7 +137,7 @@ Equivalent of - [https://firebase.google.com/docs/functions/callable](https://fi
 - name: myHttpsCallableFunction
   type: httpsCallable
   # Since 'httpsCallable' function is meant to be called
-  # from inside your app by your users, it expects a 
+  # from inside your app by your users, it expects a
   # field 'asUser'
   # With this field you specify as what user should this
   # function be triggered
@@ -155,17 +155,17 @@ Equivalent of - [https://firebase.google.com/docs/functions/auth-events](https:/
 ```yaml
 - name: myAuthOnCreateFunction
   type: auth
-  trigger: onCreate 
+  trigger: onCreate
   # The 'createUser' field specifies a new user record
   # that will trigger this auth function.
   # Keep in mind that this user will actually be created
   # in the emulated Firebase Auth users!
-  createUser:    
+  createUser:
     id: new-user-id
     data: '{"email": "new-user@email.com"}'
   # You can also reference a Firebase auth user from your
-  # production by using the 'getFromProd' field. 
-  # This user will be copied to the emulated Firebase auth users 
+  # production by using the 'getFromProd' field.
+  # This user will be copied to the emulated Firebase auth users
   # and will trigger this auth function:
   createUser:
     getFromProd:
@@ -176,7 +176,7 @@ Equivalent of - [https://firebase.google.com/docs/functions/auth-events](https:/
 ```yaml
 - name: myAuthOnDeleteFunction
   type: auth
-  trigger: onDelete    
+  trigger: onDelete
   # This auth function will be triggered by deleting
   # a user with the specified ID from your emulated
   # Firebase Auth users.
@@ -184,7 +184,7 @@ Equivalent of - [https://firebase.google.com/docs/functions/auth-events](https:/
   # from the emulated Firebase Auth users!
   deleteUser:
     # A user with this ID must be present in the emulated Firebase Auth users
-    id: existing-user-id  
+    id: existing-user-id
 ```
 
 #### Firestore Trigger Functions
@@ -253,17 +253,17 @@ Equivalent of - [https://firebase.google.com/docs/functions/firestore-events](ht
 The field `firestore` gives you an option to have a separate Firestore database from your production Firestore database. This separate Firestore is an emulated Firestore database that lives in your cloud environment for the duration of your session. <br/>
 
 The `firestore` field expects an array of collections.
-You have two options on how to fill an emulated Firestore database. 
+You have two options on how to fill an emulated Firestore database.
 
 1. Specify documents directly with JSON strings<br/>
 ```yaml
-firestore:    
+firestore:
   - collection: workspaces
     docs:
       - id: ws-id-1
         data: '{"userId": "user-id-1"}'
       - id: ws-id-2
-        data: '{"userId": "user-id-2"}'      
+        data: '{"userId": "user-id-2"}'
 ```
 
 2. Specify what documents should be copied from your production Firestore database<br/>
@@ -294,19 +294,19 @@ The same way you can [emulate](#field-firestore) Firestore database for your dev
 You have two options on how to fill the emulated uses:
 1. Directly with JSON strings
 ```yaml
-users:    
+users:
     - id: user-id-1
       # The 'data' field takes a JSON string
-      data: '{"email": "user-id-1-email@email.com"}'  
+      data: '{"email": "user-id-1-email@email.com"}'
 ```
 
 2. Specify what users should be copied from your production Firebase Auth<br/>
 Note that this approach requires you to specify the [`serviceAcc`](#field-serviceacc) field.
 ```yaml
-users:  
+users:
     - getFromProd: [user-id-1, user-id-2]
       # If the value is a number, Foundry takes first N users from Firebase Auth
-    - getFromProd: 2  
+    - getFromProd: 2
 ```
 
 ### Field `ignore`
@@ -316,9 +316,9 @@ ignore:
     # Skip all node_modules directories
   - "**/node_modules"
     # Skip the whole .git directory
-  - .git 
+  - .git
     # Skip all temp files ending with number
-  - "**/*.*[0-9]" 
+  - "**/*.*[0-9]"
     # Skip all hidden files
   - "**/.*"
     # Skip Vim's temp files
@@ -337,30 +337,30 @@ Of course, if you aren't copying any of your production data you don't need to s
 ### Full config file example
 ```yaml
 # [OPTIONAL]
-# An array of glob patterns for files that should be ignored. The path is relative 
+# An array of glob patterns for files that should be ignored. The path is relative
 # to the config file's path.
 # If the array is changed, the CLI must be restarted for it to take the effect.
 ignore:
     # Skip all node_modules directories
   - "**/node_modules"
     # Skip the whole .git directory
-  - .git 
+  - .git
     # Skip all temp files ending with number
-  - "**/*.*[0-9]" 
+  - "**/*.*[0-9]"
     # Skip all hidden files
   - "**/.*"
     # Skip Vim's temp files
   - "**/*~"
 
 
-# [OPTIONAL] 
-# A path to a service account for your Firebase project. 
-# See https://github.com/FoundryApp/foundry-cli#field-serviceAcc 
+# [OPTIONAL]
+# A path to a service account for your Firebase project.
+# See https://github.com/FoundryApp/foundry-cli#field-serviceAcc
 # for more info on how to obtain your service account.
 serviceAcc: path/to/service/account.json
 
 
-# [OPTIONAL] 
+# [OPTIONAL]
 # An array describing emulated Firebase Auth users in your cloud environment
 users:
   # You can describe your emulated Auth users either directly
@@ -380,7 +380,7 @@ users:
 
 # [OPTIONAL]
 # An array describing emulated Firestore in your cloud environment
-firestore:    
+firestore:
   # You can describe your emulated Firestore either directly
   - collection: workspaces
     docs:
@@ -390,7 +390,7 @@ firestore:
         data: '{"userId": "user-id-2"}'
       # Or you can copy data from your production Firestore by using 'getFromProd'
       # (WARNING: service account is required!):
-      # If the value is a number, Foundry takes first N documents from the 
+      # If the value is a number, Foundry takes first N documents from the
       # specified collection (here 'workspaces')
       - getFromProd: 2
       # If the value is an array, Foundry expects that the array's elements
@@ -400,15 +400,15 @@ firestore:
 
   # You can use both the direct and 'getFromProd' approach simultaneously
   # The final documents will be a merge of these
-    
+
   # To create a nested collection:
   - collection: collection/doc-id/subcollection
     docs:
       - id: doc-in-subcollection
         data: '{}'
 
-# [REQUIRED] 
-# An array describing your Firebase functions that should be evaluated by Foundry. 
+# [REQUIRED]
+# An array describing your Firebase functions that should be evaluated by Foundry.
 # All described functions must be exported in the function's root index.js file.
 # In this array, you describe how Foundry should trigger each function in every run.
 functions:
@@ -417,12 +417,12 @@ functions:
   # - httpsCallable
   # - auth
   # - firestore
-  
+
   # Each function has at least 2 fields:
   # 'name' - the same name under which a function is exported from your function's root index.js file
   # 'type' - one of the following: https, httpsCallable, auth, firestore
-  
-  
+
+
   # -----------------------
   # Type: https
   # A 'https' functions is the equivalent of
@@ -442,15 +442,15 @@ functions:
       doc:
         collection: path/to/collection
         id: doc-id
-  
+
   # -----------------------
   # Type: httpsCallable
-  # A 'httpsCallable' is the equivalent of  
+  # A 'httpsCallable' is the equivalent of
   # https://firebase.google.com/docs/functions/callable
   - name: myHttpsCallableFunction
     type: httpsCallable
     # Since 'httpsCallable' function is meant to be called
-    # from inside your app by your users, it expects a 
+    # from inside your app by your users, it expects a
     # field 'asUser'
     # With this field you specify as what user should this
     # function be triggered
@@ -459,13 +459,13 @@ functions:
       id: user-id
     # The 'payload' field is the same as in the 'https' function
     payload: '{}'
-      
-    
+
+
   # -----------------------
   # Type: auth
   # An 'auth' function is the equivalent of
   # https://firebase.google.com/docs/functions/auth-events
-  # Based on the 'trigger' field, there are 2 sub-types of 
+  # Based on the 'trigger' field, there are 2 sub-types of
   # an 'auth' function: onCreate, onDelete
   - name: myAuthOnCreateFunction
     type: auth
@@ -474,20 +474,20 @@ functions:
     # that will trigger this auth function.
     # Keep in mind that this user will actually be created
     # in the emulated Firebase Auth users!
-    createUser:    
+    createUser:
       id: new-user-id
       data: '{"email": "new-user@email.com"}'
     # You can also reference a Firebase auth user from your
-    # production by using the 'getFromProd' field. 
-    # This user will be copied to the emulated Firebase auth users 
+    # production by using the 'getFromProd' field.
+    # This user will be copied to the emulated Firebase auth users
     # and will trigger this auth function:
     createUser:
       getFromProd:
         id: user-id-in-production
-    
+
   - name: myAuthOnDeleteFunction
     type: auth
-    trigger: onDelete    
+    trigger: onDelete
     # This auth function will be triggered by deleting
     # a user with the specified ID from your emulated
     # Firebase Auth users.
@@ -495,13 +495,13 @@ functions:
     # from the emulated Firebase Auth users!
     deleteUser:
       # A user with this ID must be present in the emulated Firebase Auth users
-      id: existing-user-id  
-  
+      id: existing-user-id
+
   # -----------------------
   # Type: firestore
   # A 'firestore' function is the equivalent of
   # https://firebase.google.com/docs/functions/firestore-events
-  # Based on the 'trigger' field, there are 3 sub-types of 
+  # Based on the 'trigger' field, there are 3 sub-types of
   # a 'firestore' function: onCreate, onDelete, onUpdate
   - name: myFirestoreOnCreateFunction
     type: firestore
@@ -522,7 +522,7 @@ functions:
       getFromProd:
         collection: path/to/collection
         id: existing-doc-id
-  
+
   - name: myFirestoreOnDeleteFunction
     type: firestore
     trigger: onDelete
@@ -611,7 +611,22 @@ Deletes the specified environment variables.
 Prints all existing environment variables.
 
 ## Supported Firebase features
-TODO
+We currently support Firestore and parts of Firebase Auth. You can access these emulated services through `firebase-admin` SDK as you would normally in Firebase Functions.
+
+### Firestore
+All functionality excluding the security rules is supported.
+
+### Auth
+Functions we support are:
+
+- `getUser`
+- `getUserByEmail`
+- `createUser`
+- `deleteUser`
+- `updateUser`
+- `verifyIdToken` with mocked tokens
+
+Current `UserRecord` objects don't support `customClaims`, `metadata`, `multiFactor`, `passwordHash`, `passwordSalt`, `providerData`, `tenantId` and `tokensValidAfterTime` properties.
 
 ## FAQ
 
@@ -642,5 +657,3 @@ You can definitely use Foundry without specifying a path to your service account
 
 ## License
 [Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
-
-
