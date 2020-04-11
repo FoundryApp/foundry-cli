@@ -611,13 +611,13 @@ Deletes the specified environment variables.
 Prints all existing environment variables.
 
 ## Supported Firebase features
-We currently support Firestore and parts of Firebase Auth. You can access these emulated services through `firebase-admin` SDK as you would normally in Firebase Functions.
+Currently, we support Firestore and parts of Firebase Auth. You can access emulated version of these services through [`firebase-admin` SDK](https://firebase.google.com/docs/admin/setup) as you would normally.
 
 ### Firestore
 All functionality excluding the security rules is supported.
 
 ### Auth
-Functions we support are:
+Functions we support:
 
 - `getUser`
 - `getUserByEmail`
@@ -626,7 +626,18 @@ Functions we support are:
 - `updateUser`
 - `verifyIdToken` with mocked tokens
 
-Current `UserRecord` objects don't support `customClaims`, `metadata`, `multiFactor`, `passwordHash`, `passwordSalt`, `providerData`, `tenantId` and `tokensValidAfterTime` properties.
+Note: The [`UserRecord` type](https://firebase.google.com/docs/reference/admin/node/admin.auth.UserRecord) isn't fully supported yet. Following properties aren't implemented:
+- `customClaims`
+- `metadata`
+- `multiFactor` 
+- `passwordHash`
+- `passwordSalt`
+- `providerData`
+- `tenantId`
+- `tokensValidAfterTime`
+
+If you need any of those properties to be supported, please open and issue. We will happily implement them.
+
 
 ## FAQ
 
