@@ -73,15 +73,6 @@ func runGo(cmd *cobra.Command, args []string) {
 	initialUploadCh := make(chan struct{}, 1)
 	promptNotifCh := make(chan string)
 
-	go func() {
-		for {
-			select {
-			case msg := <-promptNotifCh:
-				prompt.SetInfoln(msg)
-			}
-		}
-	}()
-
 	// The main goroutine handling all file events + prompt command requests
 	// Command requests are all handled from a single goroutine because
 	// Gorilla's websocket connection supports only one concurrent reader
@@ -90,6 +81,12 @@ func runGo(cmd *cobra.Command, args []string) {
 	go func() {
 		for {
 			select {
+			case event := <-prompt.Events:
+				if event.Type == p.PromptEventTypeRerender {
+					files.Upload(connectionClient, foundryConf.CurrentDir, foundryConf.ServiceAccPath, promptNotifCh, foundryConf.Ignore...)
+				}
+			case msg := <-promptNotifCh:
+				prompt.SetInfoln(msg)
 			case args := <-watchAllCmd.RunCh:
 				watchAllCmd.Run(connectionClient, args)
 			case args := <-watchCmd.RunCh:

@@ -24,6 +24,11 @@ func CursorOutputStart() CursorPos {
 	return CursorPos{1, 1}
 }
 
+type PromptEventType string
+
+type PromptEvent struct {
+	Type PromptEventType
+}
 type Prompt struct {
 	cmds []cmd.Cmd
 
@@ -50,7 +55,13 @@ type Prompt struct {
 	currentPos CursorPos // Current position of the cursor when printing output
 
 	lastEscapeCode string // Last VT100 terminal escape code that should be applied next time the print() method is called
+
+	Events chan PromptEvent
 }
+
+const (
+	PromptEventTypeRerender PromptEventType = "rerender"
+)
 
 //////////////////////
 
@@ -128,6 +139,8 @@ func NewPrompt(cmds []cmd.Cmd) *Prompt {
 		// Terminal is indexed from 1
 		savedPos:   CursorOutputStart(),
 		currentPos: CursorPos{1, len(prefix) + 1},
+
+		Events: make(chan PromptEvent),
 	}
 }
 
@@ -216,7 +229,12 @@ func (p *Prompt) rerender(initialRun bool) error {
 
 	p.writer.CursorGoTo(p.promptRow, 1)
 
-	return p.writer.Flush()
+	if err := p.writer.Flush(); err != nil {
+		return err
+	}
+
+	p.Events <- PromptEvent{PromptEventTypeRerender}
+	return nil
 }
 
 // Prints # of rows of "\n" - this way the visible terminal window
