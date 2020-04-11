@@ -326,7 +326,7 @@ ignore:
 ```
 
 ### Field `serviceAcc`
-For Foundry to able to copy some of your production data to your development cloud environment it must have access to your Firebase project. This is done through a [service account](https://firebase.google.com/support/guides/service-accounts).
+For Foundry to be able to copy some of your production data to your development cloud environment it must have access to your Firebase project. This is done through a [service account](https://firebase.google.com/support/guides/service-accounts).
 The field `serviceAcc` expects a path to a service account JSON file for your Firebase project.<br/>
 
 Of course, if you aren't copying any of your production data you don't need to specify `serviceAcc`.<br/>
@@ -629,14 +629,14 @@ Functions we support:
 Note: The [`UserRecord` type](https://firebase.google.com/docs/reference/admin/node/admin.auth.UserRecord) isn't fully supported yet. Following properties aren't implemented:
 - `customClaims`
 - `metadata`
-- `multiFactor` 
+- `multiFactor`
 - `passwordHash`
 - `passwordSalt`
 - `providerData`
 - `tenantId`
 - `tokensValidAfterTime`
 
-If you need any of those properties to be supported, please open and issue. We will happily implement them.
+If you need any of those properties to be supported, please open an issue. We will happily implement them.
 
 
 ## FAQ
