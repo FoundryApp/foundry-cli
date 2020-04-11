@@ -32,10 +32,12 @@ The key features of Foundry are:
 
 
 ## TL;DR to start Foundry
-1. `$ cd <directory where is a package.json for your Firebase Functions>`
-2. `$ foundry init`
-3. [Add your Firebase Functions into Foundry `foundry.yaml` config file](#field-functions)
-3. `$ foundry go`
+1. [Download](https://github.com/FoundryApp/foundry-cli/releases) Foundry
+2. Add Foundry to your system's `PATH` variable
+3. `$ cd <directory where is a package.json for your Firebase Functions>`
+4. `$ foundry init`
+5. [Add your Firebase Functions into Foundry `foundry.yaml` config file](#field-functions)
+6. `$ foundry go`
 <br/>
 
 Once your cloud environment is ready, you can start coding. Foundry will install the dependencies on the first run. Then you will see that Foundry triggers all functions you specified in the config file each time you save your code.
