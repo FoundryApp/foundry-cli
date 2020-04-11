@@ -31,10 +31,11 @@ func Upload(c *conn.Connection, rootDir, serviceAccPath string, promptNotifCh ch
 
 	archiveChecksum := checksum(buf.Bytes())
 
-	if lastArchiveChecksum == archiveChecksum {
-		promptNotifCh <- "No change in the code detected. Make change to upload the code."
-		return
-	}
+	// TODO: Temporary disables
+	// if lastArchiveChecksum == archiveChecksum {
+	// 	promptNotifCh <- "No change in the code detected. Make change to upload the code."
+	// 	return
+	// }
 	lastArchiveChecksum = archiveChecksum
 
 	bufferSize := 1024 // 1024B, size of a single chunk
