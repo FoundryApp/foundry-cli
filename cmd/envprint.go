@@ -36,7 +36,7 @@ func runEnvPrint(cmd *cobra.Command, args []string) {
 	envs, ok := res.Result.(map[string]interface{})
 	if !ok {
 		logger.FdebuglnFatal("Failed to type assert res.Result")
-		logger.FatalLogln("Error printing environment variables. Failed to convert the resonse")
+		logger.FatalLogln("Error printing environment variables. Failed to convert the response.")
 	}
 
 	if len(envs) == 0 {

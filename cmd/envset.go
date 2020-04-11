@@ -44,7 +44,7 @@ func runEnvSet(cmd *cobra.Command, args []string) {
 
 		if name == "" {
 			logger.FdebuglnFatal("Error parsing environment variable - name is empty:", env)
-			logger.FatalLogln("Error parsing environment variable. Expected format 'env=value'. Got;", env)
+			logger.FatalLogln("Error parsing environment variable. Expected format 'env=value'. Got:", env)
 		}
 		if val == "" {
 			logger.FdebuglnFatal("Error parsing environment variable - val is empty:", env)

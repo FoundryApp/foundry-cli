@@ -31,7 +31,7 @@ func NewWatchAllCmd() *WatchCmd {
 }
 
 // Implement Cmd interface
-func (c *WatchCmd) Run(conn *c.Connection, args Args) error {
+func (c *WatchCmd) Run(conn *c.Connection, args Args) (promptOutput string, promptInfo string, err error) {
 
 	watchAll := false
 	fns := args
@@ -41,12 +41,13 @@ func (c *WatchCmd) Run(conn *c.Connection, args Args) error {
 	} else {
 		if len(args) == 0 {
 			// TODO: Inform user that the 'watch' command requires function name(s) as arguments
-			return nil
+			return "", "", nil
 		}
 	}
 
 	msg := connMsg.NewWatchfnMsg(watchAll, fns)
-	return conn.Send(msg)
+	err = conn.Send(msg)
+	return "", "", err
 }
 
 func (c *WatchCmd) RunRequest(args Args) {
