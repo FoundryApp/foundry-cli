@@ -38,7 +38,7 @@ The key features of Foundry are:
 3. `$ foundry go`
 <br/>
 
-Once your cloud environment is ready, you can start coding. Once Foundry installs all You will see that Foundry triggers all functions you mentioned in the config file each time you save your code.
+Once your cloud environment is ready, you can start coding. Foundry will install the dependencies on the first run. Then you will see that Foundry triggers all functions you specified in the config file each time you save your code.
 
 - [Read more on how to access production Firestore data and users](#config-file-foundryyaml)
 - [Read more on how to set environment variables](#environment-variables)
@@ -70,11 +70,11 @@ Once your cloud environment is ready, you can start coding. Once Foundry install
 
 ## How Foundry works
 Foundry makes the development of Firebase Functions faster and with access to a [copy of your production data](#field-firestore). It's a command-line tool that connects you to your own cloud environment for the development of Firebase Functions. This environment is as much as possible identical to the actual environment where you Firebase Functions run after the deployment. Your environment is pre-configured and your functions work out-of-the-box.<br/>
-Once connected to your development environment, Foundry starts watching your code for changes. Every change notifies the CLI and your code is uploaded to your cloud environment. Foundry then triggers all of your Firebase Functions based on the [rules](#field-functions) specified in your `foundry.yaml` [config file](#config-file-foundryyaml). <br/>
+Once connected to your development environment, Foundry starts watching your code for changes. Every change notifies the CLI and your code is uploaded to your cloud environment. Foundry then loads and triggers all of your Firebase Functions based on the [rules](#field-functions) specified in your `foundry.yaml` [config file](#config-file-foundryyaml). <br/>
 Both `stdout` and `stderr` of your functions are sent back to your terminal after each of such runs. The whole upload loop with the transmission of data back to you usually takes about 1-2 seconds. This loop creates a REPL-like tool for your functions and makes it easy to be sure that your functions' code behaves correctly with the production data.<br/>
 
 The [config](#config-file-foundryyaml) `foundry.yaml` file is a critical part of Foundry. It describes 3 main things:
-1. [What Firebase Functions should Foundry register and **how** it should trigger them in each run](#field-functions)
+1. [What Firebase Functions should Foundry load and **how** it should trigger them in each run](#field-functions)
 2. [How should the emulated Firestore database look like](#field-firestore)
 3. [How should the emulated Firebase Auth users look like](#field-auth)
 <br/>
@@ -108,10 +108,11 @@ You can run `$ foundry init` to generate a basic config file. Make sure to call 
 Check out the full config file example [here](#full-config-file-example).
 
 ### Field `functions`
-An array describing your Firebase functions that should be evaluated by Foundry. All described functions must be exported in the function's root `index.js` file. In this array, you describe how Foundry should trigger each function in every run.<br/>
+An array describing your Firebase functions that should be loaded and triggered by Foundry. All described functions must be exported in the function's root `index.js` file. In this array, you describe which functions should Foundry load and how to trigger functions you want to trigger in each run.<br/>
 
 It's important to understand how trigger functions work in Foundry. Everything happens against the emulated Firestore database or the emulated Firebase Auth users. Both can be specified in the config file under fields [`firestore`](#field-firestore) and [`users`](#field-users) respectively. So all of your code where you manipulate with Firestore or Firebase Auth happens against the emulated Firestore database and emulated Firebase Auth.<br/>
 The same is true for function triggers you describe in the Foundry config file. The triggers usually describe how should the emulated Firestore database or emulated Firebase Auth users be mutated. In return, these mutations will trigger your functions.<br/>
+If you don't specify how to trigger a Firestore or an Auth function the function will still be loaded. You can trigger these loaded functions from any other function by mutating Firestore or Auth respectively. Imagine you want to test an `https` function that changes the Firestore and an `onUpdate` Firestore functions that triggers after such change. You don't have to specify how to trigger both of them in config. You just trigger the `https` function and see both results when one function triggers the other. This way you can test how they really interact.</br>
 
 Currently, Foundry supports following Firebase functions:
 #### HTTPS Functions
@@ -159,6 +160,9 @@ Equivalent of - [https://firebase.google.com/docs/functions/auth-events](https:/
 - name: myAuthOnCreateFunction
   type: auth
   trigger: onCreate
+  # NOTE: If you leave out the field 'createUser' the function will be loaded
+  # but won't automatically trigger on each run.
+
   # The 'createUser' field specifies a new user record
   # that will trigger this auth function.
   # Keep in mind that this user will actually be created
@@ -180,6 +184,9 @@ Equivalent of - [https://firebase.google.com/docs/functions/auth-events](https:/
 - name: myAuthOnDeleteFunction
   type: auth
   trigger: onDelete
+  # NOTE: If you leave out the field 'deleteUser' the function will be loaded
+  # but won't automatically trigger on each run.
+
   # This auth function will be triggered by deleting
   # a user with the specified ID from your emulated
   # Firebase Auth users.
@@ -198,6 +205,9 @@ Equivalent of - [https://firebase.google.com/docs/functions/firestore-events](ht
 - name: myFirestoreOnCreateFunction
   type: firestore
   trigger: onCreate
+  # NOTE: If you leave out the field 'createDoc' the function will be loaded
+  # but won't automatically trigger on each run.
+
   # The 'createDoc' field creates a new specified document
   # that will trigger this firestore function.
   # Keep in mind that this document will actually be
@@ -221,6 +231,9 @@ Equivalent of - [https://firebase.google.com/docs/functions/firestore-events](ht
 - name: myFirestoreOnDeleteFunction
   type: firestore
   trigger: onDelete
+  # NOTE: If you leave out the field 'deleteDoc' the function will be loaded
+  # but won't automatically trigger on each run.
+
   # The 'deleteDoc' field deletes a specified document from
   # the emulated Firestore database. The deletion will
   # trigger this firestore function.
@@ -239,6 +252,9 @@ Equivalent of - [https://firebase.google.com/docs/functions/firestore-events](ht
 - name: myFirestoreOnUpdateFunction
   type: firestore
   trigger: onUpdate
+  # NOTE: If you leave out the field 'updateDoc' the function will be loaded
+  # but won't automatically trigger on each run.
+
   # The 'updateDoc' field updates a specified document
   # from the emulated Firestore database with a new
   # data. The update will trigger this firestore function.
@@ -413,7 +429,7 @@ firestore:
 # [REQUIRED]
 # An array describing your Firebase functions that should be evaluated by Foundry.
 # All described functions must be exported in the function's root index.js file.
-# In this array, you describe how Foundry should trigger each function in every run.
+# In this array, you describe how Foundry should load and trigger each function in every run.
 functions:
   # Foundry currently supports the following types of Firebase Functions:
   # - https
@@ -473,6 +489,9 @@ functions:
   - name: myAuthOnCreateFunction
     type: auth
     trigger: onCreate
+    # NOTE: If you leave out the field 'createUser' the function will be loaded
+    # but won't automatically trigger on each run.
+
     # The 'createUser' field specifies a new user record
     # that will trigger this auth function.
     # Keep in mind that this user will actually be created
@@ -491,6 +510,9 @@ functions:
   - name: myAuthOnDeleteFunction
     type: auth
     trigger: onDelete
+    # NOTE: If you leave out the field 'deleteUser' the function will be loaded
+    # but won't automatically trigger on each run.
+
     # This auth function will be triggered by deleting
     # a user with the specified ID from your emulated
     # Firebase Auth users.
@@ -509,6 +531,9 @@ functions:
   - name: myFirestoreOnCreateFunction
     type: firestore
     trigger: onCreate
+    # NOTE: If you leave out the field 'createDoc' the function will be loaded
+    # but won't automatically trigger on each run.
+
     # The 'createDoc' field creates a new specified document
     # that will trigger this firestore function.
     # Keep in mind that this document will actually be
@@ -529,6 +554,9 @@ functions:
   - name: myFirestoreOnDeleteFunction
     type: firestore
     trigger: onDelete
+    # NOTE: If you leave out the field 'deleteDoc' the function will be loaded
+    # but won't automatically trigger on each run.
+
     # The 'deleteDoc' field deletes a specified document from
     # the emulated Firestore database. The deletion will
     # trigger this firestore function.
@@ -544,6 +572,9 @@ functions:
   - name: myFirestoreOnUpdateFunction
     type: firestore
     trigger: onUpdate
+    # NOTE: If you leave out the field 'updateDoc' the function will be loaded
+    # but won't automatically trigger on each run.
+
     # The 'updateDoc' field updates a specified document
     # from the emulated Firestore database with a new
     # data. The update will trigger this firestore function.
@@ -595,10 +626,10 @@ To generate a basic config file run `$ foundry init`.
 ### Connecting to your cloud environment
 To connect to your cloud development environment and start your session run `$ foundry go`. If you aren't signed in, this will create an anonymous account for you that can be linked to your actual account later once you sign up.<br/>
 
-Foundry starts an interactive prompt, connects you to your cloud environment and starts watching your code for changes. Each change notifies the CLI to send your code into the environment where your functions are triggered. You see the output and errors from your functions inside the interactive prompt.
+Foundry starts an interactive prompt, connects you to your cloud environment and starts watching your code for changes. Each change notifies the CLI to send your code into the environment where your functions are loaded and triggered. You see the output and errors from your functions inside the interactive prompt.
 
 #### Filtering functions
-Often, you have many functions and orienting in the output is hard. To trigger only specific functions in each run you can execute the `watch` command inside the prompt. Its format is `watch function_name_1 function_name_2`.<br/>
+Often, you have many functions and orienting in the output is hard. To load and trigger only specific functions in each run you can execute the `watch` command inside the prompt. Its format is `watch function_name_1 function_name_2`.<br/>
 To stop filtering functions execute the command `watch:all`.
 
 ### Environment variables
@@ -614,22 +645,22 @@ Deletes the specified environment variables.
 Prints all existing environment variables.
 
 ## Supported Firebase features
-We support all Firebase functions triggered by Firestore changes, except for the 'onWrite' function, and all functions triggered by Firebase Auth changes. We support both the HTTPS and the HTTPS callable functions.
+We support all Firebase Functions triggered by Firestore changes except the 'onWrite' function. We also support all functions triggered by Firebase Auth changes. We support both the HTTPS and the HTTPS callable functions.
 
-The other features we currently support are Firestore and parts of Firebase Auth. You can access emulated version of these services through [`firebase-admin` SDK](https://firebase.google.com/docs/admin/setup) as you would normally.
+The other features we currently support are Firestore and parts of Firebase Auth. You can access emulated version of these services through [`firebase-admin` SDK](https://firebase.google.com/docs/reference/admin/node) as you would normally.
 
 ### Functions
 We support following Firebase Functions' methods from the [`firebase-functions` SDK](https://firebase.google.com/docs/reference/functions):
   - Firestore
     - `firestore().document(<documentPath>).onCreate`
-    - `firestore().document(<documentPath>).onUpdate`
     - `firestore().document(<documentPath>).onDelete`
+    - `firestore().document(<documentPath>).onUpdate`
 - Firebase Auth
   - `auth().user().onCreate`
   - `auth().user().onDelete`
 - Https
   - `https.onRequest`
-  - `https.onCall` - without providing the `context.auth.token` and the `context.instanceIdToken` arguments
+  - `https.onCall` - doesn't provide the `context.auth.token` and the `context.instanceIdToken` arguments
 
 ### Firestore
 All functionality excluding the security rules is supported.
@@ -642,7 +673,7 @@ Methods we support:
 - `createUser`
 - `deleteUser`
 - `updateUser`
-- `verifyIdToken` - accepting user's `uid` in place of an `idToken`
+- `verifyIdToken` - accepts user's `uid` in place of an `idToken`
 
 Note: The [`UserRecord` type](https://firebase.google.com/docs/reference/admin/node/admin.auth.UserRecord) isn't fully supported yet. Following properties aren't implemented:
 - `customClaims`
