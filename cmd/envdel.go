@@ -34,7 +34,7 @@ func runEnvDel(cmd *cobra.Command, args []string) {
 		Delete []string `json:"delete"`
 	}{args}
 
-	s := fmt.Sprintf("Will delete following env variables '%s'...", strings.Join(args, ","))
+	s := fmt.Sprintf("Deleting following env variables: '%s'...", strings.Join(args, ","))
 	logger.Logln(s)
 
 	res, err := firebase.Call("deleteUserEnvs", authClient.IDToken, reqBody)
@@ -68,5 +68,17 @@ func runEnvDel(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	logger.SuccessLogln("Env variables deleted")
+	logger.SuccessLogln("Deleted")
+	logger.Logln("---------------")
+
+	logger.Logln("")
+	logger.Logln("Env variables now:")
+	if len(envsMap) == 0 {
+		logger.Logln("There are no env variables set in your environment")
+	} else {
+		for k, v := range envsMap {
+			s := fmt.Sprintf("\t%s=%s\n", k, v.(string))
+			logger.Log(s)
+		}
+	}
 }
