@@ -611,20 +611,35 @@ Deletes the specified environment variables.
 Prints all existing environment variables.
 
 ## Supported Firebase features
-Currently, we support Firestore and parts of Firebase Auth. You can access emulated version of these services through [`firebase-admin` SDK](https://firebase.google.com/docs/admin/setup) as you would normally.
+We support all Firebase functions triggered by Firestore changes, except for the 'onWrite' function, and all functions triggered by Firebase Auth changes. We support both the HTTPS and the HTTPS callable functions.
+
+The other features we currently support are Firestore and parts of Firebase Auth. You can access emulated version of these services through [`firebase-admin` SDK](https://firebase.google.com/docs/admin/setup) as you would normally.
+
+### Functions
+We support following Firebase Functions' methods from the [`firebase-functions` SDK](https://firebase.google.com/docs/reference/functions):
+  - Firestore
+    - `firestore().document(<documentPath>).onCreate`
+    - `firestore().document(<documentPath>).onUpdate`
+    - `firestore().document(<documentPath>).onDelete`
+- Firebase Auth
+  - `auth().user().onCreate`
+  - `auth().user().onDelete`
+- Https
+  - `https.onRequest`
+  - `https.onCall` - without providing the `context.auth.token` and the `context.instanceIdToken` arguments
 
 ### Firestore
 All functionality excluding the security rules is supported.
 
-### Auth
-Functions we support:
+### Firebase Auth
+Methods we support:
 
 - `getUser`
 - `getUserByEmail`
 - `createUser`
 - `deleteUser`
 - `updateUser`
-- `verifyIdToken` with mocked tokens
+- `verifyIdToken` - accepting user's `uid` in place of an `idToken`
 
 Note: The [`UserRecord` type](https://firebase.google.com/docs/reference/admin/node/admin.auth.UserRecord) isn't fully supported yet. Following properties aren't implemented:
 - `customClaims`
