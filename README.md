@@ -647,7 +647,7 @@ Prints all existing environment variables.
 ## Supported Firebase features
 We support all Firebase Functions triggered by Firestore changes except the 'onWrite' function. We also support all functions triggered by Firebase Auth changes. We support both the HTTPS and the HTTPS callable functions.
 
-The other features we currently support are Firestore and parts of Firebase Auth. You can access emulated version of these services through [`firebase-admin` SDK](https://firebase.google.com/docs/reference/admin/node) as you would normally.
+The other features we currently support are Firestore and parts of Firebase Auth. You can access emulated version of these services through [`firebase-admin` SDK](https://firebase.google.com/docs/reference/admin/node) with the default credentials as you would normally. We don't support having non-default admin apps yet.
 
 ### Functions
 We support following Firebase Functions' methods from the [`firebase-functions` SDK](https://firebase.google.com/docs/reference/functions):
