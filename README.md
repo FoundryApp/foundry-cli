@@ -12,9 +12,9 @@ Foundry is a command-line tool for building Firebase Functions. Foundry connects
 With Foundry, you can feel sure that your code behaves correctly and the same as in the production already during the development.
 
 
-### Watch the 5 minutes video explaining Foundry
+### Watch the 5-minute video explaining Foundry
 <!-- [![Watch the 5 min video explaining Foundry](https://img.youtube.com/vi/wYPbR8MnNfE/maxresdefault.jpg)](https://youtu.be/wYPbR8MnNfE) -->
-[![Watch the 5 min video explaining Foundry](https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/video-thumbnail.png?alt=media&token=a0273107-e55c-42a6-b6d2-bb24a1da722c)](https://youtu.be/wYPbR8MnNfE)
+[![Watch the 5-min video explaining Foundry](https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/video-thumbnail.png?alt=media&token=a0273107-e55c-42a6-b6d2-bb24a1da722c)](https://youtu.be/wYPbR8MnNfE)
 
 
 The key features of Foundry are:
@@ -32,10 +32,12 @@ The key features of Foundry are:
 
 
 ## TL;DR to start Foundry
-1. `$ cd <directory where is a package.json for your Firebase Functions>`
-2. `$ foundry init`
-3. [Add your Firebase Functions into Foundry `foundry.yaml` config file](#field-functions)
-3. `$ foundry go`
+1. [Download](https://github.com/FoundryApp/foundry-cli/releases) Foundry
+2. Add Foundry to your system's `PATH` variable
+3. `$ cd <directory where is a package.json for your Firebase Functions>`
+4. `$ foundry init`
+5. [Add your Firebase Functions into Foundry `foundry.yaml` config file](#field-functions)
+6. `$ foundry go`
 <br/>
 
 Once your cloud environment is ready, you can start coding. Foundry will install the dependencies on the first run. Then you will see that Foundry triggers all functions you specified in the config file each time you save your code.
@@ -628,12 +630,29 @@ To connect to your cloud development environment and start your session run `$ f
 
 Foundry starts an interactive prompt, connects you to your cloud environment and starts watching your code for changes. Each change notifies the CLI to send your code into the environment where your functions are loaded and triggered. You see the output and errors from your functions inside the interactive prompt.
 
+#### Interactive prompt
+You get into the interactive prompt by running `$ foundry go`.<br/>
+There, following commands are available:
+- `watch function_name_1 function_name_2`<br/>
+  Only the specified functions will be triggered and showed in the output
+- `watch:all`<br/>
+  Reverses the `watch` command - resets the output so it shows all functions
+- `env-print`<br/>
+  Prints all previously set environment variables in your cloud environment
+- `env-set ENV_1=VALUE ENV_2=VALUE`<br/>
+  Sets the specified environment variables in your cloud environment
+- `env-delete ENV_1 ENV_2`<br/>
+  Deletes the specified environment variables from your cloud environment
+
 #### Filtering functions
 Often, you have many functions and orienting in the output is hard. To load and trigger only specific functions in each run you can execute the `watch` command inside the prompt. Its format is `watch function_name_1 function_name_2`.<br/>
 To stop filtering functions execute the command `watch:all`.
 
 ### Environment variables
+Note: you can also set environment variables through the [interactive prompt](#interactive-prompt)<br/>
+
 You can set, delete, and print all  environment variables in your cloud development environment with the following commands respectively:
+
 
 `$ foundry env-set ENV_1=VAL_1 ENV_2=VAL_2`<br/>
 Sets the specified environment variables.
