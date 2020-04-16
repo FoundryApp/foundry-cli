@@ -1,10 +1,9 @@
+- Website: [https://foundryapp.co](https://foundryapp.co)
+- Docs: [https://docs.foundryapp.co](https://docs.foundryapp.co)
+- Community Slack: [Join Foundry Community Slack](https://join.slack.com/t/community-foundry/shared_invite/zt-dcpyblnb-JSSWviMFbRvjGnikMAWJeA)
+- Youtube channel: [Foundry Youtube Channel](https://www.youtube.com/channel/UCvNVqSIXlW6nSPlAvW78TQg)
+
 # Foundry - The fastest way to build Firebase Functions
-
-<!-- [Foundry](https://foundryapp.co) is a CLI tool that creates the same environment as is the environment where your cloud functions run in the production. The environment is pre-configured, with the copy of your production data, and automatically runs your code with the near-instant feedback.
-
-Foundry let's you to develop your Firebase Functions in the same environment as is your production environemnt with access to the production data from your Firestore database. Your code is evaluated in the cloud environmentEverything happens in your p -->
-
-<!-- Foundry watches your functions' code and creates a copy of your Firebase Function production environment for your development.  -->
 
 <img alt="Foundry" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/foundry-logo.svg?alt=media&token=9625306d-3577-4aab-ab12-bbde0daae849" width="600px">
 
