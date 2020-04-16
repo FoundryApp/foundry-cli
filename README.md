@@ -1,9 +1,10 @@
+
+# Foundry - The fastest way to build Firebase CloudFunctions
+
 - Website: [https://foundryapp.co](https://foundryapp.co)
 - Docs: [https://docs.foundryapp.co](https://docs.foundryapp.co)
 - Community Slack: [Join Foundry Community Slack](https://join.slack.com/t/community-foundry/shared_invite/zt-dcpyblnb-JSSWviMFbRvjGnikMAWJeA)
 - Youtube channel: [Foundry Youtube Channel](https://www.youtube.com/channel/UCvNVqSIXlW6nSPlAvW78TQg)
-
-# Foundry - The fastest way to build Firebase Functions
 
 <img alt="Foundry" src="https://firebasestorage.googleapis.com/v0/b/foundryapp.appspot.com/o/foundry-logo.svg?alt=media&token=9625306d-3577-4aab-ab12-bbde0daae849" width="600px">
 
