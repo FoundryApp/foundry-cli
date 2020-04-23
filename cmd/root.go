@@ -38,13 +38,17 @@ var (
 		Short:   "Better serverless dev",
 		Example: "foundry --help",
 		Run: func(cmd *cobra.Command, args []string) {
-			logger.Logln("No subcommand was specified. To see all commands type 'foundry --help	'")
+			logger.Logln("No subcommand was specified. To see all commands type 'foundry --help'")
 		},
 	}
 )
 
 func init() {
 	// WARNING: logger's debug file isn't initialized yet. We can log only to the stdout or stderr.
+
+	if len(os.Args) == 1 {
+		return
+	}
 
 	cmd := os.Args[1]
 
@@ -58,7 +62,7 @@ func init() {
 		cmd != "sign-in" &&
 		cmd != "env-set" &&
 		cmd != "env-print" &&
-		cmd != "env-delete" {
+		cmd != "--help" {
 		fmt.Println("Loading foundry.yaml...")
 
 		if _, err := os.Stat(confFile); os.IsNotExist(err) {
@@ -124,7 +128,10 @@ func cobraInitCallback(cmd string) {
 	}
 	authClient = a
 
-	if cmd != "init" && cmd != "sign-out" && cmd != "sign-in" {
+	if cmd != "init" &&
+		cmd != "sign-out" &&
+		cmd != "sign-in" &&
+		cmd != "--help" {
 		logger.Log("\n")
 		warningText := "You aren't signed in. Some features won't be available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\nThis message will self-destruct in 5s...\n"
 
