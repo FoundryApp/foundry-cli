@@ -1,0 +1,74 @@
+#!/bin/sh
+
+{
+
+set -e
+
+install_dir='/usr/local/bin'
+install_path='/usr/local/bin/foundry'
+OS=$(uname | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m | tr '[:upper:]' '[:lower:]')
+cmd_exists() {
+	command -v "$@" > /dev/null 2>&1
+}
+
+latestURL=https://github.com/FoundryApp/foundry-cli/releases/latest
+
+
+case "$OS" in
+    darwin) 
+      URL=${latestURL}/foundry-macos-x86_64
+      ;;
+    linux)
+      case "$ARCH" in
+        x86_64) 
+            URL=${latestURL}/foundry-linux-x86_64
+            ;;
+        amd64) 
+            URL=${latestURL}/foundry-linux-x86_64
+            ;;
+        armv8*) 
+            URL=${latestURL}/foundry-linux-arm64
+            ;;
+        aarch64)
+            URL=${latestURL}/foundry-linux-arm64
+            ;;
+        *) 
+            printf "$red> The architecture (${ARCH}) is not supported.$reset\n" 
+            exit 1 
+            ;;
+      esac
+      ;;
+    *)
+      printf "$red> The OS (${OS}) is not supported.$reset\n"
+      exit 1
+      ;;
+esac
+
+sh_c='sh -c'
+if [ ! -w "$install_dir" ]; then
+    if [ "$user" != 'root' ]; then
+        if cmd_exists sudo; then
+            sh_c='sudo -E sh -c'
+        elif cmd_exists su; then
+            sh_c='su -c'
+        else
+            echo 'This script requires to run command as sudo. We are unable to find either "sudo" or "su".'
+            exit 1
+        fi
+    fi
+fi
+
+printf "> Downloading $URL\n"
+download_path=$(mktemp)
+curl -fSL "$URL" -o "$URL" -o "$download_path"
+chmod +x "$download_path"
+
+printf "> Installing $install_path\n"
+$sh_c "mv =f $download_path $install_path"
+
+printf "$green> Founsry successfully installed!\n$reset"
+}
+
+
+
