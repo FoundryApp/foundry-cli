@@ -36,7 +36,6 @@ Documentation is available on the [Foundry website](https://docs.foundryapp.co)
 
 macOS:
 ```bash
-# On macOS
 $ brew tap foundryapp/foundry-cli
 $ brew install foundry
 
@@ -47,7 +46,6 @@ $ foundry go
 
 Linux:
 ```bash
-# On Linux
 # Download the pre-combiled binary
 $ curl https://github.com/FoundryApp/foundry-cli/releases/download/0.1.0/foundry-linux-0.1.0 --output ./foundry
 

@@ -56,6 +56,8 @@ type Prompt struct {
 
 	lastEscapeCode string // Last VT100 terminal escape code that should be applied next time the print() method is called
 
+	printing bool
+
 	Events chan PromptEvent
 }
 
@@ -237,11 +239,40 @@ func (p *Prompt) ShowLoading() error {
 	p.writer.CursorGoTo(p.infoRow, 1)
 	p.writer.EraseLine()
 
+	p.writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, true)
 	msg := "Loading..."
 	p.writer.WriteRawStr(msg)
 	p.infoText = msg
 
-	p.writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+len(p.promptText)+1)
+	if p.printing {
+		// Was in the middle of printing out the Autorun output
+		p.writer.CursorGoTo(p.currentPos.Row, p.currentPos.Col)
+	} else {
+		p.writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+len(p.promptText)+1)
+	}
+
+	p.writer.SetColor(goprompt.DefaultColor, goprompt.DefaultColor, false)
+	return p.writer.Flush()
+}
+
+func (p *Prompt) HideLoading() error {
+	p.renderMutex.Lock()
+	defer p.renderMutex.Unlock()
+
+	if p.infoText != "Loading..." {
+		return nil
+	}
+
+	p.writer.CursorGoTo(p.infoRow, 1)
+	p.writer.EraseLine()
+	p.infoText = ""
+
+	if p.printing {
+		// Was in the middle of printing out the autorun output
+		p.writer.CursorGoTo(p.currentPos.Row, p.currentPos.Col)
+	} else {
+		p.writer.CursorGoTo(p.promptRow, len(p.promptPrefix)+len(p.promptText)+1)
+	}
 
 	return p.writer.Flush()
 }
@@ -308,6 +339,8 @@ func (p *Prompt) rerenderOnTermSizeChange() {
 func (p *Prompt) print(b []byte) {
 	p.renderMutex.Lock()
 	defer p.renderMutex.Unlock()
+
+	p.printing = true
 
 	// The invariant is that the the p.savedPos always holds
 	// a position where we stopped printing the text = where
@@ -413,4 +446,6 @@ func (p *Prompt) print(b []byte) {
 		logger.FdebuglnFatal("Error flushing prompt buffer (2)", err)
 		logger.FatalLogln("Error flushing prompt buffer", err)
 	}
+
+	p.printing = false
 }

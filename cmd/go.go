@@ -87,6 +87,7 @@ func runGo(cmd *cobra.Command, args []string) {
 			select {
 			case event := <-prompt.Events:
 				if event.Type == p.PromptEventTypeRerender {
+					_ = prompt.ShowLoading()
 					files.Upload(connectionClient, foundryConf.CurrentDir, foundryConf.ServiceAccPath, promptNotifCh, foundryConf.Ignore...)
 				}
 			case msg := <-promptNotifCh:
@@ -132,6 +133,7 @@ func runGo(cmd *cobra.Command, args []string) {
 				path := "." + string(os.PathSeparator) + e.Name
 				if !ignored(path, foundryConf.Ignore) {
 					logger.Fdebugln("Watcher event", e.Name)
+					_ = prompt.ShowLoading()
 					files.Upload(connectionClient, foundryConf.CurrentDir, foundryConf.ServiceAccPath, promptNotifCh, foundryConf.Ignore...)
 				}
 			case err := <-w.Errors:
@@ -174,6 +176,7 @@ func listenCallback(data []byte, err error) {
 		logger.FatalLogln("Parsing server JSON response error", err)
 	}
 
+	_ = prompt.HideLoading()
 	switch t.Type {
 	case connMsg.LogResponseMsg:
 		var s struct{ Content connMsg.LogContent }
