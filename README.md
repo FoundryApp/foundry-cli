@@ -60,4 +60,4 @@ $ foundry go
 ```
 
 ## License
-[Mozilla Public License v2.0](https://github.com/hashicorp/terraform/blob/master/LICENSE)
+[Mozilla Public License v2.0](https://github.com/foundryapp/foundry-cli/blob/master/LICENSE)
