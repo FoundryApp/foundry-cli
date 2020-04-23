@@ -12,7 +12,7 @@ cmd_exists() {
 	command -v "$@" > /dev/null 2>&1
 }
 
-latestURL=https://github.com/FoundryApp/foundry-cli/releases/latest
+latestURL=https://github.com/FoundryApp/foundry-cli/releases/latest/download
 
 
 case "$OS" in
