@@ -43,7 +43,7 @@ func getInitYaml() string {
 	return `
 # An array of glob patterns for files that should be ignored. The path is relative to the root dir.
 # If the array is changed, the CLI must be restarted for it to take the effect
-# See https://github.com/foundryapp/foundry-cli#field-ignore
+# See https://docs.foundryapp.co/configuration-file/ignore-directories-or-files
 ignore:
     # Skip the whole node_modules directory
   - node_modules
@@ -54,34 +54,37 @@ ignore:
     # Skip vim's temp files
   - "**/*~"
     # Ignore Firebase log files
-  - "**/firebase-debug.log"
+	- "**/firebase-debug.log"
 
+# Enable TypeScript
+# See https://docs.foundryapp.co/resources/supported-languages#using-foundry-with-cloud-functions-in-typescript
+# typescript: true
 
 # An array describing emulated Firebase Auth users in your cloud environment
-# See https://github.com/foundryapp/foundry-cli#field-users
-users:    
-  - id: user-id-1
-    # The 'data' field takes a JSON string
-    data: '{"email": "user-id-1-email@email.com"}'  
+# See https://docs.foundryapp.co/configuration-file/emulate-users
+#users:    
+#  - id: user-id-1
+#    # The 'data' field takes a JSON string
+#   data: '{"email": "user-id-1-email@email.com"}'  
 
 
 # An array describing emulated Firestore in your cloud environment
-# See https://github.com/foundryapp/foundry-cli#field-firestore 	
-firestore:    
-  # You can describe your emulated Firestore either directly
-  - collection: workspaces
-    docs:
-      - id: ws-id-1
-        data: '{"userId": "user-id-1"}'
+# See https://docs.foundryapp.co/configuration-file/emulate-firestore
+#firestore:    
+#  # You can describe your emulated Firestore either directly
+#  - collection: workspaces
+#    docs:
+#      - id: ws-id-1
+#        data: '{"userId": "user-id-1"}'
 
 
 # An array describing your Firebase functions that should be evaluated by Foundry. 
 # All described functions must be exported in the function's root index.js file.
 # In this array, you describe how Foundry should trigger each function in every run.
-# See https://github.com/foundryapp/foundry-cli#field-functions
-functions:
-  - name: myHttpsFunction
-    type: https
-    payload: '{"field":"value"}'
+# See https://docs.foundryapp.co/configuration-file/config-functions
+#functions:
+#  - name: myHttpsFunction
+#    type: https
+#    payload: '{"field":"value"}'
 `
 }
