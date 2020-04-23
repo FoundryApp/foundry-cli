@@ -65,7 +65,7 @@ curl -fSL "$URL" -o "$URL" -o "$download_path"
 chmod +x "$download_path"
 
 printf "> Installing $install_path\n"
-$sh_c "mv =f $download_path $install_path"
+$sh_c "mv -f $download_path $install_path"
 
 printf "$green> Founsry successfully installed!\n$reset"
 }
