@@ -34,24 +34,19 @@ Documentation is available on the [Foundry website](https://docs.foundryapp.co)
 
 ### Quick start
 
-macOS:
+Installation via curl:
+```bash
+$ curl https://get.foundryapp.co -sSfL | sh
+```
+
+Installation view Brew on macOS:
 ```bash
 $ brew tap foundryapp/foundry-cli
 $ brew install foundry
-
-$ cd <directory where is a package.json for your Firebase Functions>
-$ foundry init
-$ foundry go
 ```
 
-Linux:
+Run Foundry:
 ```bash
-# Download the pre-combiled binary
-$ curl https://github.com/FoundryApp/foundry-cli/releases/download/0.1.0/foundry-linux-0.1.0 --output ./foundry
-
-# Add Foundry to one of the directories in your PATH
-$ mv ./foundry /usr/local/bin/foundry
-
 $ cd <directory where is a package.json for your Firebase Functions>
 $ foundry init
 $ foundry go
