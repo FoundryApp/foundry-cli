@@ -18,7 +18,7 @@ Foundry consists of an open-sourced command-line tool called Foundry CLI and a p
 
 
 The key features of Foundry are:
-- **Develop with a copy of your production data:** Specify what data you want to copy from your production Firestore and production users. We copy the data and fill the emulated Firestore and Firebase Auth. No need to maintain any custom scripts. You access this data as you would normally in your Firebase functions code - with the official Admin SDK.
+- **Develop with a copy of your production data:** Specify what data you want to copy from your production Firestore, production RealtimeDB and production users. We copy the data and fill the emulated Firestore, emulated RealtimeDB, and Firebase Auth. No need to maintain any custom scripts. You access this data as you would normally in your Firebase functions code - with the official Admin SDK.
 
 - **Real-time feedback:** You don't have to manually trigger your functions to run them, Foundry triggers them for you every time you make a change in your code and sends you back the output usually within 1-2 seconds. You just define your Cloud Functions and how you want to trigger them in the configuration file. It's like Read-Eval-Print-Loop for your Cloud Functions.
 
@@ -26,7 +26,7 @@ The key features of Foundry are:
 
 - **Zero environment configuration:** There isn't any configuration. Just run `$ foundry init` and then `$ foundry go` and you're ready.
 
-- **Easily test integration of your Cloud Functions:** Foundry gives you an access the emulated Firestore database and emulated users. You can specify with what data they should be filled with and what parts of production Firestore and users data should be copied to the cloud development environment. Together with the specification of how your Cloud Functions should be triggered every time you save your code, Foundry can load and trigger your Cloud Functions in the same way as they would be triggered on the Firebase platform.
+- **Easily test integration of your Cloud Functions:** Foundry gives you an access the emulated Firestore database, emulated Realtime DB, and emulated users. You can specify with what data they should be filled with and what parts of production Firestore, productiom RealtimeDB and users data should be copied to the cloud development environment. Together with the specification of how your Cloud Functions should be triggered every time you save your code, Foundry can load and trigger your Cloud Functions in the same way as they would be triggered on the Firebase platform.
 
 
 ## Getting Started & Documentation
