@@ -54,7 +54,7 @@ ignore:
     # Skip vim's temp files
   - "**/*~"
     # Ignore Firebase log files
-	- "**/firebase-debug.log"
+  - "**/firebase-debug.log"
 
 # Enable TypeScript
 # See https://docs.foundryapp.co/resources/supported-languages#using-foundry-with-cloud-functions-in-typescript
@@ -62,29 +62,28 @@ ignore:
 
 # An array describing emulated Firebase Auth users in your cloud environment
 # See https://docs.foundryapp.co/configuration-file/emulate-users
-#users:    
-#  - id: user-id-1
-#    # The 'data' field takes a JSON string
-#   data: '{"email": "user-id-1-email@email.com"}'  
+users:    
+  - id: user-id-1
+    # The 'data' field takes a JSON string
+    data: '{"email": "user-id-1-email@email.com"}'  
 
 
 # An array describing emulated Firestore in your cloud environment
 # See https://docs.foundryapp.co/configuration-file/emulate-firestore
-#firestore:    
-#  # You can describe your emulated Firestore either directly
-#  - collection: workspaces
-#    docs:
-#      - id: ws-id-1
-#        data: '{"userId": "user-id-1"}'
-
+firestore:    
+  # You can describe your emulated Firestore either directly
+  - collection: workspaces
+    docs:
+      - id: ws-id-1
+        data: '{"userId": "user-id-1"}'
 
 # An array describing your Firebase functions that should be evaluated by Foundry. 
 # All described functions must be exported in the function's root index.js file.
 # In this array, you describe how Foundry should trigger each function in every run.
 # See https://docs.foundryapp.co/configuration-file/config-functions
-#functions:
-#  - name: myHttpsFunction
-#    type: https
-#    payload: '{"field":"value"}'
+functions:
+  - name: myHttpsFunction
+    type: https
+    payload: '{"field":"value"}'
 `
 }

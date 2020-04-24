@@ -38,6 +38,7 @@ var (
 		Short:   "Better serverless dev",
 		Example: "foundry --help",
 		Run: func(cmd *cobra.Command, args []string) {
+			logger.Logln("Foundry v0.2.2\n")
 			logger.Logln("No subcommand was specified. To see all commands type 'foundry --help'")
 		},
 	}
