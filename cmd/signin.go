@@ -23,12 +23,12 @@ var (
 	qs = []*survey.Question{
 		{
 			Name:     "email",
-			Prompt:   &survey.Input{Message: "Email:"},
+			Prompt:   &survey.Input{Message: "Foundry email:"},
 			Validate: survey.Required,
 		},
 		{
 			Name:     "pass",
-			Prompt:   &survey.Password{Message: "Password:"},
+			Prompt:   &survey.Password{Message: "Foundry password:"},
 			Validate: survey.Required,
 		},
 	}
@@ -43,6 +43,8 @@ func runSignIn(cmd *cobra.Command, args []string) {
 		Email string `survey:"email`
 		Pass  string `survey:"pass`
 	}{}
+
+	logger.Logln("Sign in to your Foundry account\n")
 
 	err := survey.Ask(qs, &creds)
 	// Without this specific "if" SIGINT (Ctrl+C) would only

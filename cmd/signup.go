@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"foundry/cli/logger"
 	"log"
 	"os"
 
@@ -50,6 +51,8 @@ func runSignUp(cmd *cobra.Command, args []string) {
 		Pass      string `survey:"pass`
 		PassAgain string `survey:"passAgain`
 	}{}
+
+	logger.Logln("Create new Foundry account\n")
 
 	// Ask for email
 	err := survey.Ask(emailQ, &creds)

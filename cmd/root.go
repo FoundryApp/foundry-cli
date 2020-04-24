@@ -60,6 +60,7 @@ func init() {
 	if cmd != "init" &&
 		cmd != "sign-out" &&
 		cmd != "sign-in" &&
+		cmd != "sign-up" &&
 		cmd != "env-set" &&
 		cmd != "env-print" &&
 		cmd != "--help" {
@@ -131,6 +132,7 @@ func cobraInitCallback(cmd string) {
 	if cmd != "init" &&
 		cmd != "sign-out" &&
 		cmd != "sign-in" &&
+		cmd != "sign-up" &&
 		cmd != "--help" {
 		logger.Log("\n")
 		warningText := "You aren't signed in. Some features won't be available! To sign in, run \x1b[1m'foundry sign-in'\x1b[0m or \x1b[1m'foundry sign-up'\x1b[0m to sign up.\nThis message will self-destruct in 5s...\n"
