@@ -120,11 +120,17 @@ func runGo(cmd *cobra.Command, args []string) {
 				prompt.SetInfoln(pInfo, p.InfoLineSeverityNormal)
 				prompt.Writeln(pOut)
 			case args := <-watchAllCmd.RunCh:
-				_, _, err := watchAllCmd.Run(connectionClient, args)
-				prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
+				if _, _, err := watchAllCmd.Run(connectionClient, args); err != nil {
+					prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
+					continue
+				}
 			case args := <-watchCmd.RunCh:
-				_, _, err := watchCmd.Run(connectionClient, args)
-				prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
+				_, pInfo, err := watchCmd.Run(connectionClient, args)
+				if err != nil {
+					prompt.SetInfoln(err.Error(), p.InfoLineSeverityError)
+					continue
+				}
+				prompt.SetInfoln(pInfo, p.InfoLineSeverityError)
 			case args := <-exitCmd.RunCh:
 				_, _, _ = exitCmd.Run(connectionClient, args)
 			case <-initialUploadCh:

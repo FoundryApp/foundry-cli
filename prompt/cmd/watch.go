@@ -32,7 +32,6 @@ func NewWatchAllCmd() *WatchCmd {
 
 // Implement Cmd interface
 func (c *WatchCmd) Run(conn *c.Connection, args Args) (promptOutput string, promptInfo string, err error) {
-
 	watchAll := false
 	fns := args
 	if c.Text == "watch:all" {
@@ -40,8 +39,7 @@ func (c *WatchCmd) Run(conn *c.Connection, args Args) (promptOutput string, prom
 		fns = []string{}
 	} else {
 		if len(args) == 0 {
-			// TODO: Inform user that the 'watch' command requires function name(s) as arguments
-			return "", "", nil
+			return "", "No argument specified. Example usage: 'watch myFunction'", nil
 		}
 	}
 
