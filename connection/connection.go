@@ -47,7 +47,7 @@ func (c *Connection) Close() {
 }
 
 func (c *Connection) Listen(cb ListenCallback) {
-	logger.Fdebugln(" WS listening")
+	logger.Fdebugln("WS listening")
 	for {
 		_, msg, err := c.wsconn.ReadMessage()
 		cb(msg, err)

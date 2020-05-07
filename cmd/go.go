@@ -39,6 +39,10 @@ func init() {
 }
 
 func runGo(cmd *cobra.Command, args []string) {
+	CheckForPackageJSON()
+	CreateYAMLConfig()
+	LoadYAMLConfig()
+
 	done := make(chan struct{})
 
 	watchCmd := promptCmd.NewWatchCmd()
