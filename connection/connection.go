@@ -2,6 +2,7 @@ package connection
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 
 	"foundry/cli/connection/endpoint"
@@ -26,9 +27,9 @@ type ConnectionMessage interface {
 // Gorilla's websocket.Conn can be accessed only from a single
 // goroutine.
 
-func New(token string) (*Connection, error) {
+func New(token string, admin bool) (*Connection, error) {
 	logger.Fdebugln("WS dialing")
-	url := WebSocketURL(token)
+	url := WebSocketURL(token, admin)
 	c, _, err := websocket.DefaultDialer.Dial(url, nil)
 	if err != nil {
 		return nil, err
@@ -82,8 +83,8 @@ func (c *Connection) Ping(pm *msg.PingMsg, ticker *time.Ticker, stop <-chan stru
 	}
 }
 
-func WebSocketURL(token string) string {
-	return fmt.Sprintf("%s://%s/ws/%s", endpoint.WebSocketScheme, endpoint.WebSocketURL, token)
+func WebSocketURL(token string, admin bool) string {
+	return fmt.Sprintf("%s://%s/ws/%s?admin=%s", endpoint.WebSocketScheme, endpoint.WebSocketURL, token, strconv.FormatBool(admin))
 }
 
 func PingURL() string {

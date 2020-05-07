@@ -19,6 +19,7 @@ import (
 type FoundryConf struct {
 	ServiceAccPath    string   `yaml:"serviceAcc"`
 	IgnoreStrPatterns []string `yaml:"ignore"`
+	Admin             bool     `yaml:"admin"`
 
 	CurrentDir string      `yaml:"-"` // Current working directory of CLI
 	Ignore     []glob.Glob `yaml:"-"`
@@ -165,7 +166,7 @@ func cobraInitCallback(cmd string) {
 		if cmd == "go" {
 			// Create a new connection to the cloud env
 			fmt.Println("Connecting to your cloud environment...")
-			c, err := conn.New(authClient.IDToken)
+			c, err := conn.New(authClient.IDToken, foundryConf.Admin)
 			if err != nil {
 				logger.FdebuglnFatal("Connection error", err)
 				logger.FatalLogln(err)
