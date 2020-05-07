@@ -12,6 +12,7 @@
     "node": "10"
   },
   "dependencies": {
+    "@foundryapp/foundry-backend": "git+https://gitlab.com/foundryapp/backend-sdk/foundry-backend-nodejs.git#develop",
     "firebase-admin": "^8.10.0",
     "firebase-functions": "^3.3.0"
   },

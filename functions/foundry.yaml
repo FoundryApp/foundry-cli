@@ -7,26 +7,5 @@ ignore:
   - "**/*.*[0-9]" # Skip all tmp files ending with number
   - "**/.*" # Skip all hidden files
   - "**/*~" # Skip vim's temp files
-# An array of Firebase functions that should be evaluated by Foundry. All these functions must be exported in your root index.js
 
 serviceAcc: "/Users/vasekmlejnsky/Downloads/foundryapp-firebase-adminsdk-9hj8q-20401ed01c.json"
-
-users:
-  - getFromProd: ["DbJD37dhx4VqNF3dtN7zrK6CCB13"]
-
-firestore:
-  - collection: envs
-    docs:
-      - getFromProd: 5
-
-functions:
-  - name: getUserEnvs
-    type: httpsCallable
-    asUser:
-      id: DbJD37dhx4VqNF3dtN7zrK6CCB13
-
-  - name: deleteUserEnvs
-    type: httpsCallable
-    asUser:
-      id: DbJD37dhx4VqNF3dtN7zrK6CCB13
-    payload: '{"delete": ["env1", "env2"]}'
