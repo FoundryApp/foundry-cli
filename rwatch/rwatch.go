@@ -33,8 +33,6 @@ func New(ignore []glob.Glob) (*Watcher, error) {
 		done:     make(chan struct{}),
 		ignore:   ignore,
 	}
-
-	go w.start()
 	return w, nil
 }
 
@@ -48,7 +46,7 @@ func (w *Watcher) Close() {
 	close(w.done)
 }
 
-func (w *Watcher) start() {
+func (w *Watcher) Watch() {
 	for {
 		select {
 		case ev := <-w.fsnotify.Events:
@@ -120,7 +118,7 @@ func (w *Watcher) traverse(start string, watch bool) error {
 				//	file1
 				//	subDir/
 				//		file2
-				// then when we add rootDir to watcher, the subDir isn't added
+				// and when we add rootDir to the watcher, the subDir isn't added
 				return filepath.SkipDir
 			}
 

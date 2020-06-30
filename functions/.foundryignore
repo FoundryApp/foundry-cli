@@ -1,0 +1,6 @@
+ node_modules/
+ .git
+ "**/firebase-debug.log"
+ "**/*.*[0-9]"
+ "**/.*"
+ "**/*~"

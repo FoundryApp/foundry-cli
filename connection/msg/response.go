@@ -1,28 +1,27 @@
 package msg
 
-
 const (
-	LogResponseMsg 		string 	= "log"
-	WatchResponseMsg					= "watch"
-	ErrorResponseMsg				 	= "error"
+	LogResponseMsg   string = "log"
+	WatchResponseMsg        = "watch"
+	ErrorResponseMsg        = "error"
 )
 
 type ResponseError struct {
-	Msg	string `json:"message"`
+	Msg string `json:"message"`
 }
 
 type ErrorContent struct {
-	OriginalMsg interface{} 	`json:"originalMessage"`
-	Error				ResponseError	`json:"error"`
+	OriginalMsg interface{}   `json:"originalMessage"`
+	Error       ResponseError `json:"error"`
 }
 
 type WatchContent struct {
-	RunAll	bool     	`json:"runAll"`
-	Run   	[]string 	`json:"run"`
+	RunAll bool     `json:"runAll"`
+	Run    []string `json:"run"`
 }
 
 type LogContent struct {
-	Msg	string `json:"msg"`
+	Msg string `json:"msg"`
 }
 
 type ResponseMsgType struct {

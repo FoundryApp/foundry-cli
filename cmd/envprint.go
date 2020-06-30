@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"fmt"
+	// "fmt"
 
-	"foundry/cli/firebase"
-	"foundry/cli/logger"
+	// "foundry/cli/firebase"
+	// "foundry/cli/logger"
 
 	"github.com/spf13/cobra"
 )
@@ -23,30 +23,30 @@ func init() {
 }
 
 func runEnvPrint(cmd *cobra.Command, args []string) {
-	res, err := firebase.Call("getUserEnvs", authClient.IDToken, nil)
-	if err != nil {
-		logger.FdebuglnFatal("Error calling getUserEnvs:", err)
-		logger.FatalLogln("Error printing environment variables (1):", err)
-	}
-	if res.Error != nil {
-		logger.FdebuglnFatal("Error calling getUserEnvs:", res.Error)
-		logger.FatalLogln("Error printing environment variables (2):", res.Error)
-	}
+	// res, err := firebase.Call("getUserEnvs", authClient.IDToken, nil)
+	// if err != nil {
+	// 	logger.FdebuglnFatal("Error calling getUserEnvs:", err)
+	// 	logger.FatalLogln("Error printing environment variables (1):", err)
+	// }
+	// if res.Error != nil {
+	// 	logger.FdebuglnFatal("Error calling getUserEnvs:", res.Error)
+	// 	logger.FatalLogln("Error printing environment variables (2):", res.Error)
+	// }
 
-	envs, ok := res.Result.(map[string]interface{})
-	if !ok {
-		logger.FdebuglnFatal("Failed to type assert res.Result")
-		logger.FatalLogln("Error printing environment variables. Failed to convert the response.")
-	}
+	// envs, ok := res.Result.(map[string]interface{})
+	// if !ok {
+	// 	logger.FdebuglnFatal("Failed to type assert res.Result")
+	// 	logger.FatalLogln("Error printing environment variables. Failed to convert the response.")
+	// }
 
-	if len(envs) == 0 {
-		logger.SuccessLogln("No environment variable has been set yet")
-	} else {
-		logger.SuccessLogln("Following environment variables are set:")
-		logger.Logln("")
-		for k, v := range envs {
-			s := fmt.Sprintf("%s=%s\n", k, v.(string))
-			logger.Log(s)
-		}
-	}
+	// if len(envs) == 0 {
+	// 	logger.SuccessLogln("No environment variable has been set yet")
+	// } else {
+	// 	logger.SuccessLogln("Following environment variables are set:")
+	// 	logger.Logln("")
+	// 	for k, v := range envs {
+	// 		s := fmt.Sprintf("%s=%s\n", k, v.(string))
+	// 		logger.Log(s)
+	// 	}
+	// }
 }

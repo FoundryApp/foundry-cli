@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"foundry/cli/connection/endpoint"
+	"foundry/cli/endpoint"
 	"foundry/cli/logger"
 )
 
@@ -27,7 +27,7 @@ type EnvMsg struct {
 }
 
 func SetEnvURL() string {
-	return fmt.Sprintf("%s://%s/setenv", endpoint.SetEnvScheme, endpoint.SetEnvURL)
+	return fmt.Sprintf("%s://%s/setenv", endpoint.SetEnvScheme, endpoint.SetEnvHost)
 }
 
 func NewEnvMsg(token string, envs []Env) *EnvMsg {

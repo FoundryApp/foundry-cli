@@ -18,9 +18,9 @@ var (
 	lastArchiveChecksum = ""
 )
 
-func Upload(c *conn.Connection, rootDir, serviceAccPath string, promptNotifCh chan<- string, ignore ...glob.Glob) {
+func Upload(c *conn.Connection, rootDir string, promptNotifCh chan<- string, ignore ...glob.Glob) {
 	// Zip the project in the memory and send the file in chunks
-	buf, err := zip.ArchiveDir(rootDir, serviceAccPath, ignore)
+	buf, err := zip.ArchiveDir(rootDir, ignore)
 	if err != nil {
 		logger.FdebuglnFatal("ArchiveDir error:", err)
 		logger.FatalLogln("Error uploading files:", err)

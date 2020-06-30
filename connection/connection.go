@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"foundry/cli/connection/endpoint"
 	"foundry/cli/connection/msg"
+	"foundry/cli/endpoint"
 	"foundry/cli/logger"
 
 	"github.com/gorilla/websocket"
@@ -83,9 +83,9 @@ func (c *Connection) Ping(pm *msg.PingMsg, ticker *time.Ticker, stop <-chan stru
 }
 
 func WebSocketURL(token string) string {
-	return fmt.Sprintf("%s://%s/ws/%s", endpoint.WebSocketScheme, endpoint.WebSocketURL, token)
+	return fmt.Sprintf("%s://%s/ws/cli/%s", endpoint.WebSocketScheme, endpoint.WebSocketHost, token)
 }
 
 func PingURL() string {
-	return fmt.Sprintf("%s://%s/ping", endpoint.PingScheme, endpoint.PingURL)
+	return fmt.Sprintf("%s://%s/session/ping", endpoint.PingScheme, endpoint.PingHost)
 }

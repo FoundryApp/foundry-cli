@@ -17,7 +17,7 @@ var (
 )
 
 // Recursively zips the directory
-func ArchiveDir(rootDir, serviceAccPath string, ignore []glob.Glob) (*bytes.Buffer, error) {
+func ArchiveDir(rootDir string, ignore []glob.Glob) (*bytes.Buffer, error) {
 	buf.Reset()
 	zw := zip.NewWriter(buf)
 	defer zw.Close()
@@ -32,16 +32,6 @@ func ArchiveDir(rootDir, serviceAccPath string, ignore []glob.Glob) (*bytes.Buff
 
 	for _, fPath := range fPaths {
 		err = addToZip(rootDir, fPath, zw)
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	// Zip service account - service account
-	// might be in a completely different dir.
-	// That's why we are adding it separately
-	if serviceAccPath != "" {
-		err = addServiceAccToZip(serviceAccPath, zw)
 		if err != nil {
 			return nil, err
 		}
@@ -139,57 +129,6 @@ func addToZip(rootDir, fPath string, zw *zip.Writer) error {
 
 	_, err = io.Copy(headerWriter, fileToZip)
 	return err
-}
-
-// Everything is same as addToZip besides  preserving the
-// serviceAcc's file path structure. We want to get only
-// the last part of the serviceAcc's path so it's in the
-// root of the zip file
-func addServiceAccToZip(fPath string, zw *zip.Writer) error {
-	fileToZip, err := os.Open(fPath)
-	// fi, err := f.Stat()
-	// log.Println("add", fi.Size())
-	if err != nil {
-		return err
-	}
-	defer fileToZip.Close()
-
-	// Get the file information
-	info, err := fileToZip.Stat()
-	if err != nil {
-		return err
-	}
-
-	// file -> info header -> edit header -> create hader in the zip using zip writer
-
-	h, err := zip.FileInfoHeader(info)
-	if err != nil {
-		return err
-	}
-
-	// We want to add service account into the root of the zip file
-	// Therefore we take only the last part (= file name) of its path
-	_, fName := filepath.Split(fPath)
-	h.Name = fName
-
-	// Change to deflate to gain better compression
-	// see http://golang.org/pkg/archive/zip/#pkg-constants
-	h.Method = zip.Deflate
-
-	// Reset time values so they don't influence
-	// the checksum of the created zip file
-	h.Modified = time.Time{}
-	h.ModifiedTime = uint16(0)
-	h.ModifiedDate = uint16(0)
-
-	headerWriter, err := zw.CreateHeader(h)
-	if err != nil {
-		return err
-	}
-
-	_, err = io.Copy(headerWriter, fileToZip)
-	return err
-	return nil
 }
 
 func ignored(s string, globs []glob.Glob) bool {
