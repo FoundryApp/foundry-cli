@@ -8,8 +8,6 @@ import (
 	"fmt"
 	"io"
 
-	conn "foundry/cli/connection"
-	connMsg "foundry/cli/connection/msg"
 	"foundry/cli/logger"
 
 	"github.com/gorilla/websocket"
@@ -69,7 +67,7 @@ func (sess *Session) SendData(buf *bytes.Buffer) error {
 		chsum = checksum(bytes)
 
 		isLast := i == chunkCount-1
-		chunk := connMsg.NewChunkMsg(bytes, chsum, prevchsum, isLast)
+		chunk := NewChunkMsg(bytes, chsum, prevchsum, isLast)
 		if err := sess.write(chunk); err != nil {
 			logger.FdebuglnError("send data write chunk error:", err)
 			return err
@@ -79,8 +77,8 @@ func (sess *Session) SendData(buf *bytes.Buffer) error {
 	return nil
 }
 
-func (sess *Session) write(cm conn.ConnectionMessage) error {
-	b := cm.Body()
+func (sess *Session) write(ch *ChunkMsg) error {
+	b := ch.Body()
 	if err := sess.wsconn.WriteJSON(b); err != nil {
 		return err
 	}

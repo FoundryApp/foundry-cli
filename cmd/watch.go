@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	connMsg "foundry/cli/connection/msg"
 	"foundry/cli/desktopapp"
 	"foundry/cli/logger"
 	"foundry/cli/rwatch"
@@ -15,6 +14,30 @@ import (
 
 	"github.com/gobwas/glob"
 	"github.com/spf13/cobra"
+)
+
+type EnvMsgType string
+
+type EnvMsg struct {
+	Type EnvMsgType `json:"type"`
+}
+
+type EnvMsgLogContent struct {
+	Msg string `json:"msg"`
+}
+
+type EnvMsgErrorContent struct {
+	OriginalMsg interface{} `json:"originalMessage"`
+	Error       EnvError    `json:"error"`
+}
+
+type EnvError struct {
+	Msg string `json:"message"`
+}
+
+const (
+	EnvMsgTypeLog   EnvMsgType = "log"
+	EnvMsgTypeError EnvMsgType = "error"
 )
 
 var (
@@ -143,21 +166,29 @@ func ignored(s string, globs []glob.Glob) bool {
 	}
 	return false
 }
+
 func parseMessageData(d []byte) {
-	msg := connMsg.ResponseMsgType{}
+	var msg EnvMsg
 	if err := json.Unmarshal(d, &msg); err != nil {
 		logger.DebuglnError("Couldn't parse environment response: ", err)
 		logger.FatalLogln("Couldn't parse environment response: ", err)
 	}
 
 	switch msg.Type {
-	case connMsg.LogResponseMsg:
-		var s struct{ Content connMsg.LogContent }
+	case EnvMsgTypeLog:
+		var s struct{ Content EnvMsgLogContent }
 		if err := json.Unmarshal(d, &s); err != nil {
 			logger.DebuglnError("Couldn't parse environment log message: ", err)
 			logger.FatalLogln("Couldn't parse environment log message: ", err)
 		}
 		fmt.Print(s.Content.Msg)
+	case EnvMsgTypeError:
+		var s struct{ Content EnvMsgErrorContent }
+		if err := json.Unmarshal(d, &s); err != nil {
+			logger.DebuglnError("Couldn't parse environment error message: ", err)
+			logger.FatalLogln("Couldn't parse environment error message: ", err)
+		}
+		logger.ErrorLogln(s.Content.Error.Msg)
 	}
 }
 
