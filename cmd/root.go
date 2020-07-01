@@ -4,8 +4,8 @@ import (
 	"bufio"
 	"os"
 	"path/filepath"
+	"strings"
 
-	conn "foundry/cli/connection"
 	"foundry/cli/logger"
 
 	"github.com/gobwas/glob"
@@ -21,9 +21,8 @@ const packageJSONFile = "./package.json"
 const ignoreFile = "./.foundryignore"
 
 var (
-	debugFile        = ""
-	connectionClient *conn.Connection
-	foundryConf      = FoundryConf{}
+	debugFile   = ""
+	foundryConf = FoundryConf{}
 
 	rootCmd = &cobra.Command{
 		Use:     "foundry",
@@ -92,8 +91,7 @@ func LoadIgnoreFile() {
 	line, err := readln(reader)
 	for err == nil {
 		if line != "" {
-			relativePath := filepath.Join(foundryConf.CurrentDir, line)
-			logger.Debugln(relativePath)
+			relativePath := filepath.Join(foundryConf.CurrentDir, strings.TrimSpace(line))
 			g, compileErr := glob.Compile(relativePath)
 			if compileErr != nil {
 				logger.DebuglnError("Invalid glob pattern in the '.foundryignore' file", compileErr)

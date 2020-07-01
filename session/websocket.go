@@ -88,8 +88,6 @@ func (sess *Session) write(cm conn.ConnectionMessage) error {
 }
 
 func (sess *Session) webSocketURL(token string) string {
-	url := fmt.Sprintf("wss://%s%s", sess.WebSocketHost, token)
-	logger.Debugln(url)
 	return fmt.Sprintf("wss://%s%s", sess.WebSocketHost, token)
 }
 

@@ -1,16 +1,19 @@
 package cmd
 
 import (
+	"encoding/json"
+	"fmt"
+	"os"
+
+	connMsg "foundry/cli/connection/msg"
 	"foundry/cli/desktopapp"
 	"foundry/cli/logger"
-	cliprompt "foundry/cli/prompt"
-	promptcmd "foundry/cli/prompt/cmd"
 	"foundry/cli/rwatch"
 	"foundry/cli/session"
 	"foundry/cli/user"
 	"foundry/cli/zip"
-	"os"
 
+	"github.com/gobwas/glob"
 	"github.com/spf13/cobra"
 )
 
@@ -22,9 +25,7 @@ var (
 		Run:     runWatch,
 	}
 
-	exitCmd *promptcmd.ExitCmd
-	prompt  *cliprompt.Prompt
-	sess    *session.Session
+	sess *session.Session
 )
 
 func init() {
@@ -66,14 +67,11 @@ func runWatch(cmd *cobra.Command, args []string) {
 	go fwatcher.Watch()
 
 	// Session
-	data := make(chan []byte)
-	listenErr := make(chan error)
-	go sess.Listen(data, listenErr)
-	go handleListenChannels(data, listenErr)
+	sessData := make(chan []byte)
+	sessErr := make(chan error)
+	go sess.Listen(sessData, sessErr)
 
-	// Prompt
-	prompt = setUpPrompt()
-	go prompt.Run()
+	triggerInitialSend := make(chan struct{}, 1)
 
 	// The goroutine handling all file events + prompt command requests.
 	// Command requests are all handled from a single goroutine because
@@ -83,37 +81,32 @@ func runWatch(cmd *cobra.Command, args []string) {
 	go func() {
 		for {
 			select {
-			case e := <-prompt.Events:
-				handlePromptEvent(&e)
-			case /*cmdArgs*/ _ = <-exitCmd.RunCh:
-				// TODO: RUN COMMAND
-				// _, _, _ = exitCmd.Run(connectionClient, args)
+			case d := <-sessData:
+				logger.Fdebugln(string(d))
+				parseMessageData(d)
+			case e := <-sessErr:
+				logger.DebuglnError("Session error: ", e)
+				logger.FatalLogln("Session error: ", e)
 			case e := <-fwatcher.Events:
 				path := "." + string(os.PathSeparator) + e.Name
 				if !ignored(path, foundryConf.Ignore) {
-					logger.Fdebugln("Watcher event", e.Name)
-					_ = prompt.ShowLoading()
 					zipAndSend()
 				}
 			case err := <-fwatcher.Errors:
-				logger.FdebuglnFatal("File watcher error", err)
-				logger.FatalLogln("Error - ", err)
+				logger.FdebuglnFatal("File watcher error: ", err)
+				logger.FatalLogln("Error: ", err)
+			case _ = <-triggerInitialSend:
+				zipAndSend()
 			}
 		}
 	}()
 
-	// Never finish watch command executionso the prompt doesn't exit
-	<-done
-}
+	// Don't wait for the first save event to send the code.
+	// Send it as soon as user calls 'foundry watch'
+	triggerInitialSend <- struct{}{}
 
-func handlePromptEvent(event *cliprompt.PromptEvent) {
-	switch event.Type {
-	case cliprompt.PromptEventTypeRerender:
-		if err := prompt.ShowLoading(); err != nil {
-			// TODO: Handle error
-		}
-		zipAndSend()
-	}
+	// Never finish watch command execution so the log stream doesn't exit
+	<-done
 }
 
 func zipAndSend() error {
@@ -139,22 +132,32 @@ func setUpFileWatcher() (*rwatch.Watcher, error) {
 	return fwatcher, nil
 }
 
-func setUpPrompt() *cliprompt.Prompt {
-	exitCmd = promptcmd.NewExitCmd()
-	cmds := []promptcmd.Cmd{exitCmd}
-	return cliprompt.NewPrompt(cmds)
-}
-
-func handleListenChannels(data chan []byte, err chan error) {
-	// TODO
-	for {
-		select {
-		case d := <-data:
-			logger.Debugln(string(d))
-		case e := <-err:
-			logger.DebuglnError("WebSocket error: ", e)
-			logger.FatalLogln("WebSocket error: ", e)
+func ignored(s string, globs []glob.Glob) bool {
+	logger.Fdebugln("string to match:", s)
+	for _, g := range globs {
+		logger.Fdebugln("\t- glob:", g)
+		logger.Fdebugln("\t- match:", g.Match(s))
+		if g.Match(s) {
+			return true
 		}
+	}
+	return false
+}
+func parseMessageData(d []byte) {
+	msg := connMsg.ResponseMsgType{}
+	if err := json.Unmarshal(d, &msg); err != nil {
+		logger.DebuglnError("Couldn't parse environment response: ", err)
+		logger.FatalLogln("Couldn't parse environment response: ", err)
+	}
+
+	switch msg.Type {
+	case connMsg.LogResponseMsg:
+		var s struct{ Content connMsg.LogContent }
+		if err := json.Unmarshal(d, &s); err != nil {
+			logger.DebuglnError("Couldn't parse environment log message: ", err)
+			logger.FatalLogln("Couldn't parse environment log message: ", err)
+		}
+		fmt.Print(s.Content.Msg)
 	}
 }
 
