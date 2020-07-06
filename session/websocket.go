@@ -86,7 +86,7 @@ func (sess *Session) write(ch *ChunkMsg) error {
 }
 
 func (sess *Session) webSocketURL(token string) string {
-	return fmt.Sprintf("wss://%s%s", sess.WebSocketHost, token)
+	return fmt.Sprintf("%s://%s%s", webSocketHost, sess.WebSocketHost, token)
 }
 
 func checksum(data []byte) string {
