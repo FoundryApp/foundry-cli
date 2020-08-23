@@ -26,7 +26,7 @@ The key features of Foundry are:
 
 - **Zero environment configuration:** There isn't any configuration. Just run `$ foundry init` and then `$ foundry go` and you're ready.
 
-- **Easily test integration of your Cloud Functions:** Foundry gives you an access the emulated Firestore database, emulated Realtime DB, and emulated users. You can specify with what data they should be filled with and what parts of production Firestore, productiom RealtimeDB and users data should be copied to the cloud development environment. Together with the specification of how your Cloud Functions should be triggered every time you save your code, Foundry can load and trigger your Cloud Functions in the same way as they would be triggered on the Firebase platform.
+- **Easily test integration of your Cloud Functions:** Foundry gives you an access the emulated Firestore database, emulated Realtime DB, and emulated users. You can specify with what data they should be filled with and what parts of production Firestore, production RealtimeDB and users data should be copied to the cloud development environment. Together with the specification of how your Cloud Functions should be triggered every time you save your code, Foundry can load and trigger your Cloud Functions in the same way as they would be triggered on the Firebase platform.
 
 
 ## Getting Started & Documentation
